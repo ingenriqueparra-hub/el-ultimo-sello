@@ -82,6 +82,7 @@ func _load_day_data() -> void:
 	add_child(queue)
 	queue.applicant_changed.connect(_on_applicant_changed)
 	queue.day_ended.connect(_on_day_ended)
+	_update_status_bar()
 	_build_regulations_section()
 	queue.load_applicants(applicants)
 	queue.start()
@@ -225,7 +226,9 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _update_status_bar() -> void:
-	day_label.text = "DIA %d" % current_day
+	var current_date: String = day_data.get("current_date", "")
+	var date_str := ("  —  CICLO %s" % current_date) if current_date != "" else ""
+	day_label.text = "DIA %d%s" % [current_day, date_str]
 	credits_label.text = "CREDITOS: %d" % credits
 
 func _reset_applicant_panel() -> void:
