@@ -112,7 +112,9 @@ func _on_day_ended(total: int) -> void:
 	_set_decision_buttons_enabled(false)
 	print("[ControlDesk] Turno terminado — %d / %d procesados" % [total, applicants.size()])
 	await get_tree().create_timer(1.5).timeout
-	DayReport.pending_summary = decision_system.get_summary()
+	var summary := decision_system.get_summary()
+	summary["quota"] = applicants.size()
+	DayReport.pending_summary = summary
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
 func _set_decision_buttons_enabled(enabled: bool) -> void:

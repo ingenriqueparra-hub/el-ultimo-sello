@@ -34,7 +34,8 @@ func _populate(summary: Dictionary) -> void:
 	var errors: int  = summary.get("errors", 0)
 	var credits: int = summary.get("credits", 50)
 
-	processed_label.text = "Procesados:           %d / 10" % total
+	var quota: int = summary.get("quota", total)
+	processed_label.text = "Procesados:           %d / %d" % [total, quota]
 	correct_label.text   = "Decisiones correctas: %d" % correct
 	errors_label.text    = "Errores:              %d" % errors
 	credits_label.text   = "Creditos finales:     %d" % credits
