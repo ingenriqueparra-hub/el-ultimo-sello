@@ -91,7 +91,7 @@ Estas tareas son de soporte al desarrollo. No son features del juego final ni de
 
 | ID | Tarea | Criterio de aceptación |
 |---|---|---|
-| DEV-01 | Panel debug interno (tecla `Y`) | Muestra verdad oculta del caso activo; oculto por defecto; no interfiere con el flujo del jugador |
+| DEV-01 | Panel debug interno (tecla `Y`) | En `ControlDesk`: muestra verdad oculta del caso activo, reglas fallidas, documentos y acumuladores. En `DayReport`: muestra resumen del turno, decisiones, flags narrativos y consecuencia seleccionada. Oculto por defecto en ambas pantallas; no interfiere con el flujo del jugador |
 
 ---
 

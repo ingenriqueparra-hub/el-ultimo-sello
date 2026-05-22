@@ -268,14 +268,19 @@ Debe sentir que se vuelve difícil porque las reglas empiezan a chocar con la hu
 
 El panel de debug activado con la tecla `Y` **no es una mecánica jugable**.
 
+Funciona en dos pantallas: `ControlDesk` (durante inspección activa) y `DayReport` (al terminar el turno). En ambos casos aplican las mismas restricciones.
+
 No debe:
 
 - mostrarse en builds de release ni en builds de playtest con jugadores reales;
 - alterar reglas, balance o economía;
 - usarse como ayuda al jugador durante la experiencia normal;
-- influir en las decisiones del jugador final.
+- influir en las decisiones del jugador final;
+- modificar la consecuencia seleccionada ni el resultado del día.
 
-Es exclusivamente una herramienta interna de desarrollo y QA que permite verificar si el sistema evalúa correctamente cada caso, sin modificar el flujo del juego.
+Es exclusivamente una herramienta interna de desarrollo y QA que permite verificar si el sistema evalúa correctamente cada caso y cada consecuencia narrativa, sin modificar el flujo del juego.
+
+El debug del reporte permite confirmar que `NarrativeConsequenceSystem` seleccionó la consecuencia esperada, qué flags se activaron y si algún cierre terminal debería haberse disparado.
 
 Si en el futuro se añade un sistema de "modo estudio" o "modo entrenamiento" para el jugador, debe diseñarse como una feature independiente, con diseño propio, no derivada de este panel.
 

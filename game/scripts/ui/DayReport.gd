@@ -4,6 +4,10 @@ extends Control
 static var pending_summary: Dictionary = {}
 
 var _is_terminal: bool = false
+var _selected_consequence: Dictionary = {}
+var _selected_terminal: Dictionary = {}
+var _debug_panel: PanelContainer
+var _debug_label: Label
 
 const COLOR_PANEL  := Color(0.06, 0.10, 0.06, 1)
 const COLOR_BORDER := Color(0.15, 0.45, 0.15, 1)
@@ -25,12 +29,19 @@ const COLOR_BTN    := Color(0.08, 0.36, 0.08, 1)
 
 func _ready() -> void:
 	_apply_theme()
+	_build_debug_panel()
 	_populate(pending_summary)
 	var current_day: int = pending_summary.get("day", 1)
 	header_label.text = "REPORTE DEL TURNO — DIA %d" % current_day
 	restart_btn.pressed.connect(_on_restart_pressed)
 	if not _is_terminal:
 		_maybe_add_continue_button(current_day)
+	_update_debug_panel()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_Y:
+		if _debug_panel != null:
+			_debug_panel.visible = not _debug_panel.visible
 
 func _populate(summary: Dictionary) -> void:
 	if summary.is_empty():
@@ -57,14 +68,14 @@ func _populate(summary: Dictionary) -> void:
 		_add_decision_row(decision)
 
 	var day: int = summary.get("day", 1)
-	var consequence := NarrativeConsequenceSystem.evaluate(summary, day)
-	var terminal := TerminalEndingSystem.evaluate(summary)
-	if not terminal.is_empty():
+	_selected_consequence = NarrativeConsequenceSystem.evaluate(summary, day)
+	_selected_terminal = TerminalEndingSystem.evaluate(summary)
+	if not _selected_terminal.is_empty():
 		_is_terminal = true
-		_show_terminal_ending(terminal)
+		_show_terminal_ending(_selected_terminal)
 	else:
-		consequence_title_label.text = str(consequence.get("title", "CONSECUENCIA"))
-		consequence_text.text = str(consequence.get("body", ""))
+		consequence_title_label.text = str(_selected_consequence.get("title", "CONSECUENCIA"))
+		consequence_text.text = str(_selected_consequence.get("body", ""))
 		var symptom := NarrativeStateSystem.get_narrative_symptom()
 		if symptom != "":
 			consequence_text.text += "\n\n" + symptom
@@ -152,6 +163,123 @@ func _on_continue_pressed(next_day: int) -> void:
 	pending_summary = {}
 	ControlDesk.day_to_load = next_day
 	get_tree().change_scene_to_file("res://scenes/main/ControlDesk.tscn")
+
+func _build_debug_panel() -> void:
+	_debug_panel = PanelContainer.new()
+	_debug_panel.visible = false
+	_debug_panel.z_index = 100
+	_debug_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_debug_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
+	_debug_panel.custom_minimum_size = Vector2(420, 0)
+	_debug_panel.offset_left = -420
+
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.03, 0.03, 0.06, 0.93)
+	style.border_color = Color(0.55, 0.90, 1.0, 1)
+	style.set_border_width_all(1)
+	style.set_content_margin_all(8)
+	_debug_panel.add_theme_stylebox_override("panel", style)
+
+	var vbox := VBoxContainer.new()
+	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var title := Label.new()
+	title.text = "[ DEBUG — REPORTE ]"
+	title.add_theme_color_override("font_color", Color(0.55, 0.90, 1.0, 1))
+	title.add_theme_font_size_override("font_size", 11)
+	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var sep := HSeparator.new()
+	sep.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	_debug_label = Label.new()
+	_debug_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_debug_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_debug_label.add_theme_font_size_override("font_size", 11)
+	_debug_label.add_theme_color_override("font_color", Color(0.55, 0.90, 1.0, 1))
+	_debug_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_debug_label.text = "Sin datos."
+
+	scroll.add_child(_debug_label)
+	vbox.add_child(title)
+	vbox.add_child(sep)
+	vbox.add_child(scroll)
+	_debug_panel.add_child(vbox)
+	add_child(_debug_panel)
+
+func _update_debug_panel() -> void:
+	if _debug_label == null:
+		return
+	var s := pending_summary
+	if s.is_empty():
+		_debug_label.text = "Sin datos de turno."
+		return
+
+	var day: int = s.get("day", 1)
+	var lines: Array = []
+	lines.append("DIA:        %d" % day)
+	lines.append("PROCESADOS: %d / %d" % [s.get("total", 0), s.get("quota", s.get("total", 0))])
+	lines.append("CORRECTAS:  %d" % s.get("correct", 0))
+	lines.append("ERRORES:    %d" % s.get("errors", 0))
+	lines.append("CREDITOS:   %d" % s.get("credits", 0))
+	lines.append("")
+
+	lines.append("--- DECISIONES ---")
+	var decisions: Array = s.get("decisions", [])
+	if decisions.is_empty():
+		lines.append("  (ninguna)")
+	else:
+		for d in decisions:
+			var ok: String = "[OK]" if d.get("was_correct", false) else "[! ]"
+			lines.append("%s %s — %s" % [ok, d.get("applicant_name", "?"), d.get("decision", "?").to_upper()])
+			lines.append("     id:      %s" % d.get("applicant_id", "No disponible"))
+			lines.append("     espera:  %s" % d.get("correct_decision", "No disponible").to_upper())
+			lines.append("     riesgo:  %s" % d.get("risk_level", "No disponible").to_upper())
+			var delta: int = d.get("credit_delta", 0)
+			if delta != 0:
+				lines.append("     creditos: %d" % delta)
+			var viols: Array = d.get("violations", [])
+			if not viols.is_empty():
+				lines.append("     viols:   %s" % ", ".join(viols))
+	lines.append("")
+
+	lines.append("--- FLAGS NARRATIVOS ---")
+	var flags: Array = s.get("activated_flags", [])
+	if flags.is_empty():
+		lines.append("  (ninguno)")
+	else:
+		for f in flags:
+			lines.append("  • %s" % str(f))
+	lines.append("")
+
+	lines.append("--- CONSECUENCIA SELECCIONADA ---")
+	var c := _selected_consequence
+	if c.is_empty():
+		lines.append("  Neutral (sin datos o sin coincidencia)")
+	else:
+		lines.append("  id:       %s" % c.get("id", "No disponible"))
+		lines.append("  type:     %s" % c.get("type", "No disponible"))
+		lines.append("  priority: %d" % c.get("priority", 0))
+		if c.has("trigger_flag"):
+			lines.append("  flag:     %s" % str(c["trigger_flag"]))
+		lines.append("  title:    %s" % c.get("title", "No disponible"))
+	lines.append("  archivo:  res://data/consequences/consequences_day_%02d.json" % day)
+	lines.append("")
+
+	if not _selected_terminal.is_empty():
+		lines.append("--- CIERRE TERMINAL ---")
+		lines.append("  id:       %s" % _selected_terminal.get("id", "No disponible"))
+		lines.append("  priority: %d" % _selected_terminal.get("priority", 0))
+		lines.append("  title:    %s" % _selected_terminal.get("title", "No disponible"))
+	else:
+		lines.append("--- CIERRE TERMINAL ---")
+		lines.append("  (no activado)")
+
+	_debug_label.text = "\n".join(lines)
 
 func _show_terminal_ending(terminal: Dictionary) -> void:
 	var color_terminal := Color(0.82, 0.18, 0.18, 1)

@@ -1083,15 +1083,18 @@ Pendientes:
 ---
 
 ### Herramienta interna — Panel Debug (DEV-01)
-Estado: Completado
+Estado: Completado — cubre ControlDesk y DayReport
 
 Implementado:
-- Panel superpuesto activado con tecla `Y`.
-- Muestra verdad oculta del caso, reglas fallidas, documentos, alertas y última decisión.
-- Oculto por defecto y sin bloquear interacción.
+- Panel superpuesto activado con tecla `Y`. Funciona en dos pantallas.
+- En `ControlDesk`: muestra verdad oculta del caso, reglas fallidas, documentos, alertas, última decisión y acumuladores narrativos.
+- En `DayReport`: muestra resumen del turno, lista completa de decisiones, flags narrativos activados, consecuencia seleccionada (id, type, priority, trigger_flag, title), ruta del archivo de consecuencias y cierre terminal si se activó.
+- `_selected_consequence` almacenada en `DayReport` para evitar doble evaluación de `NarrativeConsequenceSystem`.
+- Oculto por defecto en ambas pantallas. `mouse_filter = MOUSE_FILTER_IGNORE`. `z_index = 100`.
 
 Archivos principales:
 - `game/scripts/ui/ControlDesk.gd`
+- `game/scripts/ui/DayReport.gd`
 
 Pendientes:
 - No incluir en builds públicos o builds de playtest normal.

@@ -214,7 +214,11 @@ Responsable de:
 
 **No es una mecánica jugable. No debe estar disponible en builds de release.**
 
-Panel de superposición activado con la tecla `Y` durante la inspección. Visible solo para desarrolladores y QA.
+El panel de superposición se activa con la tecla `Y`. Funciona en dos pantallas:
+
+#### 4.7.1. Debug en ControlDesk (inspección activa)
+
+Visible solo para desarrolladores y QA durante el turno de inspección.
 
 Muestra:
 
@@ -226,15 +230,33 @@ Muestra:
 - Documentos presentes (por tipo).
 - Alertas de contradicción en interrogatorio (`question_alerts`).
 - Resultado de la última decisión tomada (decisión, corrección, penalización).
+- Acumuladores narrativos actuales (`NarrativeStateSystem`).
 
-Propiedades técnicas:
+#### 4.7.2. Debug en DayReport (reporte final del día)
 
-- Construido programáticamente en `ControlDesk.gd` (sin escena separada).
+Visible solo para desarrolladores y QA al terminar el turno.
+
+Muestra:
+
+- Día evaluado.
+- Total procesado y cuota.
+- Decisiones correctas y errores.
+- Créditos finales.
+- Lista de decisiones registradas (applicant_id, name, decision, correct_decision, was_correct, risk_level, credit_delta, violations).
+- Flags narrativos activados (`activated_flags`).
+- Consecuencia narrativa seleccionada (id, type, priority, trigger_flag si existe, title).
+- Ruta del archivo de consecuencias usado.
+- Indicación si se activó cierre terminal (id del terminal).
+
+Propiedades técnicas (ambos paneles):
+
+- Construido programáticamente (sin escena separada).
 - Oculto por defecto (`visible = false`).
-- `mouse_filter = MOUSE_FILTER_IGNORE` para no bloquear interacción con el juego.
+- `mouse_filter = MOUSE_FILTER_IGNORE` para no bloquear interacción.
 - `z_index = 100` para superponerse al resto de la UI.
-- Se actualiza automáticamente al cambiar de solicitante y tras cada decisión.
 - Activado/desactivado con `KEY_Y` en `_input()`.
+- El panel de ControlDesk se actualiza al cambiar de solicitante y tras cada decisión.
+- El panel de DayReport se actualiza al cargar `pending_summary`.
 
 ---
 
