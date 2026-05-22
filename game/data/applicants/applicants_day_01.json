@@ -9,6 +9,12 @@
     "dialogue_intro": "Buenos turnos. Vengo por el turno de fundicion. Tengo mis papeles.",
     "documents": ["transit_pass_001", "bio_cert_001"],
     "flags": [],
+    "questions": {
+      "motivo": "Turno de fundicion en el Nivel 4. Tengo contrato firmado.",
+      "origen": "Del Sector Bajo Ceniza. Siempre de alli.",
+      "carga": "Solo mis herramientas de trabajo. Nada mas."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": true,
       "correct_decision": "approve",
@@ -27,6 +33,12 @@
     "dialogue_intro": "Por favor, tengo turno desde hace tres dias. El transporte se retraso.",
     "documents": ["transit_pass_002"],
     "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Me llaman de vuelta a la fabrica. Hay turno disponible.",
+      "origen": "Sector Textil. Llevo tres dias viajando, hubo retrasos en las rutas.",
+      "carga": "Solo mis cosas personales. Ropa de trabajo."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": false,
       "correct_decision": "reject",
@@ -45,6 +57,12 @@
     "dialogue_intro": "Registrada en el Refugio Civil. Huimos del incendio del sector. Mis hijos esperan.",
     "documents": ["transit_pass_003"],
     "flags": ["missing_seal"],
+    "questions": {
+      "motivo": "Somos desplazadas registradas. El sistema nos dice que podemos entrar.",
+      "origen": "De la Colonia Quemada. No queda nada alli. Todo ardia.",
+      "carga": "Lo poco que pudimos salvar. Ropa, documentos de mis hijos. Nada peligroso."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -63,12 +81,20 @@
     "dialogue_intro": "Comerciante registrado. La carga esta sellada. No hay nada fuera de lo comun.",
     "documents": ["transit_pass_004", "ingress_permit_004"],
     "flags": ["cargo_mismatch"],
+    "questions": {
+      "motivo": "Entrega de carga. Ya esta todo sellado y registrado.",
+      "origen": "Puerto de Entrada 7. Base comercial principal.",
+      "carga": "Componentes electronicos. Para el sector industrial del Nivel 2."
+    },
+    "question_alerts": {
+      "carga": "CONTRADICCION: Declara 'componentes electronicos'. El permiso registra 'chatarra industrial procesada'."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
       "risk_level": "medium",
-      "violations": ["rule_003"],
-      "notes": "El permiso dice chatarra industrial. El solicitante declara componentes electronicos. Inconsistencia de carga."
+      "violations": [],
+      "notes": "El permiso dice chatarra industrial. El solicitante declara componentes electronicos. Inconsistencia de carga. No detectable por reglas — requiere escaner o interrogatorio."
     }
   },
   {
@@ -81,6 +107,12 @@
     "dialogue_intro": "Veterano en retorno. Mision completada. Autorizacion de la Milicia Orbital adjunta.",
     "documents": ["transit_pass_005", "bio_cert_005"],
     "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Reintegracion post-mision. Me ordenaron presentarme al cuartel esta jornada.",
+      "origen": "Estacion Orbital 4. Acabo de aterrizar hace dos turnos.",
+      "carga": "Equipo reglamentario de combate. Nada personal. Todo esta declarado."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -99,12 +131,18 @@
     "dialogue_intro": "Casa Veyr no se somete a control estandar. Tengo autorizacion de mi casa. Haga su trabajo rapido.",
     "documents": ["transit_pass_006", "ingress_permit_006"],
     "flags": [],
+    "questions": {
+      "motivo": "Reunion de faccion. Asunto del Ministerio. No es de su incumbencia.",
+      "origen": "Torre Veyr. No necesita mas detalles que los del documento.",
+      "carga": "Solo documentacion privada de la Casa. No traigo carga."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
       "risk_level": "low",
-      "violations": ["rule_001"],
-      "notes": "La autorizacion noble no exime del control estandar en el Dia 1. La regla no hace excepciones. El jugador debe aplicarla igual."
+      "violations": [],
+      "notes": "La autorizacion noble no exime del control estandar en el Dia 1. El documento dice EXENCION NO APROBADA. Decision de juicio del jugador."
     }
   },
   {
@@ -117,12 +155,20 @@
     "dialogue_intro": "Tecnico de mantenimiento. Tengo contrato. El equipo es estandar de trabajo.",
     "documents": ["transit_pass_007", "ingress_permit_007"],
     "flags": ["undeclared_device"],
+    "questions": {
+      "motivo": "Servicio de mantenimiento contratado. Los sistemas del Nivel 6 necesitan revision.",
+      "origen": "Taller del Sector Bajo. Soy contratista regular de esta planta.",
+      "carga": "Herramientas de mantenimiento estandar. Y un equipo de diagnostico avanzado que necesito para los sistemas."
+    },
+    "question_alerts": {
+      "carga": "OBJETO NO DECLARADO: Equipo de diagnostico avanzado no figura en el permiso de ingreso."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
       "risk_level": "medium",
-      "violations": ["rule_003"],
-      "notes": "El permiso lista herramientas de mantenimiento genericas. El solicitante lleva un dispositivo de diagnostico avanzado no declarado en el permiso."
+      "violations": [],
+      "notes": "El permiso lista herramientas genericas. El solicitante menciona un dispositivo avanzado no declarado. Solo detectable por interrogatorio o escaner."
     }
   },
   {
@@ -135,12 +181,18 @@
     "dialogue_intro": "Vengo con mi hijo. Tiene fiebre desde hace dias. Solo quiero que lo vean.",
     "documents": ["transit_pass_008", "bio_cert_008"],
     "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Mi hijo lleva dias con fiebre alta. Necesita atencion medica urgente.",
+      "origen": "Vivienda registrada en el Sector 2. Vivimos alli desde hace anos.",
+      "carga": "Solo ropa del nino y los medicamentos basicos que ya le dieron antes."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
       "risk_level": "low",
       "violations": [],
-      "notes": "Documentos en orden. El escaner detecta anomalia biologica leve en el nino. Sin amenaza clara. Decision moral extrema: aplicar protocolo o dejar pasar a un nino enfermo."
+      "notes": "Documentos en orden. El escaner detecta anomalia biologica leve en el nino. Sin amenaza clara. Decision moral extrema."
     }
   },
   {
@@ -150,9 +202,15 @@
     "origin": "Templo del Sello, Sector Central",
     "destination": "Capilla de Transito, Umbral 7",
     "purpose": "Servicio espiritual autorizado",
-    "dialogue_intro": "El Sello os bendice. Llevo permiso del Clero. Solo vengo a officiar el rito de admision.",
+    "dialogue_intro": "El Sello os bendiga. Llevo permiso del Clero. Solo vengo a oficiar el rito de admision.",
     "documents": ["transit_pass_009", "ingress_permit_009"],
     "flags": [],
+    "questions": {
+      "motivo": "El rito de admision. El Sello bendice a quienes entran con pureza de expediente.",
+      "origen": "Templo del Sello, Sector Central. Sirvo alli desde hace doce ciclos.",
+      "carga": "Los ornamentos del rito. Todo esta autorizado por el Clero del Sello."
+    },
+    "question_alerts": {},
     "truth": {
       "should_allow": true,
       "correct_decision": "approve",
@@ -165,18 +223,26 @@
     "id": "applicant_010",
     "name": "Kael Vorn",
     "type": "merchant",
-    "origin": "Sector Comercial Norte",
+    "origin": "Puerto de Entrada 7",
     "destination": "Deposito Central, Nivel 2",
     "purpose": "Entrega de materiales certificados",
     "dialogue_intro": "Comerciante registrado. Todo en regla. Tengo prisa.",
     "documents": ["transit_pass_010", "bio_cert_010"],
     "flags": ["suspicious_dialogue"],
+    "questions": {
+      "motivo": "Entrega de materiales certificados al Deposito Central. Nada especial.",
+      "origen": "Del Sector Comercial Norte. Oficina principal. Vengo directo desde alli.",
+      "carga": "Materiales certificados. Todo figura en el permiso."
+    },
+    "question_alerts": {
+      "origen": "CONTRADICCION: Declara origen en 'Sector Comercial Norte'. El Pase de Transito registra origen en 'Puerto de Entrada 7'."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
       "risk_level": "high",
       "violations": [],
-      "notes": "Documentos perfectos. Al interrogar: dice venir del Sector Norte pero el pase registra origen en Puerto de Entrada 7. La inconsistencia solo aparece al preguntar."
+      "notes": "Documentos perfectos. Al interrogar sobre origen: respuesta contradice el Pase de Transito. Solo detectable por interrogatorio."
     }
   }
 ]

@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/DayReport.gd" id="1_report"]
+
+[node name="DayReport" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_report")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.05, 0.03, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 52)
+
+[node name="HeaderLabel" type="Label" parent="VBox/Header"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "REPORTE DEL TURNO — DIA 1"
+theme_override_font_sizes/font_size = 20
+
+[node name="ScrollArea" type="ScrollContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentVBox" type="VBoxContainer" parent="VBox/ScrollArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="SummaryPanel" type="PanelContainer" parent="VBox/ScrollArea/ContentVBox"]
+layout_mode = 2
+
+[node name="SummaryVBox" type="VBoxContainer" parent="VBox/ScrollArea/ContentVBox/SummaryPanel"]
+layout_mode = 2
+
+[node name="SummaryTitle" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+text = "RESUMEN"
+theme_override_font_sizes/font_size = 12
+
+[node name="HSepS" type="HSeparator" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+
+[node name="ProcessedLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+text = "Procesados:           --- / 10"
+theme_override_font_sizes/font_size = 15
+
+[node name="CorrectLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+text = "Decisiones correctas: ---"
+theme_override_font_sizes/font_size = 15
+
+[node name="ErrorsLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+text = "Errores:              ---"
+theme_override_font_sizes/font_size = 15
+
+[node name="CreditsLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
+layout_mode = 2
+text = "Creditos finales:     ---"
+theme_override_font_sizes/font_size = 15
+
+[node name="DividerA" type="HSeparator" parent="VBox/ScrollArea/ContentVBox"]
+layout_mode = 2
+
+[node name="DecisionsPanel" type="PanelContainer" parent="VBox/ScrollArea/ContentVBox"]
+layout_mode = 2
+
+[node name="DecisionsVBox" type="VBoxContainer" parent="VBox/ScrollArea/ContentVBox/DecisionsPanel"]
+layout_mode = 2
+
+[node name="DecisionsTitle" type="Label" parent="VBox/ScrollArea/ContentVBox/DecisionsPanel/DecisionsVBox"]
+layout_mode = 2
+text = "REGISTRO DE DECISIONES"
+theme_override_font_sizes/font_size = 12
+
+[node name="HSepD" type="HSeparator" parent="VBox/ScrollArea/ContentVBox/DecisionsPanel/DecisionsVBox"]
+layout_mode = 2
+
+[node name="DecisionsList" type="VBoxContainer" parent="VBox/ScrollArea/ContentVBox/DecisionsPanel/DecisionsVBox"]
+layout_mode = 2
+
+[node name="DividerB" type="HSeparator" parent="VBox/ScrollArea/ContentVBox"]
+layout_mode = 2
+
+[node name="ConsequencePanel" type="PanelContainer" parent="VBox/ScrollArea/ContentVBox"]
+layout_mode = 2
+
+[node name="ConsequenceVBox" type="VBoxContainer" parent="VBox/ScrollArea/ContentVBox/ConsequencePanel"]
+layout_mode = 2
+
+[node name="ConsequenceTitle" type="Label" parent="VBox/ScrollArea/ContentVBox/ConsequencePanel/ConsequenceVBox"]
+layout_mode = 2
+text = "CONSECUENCIA"
+theme_override_font_sizes/font_size = 12
+
+[node name="HSepC" type="HSeparator" parent="VBox/ScrollArea/ContentVBox/ConsequencePanel/ConsequenceVBox"]
+layout_mode = 2
+
+[node name="ConsequenceText" type="Label" parent="VBox/ScrollArea/ContentVBox/ConsequencePanel/ConsequenceVBox"]
+layout_mode = 2
+autowrap_mode = 3
+text = "---"
+theme_override_font_sizes/font_size = 14
+
+[node name="Footer" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 72)
+
+[node name="FooterHBox" type="HBoxContainer" parent="VBox/Footer"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RestartBtn" type="Button" parent="VBox/Footer/FooterHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 50)
+text = "REINICIAR DIA"
+theme_override_font_sizes/font_size = 18

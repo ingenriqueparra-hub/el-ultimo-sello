@@ -10,6 +10,7 @@ const COLOR_APPROVE := Color(0.08, 0.42, 0.08, 1)
 const COLOR_HOLD := Color(0.42, 0.32, 0.04, 1)
 const COLOR_REJECT := Color(0.42, 0.06, 0.06, 1)
 const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
+const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
 @onready var day_label: Label = $VBox/StatusBar/StatusHBox/DayLabel
 @onready var credits_label: Label = $VBox/StatusBar/StatusHBox/CreditsLabel
@@ -28,6 +29,7 @@ const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 @onready var tab1: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab1
 @onready var tab2: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab2
 @onready var tab3: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab3
+@onready var applicant_vbox: VBoxContainer = $VBox/MainArea/ApplicantPanel/ApplicantVBox
 
 var current_day: int = 1
 var credits: int = 50
@@ -36,13 +38,19 @@ var applicants: Array = []
 var documents: Dictionary = {}
 var rules: Array = []
 var queue: ApplicantQueue
+var decision_system: DecisionSystem
 var _applicant_docs: Dictionary = {}
+var _scanner_used: bool = false
+var _questions_container: VBoxContainer
+var _audio: AudioStreamPlayer
 
 func _ready() -> void:
 	_apply_theme()
 	_connect_signals()
 	_update_status_bar()
 	_reset_applicant_panel()
+	_setup_questions_area()
+	_audio = SoundManager.create_player(self)
 	_load_day_data()
 
 func _load_day_data() -> void:
@@ -53,6 +61,11 @@ func _load_day_data() -> void:
 	print("[ControlDesk] Dia %d cargado — %d solicitantes, %d documentos, %d reglas" % [
 		current_day, applicants.size(), documents.size(), rules.size()
 	])
+	decision_system = DecisionSystem.new()
+	add_child(decision_system)
+	decision_system.setup(credits)
+	decision_system.decision_recorded.connect(_on_decision_recorded)
+
 	queue = ApplicantQueue.new()
 	add_child(queue)
 	queue.applicant_changed.connect(_on_applicant_changed)
@@ -69,9 +82,11 @@ func _on_applicant_changed(applicant: Dictionary) -> void:
 	applicant_destination.text = "Destino: " + applicant.get("destination", "---")
 	applicant_purpose.text = "Motivo: " + applicant.get("purpose", "---")
 	dialogue_text.text = applicant.get("dialogue_intro", "---")
-	alerts_list.text = "--- Sin alertas ---"
 	_set_decision_buttons_enabled(true)
+	_reset_scanner()
 	_load_applicant_documents(applicant)
+	_run_rules(applicant)
+	_reset_questions(applicant)
 
 func _on_day_ended(total: int) -> void:
 	panel_title.text = "TURNO CERRADO"
@@ -79,11 +94,14 @@ func _on_day_ended(total: int) -> void:
 	applicant_origin.text = "Procesados: %d / %d" % [total, applicants.size()]
 	applicant_destination.text = ""
 	applicant_purpose.text = ""
-	dialogue_text.text = "El turno ha concluido.\nEspere el reporte del dia."
+	dialogue_text.text = "El turno ha concluido.\nGenerando reporte..."
 	doc_content.text = "[ Sin caso activo ]"
 	alerts_list.text = "---"
 	_set_decision_buttons_enabled(false)
 	print("[ControlDesk] Turno terminado — %d / %d procesados" % [total, applicants.size()])
+	await get_tree().create_timer(1.5).timeout
+	DayReport.pending_summary = decision_system.get_summary()
+	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
 func _set_decision_buttons_enabled(enabled: bool) -> void:
 	approve_btn.disabled = not enabled
@@ -176,40 +194,126 @@ func _reset_applicant_panel() -> void:
 	_set_decision_buttons_enabled(false)
 
 func _on_approve_pressed() -> void:
-	var name: String = queue.get_current().get("name", "?")
-	print("[Decision] APROBAR — %s" % name)
-	queue.advance()
+	_make_decision("approve")
 
 func _on_hold_pressed() -> void:
-	var name: String = queue.get_current().get("name", "?")
-	print("[Decision] RETENER — %s" % name)
-	queue.advance()
+	_make_decision("hold")
 
 func _on_reject_pressed() -> void:
-	var name: String = queue.get_current().get("name", "?")
-	print("[Decision] RECHAZAR — %s" % name)
-	queue.advance()
+	_make_decision("reject")
 
-func _on_scanner_pressed() -> void:
+func _make_decision(decision: String) -> void:
 	var applicant := queue.get_current()
 	if applicant.is_empty():
 		return
+	_set_decision_buttons_enabled(false)
+	decision_system.record(decision, applicant)
+	queue.advance()
+
+func _on_decision_recorded(result: Dictionary) -> void:
+	credits = decision_system.get_credits()
+	_update_status_bar()
+	var label := "APROBADO" if result["decision"] == "approve" \
+		else ("RETENIDO" if result["decision"] == "hold" else "RECHAZADO")
+	var feedback := "[%s]" % label
+	if result["credit_delta"] < 0:
+		feedback += "  CREDITOS: %d" % result["credit_delta"]
+	doc_content.text = feedback
+	_play_decision_sound(result["decision"])
+	_flash_decision_bar(result["decision"])
+	if result["credit_delta"] < 0:
+		_flash_credits_label()
+	print("[Decision] %s — %s | Correcto: %s | Delta: %d" % [
+		result["decision"].to_upper(),
+		result["applicant_name"],
+		str(result["was_correct"]),
+		result["credit_delta"]
+	])
+
+func _on_scanner_pressed() -> void:
+	if _scanner_used or queue.get_current().is_empty():
+		return
+	_scanner_used = true
+	scanner_btn.disabled = true
+	scanner_btn.text = "ESCANEANDO..."
+	SoundManager.play_scan(_audio)
+	await get_tree().create_timer(0.4).timeout
+	_show_scan_results()
+	scanner_btn.text = "[ ESCANER USADO ]"
+
+func _show_scan_results() -> void:
+	var applicant := queue.get_current()
 	var flags: Array = applicant.get("flags", [])
-	if flags.has("biological_anomaly"):
-		alerts_list.text = "ANOMALIA BIOLOGICA\nDETECTADA"
-	elif flags.has("suspicious_dialogue"):
-		alerts_list.text = "PATRON DE RESPUESTA\nIRREGULAR"
-	elif flags.has("undeclared_device"):
-		alerts_list.text = "OBJETO NO DECLARADO\nEN PERMISO"
-	elif flags.has("cargo_mismatch"):
-		alerts_list.text = "DISCREPANCIA EN\nDECLARACION DE CARGA"
-	elif flags.has("missing_seal"):
-		alerts_list.text = "SELLO DE AUTORIDAD\nAUSENTE"
-	elif flags.has("expired_document"):
-		alerts_list.text = "DOCUMENTO VENCIDO\nDETECTADO"
+	var risk: String = applicant.get("truth", {}).get("risk_level", "low")
+
+	var lines: Array = [
+		"=== INFORME DE ESCANER — UMBRAL 7 ===",
+		"",
+		"SUJETO:  " + applicant.get("name", "?"),
+		"ORIGEN:  " + applicant.get("origin", "?"),
+		"",
+	]
+
+	var alert_texts: Array = []
+	if flags.is_empty():
+		lines.append("RESULTADO: SIN ANOMALIAS DETECTADAS")
+		alert_texts.append("ESCANER: Sin anomalias")
 	else:
-		alerts_list.text = "Sin anomalias."
-	print("[Escaner] Flags: ", flags)
+		lines.append("ANOMALIAS DETECTADAS:")
+		lines.append("")
+		for flag in flags:
+			var desc := _flag_description(flag)
+			lines.append("  ! " + desc)
+			alert_texts.append("! " + desc)
+
+	lines.append("")
+	lines.append(_risk_line(risk))
+	doc_content.text = "\n".join(lines)
+
+	var rule_alerts: String = alerts_list.text
+	var scanner_block: String = "\n".join(alert_texts)
+	if rule_alerts == "Sin irregularidades.":
+		alerts_list.text = scanner_block
+	else:
+		alerts_list.text = rule_alerts + "\n---\n" + scanner_block
+
+	print("[Escaner] %s — Flags: %s" % [applicant.get("name", "?"), str(flags)])
+
+func _reset_scanner() -> void:
+	_scanner_used = false
+	scanner_btn.text = "[ ESCANER ]"
+	scanner_btn.disabled = false
+
+func _flag_description(flag: String) -> String:
+	match flag:
+		"biological_anomaly":  return "Anomalia biologica detectada"
+		"suspicious_dialogue": return "Patron de respuesta irregular"
+		"undeclared_device":   return "Objeto no declarado en permiso"
+		"cargo_mismatch":      return "Contenido no coincide con declaracion"
+		"missing_seal":        return "Sello de autoridad ausente"
+		"expired_document":    return "Documento con fecha vencida"
+	return "Irregularidad no clasificada"
+
+func _risk_line(risk: String) -> String:
+	match risk:
+		"high":   return "NIVEL DE RIESGO: ALTO\nRECOMENDACION: RETENER INMEDIATAMENTE"
+		"medium": return "NIVEL DE RIESGO: MEDIO\nRECOMENDACION: RETENER PARA REVISION"
+		"low":    return "NIVEL DE RIESGO: BAJO\nRECOMENDACION: PROCEDER CON CRITERIO"
+	return "NIVEL DE RIESGO: INDETERMINADO"
+
+func _run_rules(applicant: Dictionary) -> void:
+	var current_date: String = day_data.get("current_date", "298.12")
+	var violations := RuleEngine.evaluate(_applicant_docs, rules, current_date)
+	if violations.is_empty():
+		alerts_list.text = "Sin irregularidades."
+		return
+	var lines: Array = []
+	for v in violations:
+		lines.append("! " + v.get("description", "Violacion"))
+		if v.get("detail", "") != "":
+			lines.append("  " + v["detail"])
+	alerts_list.text = "\n".join(lines)
+	print("[RuleEngine] %d violacion(es) — %s" % [violations.size(), applicant.get("name", "?")])
 
 # --- Sistema de documentos ---
 
@@ -240,7 +344,7 @@ func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 
 func _set_active_tab(active_btn: Button) -> void:
 	for tab in [tab1, tab2, tab3]:
-		var is_active := (tab == active_btn)
+		var is_active: bool = (tab == active_btn)
 		var s := StyleBoxFlat.new()
 		s.bg_color = Color(0.10, 0.22, 0.10, 1) if is_active else Color(0.05, 0.10, 0.05, 1)
 		s.border_color = COLOR_TEXT if is_active else COLOR_BORDER
@@ -254,9 +358,108 @@ func _render_document(doc: Dictionary) -> void:
 	var fields: Dictionary = doc.get("fields", {})
 	var lines: Array = ["=== %s ===" % label.to_upper(), ""]
 	for key in fields:
-		var k := key.replace("_", " ").to_upper()
+		var k: String = str(key).replace("_", " ").to_upper()
 		lines.append("%s: %s" % [k, str(fields[key])])
 	doc_content.text = "\n".join(lines)
+
+# --- Feedback visual y sonoro ---
+
+func _play_decision_sound(decision: String) -> void:
+	match decision:
+		"approve": SoundManager.play_approve(_audio)
+		"reject":  SoundManager.play_reject(_audio)
+		"hold":    SoundManager.play_hold(_audio)
+
+func _flash_decision_bar(decision: String) -> void:
+	var flash := Color(0.9, 1.0, 0.9, 1)
+	match decision:
+		"reject": flash = Color(1.0, 0.88, 0.88, 1)
+		"hold":   flash = Color(1.0, 0.96, 0.82, 1)
+	$VBox/DecisionBar.modulate = flash
+	var tween := create_tween()
+	tween.tween_property($VBox/DecisionBar, "modulate", Color.WHITE, 0.35)
+
+func _flash_credits_label() -> void:
+	credits_label.add_theme_color_override("font_color", Color.WHITE)
+	var tween := create_tween()
+	tween.tween_interval(0.2)
+	tween.tween_callback(func(): credits_label.add_theme_color_override("font_color", COLOR_TEXT))
+
+# --- Sistema de preguntas ---
+
+func _setup_questions_area() -> void:
+	var sep := HSeparator.new()
+	applicant_vbox.add_child(sep)
+
+	var title := Label.new()
+	title.text = "PREGUNTAS"
+	title.add_theme_font_size_override("font_size", 11)
+	title.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	applicant_vbox.add_child(title)
+
+	_questions_container = VBoxContainer.new()
+	_questions_container.add_theme_constant_override("separation", 4)
+	applicant_vbox.add_child(_questions_container)
+
+func _reset_questions(applicant: Dictionary) -> void:
+	for child in _questions_container.get_children():
+		_questions_container.remove_child(child)
+		child.free()
+
+	var questions: Dictionary = applicant.get("questions", {})
+	var question_alerts: Dictionary = applicant.get("question_alerts", {})
+	var question_labels := {
+		"motivo": "[ ¿Cual es el motivo? ]",
+		"origen": "[ ¿De donde proviene? ]",
+		"carga":  "[ ¿Que lleva consigo? ]"
+	}
+	for key in ["motivo", "origen", "carga"]:
+		if not questions.has(key):
+			continue
+		var response: String = questions[key]
+		var alert: String = question_alerts.get(key, "")
+		var btn := Button.new()
+		btn.text = question_labels[key]
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_style_question_button(btn)
+		btn.pressed.connect(_on_question_asked.bind(key, response, alert, btn))
+		_questions_container.add_child(btn)
+
+func _style_question_button(btn: Button) -> void:
+	var s_normal := StyleBoxFlat.new()
+	s_normal.bg_color = COLOR_QUESTION
+	s_normal.border_color = COLOR_TEXT_DIM
+	s_normal.set_border_width_all(1)
+	s_normal.set_content_margin_all(6)
+	var s_hover := StyleBoxFlat.new()
+	s_hover.bg_color = COLOR_QUESTION.lightened(0.15)
+	s_hover.border_color = COLOR_TEXT
+	s_hover.set_border_width_all(1)
+	s_hover.set_content_margin_all(6)
+	var s_disabled := StyleBoxFlat.new()
+	s_disabled.bg_color = COLOR_QUESTION.darkened(0.4)
+	s_disabled.border_color = COLOR_QUESTION.darkened(0.2)
+	s_disabled.set_border_width_all(1)
+	s_disabled.set_content_margin_all(6)
+	btn.add_theme_stylebox_override("normal", s_normal)
+	btn.add_theme_stylebox_override("hover", s_hover)
+	btn.add_theme_stylebox_override("disabled", s_disabled)
+	btn.add_theme_color_override("font_color", COLOR_TEXT)
+	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
+	btn.add_theme_color_override("font_disabled_color", COLOR_TEXT_DIM)
+	btn.add_theme_font_size_override("font_size", 12)
+
+func _on_question_asked(key: String, response: String, alert: String, btn: Button) -> void:
+	dialogue_text.text = response
+	btn.disabled = true
+	if alert != "":
+		var current_alerts: String = alerts_list.text
+		if current_alerts in ["Sin irregularidades.", "--- Sin alertas ---"]:
+			alerts_list.text = alert
+		else:
+			alerts_list.text = current_alerts + "\n" + alert
+		SoundManager.play_alert(_audio)
+		print("[Pregunta] ALERTA — %s: %s" % [key, alert])
 
 func _style_tab_buttons() -> void:
 	for tab in [tab1, tab2, tab3]:

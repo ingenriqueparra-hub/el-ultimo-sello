@@ -183,7 +183,7 @@
     "type": "bio_cert",
     "label": "Certificado de Identidad Biometrica — GRUPO FAMILIAR",
     "fields": {
-      "nombre": "Dara Miren + menor a cargo",
+      "nombre": "Dara Miren",
       "codigo_identidad": "CV-3317 / MN-3317A",
       "tipo_biologico": "Estandar / Estandar (menor)",
       "anomalias": "Menor: respuesta celular atipica — anomalia biologica leve",

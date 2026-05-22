@@ -394,6 +394,8 @@ Archivos principales:
 Bugs corregidos:
 - `get_index()` renombrado a `get_current_index()` — conflicta con built-in `Node.get_index()` de Godot 4, causaba "Could not resolve external class member".
 - Variables `:=` desde `Dictionary.get()` explicitadas como `: String =` — Godot trata como error el warning de tipo Variant inferido.
+- `var is_active := (tab == active_btn)` → `: bool =` — Godot no puede inferir bool desde comparación en este contexto.
+- `var k := key.replace(...)` → `var k: String = str(key).replace(...)` — `key` al iterar un Dictionary es Variant, hay que convertir con `str()` antes de llamar métodos de String.
 
 Pendientes:
 - Ninguno para Módulo 4.
@@ -430,22 +432,93 @@ Pendientes:
 ---
 
 ### Módulo 6 — Sistema de decisiones
-Objetivo: permitir aprobar, rechazar y retener; registrar cada decisión.
+Estado: Completado
+
+Implementado:
+- `DecisionSystem.gd` — registra decisiones, evalúa corrección vs `truth.correct_decision`, calcula delta de créditos.
+- Penalizaciones: aprobación incorrecta -10/-15 (según risk_level), rechazo incorrecto -10, retención incorrecta -5.
+- Signal `decision_recorded` actualiza créditos en barra de estado y muestra feedback en área de documentos.
+- `_make_decision()` en ControlDesk centraliza el flujo: deshabilita botones → registra → avanza cola.
+- `get_summary()` disponible para el Módulo 8 (reporte final).
+
+Archivos principales:
+- `game/scripts/systems/DecisionSystem.gd`
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Pendientes:
+- Ninguno para Módulo 6.
+
+---
 
 ### Módulo 7 — Motor de reglas e inconsistencias
-Objetivo: evaluar reglas simples, detectar errores y determinar si la decisión fue correcta o riesgosa.
+Estado: Completado
+
+Implementado:
+- `RuleEngine.gd` — clase estática, 4 tipos de validación: document_required, field_not_expired, name_consistency, field_not_empty.
+- Violaciones mostradas automáticamente al cargar cada solicitante.
+- Escáner agrega sus flags al panel sin borrar las violaciones de reglas.
+- JSON corregido: bio_cert_008, truth.violations de applicants 4 y 6.
+
+Casos que disparan reglas: applicant_002 (vencido), applicant_003 (sello PENDIENTE).
+Casos por escáner: applicants 004, 005, 007, 008, 010.
+Casos de juicio: applicants 006, 010.
+
+Archivos principales:
+- `game/scripts/systems/RuleEngine.gd`
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Pendientes:
+- Ninguno para Módulo 7.
+
+---
 
 ### Módulo 8 — Reporte final del día
-Objetivo: mostrar aciertos, errores, multas, reputación y consecuencia narrativa.
+Estado: Completado
+
+Implementado:
+- `DayReport.tscn` + `DayReport.gd` — escena de reporte con resumen, lista de decisiones y consecuencia.
+- `DayReport.pending_summary` (static var) recibe el resumen desde ControlDesk vía `decision_system.get_summary()`.
+- Resumen muestra: procesados, decisiones correctas, errores, créditos finales.
+- Lista de decisiones: [OK] verde / [!] rojo por cada caso, con nombre, decisión y delta de créditos.
+- Consecuencia narrativa en 4 niveles según errores (0, 1-2, 3-5, 6+), con tono institucional.
+- Botón "REINICIAR DIA" vuelve a ControlDesk y limpia el summary.
+- ControlDesk: al fin del día, espera 1.5s y navega automáticamente al reporte.
+
+Archivos principales:
+- `game/scenes/main/DayReport.tscn`
+- `game/scripts/ui/DayReport.gd`
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Pendientes:
+- Ninguno para Módulo 8.
+
+---
 
 ### Módulo 9 — Escáner básico
-Objetivo: agregar una herramienta simple de detección de anomalías.
+Estado: Completado
 
-### Módulo 10 — Diálogos e interrogatorio simple
+Implementado:
+- Uso único por solicitante. Reseteo automático al llegar el siguiente.
+- Delay 0.4s con "ESCANEANDO..." antes de mostrar resultado.
+- Informe formal en área de documentos con anomalías, riesgo y recomendación institucional.
+- Alertas preservan violaciones de reglas y agregan resultados del escáner separados.
+- Botón cambia a "[ ESCANER USADO ]" y se deshabilita tras el uso.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Pendientes:
+- Ninguno para Módulo 9.
+
+---
+
+### Módulo 10 — Diálogos e interrogatorio simple ✓ Completado
 Objetivo: agregar frase inicial y 2-3 preguntas funcionales.
+Implementado: 3 botones de pregunta dinámicos (motivo/origen/carga) en el panel del solicitante. Respuestas visibles en dialogue_text. Alertas de contradicción anexadas a alerts_list cuando la respuesta contradice los documentos. Datos en applicants_day_01.json (campos questions y question_alerts).
 
-### Módulo 11 — Feedback visual y sonoro
+### Módulo 11 — Feedback visual y sonoro ✓ Completado
 Objetivo: agregar sonidos de sello, alerta, confirmación y feedback visual básico.
+Implementado: SoundManager.gd genera tonos PCM sin archivos externos (AudioStreamWAV). Sonidos: aprobar (440Hz punchy), rechazar (sweep descendente), retener (300Hz suave), alerta (900Hz corto), escáner (sweep ascendente). Flash de modulate en barra de decisiones (verde/rojo/ámbar) y flash de créditos al perder créditos.
 
 ### Módulo 12 — Pulido del Día 1
 Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.

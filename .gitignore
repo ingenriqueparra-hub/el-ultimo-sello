@@ -1,0 +1,9 @@
+# Godot editor cache
+game/.godot/
+
+# Claude Code local session data
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
