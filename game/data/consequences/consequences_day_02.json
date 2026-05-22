@@ -1,0 +1,72 @@
+[
+  {
+    "id": "c02_eficiencia_maxima",
+    "day": 2,
+    "priority": 100,
+    "type": "performance",
+    "title": "Eficiencia registrada — Sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el segundo turno de control.\n\nLa nueva directiva del Certificado Biometrico fue aplicada sin errores. El Supervisor Halvek registra conformidad. Su expediente avanza sin observaciones.",
+    "conditions": {
+      "max_errors": 0,
+      "min_credits": 50
+    }
+  },
+  {
+    "id": "c02_turno_sin_incidentes",
+    "day": 2,
+    "priority": 90,
+    "type": "performance",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del segundo turno sin violaciones documentadas.\n\nSu expediente se mantiene estable. El Supervisor Halvek no emite observaciones adicionales.",
+    "conditions": {
+      "max_errors": 0
+    }
+  },
+  {
+    "id": "c02_creditos_criticos",
+    "day": 2,
+    "priority": 85,
+    "type": "performance",
+    "title": "Situacion economica critica",
+    "body": "Las penalizaciones acumuladas han llevado su cuenta de creditos a un nivel critico.\n\nEl Ministerio emite alerta de estabilidad economica. El Supervisor Halvek advierte que la continuidad del puesto puede verse afectada si la situacion no se corrige en la siguiente jornada.",
+    "conditions": {
+      "max_credits": 19,
+      "min_errors": 1
+    }
+  },
+  {
+    "id": "c02_irregularidades_menores",
+    "day": 2,
+    "priority": 80,
+    "type": "performance",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el segundo turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recuerda al operario que las nuevas directivas del Certificado Biometrico son de cumplimiento obligatorio.",
+    "conditions": {
+      "min_errors": 1,
+      "max_errors": 2
+    }
+  },
+  {
+    "id": "c02_turno_deficiente",
+    "day": 2,
+    "priority": 70,
+    "type": "performance",
+    "title": "Turno deficiente",
+    "body": "El segundo turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. Las nuevas reglas biometricas debieron haber sido comprendidas antes de este turno. Se aplica penalizacion adicional. Su expediente recibe marcador rojo.",
+    "conditions": {
+      "min_errors": 3,
+      "max_errors": 5
+    }
+  },
+  {
+    "id": "c02_turno_catastrofico",
+    "day": 2,
+    "priority": 60,
+    "type": "performance",
+    "title": "Turno catastrofico",
+    "body": "El segundo turno registra un nivel de errores inaceptable para el Ministerio de Admision Planetaria.\n\nEl Oficio de Pureza Civica ha sido notificado. Se abre investigacion formal sobre la competencia del operario asignado al Puesto Umbral 7. El Supervisor Halvek suspende la calificacion de confianza.\n\nEl Sello no perdona la reincidencia.",
+    "conditions": {
+      "min_errors": 6
+    }
+  }
+]

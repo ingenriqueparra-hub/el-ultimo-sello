@@ -1,0 +1,60 @@
+[
+  {
+    "id": "c01_eficiencia_maxima",
+    "day": 1,
+    "priority": 100,
+    "type": "performance",
+    "title": "Eficiencia registrada — Sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el primer turno de control.\n\nSu expediente se actualiza favorablemente. El Supervisor Halvek no emite observacion. Se considera al operario apto para la continuacion del servicio sin restricciones.",
+    "conditions": {
+      "max_errors": 0,
+      "min_credits": 50
+    }
+  },
+  {
+    "id": "c01_turno_sin_incidentes",
+    "day": 1,
+    "priority": 90,
+    "type": "performance",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del primer turno sin violaciones documentadas.\n\nSu expediente queda marcado como estable. El Supervisor Halvek no requiere reunion de revision.",
+    "conditions": {
+      "max_errors": 0
+    }
+  },
+  {
+    "id": "c01_irregularidades_menores",
+    "day": 1,
+    "priority": 80,
+    "type": "performance",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el primer turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recomienda mayor atencion al protocolo en la siguiente jornada. Su expediente recibe marcador de seguimiento.",
+    "conditions": {
+      "min_errors": 1,
+      "max_errors": 2
+    }
+  },
+  {
+    "id": "c01_turno_deficiente",
+    "day": 1,
+    "priority": 70,
+    "type": "performance",
+    "title": "Turno deficiente",
+    "body": "El numero de errores cometidos supera el margen tolerado por el Ministerio de Admision.\n\nEl Supervisor Halvek solicita revision formal de su expediente. Se aplica penalizacion administrativa. Si el rendimiento no mejora, su continuidad en el Puesto Umbral 7 sera evaluada en la siguiente jornada.",
+    "conditions": {
+      "min_errors": 3,
+      "max_errors": 5
+    }
+  },
+  {
+    "id": "c01_turno_catastrofico",
+    "day": 1,
+    "priority": 60,
+    "type": "performance",
+    "title": "Turno catastrofico",
+    "body": "El registro del primer turno es inaceptable.\n\nSe abre expediente disciplinario en el Oficio de Pureza Civica. El Supervisor Halvek solicita presencia inmediata en sala de revision. Su continuidad en el Puesto Umbral 7 esta en revision activa.\n\nEl Sello no perdona la negligencia.",
+    "conditions": {
+      "min_errors": 6
+    }
+  }
+]

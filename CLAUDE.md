@@ -366,8 +366,9 @@ Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar 
 ### Módulo 14 — Expansión a Día 2
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
 
-### Módulo 15 — Consecuencias narrativas por capas
+### Módulo 15 — Consecuencias narrativas por capas (Fase 1 ✓ Completada)
 Objetivo: separar consecuencia de rendimiento, consecuencia de caso, acumuladores narrativos entre días y cierres terminales futuros.
+Fase 1 implementada: NarrativeConsequenceSystem.gd + JSON por día. DayReport muestra título y body desde JSON. _get_consequence() eliminada.
 
 ---
 
@@ -1094,21 +1095,24 @@ Pendientes:
 ---
 
 ### Módulo 15 — Consecuencias narrativas por capas
-Estado: Diseñado / Pendiente de implementación
+Estado: Fase 1 Completada / Fases 2-4 Pendientes
 
-Implementado:
-- Definición documental del sistema en `GAME_DESIGN.md`, `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md`.
+Implementado (Fase 1 — consecuencia de rendimiento):
+- `NarrativeConsequenceSystem.gd` — clase estática. Carga `consequences_day_NN.json`, evalúa condiciones (min/max_errors, min/max_credits, min_correct), retorna la consecuencia válida de mayor prioridad. Fallback neutral si falta el archivo o no hay coincidencia.
+- `consequences_day_01.json` — 5 consecuencias: eficiencia máxima (0 err, cred≥50), sin incidentes (0 err), irregularidades (1-2 err), deficiente (3-5 err), catastrófico (6+ err).
+- `consequences_day_02.json` — 6 consecuencias: igual estructura + créditos críticos (cred≤19, min_errors 1, prioridad 85).
+- `DayReport.gd` — usa `NarrativeConsequenceSystem.evaluate()`. Muestra título dinámico en `ConsequenceTitle` y body en `ConsequenceText`. `_get_consequence()` eliminada.
 
 Archivos principales:
-- `GAME_DESIGN.md`
-- `TECHNICAL_SPEC.md`
-- `MVP_BACKLOG.md`
+- `game/scripts/systems/NarrativeConsequenceSystem.gd`
+- `game/data/consequences/consequences_day_01.json`
+- `game/data/consequences/consequences_day_02.json`
+- `game/scripts/ui/DayReport.gd` (actualizado)
 
 Pendientes:
-- Implementar consecuencia de rendimiento desde JSON.
-- Agregar consecuencias de caso con `narrative_hooks`.
-- Persistir acumuladores narrativos entre días.
-- Evaluar cierres terminales futuros solo por acumulación extrema.
+- Fase 2: consecuencias de caso con `narrative_hooks` por solicitante.
+- Fase 3: persistir acumuladores narrativos entre días.
+- Fase 4: evaluar cierres terminales por acumulación extrema.
 
 ---
 

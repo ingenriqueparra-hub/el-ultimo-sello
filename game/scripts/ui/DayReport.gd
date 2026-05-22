@@ -17,6 +17,7 @@ const COLOR_BTN    := Color(0.08, 0.36, 0.08, 1)
 @onready var errors_label: Label      = $VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox/ErrorsLabel
 @onready var credits_label: Label     = $VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox/CreditsLabel
 @onready var decisions_list: VBoxContainer = $VBox/ScrollArea/ContentVBox/DecisionsPanel/DecisionsVBox/DecisionsList
+@onready var consequence_title_label: Label = $VBox/ScrollArea/ContentVBox/ConsequencePanel/ConsequenceVBox/ConsequenceTitle
 @onready var consequence_text: Label  = $VBox/ScrollArea/ContentVBox/ConsequencePanel/ConsequenceVBox/ConsequenceText
 @onready var restart_btn: Button      = $VBox/Footer/FooterHBox/RestartBtn
 
@@ -52,7 +53,10 @@ func _populate(summary: Dictionary) -> void:
 	for decision in summary.get("decisions", []):
 		_add_decision_row(decision)
 
-	consequence_text.text = _get_consequence(errors, credits)
+	var day: int = summary.get("day", 1)
+	var consequence := NarrativeConsequenceSystem.evaluate(summary, day)
+	consequence_title_label.text = str(consequence.get("title", "CONSECUENCIA"))
+	consequence_text.text = str(consequence.get("body", ""))
 
 func _add_decision_row(decision: Dictionary) -> void:
 	var was_correct: bool = decision.get("was_correct", false)
@@ -72,16 +76,6 @@ func _add_decision_row(decision: Dictionary) -> void:
 	row.add_theme_color_override("font_color", COLOR_OK if was_correct else COLOR_ERROR)
 	row.add_theme_font_size_override("font_size", 13)
 	decisions_list.add_child(row)
-
-func _get_consequence(errors: int, credits: int) -> String:
-	if errors == 0:
-		return "Turno sin incidentes.\n\nEl Ministerio de Admision registra eficiencia maxima en el Puesto Umbral 7. Su expediente se actualiza favorablemente."
-	elif errors <= 2:
-		return "Turno con irregularidades menores.\n\nSe emite notificacion interna. El Supervisor Halvek recomienda mayor atencion al protocolo en la proxima jornada."
-	elif errors <= 5:
-		return "Turno deficiente.\n\nEl Supervisor Halvek solicita revision formal de su expediente. Se aplica penalizacion de creditos en la proxima jornada. No cometa los mismos errores."
-	else:
-		return "Turno catastrofico.\n\nSe abre expediente disciplinario en el Oficio de Pureza Civica. Su continuidad en el Puesto Umbral 7 esta en revision. El Sello no perdona la negligencia."
 
 func _apply_theme() -> void:
 	_style_panel($VBox/Header, COLOR_PANEL, COLOR_BORDER)
