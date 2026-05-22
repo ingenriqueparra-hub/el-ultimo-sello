@@ -1,0 +1,88 @@
+[
+  {
+    "id": "terminal_desastre_colmena",
+    "priority": 200,
+    "title": "COLAPSO — Ciudad-Colmena Ceniza en estado de emergencia",
+    "body": "El nivel de amenaza acumulado en el Sector Umbral ha superado el umbral de contencion del Puerto de Entrada 7.\n\nLas anomalias no interceptadas durante los turnos de control han convergido en un incidente de contaminacion masiva. La Ciudad-Colmena Ceniza ha iniciado protocolo de sellado de emergencia de nivel critico.\n\nEl Ministerio de Admision Planetaria declara responsabilidad directa del Puesto Umbral 7. Su expediente ha sido transferido al Oficio de Pureza Civica con clasificacion de catastrofe operacional.\n\nNo se esperan mas turnos de control.\n\nEl Sello no puede proteger lo que ya ha entrado.",
+    "conditions": {
+      "security_risk_min": 6,
+      "min_day": 1
+    }
+  },
+  {
+    "id": "terminal_ejecucion_protocolaria",
+    "priority": 190,
+    "title": "DECRETO DE PUREZA — Ejecucion protocolaria ordenada",
+    "body": "El Oficio de Pureza Civica ha emitido Decreto de Pureza Administrativa sobre el operario del Puesto Umbral 7.\n\nEl expediente acumula perdida total de confianza institucional y sospecha activa del Supervisor Halvek. La combinacion activa el protocolo de cierre definitivo de expediente por Riesgo Institucional Confirmado.\n\nEl Supervisor Halvek no ha interpuesto recurso. El proceso es breve. El Ministerio lo registra como medida correctiva estandar.\n\nEl Sello confirma. La conciencia no consta en el formulario.",
+    "conditions": {
+      "institutional_trust_max": -5,
+      "supervisor_suspicion_min": 5,
+      "min_day": 2
+    }
+  },
+  {
+    "id": "terminal_cuarentena_total",
+    "priority": 180,
+    "title": "CUARENTENA — Sector Umbral sellado por orden del Oficio",
+    "body": "El Oficio de Pureza Civica ha decretado cuarentena total del Sector Umbral.\n\nEl nivel de riesgo de seguridad acumulado durante los turnos anteriores ha superado el margen tolerable para el Ministerio de Admision Planetaria. El Puerto de Entrada 7 queda sellado de forma indefinida.\n\nTodo el personal queda en estado de revision activa. Los solicitantes retenidos pasan a custodia del Oficio. No hay estimacion de reapertura.\n\nSu expediente permanece abierto bajo clasificacion de negligencia sistemica.",
+    "conditions": {
+      "security_risk_min": 5,
+      "min_day": 2
+    }
+  },
+  {
+    "id": "terminal_sabotaje_exitoso",
+    "priority": 170,
+    "title": "SABOTAJE — Accion completada en el interior del Umbral",
+    "body": "Inteligencia del Ministerio confirma accion de sabotaje completada en instalaciones criticas del Puerto de Entrada 7.\n\nLos elementos no interceptados durante su turno de control han llevado a cabo su objetivo. La perdida de confianza institucional registrada en su expediente impide cualquier credibilidad en su defensa.\n\nEl Supervisor Halvek ha remitido su caso al Oficio de Pureza Civica bajo cargo de colaboracion pasiva. La investigacion ya esta en curso.\n\nNadie entra limpio. Usted dejo que entrara quien no debia.",
+    "conditions": {
+      "security_risk_min": 4,
+      "institutional_trust_max": -2,
+      "min_day": 1
+    }
+  },
+  {
+    "id": "terminal_colapso_puesto",
+    "priority": 160,
+    "title": "CIERRE OPERACIONAL — Puesto Umbral 7 inhabilitado",
+    "body": "La desconfianza acumulada por el Supervisor Halvek hacia el operario ha alcanzado el limite institucional.\n\nSe emite orden de cierre del Puesto Umbral 7 por falta de fiabilidad operativa. El personal asignado es reasignado o suspendido. El Ministerio de Admision Planetaria registra el cierre como fallo sistemico de control humano.\n\nSu expediente queda marcado con codigo de inhabilitacion de puesto. No se tramitara solicitud de reincorporacion en los proximos cuarenta ciclos.\n\nEl error individual es una amenaza colectiva. El Ministerio ha actuado en consecuencia.",
+    "conditions": {
+      "supervisor_suspicion_min": 5,
+      "institutional_trust_max": -2,
+      "min_day": 2
+    }
+  },
+  {
+    "id": "terminal_arresto_negligencia",
+    "priority": 150,
+    "title": "ARRESTO — Detencion por negligencia grave certificada",
+    "body": "El Oficio de Pureza Civica ha emitido orden de detencion preventiva sobre el operario del Puesto Umbral 7.\n\nEl deterioro acumulado de la confianza institucional combinado con el nivel de sospecha registrado por el Supervisor Halvek ha activado el protocolo de arresto por negligencia grave. Sus funciones quedan suspendidas de forma inmediata.\n\nEl Ministerio no garantiza plazos de revision del expediente. El Supervisor Halvek ha avalado la medida sin objecion.\n\nLa ciudad no teme a los culpables. Teme a los no registrados. Usted ya no es de confianza registrada.",
+    "conditions": {
+      "institutional_trust_max": -4,
+      "supervisor_suspicion_min": 4,
+      "min_day": 2
+    }
+  },
+  {
+    "id": "terminal_despido_administrativo",
+    "priority": 140,
+    "title": "CESE — Terminacion de funciones por bajo rendimiento institucional",
+    "body": "El Supervisor Halvek ha comunicado la terminacion de sus funciones en el Puesto Umbral 7.\n\nEl expediente acumula irregularidades suficientes para aplicar el procedimiento de cese por rendimiento institucional insuficiente. Se le notifica que no podra solicitar reincorporacion en el Ministerio de Admision Planetaria en los proximos treinta ciclos.\n\nSu credencial de acceso ha sido desactivada. Los registros del turno quedan archivados bajo revision interna.\n\nEl Sello no le reconoce mas.",
+    "conditions": {
+      "institutional_trust_max": -3,
+      "supervisor_suspicion_min": 3,
+      "min_day": 2
+    }
+  },
+  {
+    "id": "terminal_ascenso_oscuro",
+    "priority": 130,
+    "title": "TRASLADO — Perfil de obediencia institucional detectado",
+    "body": "El Ministerio de Admision Planetaria ha identificado en su expediente un perfil de alta adhesion institucional.\n\nSus decisiones, aunque costosas para la poblacion civil del Sector Umbral, han demostrado obediencia estricta al protocolo por encima de cualquier consideracion humana. Este tipo de operario tiene valor en niveles mas altos del sistema.\n\nSe le comunica traslado a funciones de supervision de puesto. El Supervisor Halvek no ha hecho comentarios. El Oficio de Pureza Civica avala el ascenso.\n\nUsted ha demostrado que el Sello puede mantenerse limpio sin importar el precio.\n\nBienvenido al otro lado de la ventanilla.",
+    "conditions": {
+      "institutional_trust_min": 3,
+      "civilian_harm_min": 3,
+      "min_day": 2
+    }
+  }
+]

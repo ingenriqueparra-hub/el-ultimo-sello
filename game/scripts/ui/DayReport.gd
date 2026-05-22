@@ -3,6 +3,8 @@ extends Control
 
 static var pending_summary: Dictionary = {}
 
+var _is_terminal: bool = false
+
 const COLOR_PANEL  := Color(0.06, 0.10, 0.06, 1)
 const COLOR_BORDER := Color(0.15, 0.45, 0.15, 1)
 const COLOR_TEXT   := Color(0.18, 0.82, 0.18, 1)
@@ -27,7 +29,8 @@ func _ready() -> void:
 	var current_day: int = pending_summary.get("day", 1)
 	header_label.text = "REPORTE DEL TURNO — DIA %d" % current_day
 	restart_btn.pressed.connect(_on_restart_pressed)
-	_maybe_add_continue_button(current_day)
+	if not _is_terminal:
+		_maybe_add_continue_button(current_day)
 
 func _populate(summary: Dictionary) -> void:
 	if summary.is_empty():
@@ -55,11 +58,16 @@ func _populate(summary: Dictionary) -> void:
 
 	var day: int = summary.get("day", 1)
 	var consequence := NarrativeConsequenceSystem.evaluate(summary, day)
-	consequence_title_label.text = str(consequence.get("title", "CONSECUENCIA"))
-	consequence_text.text = str(consequence.get("body", ""))
-	var symptom := NarrativeStateSystem.get_narrative_symptom()
-	if symptom != "":
-		consequence_text.text += "\n\n" + symptom
+	var terminal := TerminalEndingSystem.evaluate(summary)
+	if not terminal.is_empty():
+		_is_terminal = true
+		_show_terminal_ending(terminal)
+	else:
+		consequence_title_label.text = str(consequence.get("title", "CONSECUENCIA"))
+		consequence_text.text = str(consequence.get("body", ""))
+		var symptom := NarrativeStateSystem.get_narrative_symptom()
+		if symptom != "":
+			consequence_text.text += "\n\n" + symptom
 
 func _add_decision_row(decision: Dictionary) -> void:
 	var was_correct: bool = decision.get("was_correct", false)
@@ -145,9 +153,28 @@ func _on_continue_pressed(next_day: int) -> void:
 	ControlDesk.day_to_load = next_day
 	get_tree().change_scene_to_file("res://scenes/main/ControlDesk.tscn")
 
+func _show_terminal_ending(terminal: Dictionary) -> void:
+	var color_terminal := Color(0.82, 0.18, 0.18, 1)
+	consequence_title_label.text = str(terminal.get("title", "CIERRE TERMINAL"))
+	consequence_title_label.add_theme_color_override("font_color", color_terminal)
+	consequence_text.text = str(terminal.get("body", ""))
+	consequence_text.add_theme_color_override("font_color", COLOR_TEXT)
+	var panel := $VBox/ScrollArea/ContentVBox/ConsequencePanel
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.12, 0.04, 0.04, 1)
+	style.border_color = color_terminal
+	style.set_border_width_all(2)
+	style.set_content_margin_all(10)
+	panel.add_theme_stylebox_override("panel", style)
+	restart_btn.text = "NUEVA PARTIDA"
+
 func _on_restart_pressed() -> void:
 	var day: int = pending_summary.get("day", 1)
 	pending_summary = {}
-	NarrativeStateSystem.restore_snapshot()
-	ControlDesk.day_to_load = day
+	if _is_terminal:
+		NarrativeStateSystem.reset()
+		ControlDesk.day_to_load = 1
+	else:
+		NarrativeStateSystem.restore_snapshot()
+		ControlDesk.day_to_load = day
 	get_tree().change_scene_to_file("res://scenes/main/ControlDesk.tscn")
