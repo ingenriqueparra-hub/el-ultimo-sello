@@ -288,12 +288,13 @@ El prototipo funciona si el jugador:
 
 ## 15. Estado actual del proyecto
 
-Estado: **Documentación inicial preparada para desarrollo asistido con Codex**.
+Estado: **Documentación inicial preparada para desarrollo asistido con agentes IA**.
 
 Actualmente existe:
 
 - visión general del juego en `PROJECT.md`;
-- guía operativa para agentes IA en `AGENTS.md`;
+- guía principal para agentes IA en `CLAUDE.md`;
+- guía secundaria para Codex en `AGENTS.md`;
 - diseño jugable en `GAME_DESIGN.md`;
 - biblia narrativa en `NARRATIVE_BIBLE.md`;
 - backlog MVP en `MVP_BACKLOG.md`;
@@ -317,11 +318,13 @@ Aún falta construir:
 
 ---
 
-## 16. Forma de trabajo con Codex
+## 16. Forma de trabajo con agentes IA
 
-Codex debe usar `AGENTS.md` como punto de entrada obligatorio.
+Todo agente IA debe usar `CLAUDE.md` como punto de entrada principal.
 
-`AGENTS.md` funciona como router del proyecto:
+Codex puede usar `AGENTS.md` como archivo secundario de compatibilidad, pero debe priorizar `CLAUDE.md`.
+
+`CLAUDE.md` funciona como router principal del proyecto:
 
 - indica qué documentos consultar;
 - define el orden de prioridad entre archivos;
@@ -331,11 +334,13 @@ Codex debe usar `AGENTS.md` como punto de entrada obligatorio.
 - protege la identidad propia del juego;
 - obliga a consultar `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md` antes de escribir código.
 
-Codex no debe trabajar por ideas sueltas. Debe trabajar por módulos, con criterios de aceptación claros y cambios limitados.
+Ningún agente debe trabajar por ideas sueltas. Debe trabajar por módulos, con criterios de aceptación claros y cambios limitados.
+
+`AGENTS.md` debe mantenerse sincronizado con estas reglas, pero como archivo secundario para Codex. Si hay conflicto entre `CLAUDE.md` y `AGENTS.md`, priorizar `CLAUDE.md`. Si hay conflicto con documentación de producto, priorizar en este orden: `IP_SAFETY.md`, `PROJECT.md`, `MVP_BACKLOG.md`, `TECHNICAL_SPEC.md`, `GAME_DESIGN.md`.
 
 Ejemplo correcto de instrucción:
 
-> Implementa el Módulo 1: estructura base Godot. Consulta `AGENTS.md`, `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md`. No avances al Módulo 2.
+> Implementa el Módulo 1: estructura base Godot. Consulta `CLAUDE.md`, `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md`. No avances al Módulo 2.
 
 Ejemplo incorrecto:
 
@@ -447,23 +452,24 @@ Pendientes:
 
 ---
 
-## 21. Criterio de preparación para Codex
+## 21. Criterio de preparación para agentes IA
 
-El proyecto está preparado para empezar en Codex cuando:
+El proyecto está preparado para empezar con agentes IA cuando:
 
-- `AGENTS.md` esté en la raíz del proyecto;
+- `CLAUDE.md` esté en la raíz del proyecto como guía principal;
+- `AGENTS.md` esté en la raíz del proyecto como guía secundaria para Codex;
 - `PROJECT.md`, `TECHNICAL_SPEC.md`, `MVP_BACKLOG.md` y `GAME_DESIGN.md` estén accesibles;
-- Codex reciba una tarea modular concreta;
+- el agente reciba una tarea modular concreta;
 - la tarea indique qué módulo trabajar;
 - la tarea no pida construir el juego completo de una sola vez.
 
-Primera tarea recomendada para Codex:
+Primera tarea recomendada:
 
 ```md
 Implementa el Módulo 1 — Estructura base Godot.
 
 Consulta:
-- AGENTS.md
+- CLAUDE.md
 - PROJECT.md
 - TECHNICAL_SPEC.md
 - MVP_BACKLOG.md

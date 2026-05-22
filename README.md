@@ -5,7 +5,8 @@ Este paquete contiene la documentación base para iniciar el desarrollo de un vi
 ## Archivos incluidos
 
 - `PROJECT.md`: visión general, alcance, principios y riesgos.
-- `AGENTS.md`: instrucciones para trabajar con agentes IA.
+- `CLAUDE.md`: guía principal para agentes IA.
+- `AGENTS.md`: guía secundaria para Codex.
 - `SKILLS.md`: capacidades necesarias del proyecto.
 - `GAME_DESIGN.md`: diseño jugable, loop, documentos y decisiones.
 - `NARRATIVE_BIBLE.md`: mundo, facciones, tono y personajes.
@@ -37,4 +38,3 @@ Construir un MVP con:
 - 3 decisiones;
 - 1 reporte final;
 - 1 consecuencia narrativa.
-
