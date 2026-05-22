@@ -173,6 +173,32 @@ Responsable de:
 - permitir preguntas;
 - revelar respuestas.
 
+### 4.7. Debug Panel (herramienta interna de desarrollo / QA)
+
+**No es una mecánica jugable. No debe estar disponible en builds de release.**
+
+Panel de superposición activado con la tecla `Y` durante la inspección. Visible solo para desarrolladores y QA.
+
+Muestra:
+
+- ID y nombre del solicitante actual.
+- Decisión correcta esperada (`truth.correct_decision`).
+- Nivel de riesgo y notas internas (`truth.risk_level`, `truth.notes`).
+- Flags del solicitante (`flags[]`).
+- Reglas fallidas detectadas por `RuleEngine` en el turno actual.
+- Documentos presentes (por tipo).
+- Alertas de contradicción en interrogatorio (`question_alerts`).
+- Resultado de la última decisión tomada (decisión, corrección, penalización).
+
+Propiedades técnicas:
+
+- Construido programáticamente en `ControlDesk.gd` (sin escena separada).
+- Oculto por defecto (`visible = false`).
+- `mouse_filter = MOUSE_FILTER_IGNORE` para no bloquear interacción con el juego.
+- `z_index = 100` para superponerse al resto de la UI.
+- Se actualiza automáticamente al cambiar de solicitante y tras cada decisión.
+- Activado/desactivado con `KEY_Y` en `_input()`.
+
 ---
 
 ## 5. Estados del juego

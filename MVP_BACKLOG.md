@@ -83,6 +83,16 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 
 ---
 
+### Dev / QA — Herramientas internas
+
+Estas tareas son de soporte al desarrollo. No son features del juego final ni deben aparecer en builds públicos.
+
+| ID | Tarea | Criterio de aceptación |
+|---|---|---|
+| DEV-01 | Panel debug interno (tecla `Y`) | Muestra verdad oculta del caso activo; oculto por defecto; no interfiere con el flujo del jugador |
+
+---
+
 ## 4. Primeros 10 solicitantes del MVP
 
 | # | Tipo | Caso | Decisión esperada |

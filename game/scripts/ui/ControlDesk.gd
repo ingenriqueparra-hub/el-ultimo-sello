@@ -44,6 +44,13 @@ var _scanner_used: bool = false
 var _questions_container: VBoxContainer
 var _audio: AudioStreamPlayer
 
+# --- Estado interno para debug ---
+var _current_applicant: Dictionary = {}
+var _last_violations: Array = []
+var _last_decision_result: Dictionary = {}
+var _debug_panel: PanelContainer
+var _debug_label: Label
+
 func _ready() -> void:
 	_apply_theme()
 	_connect_signals()
@@ -51,6 +58,7 @@ func _ready() -> void:
 	_reset_applicant_panel()
 	_setup_questions_area()
 	_audio = SoundManager.create_player(self)
+	_build_debug_panel()
 	_load_day_data()
 
 func _load_day_data() -> void:
@@ -74,6 +82,8 @@ func _load_day_data() -> void:
 	queue.start()
 
 func _on_applicant_changed(applicant: Dictionary) -> void:
+	_current_applicant = applicant
+	_last_decision_result = {}
 	var pos := queue.get_current_index() + 1
 	var total := queue.get_total()
 	panel_title.text = "SOLICITANTE %d / %d" % [pos, total]
@@ -87,6 +97,8 @@ func _on_applicant_changed(applicant: Dictionary) -> void:
 	_load_applicant_documents(applicant)
 	_run_rules(applicant)
 	_reset_questions(applicant)
+	if _debug_panel != null and _debug_panel.visible:
+		_update_debug_panel(applicant)
 
 func _on_day_ended(total: int) -> void:
 	panel_title.text = "TURNO CERRADO"
@@ -178,6 +190,14 @@ func _connect_signals() -> void:
 	tab2.pressed.connect(func(): _show_doc_by_type("bio_cert", tab2))
 	tab3.pressed.connect(func(): _show_doc_by_type("ingress_permit", tab3))
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_Y:
+			_debug_panel.visible = not _debug_panel.visible
+			if _debug_panel.visible and not _current_applicant.is_empty():
+				_update_debug_panel(_current_applicant)
+			get_viewport().set_input_as_handled()
+
 func _update_status_bar() -> void:
 	day_label.text = "DIA %d" % current_day
 	credits_label.text = "CREDITOS: %d" % credits
@@ -219,6 +239,9 @@ func _on_decision_recorded(result: Dictionary) -> void:
 	if result["credit_delta"] < 0:
 		feedback += "  CREDITOS: %d" % result["credit_delta"]
 	doc_content.text = feedback
+	_last_decision_result = result
+	if _debug_panel != null and _debug_panel.visible:
+		_update_debug_panel(_current_applicant)
 	_play_decision_sound(result["decision"])
 	_flash_decision_bar(result["decision"])
 	if result["credit_delta"] < 0:
@@ -304,6 +327,7 @@ func _risk_line(risk: String) -> String:
 func _run_rules(applicant: Dictionary) -> void:
 	var current_date: String = day_data.get("current_date", "298.12")
 	var violations := RuleEngine.evaluate(_applicant_docs, rules, current_date)
+	_last_violations = violations
 	if violations.is_empty():
 		alerts_list.text = "Sin irregularidades."
 		return
@@ -460,6 +484,122 @@ func _on_question_asked(key: String, response: String, alert: String, btn: Butto
 			alerts_list.text = current_alerts + "\n" + alert
 		SoundManager.play_alert(_audio)
 		print("[Pregunta] ALERTA — %s: %s" % [key, alert])
+
+# --- Panel de debug interno (solo desarrollo) ---
+
+func _build_debug_panel() -> void:
+	_debug_panel = PanelContainer.new()
+	_debug_panel.visible = false
+	_debug_panel.z_index = 100
+	_debug_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# Posición: cubre el lado izquierdo (sobre el panel de solicitante)
+	_debug_panel.set_anchor_and_offset(SIDE_LEFT,   0.0,  4)
+	_debug_panel.set_anchor_and_offset(SIDE_RIGHT,  0.0,  394)
+	_debug_panel.set_anchor_and_offset(SIDE_TOP,    0.0,  4)
+	_debug_panel.set_anchor_and_offset(SIDE_BOTTOM, 1.0, -4)
+
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.02, 0.04, 0.12, 0.93)
+	style.border_color = Color(0.20, 0.60, 0.90, 1)
+	style.set_border_width_all(2)
+	style.set_content_margin_all(8)
+	_debug_panel.add_theme_stylebox_override("panel", style)
+
+	var vbox := VBoxContainer.new()
+	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var title := Label.new()
+	title.text = "[ DEBUG — SOLO DESARROLLO ]  Y: ocultar"
+	title.add_theme_font_size_override("font_size", 10)
+	title.add_theme_color_override("font_color", Color(1.0, 0.75, 0.15, 1))
+	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var sep := HSeparator.new()
+
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	_debug_label = Label.new()
+	_debug_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_debug_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_debug_label.add_theme_font_size_override("font_size", 11)
+	_debug_label.add_theme_color_override("font_color", Color(0.55, 0.90, 1.0, 1))
+	_debug_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_debug_label.text = "Sin caso activo."
+
+	scroll.add_child(_debug_label)
+	vbox.add_child(title)
+	vbox.add_child(sep)
+	vbox.add_child(scroll)
+	_debug_panel.add_child(vbox)
+	add_child(_debug_panel)
+
+func _update_debug_panel(applicant: Dictionary) -> void:
+	if _debug_label == null:
+		return
+	if applicant.is_empty():
+		_debug_label.text = "Sin caso activo."
+		return
+
+	var truth: Dictionary = applicant.get("truth", {})
+	var flags: Array    = applicant.get("flags", [])
+	var q_alerts: Dictionary = applicant.get("question_alerts", {})
+
+	var lines: Array = []
+	lines.append("ID:       " + applicant.get("id", "No disponible"))
+	lines.append("NOMBRE:   " + applicant.get("name", "No disponible"))
+	lines.append("TIPO:     " + applicant.get("type", "No disponible"))
+	lines.append("")
+	lines.append("--- VERDAD OCULTA ---")
+	lines.append("Decisión: " + truth.get("correct_decision", "No disponible").to_upper())
+	lines.append("Riesgo:   " + truth.get("risk_level", "No disponible").to_upper())
+	lines.append("Notas:    " + truth.get("notes", "No disponible"))
+	lines.append("")
+	lines.append("--- DOCUMENTOS ---")
+	var doc_keys := _applicant_docs.keys()
+	if doc_keys.is_empty():
+		lines.append("  (ninguno)")
+	else:
+		for d in doc_keys:
+			lines.append("  • " + str(d))
+	lines.append("")
+	lines.append("--- FLAGS ---")
+	if flags.is_empty():
+		lines.append("  (ninguno)")
+	else:
+		for f in flags:
+			lines.append("  ! " + str(f))
+	lines.append("")
+	lines.append("--- REGLAS FALLIDAS ---")
+	if _last_violations.is_empty():
+		lines.append("  (ninguna)")
+	else:
+		for v in _last_violations:
+			lines.append("  ! " + v.get("description", "?"))
+	lines.append("")
+	lines.append("--- ALERTAS INTERROGATORIO ---")
+	if q_alerts.is_empty():
+		lines.append("  (ninguna)")
+	else:
+		for k in q_alerts.keys():
+			lines.append("  [" + str(k).to_upper() + "]")
+			lines.append("   " + str(q_alerts[k]))
+	lines.append("")
+	lines.append("--- ÚLTIMA DECISIÓN ---")
+	if _last_decision_result.is_empty():
+		lines.append("  (sin decisión aún)")
+	else:
+		var dec: String  = _last_decision_result.get("decision", "?").to_upper()
+		var ok: bool     = _last_decision_result.get("was_correct", false)
+		var delta: int   = _last_decision_result.get("credit_delta", 0)
+		lines.append("  Decisión:  " + dec)
+		lines.append("  Correcta:  " + ("SÍ" if ok else "NO"))
+		if delta < 0:
+			lines.append("  Créditos:  %d" % delta)
+
+	_debug_label.text = "\n".join(lines)
 
 func _style_tab_buttons() -> void:
 	for tab in [tab1, tab2, tab3]:

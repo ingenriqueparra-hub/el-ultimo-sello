@@ -520,6 +520,11 @@ Implementado: 3 botones de pregunta dinámicos (motivo/origen/carga) en el panel
 Objetivo: agregar sonidos de sello, alerta, confirmación y feedback visual básico.
 Implementado: SoundManager.gd genera tonos PCM sin archivos externos (AudioStreamWAV). Sonidos: aprobar (440Hz punchy), rechazar (sweep descendente), retener (300Hz suave), alerta (900Hz corto), escáner (sweep ascendente). Flash de modulate en barra de decisiones (verde/rojo/ámbar) y flash de créditos al perder créditos.
 
+### Herramienta interna — Panel Debug (DEV-01) ✓ Completado
+Tipo: Dev/QA. No es un módulo jugable.
+Implementado: Panel superpuesto activado con tecla `Y`. Muestra verdad oculta del caso (correct_decision, risk_level, notes), flags, reglas fallidas, documentos presentes, alertas de interrogatorio y resultado de la última decisión. Oculto por defecto. mouse_filter=IGNORE para no bloquear interacción. Construido programáticamente en ControlDesk.gd sin escena separada.
+Archivos modificados: game/scripts/ui/ControlDesk.gd
+
 ### Módulo 12 — Pulido del Día 1
 Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.
 

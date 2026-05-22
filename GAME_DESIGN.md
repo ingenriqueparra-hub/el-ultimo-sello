@@ -260,7 +260,24 @@ El jugador debe sentir que domina una capa antes de recibir la siguiente.
 
 ---
 
-## 10. Condición de victoria
+## 10. Panel de debug — Aclaración de diseño
+
+El panel de debug activado con la tecla `Y` **no es una mecánica jugable**.
+
+No debe:
+
+- mostrarse en builds de release ni en builds de playtest con jugadores reales;
+- alterar reglas, balance o economía;
+- usarse como ayuda al jugador durante la experiencia normal;
+- influir en las decisiones del jugador final.
+
+Es exclusivamente una herramienta interna de desarrollo y QA que permite verificar si el sistema evalúa correctamente cada caso, sin modificar el flujo del juego.
+
+Si en el futuro se añade un sistema de "modo estudio" o "modo entrenamiento" para el jugador, debe diseñarse como una feature independiente, con diseño propio, no derivada de este panel.
+
+---
+
+## 11. Condición de victoria
 
 No debe haber una sola victoria.
 
