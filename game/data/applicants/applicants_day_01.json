@@ -63,6 +63,10 @@
       "carga": "Lo poco que pudimos salvar. Ropa, documentos de mis hijos. Nada peligroso."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_unauthorized_entry",
+      "on_correct_hold": "flag_refugee_detained"
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -113,6 +117,10 @@
       "carga": "Equipo reglamentario de combate. Nada personal. Todo esta declarado."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_implant_admitted",
+      "on_correct_hold": "flag_implant_intercepted"
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -187,6 +195,11 @@
       "carga": "Solo ropa del nino y los medicamentos basicos que ya le dieron antes."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_anomaly_admitted",
+      "on_wrong_reject": "flag_family_turned_away",
+      "on_correct_hold": "flag_family_detained"
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -236,6 +249,11 @@
     },
     "question_alerts": {
       "origen": "CONTRADICCION: Declara origen en 'Sector Comercial Norte'. El Pase de Transito registra origen en 'Puerto de Entrada 7'."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_agent_admitted",
+      "on_wrong_reject": "flag_agent_dismissed",
+      "on_correct_hold": "flag_agent_intercepted"
     },
     "truth": {
       "should_allow": false,

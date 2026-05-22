@@ -21,9 +21,16 @@ static func evaluate(summary: Dictionary, day: int) -> Dictionary:
 		return _neutral()
 
 	candidates.sort_custom(func(a, b): return a.get("priority", 0) > b.get("priority", 0))
-	return candidates[0]
+	var winner: Dictionary = candidates[0]
+	print("[NarrativeConsequence] Seleccionada: %s (tipo: %s, prioridad: %d)" % [
+		winner.get("id", "?"), winner.get("type", "?"), winner.get("priority", 0)
+	])
+	return winner
 
 static func _matches(entry: Dictionary, summary: Dictionary) -> bool:
+	if entry.has("trigger_flag"):
+		var flags: Array = summary.get("activated_flags", [])
+		return str(entry["trigger_flag"]) in flags
 	var cond: Dictionary = entry.get("conditions", {})
 	var errors: int  = summary.get("errors", 0)
 	var credits: int = summary.get("credits", 0)

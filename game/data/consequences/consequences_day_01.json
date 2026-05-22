@@ -1,5 +1,95 @@
 [
   {
+    "id": "c01_agent_admitted",
+    "day": 1,
+    "priority": 200,
+    "type": "case",
+    "trigger_flag": "flag_agent_admitted",
+    "title": "BRECHA DE SEGURIDAD — Agente infiltrado admitido",
+    "body": "El individuo identificado como Kael Vorn ha cruzado el control con documentacion falsificada.\n\nInteligenica del Ministerio confirma presencia de un agente encubierto en el interior del Umbral. El Supervisor Halvek ha sido relevado temporalmente. Se abre investigacion urgente.\n\nSu decision de admision esta siendo revisada como posible complicidad."
+  },
+  {
+    "id": "c01_implant_admitted",
+    "day": 1,
+    "priority": 190,
+    "type": "case",
+    "trigger_flag": "flag_implant_admitted",
+    "title": "ALERTA BIOLOGICA — Implante no registrado en interior",
+    "body": "El soldado Rhen Axis fue admitido con un implante neural no registrado en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha activado protocolo de contencion interior. El Supervisor Halvek solicita informe de decision.\n\nSe desconoce el proposito del implante. Su origen orbital complica la revision."
+  },
+  {
+    "id": "c01_anomaly_admitted",
+    "day": 1,
+    "priority": 180,
+    "type": "case",
+    "trigger_flag": "flag_anomaly_admitted",
+    "title": "ANOMALIA BIOLOGICA — Caso sin registro admitido",
+    "body": "Dara Miren y su hijo menor cruzaron el control. El escaner detectaba anomalia biologica leve en el menor.\n\nEl Ministerio de Admision ha emitido alerta sanitaria. El Centro Medico Umbral esta siendo notificado para supervision inmediata.\n\nSu decision podria haber introducido un factor de riesgo no documentado."
+  },
+  {
+    "id": "c01_agent_intercepted",
+    "day": 1,
+    "priority": 175,
+    "type": "case",
+    "trigger_flag": "flag_agent_intercepted",
+    "title": "INTERCEPCION EXITOSA — Agente neutralizado",
+    "body": "El individuo identificado como Kael Vorn fue retenido correctamente antes de cruzar el control.\n\nInteligencia del Ministerio confirma que se trataba de un agente encubierto con documentacion falsificada. La intercepcion ha sido catalogada como exito operacional.\n\nEl Supervisor Halvek registra la decision como ejemplo de procedimiento correcto."
+  },
+  {
+    "id": "c01_family_turned_away",
+    "day": 1,
+    "priority": 170,
+    "type": "case",
+    "trigger_flag": "flag_family_turned_away",
+    "title": "RECHAZO — Caso medico urgente denegado",
+    "body": "Dara Miren y su hijo fueron rechazados en el control. El menor presentaba fiebre alta y necesitaba atencion medica.\n\nEl nino no ha recibido asistencia. El Ministerio registra el rechazo como correcto por protocolo, pero emite nota interna sobre el caso.\n\nEl Supervisor Halvek no formula observaciones. El protocolo fue seguido."
+  },
+  {
+    "id": "c01_agent_dismissed",
+    "day": 1,
+    "priority": 165,
+    "type": "case",
+    "trigger_flag": "flag_agent_dismissed",
+    "title": "RECHAZO INCORRECTO — Agente escapado por rechazo",
+    "body": "El individuo identificado como Kael Vorn fue rechazado en lugar de retenido para investigacion.\n\nInteligencia del Ministerio indica que el agente conocia el procedimiento y contaba con documentos alternativos. El rechazo le ha permitido retirarse sin dejar rastro.\n\nSu expediente recibe anotacion por manejo incorrecto del caso."
+  },
+  {
+    "id": "c01_implant_intercepted",
+    "day": 1,
+    "priority": 160,
+    "type": "case",
+    "trigger_flag": "flag_implant_intercepted",
+    "title": "RETENCION CORRECTA — Soldado con implante detenido",
+    "body": "El soldado Rhen Axis fue correctamente retenido ante la deteccion de implante neural no registrado.\n\nEl Oficio de Pureza Civica ha iniciado revision tecnica del dispositivo. La identidad del soldado ha sido verificada independientemente.\n\nEl Supervisor Halvek califica la decision como procedimentalmente correcta."
+  },
+  {
+    "id": "c01_family_detained",
+    "day": 1,
+    "priority": 150,
+    "type": "case",
+    "trigger_flag": "flag_family_detained",
+    "title": "RETENCION — Familia en espera de clasificacion",
+    "body": "Dara Miren y su hijo menor han sido retenidos en sala de espera de control.\n\nEl Centro Medico ha sido notificado. La anomalia biologica detectada en el menor esta siendo evaluada por personal sanitario autorizado.\n\nSu decision permite revision sin comprometer la seguridad del Umbral."
+  },
+  {
+    "id": "c01_unauthorized_entry",
+    "day": 1,
+    "priority": 140,
+    "type": "case",
+    "trigger_flag": "flag_unauthorized_entry",
+    "title": "ENTRADA NO AUTORIZADA — Sello pendiente ignorado",
+    "body": "Sela Driva accedio al Umbral con documentacion incompleta. El sello MAP estaba pendiente de validacion.\n\nEl Ministerio registra la entrada como no autorizada. Se abre expediente de seguimiento sobre el acceso.\n\nSu decision ha introducido un caso irregular en el sistema de registro del Refugio Civil."
+  },
+  {
+    "id": "c01_refugee_detained",
+    "day": 1,
+    "priority": 130,
+    "type": "case",
+    "trigger_flag": "flag_refugee_detained",
+    "title": "RETENCION — Refugiada en espera de verificacion de sello",
+    "body": "Sela Driva y sus hijos han sido retenidos en zona de espera. El sello MAP de su Pase de Transito esta pendiente de validacion.\n\nEl Ministerio de Admision Planetaria ha notificado al Refugio Civil. Se estima resolucion en el siguiente turno.\n\nSu decision aplica el protocolo sin cerrar el caso definitivamente."
+  },
+  {
     "id": "c01_eficiencia_maxima",
     "day": 1,
     "priority": 100,

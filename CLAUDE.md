@@ -366,9 +366,9 @@ Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar 
 ### Módulo 14 — Expansión a Día 2
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
 
-### Módulo 15 — Consecuencias narrativas por capas (Fase 1 ✓ Completada)
+### Módulo 15 — Consecuencias narrativas por capas (Fases 1 y 2 ✓ Completadas)
 Objetivo: separar consecuencia de rendimiento, consecuencia de caso, acumuladores narrativos entre días y cierres terminales futuros.
-Fase 1 implementada: NarrativeConsequenceSystem.gd + JSON por día. DayReport muestra título y body desde JSON. _get_consequence() eliminada.
+Fases 1-2 implementadas: NarrativeConsequenceSystem.gd + JSON por día con consecuencias de rendimiento y caso. narrative_hooks en solicitantes clave. DecisionSystem acumula activated_flags.
 
 ---
 
@@ -1095,22 +1095,32 @@ Pendientes:
 ---
 
 ### Módulo 15 — Consecuencias narrativas por capas
-Estado: Fase 1 Completada / Fases 2-4 Pendientes
+Estado: Fases 1 y 2 Completadas / Fases 3-4 Pendientes
 
 Implementado (Fase 1 — consecuencia de rendimiento):
 - `NarrativeConsequenceSystem.gd` — clase estática. Carga `consequences_day_NN.json`, evalúa condiciones (min/max_errors, min/max_credits, min_correct), retorna la consecuencia válida de mayor prioridad. Fallback neutral si falta el archivo o no hay coincidencia.
-- `consequences_day_01.json` — 5 consecuencias: eficiencia máxima (0 err, cred≥50), sin incidentes (0 err), irregularidades (1-2 err), deficiente (3-5 err), catastrófico (6+ err).
-- `consequences_day_02.json` — 6 consecuencias: igual estructura + créditos críticos (cred≤19, min_errors 1, prioridad 85).
+- `consequences_day_01.json` — 5 consecuencias de rendimiento (prioridades 60-100).
+- `consequences_day_02.json` — 6 consecuencias de rendimiento (prioridades 60-100 + créditos críticos p85).
 - `DayReport.gd` — usa `NarrativeConsequenceSystem.evaluate()`. Muestra título dinámico en `ConsequenceTitle` y body en `ConsequenceText`. `_get_consequence()` eliminada.
+
+Implementado (Fase 2 — consecuencia de caso):
+- `DecisionSystem.gd` — acumula `_activated_flags`. Hook key: `on_correct_hold`, `on_wrong_approve`, `on_wrong_reject`, etc. Flags incluidos en `get_summary()` como `activated_flags`.
+- `NarrativeConsequenceSystem._matches()` — evalúa `trigger_flag` primero (antes que conditions). Si el flag está en `activated_flags`, la consecuencia es candidata.
+- `applicants_day_01.json` — narrative_hooks en 4 solicitantes: 003 (Sela Driva), 005 (Rhen Axis), 008 (Dara Miren), 010 (Kael Vorn).
+- `applicants_day_02.json` — narrative_hooks en 3 solicitantes: 013 (Vara Kess), 016 (Gal Nex), 019 (Thal Vor).
+- `consequences_day_01.json` — 10 consecuencias de caso (prioridades 130-200) + 5 de rendimiento.
+- `consequences_day_02.json` — 6 consecuencias de caso (prioridades 145-200) + 6 de rendimiento.
 
 Archivos principales:
 - `game/scripts/systems/NarrativeConsequenceSystem.gd`
+- `game/scripts/systems/DecisionSystem.gd` (actualizado)
 - `game/data/consequences/consequences_day_01.json`
 - `game/data/consequences/consequences_day_02.json`
+- `game/data/applicants/applicants_day_01.json` (actualizado)
+- `game/data/applicants/applicants_day_02.json` (actualizado)
 - `game/scripts/ui/DayReport.gd` (actualizado)
 
 Pendientes:
-- Fase 2: consecuencias de caso con `narrative_hooks` por solicitante.
 - Fase 3: persistir acumuladores narrativos entre días.
 - Fase 4: evaluar cierres terminales por acumulación extrema.
 

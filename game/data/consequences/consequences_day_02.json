@@ -1,5 +1,59 @@
 [
   {
+    "id": "c02_identity_fraud_admitted",
+    "day": 2,
+    "priority": 200,
+    "type": "case",
+    "trigger_flag": "flag_identity_fraud_admitted",
+    "title": "BRECHA DE IDENTIDAD — Fraude documental admitido",
+    "body": "La individua identificada como Vara Kess cruzo el control con codigos de identidad inconsistentes entre documentos.\n\nInteligencia del Ministerio confirma que el codigo LM-4402 del Certificado Biometrico no corresponde a la identidad declarada. Se ha activado protocolo de busqueda en el interior del Umbral.\n\nSu decision de admision esta siendo revisada como posible negligencia de verificacion."
+  },
+  {
+    "id": "c02_anomaly_soldier_admitted",
+    "day": 2,
+    "priority": 190,
+    "type": "case",
+    "trigger_flag": "flag_anomaly_soldier_admitted",
+    "title": "ALERTA BIOLOGICA — Soldado con anomalia en interior",
+    "body": "El veterano Gal Nex fue admitido con una anomalia biologica no registrada en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha activado protocolo de seguimiento interior. Se desconoce el origen de la anomalia orbital.\n\nEl Supervisor Halvek solicita informe de decision urgente."
+  },
+  {
+    "id": "c02_suspicious_cargo_admitted",
+    "day": 2,
+    "priority": 180,
+    "type": "case",
+    "trigger_flag": "flag_suspicious_cargo_admitted",
+    "title": "CARGA NO DECLARADA — Contradiccion ignorada",
+    "body": "El comerciante Thal Vor fue admitido a pesar de declarar carga distinta a la registrada en el Permiso de Ingreso.\n\nEl Deposito Norte ha recibido carga de clasificacion 'Insumos de laboratorio — grado 2' sin registro de inspeccion previa.\n\nEl Ministerio abre revision de la cadena de transporte. Su decision facilito el acceso sin inspeccion."
+  },
+  {
+    "id": "c02_fraud_intercepted",
+    "day": 2,
+    "priority": 175,
+    "type": "case",
+    "trigger_flag": "flag_fraud_intercepted",
+    "title": "INTERCEPCION CORRECTA — Fraude de identidad detenido",
+    "body": "Vara Kess fue correctamente retenida ante la deteccion de inconsistencia en el codigo de identidad entre documentos.\n\nInteligenica del Ministerio confirma que la documentacion presentaba alteracion. La identidad real del solicitante esta siendo verificada.\n\nEl Supervisor Halvek registra la decision como ejemplo de aplicacion correcta del protocolo biometrico."
+  },
+  {
+    "id": "c02_anomaly_soldier_detained",
+    "day": 2,
+    "priority": 155,
+    "type": "case",
+    "trigger_flag": "flag_anomaly_soldier_detained",
+    "title": "RETENCION CORRECTA — Soldado con anomalia bajo revision",
+    "body": "El veterano Gal Nex fue retenido correctamente ante la deteccion de anomalia biologica no registrada.\n\nEl Oficio de Pureza Civica ha iniciado evaluacion medica del caso. Se espera clasificacion en la siguiente jornada.\n\nSu decision protege el Umbral sin resolver aun la naturaleza de la anomalia."
+  },
+  {
+    "id": "c02_cargo_inspected",
+    "day": 2,
+    "priority": 145,
+    "type": "case",
+    "trigger_flag": "flag_cargo_inspected",
+    "title": "RETENCION CORRECTA — Carga contradictoria bajo inspeccion",
+    "body": "El comerciante Thal Vor fue correctamente retenido tras detectar contradiccion entre su declaracion verbal y el Permiso de Ingreso.\n\nLa carga ha sido derivada a inspeccion tecnica. El Ministerio registra la intercepcion como uso correcto del protocolo de interrogatorio.\n\nEl Supervisor Halvek no emite observaciones adicionales."
+  },
+  {
     "id": "c02_eficiencia_maxima",
     "day": 2,
     "priority": 100,

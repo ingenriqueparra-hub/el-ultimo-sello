@@ -63,6 +63,10 @@
       "carga": "Equipo de instalacion estandar. Todo esta declarado en el pase."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_identity_fraud_admitted",
+      "on_correct_hold": "flag_fraud_intercepted"
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -135,6 +139,10 @@
       "carga": "Equipo reglamentario de combate. Todo declarado."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_anomaly_soldier_admitted",
+      "on_correct_hold": "flag_anomaly_soldier_detained"
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -208,6 +216,10 @@
     },
     "question_alerts": {
       "carga": "CONTRADICCION: Declara 'insumos quimicos comunes'. El Permiso de Ingreso registra 'Insumos de laboratorio — grado 2'. No es equivalente."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_suspicious_cargo_admitted",
+      "on_correct_hold": "flag_cargo_inspected"
     },
     "truth": {
       "should_allow": false,

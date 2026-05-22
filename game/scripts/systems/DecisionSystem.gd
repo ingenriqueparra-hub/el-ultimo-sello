@@ -7,12 +7,14 @@ var _decisions: Array = []
 var _credits: int = 50
 var _correct: int = 0
 var _errors: int = 0
+var _activated_flags: Array = []
 
 func setup(starting_credits: int) -> void:
 	_credits = starting_credits
 	_decisions = []
 	_correct = 0
 	_errors = 0
+	_activated_flags = []
 
 func record(decision: String, applicant: Dictionary) -> Dictionary:
 	var truth: Dictionary = applicant.get("truth", {})
@@ -27,6 +29,14 @@ func record(decision: String, applicant: Dictionary) -> Dictionary:
 		_correct += 1
 	else:
 		_errors += 1
+
+	var hooks: Dictionary = applicant.get("narrative_hooks", {})
+	var hook_key := "on_%s_%s" % ["correct" if was_correct else "wrong", decision]
+	if hooks.has(hook_key):
+		var flag: String = str(hooks[hook_key])
+		if flag != "" and flag not in _activated_flags:
+			_activated_flags.append(flag)
+			print("[NarrativeHook] Flag activado: %s (solicitante: %s)" % [flag, applicant.get("name", "?")])
 
 	var result := {
 		"applicant_id": applicant.get("id", ""),
@@ -74,4 +84,5 @@ func get_summary() -> Dictionary:
 		"errors": _errors,
 		"credits": _credits,
 		"decisions": _decisions,
+		"activated_flags": _activated_flags,
 	}
