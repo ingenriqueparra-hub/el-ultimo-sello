@@ -1,4 +1,7 @@
+class_name ControlDesk
 extends Control
+
+static var day_to_load: int = 1
 
 const COLOR_BG := Color(0.03, 0.05, 0.03, 1)
 const COLOR_PANEL := Color(0.06, 0.10, 0.06, 1)
@@ -58,6 +61,7 @@ func _ready() -> void:
 	reject_btn.text  = "RECHAZAR (S)"
 	hold_btn.text    = "RETENER (D)"
 	_connect_signals()
+	current_day = ControlDesk.day_to_load
 	_update_status_bar()
 	_reset_applicant_panel()
 	_setup_questions_area()
@@ -73,6 +77,7 @@ func _load_day_data() -> void:
 	print("[ControlDesk] Dia %d cargado — %d solicitantes, %d documentos, %d reglas" % [
 		current_day, applicants.size(), documents.size(), rules.size()
 	])
+	credits = day_data.get("credits_start", 50)
 	decision_system = DecisionSystem.new()
 	add_child(decision_system)
 	decision_system.setup(credits)
@@ -123,6 +128,7 @@ func _on_day_ended(total: int) -> void:
 	await get_tree().create_timer(1.5).timeout
 	var summary := decision_system.get_summary()
 	summary["quota"] = applicants.size()
+	summary["day"] = current_day
 	DayReport.pending_summary = summary
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 

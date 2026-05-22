@@ -1,0 +1,244 @@
+[
+  {
+    "id": "applicant_011",
+    "name": "Miren Sola",
+    "type": "citizen",
+    "origin": "Sector Residencial Umbral",
+    "destination": "Nivel Administrativo 2",
+    "purpose": "Tramite de registro civil",
+    "dialogue_intro": "Buenos turnos. Vengo a regularizar mi registro. Traigo el Pase y el Certificado al dia.",
+    "documents": ["transit_pass_011", "bio_cert_011"],
+    "flags": [],
+    "questions": {
+      "motivo": "Necesito actualizar mi registro en el Nivel 2. Nada urgente, es un tramite de rutina.",
+      "origen": "Vivo en el Sector Residencial desde hace seis ciclos. No me he movido de alli.",
+      "carga": "Solo mis documentos personales. Nada mas."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso correcto. Introduce al jugador a la nueva exigencia del Certificado Biometrico. Todo en orden."
+    }
+  },
+  {
+    "id": "applicant_012",
+    "name": "Toras Beld",
+    "type": "worker",
+    "origin": "Planta de Ensamble Sector Este",
+    "destination": "Nivel Industrial 3",
+    "purpose": "Turno de mantenimiento",
+    "dialogue_intro": "Trabajo en la planta desde hace anos. Tengo el turno asignado. El pase... lo tenia vigente la semana pasada.",
+    "documents": ["transit_pass_012", "bio_cert_012"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Turno de mantenimiento en el Nivel 3. Me llaman cada dos semanas.",
+      "origen": "Planta del Sector Este. Siempre el mismo recorrido.",
+      "carga": "Solo mis herramientas. Nada personal."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase de Transito vencido. El Certificado Biometrico es valido. La violacion es clara."
+    }
+  },
+  {
+    "id": "applicant_013",
+    "name": "Vara Kess",
+    "type": "technician",
+    "origin": "Taller de Sistemas, Sector Bajo",
+    "destination": "Planta de Procesamiento, Nivel 5",
+    "purpose": "Instalacion de modulo de control",
+    "dialogue_intro": "Tecnica contratada. Tengo pase y certificado. El sistema no deberia tener problemas con mis documentos.",
+    "documents": ["transit_pass_013", "bio_cert_013"],
+    "flags": [],
+    "questions": {
+      "motivo": "Instalacion de un modulo de control en la planta del Nivel 5. Contrato de tres turnos.",
+      "origen": "Del Taller de Sistemas. Trabajo alli como contratista independiente.",
+      "carga": "Equipo de instalacion estandar. Todo esta declarado en el pase."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_007"],
+      "notes": "El codigo de identidad no coincide entre documentos: LM-4420 en el Pase, LM-4402 en el Certificado. Error o falsificacion. El jugador debe comparar los campos."
+    }
+  },
+  {
+    "id": "applicant_014",
+    "name": "Edan Voss",
+    "type": "refugee",
+    "origin": "Colonia Borkon, Sector 12",
+    "destination": "Refugio Civil Umbral",
+    "purpose": "Desplazado registrado en busca de asilo",
+    "dialogue_intro": "Huimos de Borkon. Traigo el Pase de Transito. El Certificado... lo perdimos en la evacuacion. No habia tiempo.",
+    "documents": ["transit_pass_014"],
+    "flags": [],
+    "questions": {
+      "motivo": "La Colonia Borkon fue evacuada de urgencia. Somos desplazados registrados.",
+      "origen": "Sector 12. No queda infraestructura alli. Todo colapso.",
+      "carga": "Solo lo que cargamos en la evacuacion. Documentos basicos."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "low",
+      "violations": ["rule_005"],
+      "notes": "Falta el Certificado Biometrico. El Pase es valido. Situacion de refugiado. Decision de juicio: la regla exige el certificado, pero el contexto es una evacuacion. Retener es mas justo que rechazar."
+    }
+  },
+  {
+    "id": "applicant_015",
+    "name": "Sira Molt",
+    "type": "merchant",
+    "origin": "Mercado Flotante Sector Norte",
+    "destination": "Sector Comercial Medio",
+    "purpose": "Distribucion de bienes certificados",
+    "dialogue_intro": "Comerciante registrada. Ruta habitual. Tengo mis dos documentos. El negocio no espera.",
+    "documents": ["transit_pass_015", "bio_cert_015"],
+    "flags": [],
+    "questions": {
+      "motivo": "Distribucion de bienes al Sector Comercial. Es mi ruta de cada ciclo.",
+      "origen": "Mercado Flotante. Base de operaciones desde hace cuatro ciclos.",
+      "carga": "Bienes certificados. Todo esta sellado y registrado."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_006"],
+      "notes": "El Certificado Biometrico esta vencido. El Pase de Transito es valido. La violacion es directamente visible en el campo 'expira'."
+    }
+  },
+  {
+    "id": "applicant_016",
+    "name": "Gal Nex",
+    "type": "soldier",
+    "origin": "Base Orbital Sector 3",
+    "destination": "Cuartel Umbral Norte",
+    "purpose": "Reintegracion de campana",
+    "dialogue_intro": "Veterano en retorno. Documentos en orden. La Milicia Orbital avala mi regreso.",
+    "documents": ["transit_pass_016", "bio_cert_016"],
+    "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Reintegracion post-campana. Ordenes directas del cuartel.",
+      "origen": "Base Orbital Sector 3. Acabo de descender.",
+      "carga": "Equipo reglamentario de combate. Todo declarado."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos y codigos coincidentes. El escaner detecta anomalia biologica no registrada en el Certificado. Decision ambigua: el certificado dice 'Ninguna anomalia'."
+    }
+  },
+  {
+    "id": "applicant_017",
+    "name": "Pola Dren",
+    "type": "civilian",
+    "origin": "Vivienda Registrada Sector 4",
+    "destination": "Centro de Registro Umbral",
+    "purpose": "Renovacion de permiso de residencia",
+    "dialogue_intro": "Vengo a renovar mi permiso de residencia. Es un tramite. Llevo todos mis papeles.",
+    "documents": ["transit_pass_017", "bio_cert_017"],
+    "flags": [],
+    "questions": {
+      "motivo": "Renovacion de permiso. Es obligatorio cada tres ciclos.",
+      "origen": "Sector 4. Alli vivo desde que llegue al Umbral.",
+      "carga": "Solo mis documentos."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_003"],
+      "notes": "El nombre en el Pase de Transito es 'Pola Dren', pero el Certificado Biometrico dice 'Pola Gren'. Diferencia de una letra. Error tipografico o identidad falsa. El jugador debe comparar los campos de nombre."
+    }
+  },
+  {
+    "id": "applicant_018",
+    "name": "Osin Marr",
+    "type": "clergy",
+    "origin": "Templo del Sello, Sector Sur",
+    "destination": "Capilla de Transito, Umbral 7",
+    "purpose": "Servicio espiritual autorizado",
+    "dialogue_intro": "El Sello os proteja. Vengo a oficiar el rito matutino. Traigo todos mis documentos actualizados.",
+    "documents": ["transit_pass_018", "bio_cert_018"],
+    "flags": [],
+    "questions": {
+      "motivo": "El rito de admision de ciclo. Es un oficio regular del Clero.",
+      "origen": "Templo del Sello en el Sector Sur. Sirvo alli desde hace ocho ciclos.",
+      "carga": "Los ornamentos del rito. Todo esta sellado por el Clero."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso correcto. Documentos validos. Codigos coincidentes. Sin anomalias."
+    }
+  },
+  {
+    "id": "applicant_019",
+    "name": "Thal Vor",
+    "type": "merchant",
+    "origin": "Sector Comercial Oeste",
+    "destination": "Deposito Norte, Nivel 4",
+    "purpose": "Entrega de insumos certificados",
+    "dialogue_intro": "Comerciante con carga certificada. El pase, el certificado y el permiso estan todos en regla.",
+    "documents": ["transit_pass_019", "bio_cert_019", "ingress_permit_019"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de carga al Deposito Norte. Contrato de suministro activo.",
+      "origen": "Sector Comercial Oeste. Salida hace cuatro turnos.",
+      "carga": "Insumos quimicos comunes. Para los sistemas de filtrado del Deposito."
+    },
+    "question_alerts": {
+      "carga": "CONTRADICCION: Declara 'insumos quimicos comunes'. El Permiso de Ingreso registra 'Insumos de laboratorio — grado 2'. No es equivalente."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos en orden y codigos coincidentes. Al interrogar sobre la carga: el solicitante declara algo diferente a lo registrado en el permiso. Solo detectable por interrogatorio."
+    }
+  },
+  {
+    "id": "applicant_020",
+    "name": "Celas Drin",
+    "type": "refugee",
+    "origin": "Sector Colapsado 8",
+    "destination": "Refugio Civil Umbral",
+    "purpose": "Busqueda de asilo por zona en colapso",
+    "dialogue_intro": "No tengo el Pase. Lo perdi cuando huimos. Pero tengo el Certificado Biometrico. Por favor.",
+    "documents": ["bio_cert_020"],
+    "flags": [],
+    "questions": {
+      "motivo": "El Sector 8 colapso hace dos dias. No habia forma de tramitar el Pase.",
+      "origen": "Sector Colapsado 8. Ya no queda estructura alli.",
+      "carga": "Nada. Solo lo puesto."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_001"],
+      "notes": "Sin Pase de Transito. El Certificado Biometrico es valido, pero la regla exige el Pase. Caso moralmente dificil: el solicitante explica la ausencia del documento. La decision es rechazar por regla, o retener como dilema moral."
+    }
+  }
+]

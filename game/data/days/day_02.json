@@ -1,0 +1,13 @@
+{
+  "day": 2,
+  "title": "Umbral 7 — Segundo Turno de Control",
+  "intro": "El Ministerio de Admision Planetaria emite nueva directiva. Desde hoy, el Certificado de Identidad Biometrica es obligatorio. El codigo de identidad debe coincidir entre todos los documentos. No hay margen para errores.",
+  "current_date": "299.01",
+  "rules_active": ["rule_001", "rule_002", "rule_003", "rule_004", "rule_005", "rule_006", "rule_007"],
+  "applicant_ids": [
+    "applicant_011", "applicant_012", "applicant_013", "applicant_014", "applicant_015",
+    "applicant_016", "applicant_017", "applicant_018", "applicant_019", "applicant_020"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

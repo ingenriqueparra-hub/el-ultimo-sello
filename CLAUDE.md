@@ -531,8 +531,9 @@ Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.
 ### Módulo 13 — Playtest interno
 Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar otro día.
 
-### Módulo 14 — Expansión a Día 2
+### Módulo 14 — Expansión a Día 2 ✓ Completado
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
+Implementado: day_to_load (static var) controla qué día carga ControlDesk. DayReport muestra header dinámico con número de día y botón "CONTINUAR — DIA N" si existe el archivo del siguiente día. RuleEngine con validación field_match (cruce de campo entre dos documentos). Día 2 completo: 7 reglas, 10 solicitantes (011-020), 19 documentos, fecha 299.01. Nueva mecánica central: Certificado Biométrico obligatorio + cruce de código de identidad entre Pase y Certificado.
 
 ---
 
@@ -1001,6 +1002,32 @@ Archivos principales:
 
 Pendientes:
 - Ninguno para Módulo 1.
+
+---
+
+### Módulo 14 — Expansión a Día 2
+Estado: Completado
+
+Implementado:
+- `ControlDesk.day_to_load` (static var, int) controla qué día carga. `_ready()` lo lee; `_load_day_data()` carga créditos desde `credits_start` del JSON.
+- `DayReport.gd`: header dinámico "REPORTE DEL TURNO — DIA N". Botón "CONTINUAR — DIA N" (azul) aparece si existe `res://data/days/day_NN.json`. Restart y Continue establecen `ControlDesk.day_to_load` antes de cambiar escena.
+- `RuleEngine.gd`: nuevo tipo `field_match` — compara un campo entre dos tipos de documento (ej. codigo_identidad en transit_pass vs bio_cert).
+- `rules_day_02.json` — 7 reglas (4 heredadas + 3 nuevas: bio_cert obligatorio, bio_cert no vencido, field_match codigo_identidad).
+- `day_02.json` — fecha 299.01, 10 solicitantes 011-020, credits_start 50.
+- `applicants_day_02.json` — 10 casos: 2 aprobaciones limpias, pase vencido, código no coincide (Vara Kess LM-4420/LM-4402), sin bio_cert (refugiado), bio_cert vencido, anomalía biológica, nombres inconsistentes (Pola Dren/Pola Gren), carga contradictoria en interrogatorio, sin pase de tránsito.
+- `documents_day_02.json` — 19 documentos: 9 transit_pass + 9 bio_cert + 1 ingress_permit.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+- `game/scripts/ui/DayReport.gd` (actualizado)
+- `game/scripts/systems/RuleEngine.gd` (actualizado)
+- `game/data/days/day_02.json`
+- `game/data/rules/rules_day_02.json`
+- `game/data/applicants/applicants_day_02.json`
+- `game/data/documents/documents_day_02.json`
+
+Pendientes:
+- Ninguno para Módulo 14.
 
 ---
 

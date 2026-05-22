@@ -19,6 +19,8 @@ static func _check_rule(rule: Dictionary, docs: Dictionary, current_date: String
 			return _check_name_consistency(rule, validation, docs)
 		"field_not_empty":
 			return _check_field_not_empty(rule, validation, docs)
+		"field_match":
+			return _check_field_match(rule, validation, docs)
 	return null
 
 static func _check_document_required(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:
@@ -61,6 +63,20 @@ static func _check_field_not_empty(rule: Dictionary, validation: Dictionary, doc
 	var value: String = docs[dtype].get("fields", {}).get(field, "")
 	if value == "" or value in invalid:
 		return _violation(rule, "Sello invalido: \"%s\"" % value)
+	return null
+
+static func _check_field_match(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:
+	var dtype_a: String = validation.get("document_type_a", "")
+	var dtype_b: String = validation.get("document_type_b", "")
+	var field: String   = validation.get("field", "")
+	if not docs.has(dtype_a) or not docs.has(dtype_b):
+		return null
+	var val_a: String = docs[dtype_a].get("fields", {}).get(field, "").strip_edges().to_lower()
+	var val_b: String = docs[dtype_b].get("fields", {}).get(field, "").strip_edges().to_lower()
+	if val_a == "" or val_b == "":
+		return null
+	if val_a != val_b:
+		return _violation(rule, "%s: %s | %s: %s" % [dtype_a, val_a.to_upper(), dtype_b, val_b.to_upper()])
 	return null
 
 static func _violation(rule: Dictionary, detail: String) -> Dictionary:
