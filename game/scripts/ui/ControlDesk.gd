@@ -110,6 +110,9 @@ func _on_day_ended(total: int) -> void:
 	doc_content.text = "[ Sin caso activo ]"
 	alerts_list.text = "---"
 	_set_decision_buttons_enabled(false)
+	for btn in _questions_container.get_children():
+		if btn is Button:
+			btn.disabled = true
 	print("[ControlDesk] Turno terminado — %d / %d procesados" % [total, applicants.size()])
 	await get_tree().create_timer(1.5).timeout
 	var summary := decision_system.get_summary()
