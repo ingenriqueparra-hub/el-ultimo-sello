@@ -53,6 +53,9 @@ var _debug_label: Label
 
 func _ready() -> void:
 	_apply_theme()
+	approve_btn.text = "APROBAR (A)"
+	reject_btn.text  = "RECHAZAR (S)"
+	hold_btn.text    = "RETENER (D)"
 	_connect_signals()
 	_update_status_bar()
 	_reset_applicant_panel()
@@ -196,12 +199,28 @@ func _connect_signals() -> void:
 	tab3.pressed.connect(func(): _show_doc_by_type("ingress_permit", tab3))
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_Y:
+	if not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	var handled := true
+	match event.keycode:
+		KEY_Y:
 			_debug_panel.visible = not _debug_panel.visible
 			if _debug_panel.visible and not _current_applicant.is_empty():
 				_update_debug_panel(_current_applicant)
-			get_viewport().set_input_as_handled()
+		KEY_A:
+			if not approve_btn.disabled: _on_approve_pressed()
+		KEY_S:
+			if not reject_btn.disabled:  _on_reject_pressed()
+		KEY_D:
+			if not hold_btn.disabled:    _on_hold_pressed()
+		KEY_E:
+			if not scanner_btn.disabled: _on_scanner_pressed()
+		KEY_Q:
+			_press_next_question()
+		_:
+			handled = false
+	if handled:
+		get_viewport().set_input_as_handled()
 
 func _update_status_bar() -> void:
 	day_label.text = "DIA %d" % current_day
@@ -317,7 +336,7 @@ func _show_scan_results() -> void:
 
 func _reset_scanner() -> void:
 	_scanner_used = false
-	scanner_btn.text = "[ ESCANER ]"
+	scanner_btn.text = "[ ESCANER ] (E)"
 	scanner_btn.disabled = false
 
 func _flag_description(flag: String) -> String:
@@ -446,9 +465,9 @@ func _reset_questions(applicant: Dictionary) -> void:
 	var questions: Dictionary = applicant.get("questions", {})
 	var question_alerts: Dictionary = applicant.get("question_alerts", {})
 	var question_labels := {
-		"motivo": "[ ¿Cual es el motivo? ]",
-		"origen": "[ ¿De donde proviene? ]",
-		"carga":  "[ ¿Que lleva consigo? ]"
+		"motivo": "[ ¿Cual es el motivo? ] (Q)",
+		"origen": "[ ¿De donde proviene? ] (Q)",
+		"carga":  "[ ¿Que lleva consigo? ] (Q)"
 	}
 	for key in ["motivo", "origen", "carga"]:
 		if not questions.has(key):
@@ -485,6 +504,12 @@ func _style_question_button(btn: Button) -> void:
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", COLOR_TEXT_DIM)
 	btn.add_theme_font_size_override("font_size", 12)
+
+func _press_next_question() -> void:
+	for btn in _questions_container.get_children():
+		if btn is Button and not btn.disabled:
+			btn.pressed.emit()
+			return
 
 func _on_question_asked(key: String, response: String, alert: String, btn: Button) -> void:
 	dialogue_text.text = response
