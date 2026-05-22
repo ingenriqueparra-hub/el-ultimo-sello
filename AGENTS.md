@@ -1,10 +1,10 @@
 # Guía para agentes IA que trabajen en **El Último Sello**
 
-Este archivo define cómo deben colaborar los agentes de IA en el desarrollo del proyecto.  
+Este archivo define cómo deben colaborar Codex y otros agentes IA en el desarrollo del proyecto.
 Su objetivo es mantener coherencia narrativa, técnica, legal y de producto.
 
-Este archivo funciona como **punto de entrada obligatorio** para Codex y cualquier agente IA.  
-Antes de diseñar, programar o modificar cualquier parte del proyecto, el agente debe usar este archivo para saber qué documentación consultar.
+Este archivo funciona como **punto de entrada obligatorio** del proyecto.  
+Antes de diseñar, programar o modificar cualquier parte del juego, el agente debe usar este documento como router para saber qué archivos consultar, qué módulo tocar y qué límites respetar.
 
 ---
 
@@ -39,7 +39,8 @@ Fuente principal de:
 - principios de diseño;
 - MVP;
 - riesgos;
-- criterio de éxito del prototipo.
+- criterio de éxito del prototipo;
+- estado actual del proyecto.
 
 Usar cuando la tarea tenga que ver con:
 
@@ -47,7 +48,8 @@ Usar cuando la tarea tenga que ver con:
 - alcance del producto;
 - prioridades;
 - decisiones de diseño de alto nivel;
-- evaluación de riesgos.
+- evaluación de riesgos;
+- estado del proyecto.
 
 ---
 
@@ -290,7 +292,7 @@ Antes de escribir código, modificar archivos o proponer una solución, el agent
 
 2. Consultar los documentos relacionados según el mapa de documentación.
 
-3. Resumir brevemente qué archivos usó como base, cuando sea útil para justificar una decisión.
+3. Indicar brevemente qué archivos usó como base cuando la decisión pueda afectar arquitectura, alcance, narrativa o IP.
 
 4. Implementar solo lo necesario para el MVP, salvo que el usuario indique explícitamente lo contrario.
 
@@ -300,7 +302,70 @@ Antes de escribir código, modificar archivos o proponer una solución, el agent
 
 ---
 
-## 6. Regla principal de propiedad intelectual
+## 6. Regla de planificación antes de código
+
+Antes de escribir o modificar código, el agente debe indicar:
+
+1. Qué archivos va a crear o modificar.
+2. Qué función cumple cada archivo en una línea.
+3. Qué módulo del MVP está trabajando.
+4. Qué criterio de aceptación busca cumplir.
+
+No debe hacer cambios grandes sin explicar primero el impacto.
+
+Para cambios pequeños y evidentes, puede avanzar directamente, pero debe mantener el cambio limitado al objetivo pedido.
+
+---
+
+## 7. Orden modular de desarrollo
+
+El agente debe trabajar por módulos. No debe saltar a módulos futuros si el módulo actual no está funcional.
+
+### Módulo 1 — Estructura base Godot
+Objetivo: crear estructura mínima del proyecto, carpetas, escena inicial y configuración base.
+
+### Módulo 2 — Escena principal del puesto de control
+Objetivo: mostrar ventanilla, área de documentos, panel de solicitante y botones de decisión.
+
+### Módulo 3 — Sistema de carga de datos JSON
+Objetivo: cargar solicitantes, documentos y reglas desde archivos JSON.
+
+### Módulo 4 — Sistema de solicitantes
+Objetivo: mostrar el solicitante actual, avanzar en cola y detectar fin del día.
+
+### Módulo 5 — Sistema de documentos
+Objetivo: renderizar documentos con campos comparables y visualmente claros.
+
+### Módulo 6 — Sistema de decisiones
+Objetivo: permitir aprobar, rechazar y retener; registrar cada decisión.
+
+### Módulo 7 — Motor de reglas e inconsistencias
+Objetivo: evaluar reglas simples, detectar errores y determinar si la decisión fue correcta o riesgosa.
+
+### Módulo 8 — Reporte final del día
+Objetivo: mostrar aciertos, errores, multas, reputación y consecuencia narrativa.
+
+### Módulo 9 — Escáner básico
+Objetivo: agregar una herramienta simple de detección de anomalías.
+
+### Módulo 10 — Diálogos e interrogatorio simple
+Objetivo: agregar frase inicial y 2-3 preguntas funcionales.
+
+### Módulo 11 — Feedback visual y sonoro
+Objetivo: agregar sonidos de sello, alerta, confirmación y feedback visual básico.
+
+### Módulo 12 — Pulido del Día 1
+Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.
+
+### Módulo 13 — Playtest interno
+Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar otro día.
+
+### Módulo 14 — Expansión a Día 2
+Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
+
+---
+
+## 8. Regla principal de propiedad intelectual
 
 El proyecto puede inspirarse en el tono grimdark, la burocracia imperial, la ciencia ficción oscura y los simuladores de inspección, pero **no debe copiar Warhammer 40k ni ninguna franquicia existente**.
 
@@ -330,7 +395,7 @@ Cuando haya duda, el agente debe proponer una alternativa original.
 
 ---
 
-## 7. Estilo de respuesta esperado
+## 9. Estilo de respuesta esperado
 
 El agente debe responder en español, con tono ejecutivo, claro y útil.
 
@@ -357,7 +422,36 @@ Debe entregar:
 
 ---
 
-## 8. Principios de diseño del juego
+## 10. Regla de eficiencia
+
+El agente debe evitar respuestas largas innecesarias.
+
+Cuando modifique código:
+
+- No repetir archivos completos si solo cambia una sección.
+- Mostrar solo los cambios relevantes cuando sea posible.
+- Usar comentarios breves.
+- Evitar explicar conceptos obvios.
+- Priorizar entregables ejecutables sobre teoría.
+- No reescribir todo un sistema si basta con un cambio puntual.
+
+---
+
+## 11. Protocolo cuando algo falle
+
+Si aparece un error:
+
+1. Mostrar el error exacto.
+2. Explicar la causa probable en pocas líneas.
+3. Dar máximo 2 opciones de solución.
+4. Indicar cuál opción recomienda y por qué.
+5. No reescribir arquitectura completa salvo que sea necesario.
+
+Si el error revela deuda técnica, documentarla como pendiente en lugar de resolverla con una expansión no solicitada.
+
+---
+
+## 12. Principios de diseño del juego
 
 Cada sugerencia debe respetar estos principios:
 
@@ -374,7 +468,7 @@ Cada sugerencia debe respetar estos principios:
 
 ---
 
-## 9. Jerarquía de prioridades
+## 13. Jerarquía de prioridades
 
 Cuando haya conflicto entre opciones, priorizar en este orden:
 
@@ -391,7 +485,7 @@ Cuando haya conflicto entre opciones, priorizar en este orden:
 
 ---
 
-## 10. Alcance del MVP
+## 14. Alcance del MVP
 
 El MVP debe enfocarse en construir una versión mínima jugable que pruebe el loop principal.
 
@@ -427,9 +521,9 @@ El MVP debe enfocarse en construir una versión mínima jugable que pruebe el lo
 
 ---
 
-## 11. Agentes especializados sugeridos
+## 15. Agentes especializados sugeridos
 
-### 11.1. Game Design Agent
+### 15.1. Game Design Agent
 
 Responsable de:
 
@@ -440,14 +534,6 @@ Responsable de:
 - rejugabilidad;
 - sistemas de error y penalización.
 
-Debe producir entregables como:
-
-- core loop;
-- ruleset por día;
-- tabla de mecánicas;
-- matriz de dificultad;
-- prototipos de casos.
-
 Debe consultar principalmente:
 
 1. `GAME_DESIGN.md`
@@ -456,7 +542,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.2. Narrative Design Agent
+### 15.2. Narrative Design Agent
 
 Responsable de:
 
@@ -467,14 +553,6 @@ Responsable de:
 - dilemas morales;
 - finales múltiples futuros.
 
-Debe mantener el estilo:
-
-- sobrio;
-- oscuro;
-- institucional;
-- humano;
-- sin melodrama excesivo.
-
 Debe consultar principalmente:
 
 1. `NARRATIVE_BIBLE.md`
@@ -483,7 +561,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.3. UI/UX Agent
+### 15.3. UI/UX Agent
 
 Responsable de:
 
@@ -494,15 +572,6 @@ Responsable de:
 - feedback visual;
 - accesibilidad.
 
-Debe priorizar:
-
-- legibilidad;
-- contraste;
-- pocos clics;
-- tensión visual;
-- sensación de máquina administrativa;
-- claridad sobre decoración.
-
 Debe consultar principalmente:
 
 1. `TECHNICAL_SPEC.md`
@@ -512,7 +581,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.4. Technical Agent
+### 15.4. Technical Agent
 
 Responsable de:
 
@@ -542,7 +611,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.5. QA Agent
+### 15.5. QA Agent
 
 Responsable de:
 
@@ -553,13 +622,6 @@ Responsable de:
 - regresión;
 - balance básico.
 
-Debe crear:
-
-- checklists;
-- casos de prueba;
-- matriz de reglas contra solicitantes;
-- reportes de bugs.
-
 Debe consultar principalmente:
 
 1. `MVP_BACKLOG.md`
@@ -568,7 +630,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.6. Steam Marketing Agent
+### 15.6. Steam Marketing Agent
 
 Responsable de:
 
@@ -590,7 +652,7 @@ Debe consultar principalmente:
 
 ---
 
-### 11.7. Legal/IP Risk Reviewer
+### 15.7. Legal/IP Risk Reviewer
 
 Responsable de:
 
@@ -610,7 +672,7 @@ Debe consultar principalmente:
 
 ---
 
-## 12. Reglas para trabajo con código
+## 16. Reglas para trabajo con código
 
 Cuando el agente trabaje en código:
 
@@ -627,7 +689,39 @@ Cuando el agente trabaje en código:
 
 ---
 
-## 13. Reglas para trabajo narrativo
+## 17. Convenciones de nombres para Godot
+
+Escenas:
+
+- PascalCase: `MainMenu.tscn`, `ControlDesk.tscn`, `DayReport.tscn`.
+
+Scripts:
+
+- PascalCase cuando representen una clase o sistema: `ApplicantQueue.gd`, `RuleEngine.gd`, `ReportSystem.gd`.
+
+Archivos JSON:
+
+- snake_case: `day_01.json`, `applicants_day_01.json`, `documents_day_01.json`.
+
+Variables y funciones:
+
+- snake_case, siguiendo convención GDScript: `current_applicant`, `load_next_applicant()`.
+
+IDs de datos:
+
+- snake_case con prefijo: `applicant_001`, `document_001`, `rule_001`.
+
+Decisiones:
+
+- usar valores constantes en inglés: `approve`, `reject`, `hold`.
+
+Carpetas:
+
+- minúsculas y descriptivas: `scenes`, `scripts`, `data`, `assets`, `tests`, `docs`.
+
+---
+
+## 18. Reglas para trabajo narrativo
 
 Cuando el agente trabaje narrativa:
 
@@ -655,7 +749,7 @@ Cuando el agente trabaje narrativa:
 
 ---
 
-## 14. Reglas para UI/UX
+## 19. Reglas para UI/UX
 
 Cuando el agente trabaje interfaz:
 
@@ -675,7 +769,70 @@ Cuando el agente trabaje interfaz:
 
 ---
 
-## 15. Reglas para control de alcance
+## 20. Reglas jugables implementadas
+
+Registrar aquí las reglas activas del prototipo.
+
+### Día 1 — Control básico
+Estado: pendiente de implementación.
+
+Reglas esperadas:
+
+- Todo solicitante debe tener Pase de Tránsito.
+- El Pase de Tránsito debe estar vigente.
+- El nombre debe coincidir entre documentos cuando existan documentos múltiples.
+- El destino debe estar autorizado por la regla del día.
+- Decisiones disponibles: `approve`, `reject`, `hold`.
+
+Cuando una regla sea implementada en código, agregar:
+
+- archivo donde vive la regla;
+- archivo JSON relacionado;
+- criterio de prueba;
+- resultado esperado.
+
+---
+
+## 21. Registro de módulos completados
+
+Esta sección debe mantenerse actualizada para evitar que el agente reconstruya lo ya hecho.
+
+Formato obligatorio:
+
+```md
+### Módulo X — Nombre
+Estado: Completado / Parcial / Pendiente
+
+Implementado:
+- ...
+
+Archivos principales:
+- ...
+
+Pendientes:
+- ...
+```
+
+### Módulo 1 — Estructura base Godot
+Estado: Pendiente
+
+Implementado:
+- Documentación inicial del proyecto.
+
+Archivos principales:
+- `PROJECT.md`
+- `AGENTS.md`
+- `TECHNICAL_SPEC.md`
+- `MVP_BACKLOG.md`
+
+Pendientes:
+- Crear proyecto Godot.
+- Crear estructura de carpetas.
+- Crear escena inicial.
+
+---
+
+## 22. Reglas para control de alcance
 
 Cada vez que aparezca una idea nueva, evaluar:
 
@@ -691,7 +848,7 @@ No agregar nuevos sistemas hasta que el jugador quiera jugar un segundo día.
 
 ---
 
-## 16. Definición de listo
+## 23. Definición de listo
 
 Una tarea se considera lista cuando:
 
@@ -706,7 +863,7 @@ Una tarea se considera lista cuando:
 
 ---
 
-## 17. Definición de hecho para el MVP
+## 24. Definición de hecho para el MVP
 
 El MVP está hecho cuando existe:
 
@@ -722,7 +879,7 @@ El MVP está hecho cuando existe:
 
 ---
 
-## 18. Convenciones de nombres
+## 25. Convenciones de nombres del universo
 
 Usar nombres originales.
 
@@ -745,7 +902,7 @@ Evitar nombres directamente asociados a franquicias existentes.
 
 ---
 
-## 19. Formato recomendado para tareas
+## 26. Formato recomendado para tareas
 
 Cada tarea debe registrarse así:
 
@@ -754,7 +911,16 @@ Cada tarea debe registrarse así:
 
 **Objetivo:**  
 **Tipo:** Diseño / Narrativa / UI / Código / QA / Marketing / Producción / Legal  
+**Módulo:**  
 **Prioridad:** Alta / Media / Baja  
 **Documentos base:**  
+**Archivos a crear/modificar:**  
 **Criterio de aceptación:**  
 **Notas:**  
+```
+
+---
+
+## 27. Instrucción base para agentes
+
+> Trabaja como parte de un equipo indie que desarrolla un simulador narrativo de inspección migratoria en un imperio galáctico oscuro. Antes de implementar cualquier tarea, consulta los documentos del proyecto según el mapa de documentación definido en este archivo. Trabaja por módulos, prioriza un MVP jugable en Godot 4, decisiones morales, claridad de reglas, datos separados del código, universo propio y bajo riesgo legal. No copies Warhammer 40k ni ninguna IP existente. Entrega resultados concretos, accionables y listos para implementar.

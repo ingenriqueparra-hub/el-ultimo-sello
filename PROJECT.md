@@ -76,7 +76,7 @@ El MVP debe demostrar el núcleo jugable en una escala pequeña.
 
 - 1 puesto de control.
 - 1 día jugable completo.
-- 10 a 15 solicitantes.
+- 10 solicitantes.
 - 3 documentos base.
 - 1 herramienta de verificación.
 - 1 regla nueva durante el día.
@@ -282,3 +282,200 @@ El prototipo funciona si el jugador:
 - recuerda al menos un caso humano;
 - quiere jugar “un día más”.
 
+
+
+---
+
+## 15. Estado actual del proyecto
+
+Estado: **Documentación inicial preparada para desarrollo asistido con Codex**.
+
+Actualmente existe:
+
+- visión general del juego en `PROJECT.md`;
+- guía operativa para agentes IA en `AGENTS.md`;
+- diseño jugable en `GAME_DESIGN.md`;
+- biblia narrativa en `NARRATIVE_BIBLE.md`;
+- backlog MVP en `MVP_BACKLOG.md`;
+- especificación técnica inicial en `TECHNICAL_SPEC.md`;
+- guía de seguridad IP en `IP_SAFETY.md`;
+- marketing inicial para Steam en `STEAM_MARKETING.md`;
+- mapa de capacidades en `SKILLS.md`.
+
+Aún falta construir:
+
+- proyecto Godot inicial;
+- estructura real de carpetas;
+- escenas base;
+- datos JSON del Día 1;
+- sistema de solicitantes;
+- sistema de documentos;
+- sistema de decisiones;
+- motor de reglas;
+- reporte final;
+- escáner básico.
+
+---
+
+## 16. Forma de trabajo con Codex
+
+Codex debe usar `AGENTS.md` como punto de entrada obligatorio.
+
+`AGENTS.md` funciona como router del proyecto:
+
+- indica qué documentos consultar;
+- define el orden de prioridad entre archivos;
+- establece reglas de trabajo por módulo;
+- limita el alcance del MVP;
+- define convenciones de nombres;
+- protege la identidad propia del juego;
+- obliga a consultar `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md` antes de escribir código.
+
+Codex no debe trabajar por ideas sueltas. Debe trabajar por módulos, con criterios de aceptación claros y cambios limitados.
+
+Ejemplo correcto de instrucción:
+
+> Implementa el Módulo 1: estructura base Godot. Consulta `AGENTS.md`, `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md`. No avances al Módulo 2.
+
+Ejemplo incorrecto:
+
+> Haz el juego completo.
+
+---
+
+## 17. Orden modular de desarrollo
+
+El desarrollo debe avanzar en módulos cerrados.
+
+| Módulo | Nombre | Objetivo |
+|---|---|---|
+| 1 | Estructura base Godot | Crear proyecto, carpetas, escena inicial y configuración base |
+| 2 | Puesto de control | Crear pantalla principal con ventanilla, documentos y botones |
+| 3 | Carga JSON | Cargar solicitantes, documentos y reglas desde datos externos |
+| 4 | Sistema de solicitantes | Mostrar solicitante actual y avanzar en cola |
+| 5 | Sistema de documentos | Renderizar documentos con campos comparables |
+| 6 | Sistema de decisiones | Aprobar, rechazar y retener casos |
+| 7 | Motor de reglas | Validar inconsistencias y decisiones |
+| 8 | Reporte final | Mostrar aciertos, errores, multas y consecuencia |
+| 9 | Escáner básico | Detectar anomalías simples |
+| 10 | Diálogo simple | Agregar frase inicial e interrogatorio básico |
+| 11 | Feedback visual/sonoro | Agregar sellos, alertas y respuesta sensorial |
+| 12 | Pulido Día 1 | Mejorar claridad, ritmo y usabilidad |
+| 13 | Playtest interno | Validar comprensión y tensión |
+| 14 | Expansión Día 2 | Agregar complejidad solo después de validar el Día 1 |
+
+No se debe avanzar a módulos futuros si el módulo actual no tiene flujo funcional mínimo.
+
+---
+
+## 18. Reglas de control de alcance
+
+El proyecto debe resistir la expansión prematura.
+
+Antes de aceptar una nueva idea, preguntar:
+
+1. ¿Hace más claro el loop principal?
+2. ¿Aumenta la tensión o solo agrega complejidad?
+3. ¿Puede probarse en el MVP?
+4. ¿Requiere arte, sistemas o narrativa adicional?
+5. ¿Puede dejarse para una versión posterior?
+
+Si una idea no fortalece el MVP, debe ir al backlog futuro.
+
+El MVP no debe incluir combate, exploración, finales múltiples, facciones completamente simuladas, cinemáticas, economía compleja ni arte final.
+
+---
+
+## 19. Convenciones generales de implementación
+
+### Motor
+
+- Godot 4.
+- GDScript.
+- Juego 2D basado en interfaz.
+
+### Datos
+
+Los datos deben estar separados del código cuando sea posible:
+
+- solicitantes en JSON;
+- documentos en JSON;
+- reglas en JSON;
+- configuración de días en JSON.
+
+### Nombres técnicos
+
+- Escenas: PascalCase, por ejemplo `ControlDesk.tscn`.
+- Scripts: PascalCase, por ejemplo `RuleEngine.gd`.
+- Variables y funciones GDScript: snake_case, por ejemplo `current_applicant` y `load_next_applicant()`.
+- Archivos JSON: snake_case, por ejemplo `applicants_day_01.json`.
+- IDs de datos: snake_case con prefijo, por ejemplo `applicant_001`, `document_001`, `rule_001`.
+- Decisiones internas: inglés constante, por ejemplo `approve`, `reject`, `hold`.
+
+---
+
+## 20. Registro de avance del proyecto
+
+Este registro debe actualizarse cuando se complete un módulo importante.
+
+### Documentación inicial
+
+Estado: **Completado**.
+
+Incluye:
+
+- visión general;
+- diseño de juego;
+- biblia narrativa;
+- backlog MVP;
+- especificación técnica;
+- guía IP;
+- marketing inicial;
+- guía para agentes IA.
+
+### Módulo 1 — Estructura base Godot
+
+Estado: **Pendiente**.
+
+Pendientes:
+
+- crear proyecto Godot;
+- crear carpetas base;
+- crear escena inicial;
+- crear scripts base;
+- validar que el proyecto abre correctamente.
+
+---
+
+## 21. Criterio de preparación para Codex
+
+El proyecto está preparado para empezar en Codex cuando:
+
+- `AGENTS.md` esté en la raíz del proyecto;
+- `PROJECT.md`, `TECHNICAL_SPEC.md`, `MVP_BACKLOG.md` y `GAME_DESIGN.md` estén accesibles;
+- Codex reciba una tarea modular concreta;
+- la tarea indique qué módulo trabajar;
+- la tarea no pida construir el juego completo de una sola vez.
+
+Primera tarea recomendada para Codex:
+
+```md
+Implementa el Módulo 1 — Estructura base Godot.
+
+Consulta:
+- AGENTS.md
+- PROJECT.md
+- TECHNICAL_SPEC.md
+- MVP_BACKLOG.md
+
+Objetivo:
+Crear la estructura inicial del proyecto Godot 4, carpetas base y una escena principal vacía que pueda ejecutarse.
+
+No implementar todavía:
+- sistema de solicitantes;
+- documentos;
+- decisiones;
+- reglas;
+- escáner;
+- narrativa avanzada.
+```
