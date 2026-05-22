@@ -202,17 +202,61 @@ Para MVP:
 
 ---
 
-## 9. Progresión por días
+## 9. Progresión de dificultad
 
-| Día | Nueva complejidad |
-|---|---|
-| Día 1 | Pasaportes y fechas |
-| Día 2 | Certificados biométricos |
-| Día 3 | Sectores en cuarentena |
-| Día 4 | Cargas y contrabando |
-| Día 5 | Facciones con privilegios |
-| Día 6 | Interrogatorio avanzado |
-| Día 7 | Caso narrativo mayor |
+La dificultad debe escalar por capas, no por saturación.
+
+El jugador no debe empezar revisando todos los documentos, reglas y excepciones desde el primer día. Cada día debe introducir una nueva capa jugable que se apoya sobre lo aprendido anteriormente.
+
+Principio:
+
+> Primero detectar errores simples, luego interpretar excepciones, finalmente cargar con consecuencias.
+
+### Curva base
+
+| Día | Nueva capa | Qué aprende el jugador | Riesgo principal |
+|---|---|---|---|
+| Día 1 | Pase de tránsito | Revisar nombre, fecha, origen, destino, motivo y sello | Error documental simple |
+| Día 2 | Certificado biométrico | Cruzar datos entre documentos | Identidad inconsistente |
+| Día 3 | Sectores en cuarentena | Aplicar reglas externas del día | Documento válido pero origen prohibido |
+| Día 4 | Permiso de carga | Revisar mercancías y peso declarado | Contrabando o carga no declarada |
+| Día 5 | Facciones | Gestionar privilegios, presión y órdenes contradictorias | Decisión políticamente costosa |
+| Día 6 | Interrogatorio | Comparar respuestas contra documentos | Mentira o contradicción verbal |
+| Día 7 | Caso narrativo mayor | Resolver dilema con información incompleta | No hay decisión limpia |
+
+### Regla de diseño
+
+La dificultad no debe crecer agregando demasiados campos por solicitante. Debe crecer combinando:
+
+- más documentos;
+- más reglas;
+- más excepciones;
+- más presión moral;
+- más consecuencias.
+
+### Ejemplo de escalada
+
+Día 1:
+- El pase está vencido.
+- Decisión esperada: rechazar.
+
+Día 4:
+- El pase es válido.
+- El certificado es válido.
+- La carga pesa más de lo declarado.
+- Decisión esperada: retener.
+
+Día 7:
+- Madre con niño.
+- Documentos incompletos.
+- Niño con anomalía leve.
+- Sector de origen en cuarentena.
+- Orden superior contradictoria.
+- Decisión esperada: ambigua, con consecuencia narrativa.
+
+### Regla de oro
+
+El jugador debe sentir que domina una capa antes de recibir la siguiente.
 
 ---
 

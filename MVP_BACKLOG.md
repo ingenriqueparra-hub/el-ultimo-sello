@@ -13,7 +13,7 @@ Crear una versión jugable mínima que pruebe si el loop de inspección document
 
 Incluye:
 
-- 1 día jugable.
+- 1 día jugable. 
 - 10 solicitantes.
 - 3 documentos.
 - 1 herramienta de escáner.
@@ -32,6 +32,10 @@ No incluye:
 - traducción multi-idioma;
 - tienda de Steam completa;
 - arte final.
+
+Nota:
+
+El MVP representa el Día 1. No debe implementar toda la progresión, pero debe estar preparado para que nuevos días agreguen capas posteriores.
 
 ---
 

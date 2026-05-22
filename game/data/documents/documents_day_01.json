@@ -1,0 +1,249 @@
+[
+  {
+    "id": "transit_pass_001",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Elias Vorn",
+      "codigo_identidad": "CV-8831",
+      "origen": "Sector Bajo Ceniza",
+      "destino": "Nivel Industrial 4",
+      "expira": "300.08",
+      "motivo": "Trabajo temporal",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_001",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Elias Vorn",
+      "codigo_identidad": "CV-8831",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_002",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Caren Muss",
+      "codigo_identidad": "TF-4421",
+      "origen": "Sector Textil Ceniza",
+      "destino": "Fabrica de Hilados, Nivel 3",
+      "expira": "297.30",
+      "motivo": "Reincorporacion laboral",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "transit_pass_003",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Sela Driva",
+      "codigo_identidad": "RF-0093",
+      "origen": "Colonia Quemada Sector 9",
+      "destino": "Refugio Civil Umbral",
+      "expira": "305.00",
+      "motivo": "Desplazada registrada",
+      "sello_autoridad": "PENDIENTE"
+    }
+  },
+  {
+    "id": "transit_pass_004",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Vord Kellan",
+      "codigo_identidad": "LM-7754",
+      "origen": "Puerto de Entrada 7",
+      "destino": "Sector Comercial Medio",
+      "expira": "299.05",
+      "motivo": "Entrega de carga",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "ingress_permit_004",
+    "type": "ingress_permit",
+    "label": "Permiso de Ingreso con Carga",
+    "fields": {
+      "nombre": "Vord Kellan",
+      "codigo_identidad": "LM-7754",
+      "tipo_carga": "Chatarra industrial procesada",
+      "cantidad": "12 contenedores",
+      "destino_carga": "Deposito Reciclaje Nivel 2",
+      "expira": "299.05",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "transit_pass_005",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Rhen Axis",
+      "codigo_identidad": "MO-1190",
+      "origen": "Estacion Orbital 4",
+      "destino": "Cuartel Sector Umbral",
+      "expira": "310.00",
+      "motivo": "Reintegracion post-mision",
+      "sello_autoridad": "MO-9"
+    }
+  },
+  {
+    "id": "bio_cert_005",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Rhen Axis",
+      "codigo_identidad": "MO-1190",
+      "tipo_biologico": "Modificado - Grado Combate",
+      "anomalias": "Implante neural detectado — no registrado en expediente",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_006",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Lissara Veyr",
+      "codigo_identidad": "NB-0012",
+      "origen": "Torre Veyr, Nivel Superior",
+      "destino": "Camara de Administracion Central",
+      "expira": "315.00",
+      "motivo": "Reunion oficial de faccion",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "ingress_permit_006",
+    "type": "ingress_permit",
+    "label": "Autorizacion de Casa Noble",
+    "fields": {
+      "nombre": "Lissara Veyr",
+      "casa": "Casa Veyr",
+      "rango": "Segundo Anillo",
+      "exencion_control": "SOLICITADA — NO APROBADA",
+      "expira": "315.00",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "transit_pass_007",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Obrak Senn",
+      "codigo_identidad": "TC-5582",
+      "origen": "Taller Tecnico Sector Bajo",
+      "destino": "Planta de Mantenimiento, Nivel 6",
+      "expira": "300.00",
+      "motivo": "Servicio de mantenimiento",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "ingress_permit_007",
+    "type": "ingress_permit",
+    "label": "Permiso de Ingreso con Equipamiento",
+    "fields": {
+      "nombre": "Obrak Senn",
+      "codigo_identidad": "TC-5582",
+      "tipo_carga": "Herramientas de mantenimiento estandar",
+      "cantidad": "1 maletin sellado",
+      "destino_carga": "Planta de Mantenimiento, Nivel 6",
+      "expira": "300.00",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "transit_pass_008",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Dara Miren",
+      "codigo_identidad": "CV-3317",
+      "origen": "Vivienda Registrada Sector 2",
+      "destino": "Centro Medico Umbral",
+      "expira": "298.20",
+      "motivo": "Consulta medica",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_008",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica — GRUPO FAMILIAR",
+    "fields": {
+      "nombre": "Dara Miren + menor a cargo",
+      "codigo_identidad": "CV-3317 / MN-3317A",
+      "tipo_biologico": "Estandar / Estandar (menor)",
+      "anomalias": "Menor: respuesta celular atipica — anomalia biologica leve",
+      "expira": "310.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_009",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Fravin Clos",
+      "codigo_identidad": "CS-0447",
+      "origen": "Templo del Sello, Sector Central",
+      "destino": "Capilla de Transito, Umbral 7",
+      "expira": "302.00",
+      "motivo": "Servicio espiritual autorizado",
+      "sello_autoridad": "CS-1"
+    }
+  },
+  {
+    "id": "ingress_permit_009",
+    "type": "ingress_permit",
+    "label": "Permiso Especial del Clero del Sello",
+    "fields": {
+      "nombre": "Fravin Clos",
+      "codigo_identidad": "CS-0447",
+      "funcion": "Oficio del Rito de Admision",
+      "duracion": "1 turno",
+      "destino": "Capilla de Transito, Umbral 7",
+      "expira": "298.14",
+      "sello_autoridad": "CS-1"
+    }
+  },
+  {
+    "id": "transit_pass_010",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Kael Vorn",
+      "codigo_identidad": "LM-9901",
+      "origen": "Puerto de Entrada 7",
+      "destino": "Deposito Central, Nivel 2",
+      "expira": "299.00",
+      "motivo": "Entrega de materiales certificados",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_010",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Kael Vorn",
+      "codigo_identidad": "LM-9901",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  }
+]

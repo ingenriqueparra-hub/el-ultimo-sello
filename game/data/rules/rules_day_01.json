@@ -1,0 +1,70 @@
+[
+  {
+    "id": "rule_001",
+    "day": 1,
+    "order": 1,
+    "description": "Todo solicitante debe presentar Pase de Transito Planetario vigente.",
+    "display_text": "DECRETO MAP-7: Pase de Transito obligatorio para todo ingreso.",
+    "validation": {
+      "type": "document_required",
+      "document_type": "transit_pass"
+    },
+    "penalty_on_fail": {
+      "credits": -10,
+      "reputation": -1,
+      "faction": "MAP"
+    }
+  },
+  {
+    "id": "rule_002",
+    "day": 1,
+    "order": 2,
+    "description": "El Pase de Transito no debe estar vencido. Fecha limite: ciclo actual.",
+    "display_text": "DECRETO MAP-7: Documentos vencidos no tienen validez de ingreso.",
+    "validation": {
+      "type": "field_not_expired",
+      "document_type": "transit_pass",
+      "field": "expira",
+      "current_date": "298.12"
+    },
+    "penalty_on_fail": {
+      "credits": -10,
+      "reputation": -1,
+      "faction": "MAP"
+    }
+  },
+  {
+    "id": "rule_003",
+    "day": 1,
+    "order": 3,
+    "description": "El nombre en todos los documentos presentados debe coincidir exactamente.",
+    "display_text": "DECRETO OPC-3: Identidad consistente en todos los documentos.",
+    "validation": {
+      "type": "name_consistency",
+      "field": "nombre"
+    },
+    "penalty_on_fail": {
+      "credits": -15,
+      "reputation": -2,
+      "faction": "OPC"
+    }
+  },
+  {
+    "id": "rule_004",
+    "day": 1,
+    "order": 4,
+    "description": "El Pase de Transito debe tener sello de autoridad MAP valido. Sellos pendientes o en blanco no son validos.",
+    "display_text": "DECRETO MAP-7: Solo se acepta sello MAP, LMR, MO, OPC o CS. PENDIENTE no es valido.",
+    "validation": {
+      "type": "field_not_empty",
+      "document_type": "transit_pass",
+      "field": "sello_autoridad",
+      "invalid_values": ["PENDIENTE", "", "NINGUNO"]
+    },
+    "penalty_on_fail": {
+      "credits": -10,
+      "reputation": -1,
+      "faction": "MAP"
+    }
+  }
+]

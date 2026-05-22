@@ -1,0 +1,182 @@
+[
+  {
+    "id": "applicant_001",
+    "name": "Elias Vorn",
+    "type": "citizen",
+    "origin": "Sector Bajo Ceniza",
+    "destination": "Nivel Industrial 4",
+    "purpose": "Trabajo temporal en fundicion",
+    "dialogue_intro": "Buenos turnos. Vengo por el turno de fundicion. Tengo mis papeles.",
+    "documents": ["transit_pass_001", "bio_cert_001"],
+    "flags": [],
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso correcto. Ensenha las reglas basicas al jugador."
+    }
+  },
+  {
+    "id": "applicant_002",
+    "name": "Caren Muss",
+    "type": "worker",
+    "origin": "Sector Textil Ceniza",
+    "destination": "Fabrica de Hilados, Nivel 3",
+    "purpose": "Reincorporacion laboral",
+    "dialogue_intro": "Por favor, tengo turno desde hace tres dias. El transporte se retraso.",
+    "documents": ["transit_pass_002"],
+    "flags": ["expired_document"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase vencido. Sin amenaza real, pero viola la regla basica del dia."
+    }
+  },
+  {
+    "id": "applicant_003",
+    "name": "Sela Driva",
+    "type": "refugee",
+    "origin": "Colonia Quemada Sector 9",
+    "destination": "Refugio Civil Umbral",
+    "purpose": "Ingreso como desplazada registrada",
+    "dialogue_intro": "Registrada en el Refugio Civil. Huimos del incendio del sector. Mis hijos esperan.",
+    "documents": ["transit_pass_003"],
+    "flags": ["missing_seal"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "low",
+      "violations": ["rule_004"],
+      "notes": "Falta sello MAP. No hay amenaza. Decision moral: aplicar la regla o reconocer la situacion. Retener es mas justo que rechazar."
+    }
+  },
+  {
+    "id": "applicant_004",
+    "name": "Vord Kellan",
+    "type": "merchant",
+    "origin": "Puerto de Entrada 7",
+    "destination": "Sector Comercial Medio",
+    "purpose": "Entrega de carga registrada",
+    "dialogue_intro": "Comerciante registrado. La carga esta sellada. No hay nada fuera de lo comun.",
+    "documents": ["transit_pass_004", "ingress_permit_004"],
+    "flags": ["cargo_mismatch"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_003"],
+      "notes": "El permiso dice chatarra industrial. El solicitante declara componentes electronicos. Inconsistencia de carga."
+    }
+  },
+  {
+    "id": "applicant_005",
+    "name": "Rhen Axis",
+    "type": "soldier",
+    "origin": "Estacion Orbital 4",
+    "destination": "Cuartel Sector Umbral",
+    "purpose": "Reintegracion post-mision",
+    "dialogue_intro": "Veterano en retorno. Mision completada. Autorizacion de la Milicia Orbital adjunta.",
+    "documents": ["transit_pass_005", "bio_cert_005"],
+    "flags": ["biological_anomaly"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos en orden. El escaner revela implante neural no registrado. Decision ambigua: puede ser equipo de combate no actualizado o algo peor."
+    }
+  },
+  {
+    "id": "applicant_006",
+    "name": "Lissara Veyr",
+    "type": "noble",
+    "origin": "Torre Veyr, Nivel Superior",
+    "destination": "Camara de Administracion Central",
+    "purpose": "Reunion de faccion autorizada",
+    "dialogue_intro": "Casa Veyr no se somete a control estandar. Tengo autorizacion de mi casa. Haga su trabajo rapido.",
+    "documents": ["transit_pass_006", "ingress_permit_006"],
+    "flags": [],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "low",
+      "violations": ["rule_001"],
+      "notes": "La autorizacion noble no exime del control estandar en el Dia 1. La regla no hace excepciones. El jugador debe aplicarla igual."
+    }
+  },
+  {
+    "id": "applicant_007",
+    "name": "Obrak Senn",
+    "type": "technician",
+    "origin": "Taller Tecnico Sector Bajo",
+    "destination": "Planta de Mantenimiento, Nivel 6",
+    "purpose": "Servicio de mantenimiento de sistemas",
+    "dialogue_intro": "Tecnico de mantenimiento. Tengo contrato. El equipo es estandar de trabajo.",
+    "documents": ["transit_pass_007", "ingress_permit_007"],
+    "flags": ["undeclared_device"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_003"],
+      "notes": "El permiso lista herramientas de mantenimiento genericas. El solicitante lleva un dispositivo de diagnostico avanzado no declarado en el permiso."
+    }
+  },
+  {
+    "id": "applicant_008",
+    "name": "Dara Miren",
+    "type": "civilian",
+    "origin": "Vivienda Registrada Sector 2",
+    "destination": "Centro Medico Umbral",
+    "purpose": "Consulta medica con hijo menor",
+    "dialogue_intro": "Vengo con mi hijo. Tiene fiebre desde hace dias. Solo quiero que lo vean.",
+    "documents": ["transit_pass_008", "bio_cert_008"],
+    "flags": ["biological_anomaly"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Documentos en orden. El escaner detecta anomalia biologica leve en el nino. Sin amenaza clara. Decision moral extrema: aplicar protocolo o dejar pasar a un nino enfermo."
+    }
+  },
+  {
+    "id": "applicant_009",
+    "name": "Fravin Clos",
+    "type": "clergy",
+    "origin": "Templo del Sello, Sector Central",
+    "destination": "Capilla de Transito, Umbral 7",
+    "purpose": "Servicio espiritual autorizado",
+    "dialogue_intro": "El Sello os bendice. Llevo permiso del Clero. Solo vengo a officiar el rito de admision.",
+    "documents": ["transit_pass_009", "ingress_permit_009"],
+    "flags": [],
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Permiso especial del Clero del Sello valido. Todo en orden. Caso correcto."
+    }
+  },
+  {
+    "id": "applicant_010",
+    "name": "Kael Vorn",
+    "type": "merchant",
+    "origin": "Sector Comercial Norte",
+    "destination": "Deposito Central, Nivel 2",
+    "purpose": "Entrega de materiales certificados",
+    "dialogue_intro": "Comerciante registrado. Todo en regla. Tengo prisa.",
+    "documents": ["transit_pass_010", "bio_cert_010"],
+    "flags": ["suspicious_dialogue"],
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "high",
+      "violations": [],
+      "notes": "Documentos perfectos. Al interrogar: dice venir del Sector Norte pero el pase registra origen en Puerto de Entrada 7. La inconsistencia solo aparece al preguntar."
+    }
+  }
+]

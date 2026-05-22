@@ -1,0 +1,13 @@
+{
+  "day": 1,
+  "title": "Umbral 7 — Primer Turno de Control",
+  "intro": "El Ministerio de Admision Planetaria te asigna al Puesto Umbral 7. Es tu primer turno. Las reglas son claras. El margen de error, no.",
+  "current_date": "298.12",
+  "rules_active": ["rule_001", "rule_002", "rule_003", "rule_004"],
+  "applicant_ids": [
+    "applicant_001", "applicant_002", "applicant_003", "applicant_004", "applicant_005",
+    "applicant_006", "applicant_007", "applicant_008", "applicant_009", "applicant_010"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

@@ -31,6 +31,8 @@ No es “revisar papeles”. Es decidir entre:
 
 ## 3. Principios de diseño
 
+La dificultad debe escalar por capas: primero errores documentales simples, luego cruce de documentos, reglas externas, carga, facciones, interrogatorio y dilemas narrativos.
+
 ### 3.1. Burocracia con tensión
 Cada regla debe parecer administrativa, pero tener consecuencias humanas o políticas.
 

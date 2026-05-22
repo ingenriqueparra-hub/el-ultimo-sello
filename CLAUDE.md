@@ -328,16 +328,106 @@ El agente debe trabajar por módulos. No debe saltar a módulos futuros si el m�
 Objetivo: crear estructura mínima del proyecto, carpetas, escena inicial y configuración base.
 
 ### Módulo 2 — Escena principal del puesto de control
-Objetivo: mostrar ventanilla, área de documentos, panel de solicitante y botones de decisión.
+Estado: Completado
+
+Implementado:
+- Escena `ControlDesk.tscn` con layout completo de 4 zonas.
+- Panel izquierdo: solicitante (nombre, origen, destino, motivo, diálogo).
+- Panel central: área de documentos con 3 pestañas y vista activa.
+- Panel derecho: herramientas (escáner, alertas).
+- Barra inferior: botones APROBAR (verde), RETENER (ámbar), RECHAZAR (rojo).
+- Barra superior: día, título del puesto, créditos.
+- Script `ControlDesk.gd` con tema verde fósforo aplicado por código.
+- `Main.tscn` actualizado con botón COMENZAR que carga ControlDesk.
+- Script `Main.gd` con navegación de escena.
+
+Archivos principales:
+- `game/scenes/main/ControlDesk.tscn`
+- `game/scripts/ui/ControlDesk.gd`
+- `game/scenes/main/Main.tscn`
+- `game/scripts/ui/Main.gd`
+
+Pendientes:
+- Ninguno para Módulo 2.
+
+---
 
 ### Módulo 3 — Sistema de carga de datos JSON
-Objetivo: cargar solicitantes, documentos y reglas desde archivos JSON.
+Estado: Completado
+
+Implementado:
+- `day_01.json` — configuración del día, fecha actual 298.12, lista de 10 solicitantes.
+- `applicants_day_01.json` — 10 solicitantes completos con flags, truth y diálogo.
+- `documents_day_01.json` — 17 documentos (transit_pass, bio_cert, ingress_permit) con campos comparables.
+- `rules_day_01.json` — 4 reglas del Día 1 con tipo de validación y penalización.
+- `DataLoader.gd` — clase estática con métodos load_day(), load_applicants(), load_documents(), load_rules().
+- `ControlDesk.gd` — carga datos en _ready() e imprime resumen en consola.
+
+Archivos principales:
+- `game/data/days/day_01.json`
+- `game/data/applicants/applicants_day_01.json`
+- `game/data/documents/documents_day_01.json`
+- `game/data/rules/rules_day_01.json`
+- `game/scripts/data/DataLoader.gd`
+
+Pendientes:
+- Ninguno para Módulo 3.
+
+---
 
 ### Módulo 4 — Sistema de solicitantes
-Objetivo: mostrar el solicitante actual, avanzar en cola y detectar fin del día.
+Estado: Completado
+
+Implementado:
+- `ApplicantQueue.gd` — cola con señales `applicant_changed` y `day_ended`, avance por índice.
+- `ControlDesk.gd` — muestra nombre, origen, destino, motivo y diálogo del solicitante actual.
+- Contador "SOLICITANTE X / 10" actualizado en cada cambio.
+- Botones de decisión deshabilitados al inicio y al fin del turno.
+- Escáner básico activo: detecta flags `biological_anomaly` y `suspicious_dialogue`.
+- Al terminar los 10 solicitantes muestra "TURNO CERRADO" y bloquea decisiones.
+- Pestañas de documentos (Tab1, Tab2, Tab3) conectadas a `_show_doc_by_type()`.
+
+Archivos principales:
+- `game/scripts/systems/ApplicantQueue.gd`
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Bugs corregidos:
+- `get_index()` renombrado a `get_current_index()` — conflicta con built-in `Node.get_index()` de Godot 4, causaba "Could not resolve external class member".
+- Variables `:=` desde `Dictionary.get()` explicitadas como `: String =` — Godot trata como error el warning de tipo Variant inferido.
+
+Pendientes:
+- Ninguno para Módulo 4.
+
+---
+
+### Nota técnica — Conflictos con métodos built-in de Node (Godot 4)
+
+**IMPORTANTE:** No usar estos nombres como métodos propios en clases que extiendan `Node` o `Control`:
+- `get_index()` → usar nombre descriptivo como `get_current_index()`.
+- `get_name()`, `get_parent()`, `get_children()`, `get_class()` → ídem.
+
+Verificar siempre que el nombre del método no exista en la API de `Node` antes de usarlo.
+
+---
 
 ### Módulo 5 — Sistema de documentos
-Objetivo: renderizar documentos con campos comparables y visualmente claros.
+Estado: Completado
+
+Implementado:
+- Pestañas conectadas a transit_pass, bio_cert, ingress_permit.
+- Pestañas se habilitan/deshabilitan según documentos del solicitante.
+- Primer documento disponible se muestra automáticamente.
+- `_render_document()` formatea campos del JSON como "CAMPO: valor".
+- `_set_active_tab()` resalta la pestaña activa visualmente.
+- Escáner detecta 6 tipos de flags con mensaje descriptivo.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
+
+Pendientes:
+- Ninguno para Módulo 5.
+
+---
 
 ### Módulo 6 — Sistema de decisiones
 Objetivo: permitir aprobar, rechazar y retener; registrar cada decisión.
@@ -817,22 +907,22 @@ Pendientes:
 ```
 
 ### Módulo 1 — Estructura base Godot
-Estado: Pendiente
+Estado: Completado
 
 Implementado:
 - Documentación inicial del proyecto.
+- Proyecto Godot 4 creado en `game/`.
+- Estructura de carpetas según `TECHNICAL_SPEC.md`.
+- Escena principal `Main.tscn` funcional (fondo verde fósforo, título).
+- Script base `GameManager.gd` con enum de estados del juego.
 
 Archivos principales:
-- `PROJECT.md`
-- `CLAUDE.md`
-- `AGENTS.md`
-- `TECHNICAL_SPEC.md`
-- `MVP_BACKLOG.md`
+- `game/project.godot`
+- `game/scenes/main/Main.tscn`
+- `game/scripts/core/GameManager.gd`
 
 Pendientes:
-- Crear proyecto Godot.
-- Crear estructura de carpetas.
-- Crear escena inicial.
+- Ninguno para Módulo 1.
 
 ---
 

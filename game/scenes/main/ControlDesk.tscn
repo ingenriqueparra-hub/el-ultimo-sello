@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://cjbcf1tw2uvb4"]
+
+[ext_resource type="Script" uid="uid://cecc5af6gaddf" path="res://scripts/ui/ControlDesk.gd" id="1_desk"]
+
+[node name="ControlDesk" type="Control" unique_id=825038340]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_desk")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1125008145]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.05, 0.03, 1)
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1406640468]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusBar" type="PanelContainer" parent="VBox" unique_id=1498670290]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+
+[node name="StatusHBox" type="HBoxContainer" parent="VBox/StatusBar" unique_id=194195802]
+layout_mode = 2
+
+[node name="DayLabel" type="Label" parent="VBox/StatusBar/StatusHBox" unique_id=255722143]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "DIA 1"
+
+[node name="TitleLabel" type="Label" parent="VBox/StatusBar/StatusHBox" unique_id=401757419]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "PUESTO DE CONTROL - UMBRAL 7"
+horizontal_alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="VBox/StatusBar/StatusHBox" unique_id=1107733996]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "CREDITOS: 50"
+horizontal_alignment = 2
+
+[node name="MainArea" type="HBoxContainer" parent="VBox" unique_id=541580532]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ApplicantPanel" type="PanelContainer" parent="VBox/MainArea" unique_id=249692887]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+
+[node name="ApplicantVBox" type="VBoxContainer" parent="VBox/MainArea/ApplicantPanel" unique_id=540933615]
+layout_mode = 2
+
+[node name="PanelTitle" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=666500131]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "SOLICITANTE"
+horizontal_alignment = 1
+
+[node name="HSep1" type="HSeparator" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=1194626264]
+layout_mode = 2
+
+[node name="ApplicantName" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=1297114534]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "--- EN ESPERA ---"
+horizontal_alignment = 1
+
+[node name="ApplicantOrigin" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=1000175331]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Origen: ---"
+
+[node name="ApplicantDestination" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=1173255925]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Destino: ---"
+
+[node name="ApplicantPurpose" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=190328877]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Motivo: ---"
+
+[node name="HSep2" type="HSeparator" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=139107782]
+layout_mode = 2
+
+[node name="DialogueLabel" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=544470929]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "DIALOGO"
+
+[node name="DialogueText" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=938434086]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 13
+text = "Esperando al proximo solicitante."
+autowrap_mode = 3
+
+[node name="DocumentArea" type="PanelContainer" parent="VBox/MainArea" unique_id=1627757967]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DocumentVBox" type="VBoxContainer" parent="VBox/MainArea/DocumentArea" unique_id=609910610]
+layout_mode = 2
+
+[node name="DocTitle" type="Label" parent="VBox/MainArea/DocumentArea/DocumentVBox" unique_id=1206858063]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "DOCUMENTOS"
+horizontal_alignment = 1
+
+[node name="DocTabs" type="HBoxContainer" parent="VBox/MainArea/DocumentArea/DocumentVBox" unique_id=2146825161]
+layout_mode = 2
+
+[node name="Tab1" type="Button" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocTabs" unique_id=1805700490]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Pase de Transito"
+
+[node name="Tab2" type="Button" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocTabs" unique_id=1953804532]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Cert. Biometrico"
+
+[node name="Tab3" type="Button" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocTabs" unique_id=722374577]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Permiso de Ingreso"
+
+[node name="DocumentView" type="PanelContainer" parent="VBox/MainArea/DocumentArea/DocumentVBox" unique_id=774698009]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DocContent" type="Label" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocumentView" unique_id=349508034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "[ Sin documento activo ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ToolsPanel" type="PanelContainer" parent="VBox/MainArea" unique_id=59860049]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+
+[node name="ToolsVBox" type="VBoxContainer" parent="VBox/MainArea/ToolsPanel" unique_id=2088026622]
+layout_mode = 2
+
+[node name="ToolsTitle" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=1738903473]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "HERRAMIENTAS"
+horizontal_alignment = 1
+
+[node name="HSepTools" type="HSeparator" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=107036816]
+layout_mode = 2
+
+[node name="ScannerButton" type="Button" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=1944774211]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "[ ESCANER ]"
+
+[node name="AlertsLabel" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=807277283]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "ALERTAS:"
+
+[node name="AlertsList" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=831745659]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+text = "--- Sin alertas ---"
+autowrap_mode = 3
+
+[node name="DecisionBar" type="PanelContainer" parent="VBox" unique_id=119294482]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+
+[node name="DecisionHBox" type="HBoxContainer" parent="VBox/DecisionBar" unique_id=1974505175]
+layout_mode = 2
+alignment = 1
+
+[node name="ApproveButton" type="Button" parent="VBox/DecisionBar/DecisionHBox" unique_id=366240599]
+custom_minimum_size = Vector2(220, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "APROBAR"
+
+[node name="Spacer1" type="Control" parent="VBox/DecisionBar/DecisionHBox" unique_id=1366666247]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="HoldButton" type="Button" parent="VBox/DecisionBar/DecisionHBox" unique_id=1335399034]
+custom_minimum_size = Vector2(220, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "RETENER"
+
+[node name="Spacer2" type="Control" parent="VBox/DecisionBar/DecisionHBox" unique_id=1611222183]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="RejectButton" type="Button" parent="VBox/DecisionBar/DecisionHBox" unique_id=1297473642]
+custom_minimum_size = Vector2(220, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "RECHAZAR"
