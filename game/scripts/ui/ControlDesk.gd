@@ -30,6 +30,7 @@ const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 @onready var tab2: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab2
 @onready var tab3: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab3
 @onready var applicant_vbox: VBoxContainer = $VBox/MainArea/ApplicantPanel/ApplicantVBox
+@onready var tools_vbox: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox
 
 var current_day: int = 1
 var credits: int = 50
@@ -81,6 +82,7 @@ func _load_day_data() -> void:
 	add_child(queue)
 	queue.applicant_changed.connect(_on_applicant_changed)
 	queue.day_ended.connect(_on_day_ended)
+	_build_regulations_section()
 	queue.load_applicants(applicants)
 	queue.start()
 
@@ -638,6 +640,28 @@ func _update_debug_panel(applicant: Dictionary) -> void:
 			lines.append("  Créditos:  %d" % delta)
 
 	_debug_label.text = "\n".join(lines)
+
+func _build_regulations_section() -> void:
+	tools_vbox.add_child(HSeparator.new())
+
+	var title := Label.new()
+	title.text = "REGULACIONES"
+	title.add_theme_font_size_override("font_size", 11)
+	title.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	tools_vbox.add_child(title)
+
+	tools_vbox.add_child(HSeparator.new())
+
+	for rule in rules:
+		var display: String = rule.get("display_text", rule.get("description", ""))
+		if display == "":
+			continue
+		var lbl := Label.new()
+		lbl.text = display
+		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		lbl.add_theme_font_size_override("font_size", 10)
+		lbl.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+		tools_vbox.add_child(lbl)
 
 func _style_tab_buttons() -> void:
 	for tab in [tab1, tab2, tab3]:
