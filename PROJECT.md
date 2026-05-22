@@ -195,22 +195,96 @@ Ejemplo de tono:
 
 ---
 
-## 9. Estilo visual
+## 9. Dirección visual oficial
 
-### Dirección sugerida
+### 9.1. Estilo base
 
-- Interfaz retrofuturista.
-- Verde fósforo, ámbar, rojo de alerta, metal oscuro.
-- Documentos gastados, sellos imperiales propios, códigos.
-- Pantallas con ruido, scanners imperfectos.
-- Ventanilla estrecha, rostro del solicitante parcialmente visible.
-- Fondo de puerto espacial o ciudad-colmena.
+El juego no debe definirse como pixel art puro. La dirección visual recomendada es:
 
-### Evitar
+> **Retrofuturismo burocrático analógico.**
 
+El mundo debe sentirse tecnológico, viejo, pesado, institucional y decadente. La interfaz no debe parecer una computadora limpia del futuro, sino una terminal administrativa antigua, usada por una institución que mezcla control digital, ritual burocrático y autoridad opresiva.
+
+La estética debe combinar:
+
+- pantallas verdes o ámbar tipo terminal;
+- paneles industriales oscuros;
+- textos administrativos secos;
+- ruido visual, scanlines o glitch sutil;
+- sellos institucionales originales;
+- códigos, expedientes y protocolos;
+- objetos documentales físicos o semi-digitales;
+- sensación de máquina estatal vieja, no de tecnología elegante.
+
+### 9.2. La pantalla actual como terminal del puesto
+
+La interfaz principal del prototipo puede entenderse como la **computadora del puesto de control**.
+
+No es necesario que todos los documentos sean papeles físicos. El jugador puede revisar expedientes, reglas, alertas, escáneres y documentos desde una terminal institucional.
+
+Esta pantalla representa el plano administrativo:
+
+- datos del solicitante;
+- documentos registrados;
+- reglas activas;
+- alertas del escáner;
+- preguntas disponibles;
+- decisiones del oficial;
+- créditos, sanciones y reporte.
+
+### 9.3. Vista del solicitante
+
+A futuro, el juego puede alternar entre dos planos:
+
+1. **Vista de terminal:** revisión de datos, documentos, reglas, alertas y decisiones.
+2. **Vista del solicitante:** mirar a la persona frente a la ventanilla, observar expresión, postura, heridas, implantes, miedo, arrogancia o contradicciones visibles.
+
+La vista del solicitante no debe ser solo decorativa. Puede apoyar mecánicas futuras como:
+
+- confirmar coincidencia visual con el registro;
+- detectar nerviosismo o señales físicas;
+- notar implantes no declarados;
+- observar anomalías leves;
+- recibir presión directa de nobles, militares o clérigos;
+- reforzar dilemas morales.
+
+### 9.4. Soportes documentales del mundo
+
+Los documentos no deben limitarse a papel clásico. El universo puede usar una mezcla de soportes burocráticos:
+
+| Soporte | Uso sugerido | Sensación |
+|---|---|---|
+| Terminal administrativa | Expedientes, reglas, alertas y validaciones | Control frío |
+| Credencial o ficha de tránsito | Pase de Tránsito Planetario | Documento funcional |
+| Certificado digital biométrico | Identidad, anomalías y pureza biológica | Técnico / médico |
+| Tablet industrial pesada | Permisos de carga o rutas | Tecnología vieja |
+| Pergamino o lámina sellada | Órdenes superiores o salvoconductos de facción | Autoridad ritual |
+| Placa de identificación | Soldados, técnicos o prisioneros | Institucional / militar |
+
+Esta mezcla evita que el juego parezca una copia directa de simuladores de papeles, y refuerza la identidad de horror administrativo.
+
+### 9.5. Paleta y jerarquía visual
+
+La interfaz debe usar color con función, no solo decoración:
+
+- verde fósforo: sistema, datos válidos, texto operativo;
+- ámbar: advertencias, reglas activas, campos dudosos;
+- rojo: alertas graves, rechazo, peligro o sanción;
+- azul grisáceo: herramientas, escáneres, paneles técnicos;
+- blanco sucio: documentos activos o información primaria;
+- gris oscuro / negro verdoso: fondos y paneles secundarios.
+
+Evitar que toda la interfaz sea verde con la misma intensidad. La legibilidad y la jerarquía visual son más importantes que el efecto retro.
+
+### 9.6. Evitar
+
+- Pixel art obligatorio si reduce legibilidad.
+- Hologramas limpios o futurismo demasiado pulido.
+- Papeles idénticos a juegos de inspección documental existentes.
 - Calaveras aladas, águilas bicéfalas, servo-cráneos, inquisidores o iconografía reconocible de Warhammer.
 - Nombres como Imperium, Inquisición, Herejía, Caos, Xenos, Adeptus, Mechanicus, etc.
 - Armaduras o diseños demasiado cercanos a Space Marines.
+- UI tan decorativa que dificulte comparar datos.
 
 ---
 

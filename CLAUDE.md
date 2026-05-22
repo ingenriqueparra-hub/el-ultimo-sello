@@ -473,6 +473,67 @@ Cada sugerencia debe respetar estos principios:
 9. **Claridad antes que complejidad:** el jugador debe entender qué revisar y por qué.
 10. **UI como núcleo:** la interfaz es parte central de la experiencia, no solo presentación.
 
+## 12.1. Dirección visual obligatoria
+
+El agente no debe asumir que el juego es pixel art puro.
+
+La dirección visual oficial es:
+
+> **Retrofuturismo burocrático analógico.**
+
+El juego debe sentirse como una terminal administrativa vieja, institucional y opresiva, combinada con tecnología industrial pesada, documentos digitales, soportes físicos ritualizados y estética de ciudad-colmena decadente.
+
+### La pantalla actual
+
+La pantalla principal puede representar la **computadora del puesto de control**.
+
+Debe entenderse como el plano administrativo del juego, donde el jugador revisa:
+
+- solicitantes;
+- documentos;
+- regulaciones;
+- herramientas;
+- alertas;
+- decisiones;
+- reportes.
+
+No debe asumirse que toda la experiencia ocurre solo en esa pantalla. En versiones futuras, puede existir una vista del solicitante para observar rostro, postura, anomalías y reacciones.
+
+### Soportes documentales permitidos
+
+Los documentos pueden representarse como:
+
+- fichas digitales;
+- tarjetas industriales;
+- tablets grandes y toscas;
+- expedientes biométricos;
+- manifiestos de carga;
+- protocolos sellados;
+- órdenes ceremoniales;
+- salvoconductos de facción.
+
+No limitar el diseño a papeles físicos tradicionales.
+
+### Evitar
+
+Evitar:
+
+- pixel art como obligación;
+- hologramas limpios y modernos;
+- interfaz futurista elegante;
+- estética demasiado parecida a Warhammer 40k;
+- documentos idénticos a pasaportes contemporáneos;
+- depender solo de texto verde plano sin jerarquía visual.
+
+### Prioridad visual
+
+La interfaz debe priorizar:
+
+1. legibilidad;
+2. tensión burocrática;
+3. identidad propia;
+4. claridad de decisiones;
+5. atmósfera opresiva.
 ---
 
 ## 13. Jerarquía de prioridades
@@ -1217,5 +1278,4 @@ Cada tarea debe registrarse así:
 
 ## 27. Instrucción base para agentes
 
-> Trabaja como parte de un equipo indie que desarrolla un simulador narrativo de inspección migratoria en un imperio galáctico oscuro. Antes de implementar cualquier tarea, consulta los documentos del proyecto según el mapa de documentación definido en este archivo. Trabaja por módulos, prioriza un MVP jugable en Godot 4, decisiones morales, claridad de reglas, datos separados del código, universo propio y bajo riesgo legal. No copies Warhammer 40k ni ninguna IP existente. Entrega resultados concretos, accionables y listos para implementar.
-
+> Trabaja como parte de un equipo indie que desarrolla un simulador narrativo de inspección migratoria en un imperio galáctico oscuro. Antes de implementar cualquier tarea, consulta los documentos del proyecto según el mapa de documentación definido en este archivo. Trabaja por módulos, prioriza un MVP jugable en Godot 4, decisiones morales, claridad de reglas, datos separados del código, universo propio y bajo riesgo legal. No copies Warhammer 40k ni ninguna IP existente. No asumas pixel art puro: la dirección visual es retrofuturismo burocrático analógico, con terminales institucionales, soportes documentales híbridos y tecnología pesada. Entrega resultados concretos, accionables y listos para implementar.

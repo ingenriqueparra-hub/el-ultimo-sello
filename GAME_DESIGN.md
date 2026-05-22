@@ -218,8 +218,8 @@ Principio:
 |---|---|---|---|
 | Día 1 | Pase de tránsito | Revisar nombre, fecha, origen, destino, motivo y sello | Error documental simple |
 | Día 2 | Certificado biométrico | Cruzar datos entre documentos | Identidad inconsistente |
-| Día 3 | Sectores en cuarentena | Aplicar reglas externas del día | Documento válido pero origen prohibido |
-| Día 4 | Permiso de carga | Revisar mercancías y peso declarado | Contrabando o carga no declarada |
+| Día 3 | Sectores en cuarentena | Aplicar reglas externas del día | Documento válido, pero origen prohibido |
+| Día 4 | Permiso de carga | Revisar mercancías, peso y destino | Contrabando o carga no declarada |
 | Día 5 | Facciones | Gestionar privilegios, presión y órdenes contradictorias | Decisión políticamente costosa |
 | Día 6 | Interrogatorio | Comparar respuestas contra documentos | Mentira o contradicción verbal |
 | Día 7 | Caso narrativo mayor | Resolver dilema con información incompleta | No hay decisión limpia |
@@ -233,6 +233,8 @@ La dificultad no debe crecer agregando demasiados campos por solicitante. Debe c
 - más excepciones;
 - más presión moral;
 - más consecuencias.
+
+El jugador debe sentir que domina una capa antes de recibir la siguiente.
 
 ### Ejemplo de escalada
 
@@ -256,7 +258,9 @@ Día 7:
 
 ### Regla de oro
 
-El jugador debe sentir que domina una capa antes de recibir la siguiente.
+El jugador no debe sentir que el juego se vuelve difícil porque hay más texto.
+
+Debe sentir que se vuelve difícil porque las reglas empiezan a chocar con la humanidad, la política y el miedo.
 
 ---
 
@@ -380,7 +384,120 @@ Fase 4:
 
 ---
 
-## 12. Condicion de victoria
+## 12. Puesto de control, terminal y soportes documentales
+
+### 12.1. Concepto del puesto
+
+La pantalla principal del jugador representa la **terminal administrativa del puesto de control**.
+
+Desde esta terminal el jugador puede:
+
+- revisar expedientes;
+- consultar documentos;
+- activar herramientas;
+- leer regulaciones;
+- detectar alertas;
+- registrar decisiones;
+- cerrar el reporte del día.
+
+La terminal no representa necesariamente todo lo que el jugador ve. En futuras versiones, puede existir una vista complementaria para mirar al solicitante directamente.
+
+---
+
+### 12.2. Vista de terminal
+
+La vista de terminal es el plano administrativo del juego.
+
+Debe incluir:
+
+- datos del solicitante;
+- documentos;
+- regulaciones activas;
+- herramientas;
+- alertas;
+- preguntas disponibles;
+- decisiones;
+- créditos o sanciones;
+- progreso del día.
+
+Esta vista debe ser clara, legible y funcional. La estética no debe impedir que el jugador detecte inconsistencias.
+
+---
+
+### 12.3. Vista del solicitante
+
+En una versión posterior, el jugador podrá alternar o mover la mirada hacia la persona frente a la ventanilla.
+
+Esta vista puede servir para:
+
+- observar rostro y postura;
+- detectar nerviosismo;
+- ver heridas, implantes o anomalías;
+- escuchar respuestas;
+- sentir presión emocional;
+- comparar apariencia contra registro;
+- reforzar dilemas humanos.
+
+Esta capa no es obligatoria para el MVP, pero debe considerarse parte de la visión del juego.
+
+---
+
+### 12.4. Soportes documentales
+
+Los documentos no tienen que ser papeles modernos.
+
+El universo usa una mezcla de tecnología vieja, burocracia ritual y soportes físicos o digitales.
+
+Ejemplos:
+
+| Documento | Soporte posible |
+|---|---|
+| Pase de Tránsito Planetario | ficha digital, tarjeta de tránsito, credencial industrial |
+| Certificado Biométrico | expediente técnico en terminal |
+| Permiso de Carga | tablet logística, manifiesto digital, placa de carga |
+| Salvoconducto de Facción | soporte institucional con sello y código |
+| Orden Superior | protocolo sellado, archivo bloqueado o documento ceremonial |
+
+---
+
+### 12.5. Principio visual
+
+No asumir pixel art puro.
+
+El estilo debe ser:
+
+> **2D retrofuturista burocrático analógico.**
+
+Debe sentirse como:
+
+- tecnología antigua;
+- terminal institucional;
+- formularios digitales;
+- sellos y códigos;
+- tablets pesadas;
+- documentos ritualizados;
+- oficina militarizada;
+- ciudad-colmena decadente.
+
+---
+
+### 12.6. Implicación jugable
+
+La variedad de soportes documentales puede agregar dificultad sin depender solo de más texto.
+
+Ejemplo:
+
+- una tarjeta puede tener datos visibles;
+- una tablet puede requerir navegar pestañas;
+- una orden superior puede estar parcialmente bloqueada;
+- un certificado biométrico puede mostrar probabilidades;
+- un salvoconducto puede contradecir una regulación activa.
+
+Esto permite que la revisión documental sea más visual, táctil y memorable.
+
+---
+
+## 13. Condicion de victoria
 
 No debe haber una sola victoria.
 
