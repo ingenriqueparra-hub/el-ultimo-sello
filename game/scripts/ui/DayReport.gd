@@ -57,6 +57,9 @@ func _populate(summary: Dictionary) -> void:
 	var consequence := NarrativeConsequenceSystem.evaluate(summary, day)
 	consequence_title_label.text = str(consequence.get("title", "CONSECUENCIA"))
 	consequence_text.text = str(consequence.get("body", ""))
+	var symptom := NarrativeStateSystem.get_narrative_symptom()
+	if symptom != "":
+		consequence_text.text += "\n\n" + symptom
 
 func _add_decision_row(decision: Dictionary) -> void:
 	var was_correct: bool = decision.get("was_correct", false)
@@ -145,5 +148,6 @@ func _on_continue_pressed(next_day: int) -> void:
 func _on_restart_pressed() -> void:
 	var day: int = pending_summary.get("day", 1)
 	pending_summary = {}
+	NarrativeStateSystem.restore_snapshot()
 	ControlDesk.day_to_load = day
 	get_tree().change_scene_to_file("res://scenes/main/ControlDesk.tscn")

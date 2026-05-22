@@ -25,6 +25,7 @@ static func evaluate(summary: Dictionary, day: int) -> Dictionary:
 	print("[NarrativeConsequence] Seleccionada: %s (tipo: %s, prioridad: %d)" % [
 		winner.get("id", "?"), winner.get("type", "?"), winner.get("priority", 0)
 	])
+	NarrativeStateSystem.apply_effects(winner.get("effects", {}))
 	return winner
 
 static func _matches(entry: Dictionary, summary: Dictionary) -> bool:

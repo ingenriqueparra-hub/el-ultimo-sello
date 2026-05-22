@@ -366,9 +366,10 @@ Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar 
 ### Módulo 14 — Expansión a Día 2
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
 
-### Módulo 15 — Consecuencias narrativas por capas (Fases 1 y 2 ✓ Completadas)
+### Módulo 15 — Consecuencias narrativas por capas (Fases 1, 2 y 3 ✓ Completadas)
 Objetivo: separar consecuencia de rendimiento, consecuencia de caso, acumuladores narrativos entre días y cierres terminales futuros.
 Fases 1-2 implementadas: NarrativeConsequenceSystem.gd + JSON por día con consecuencias de rendimiento y caso. narrative_hooks en solicitantes clave. DecisionSystem acumula activated_flags.
+Fase 3 implementada: NarrativeStateSystem.gd con 4 acumuladores estáticos. apply_effects() llamado al evaluar consecuencia. snapshot/restore para restart correcto. Síntomas narrativos visibles al jugador si se cruzan umbrales.
 
 ---
 
@@ -1156,7 +1157,7 @@ Pendientes:
 ---
 
 ### Módulo 15 — Consecuencias narrativas por capas
-Estado: Fases 1 y 2 Completadas / Fases 3-4 Pendientes
+Estado: Fases 1, 2 y 3 Completadas / Fase 4 Pendiente
 
 Implementado (Fase 1 — consecuencia de rendimiento):
 - `NarrativeConsequenceSystem.gd` — clase estática. Carga `consequences_day_NN.json`, evalúa condiciones (min/max_errors, min/max_credits, min_correct), retorna la consecuencia válida de mayor prioridad. Fallback neutral si falta el archivo o no hay coincidencia.
@@ -1172,17 +1173,32 @@ Implementado (Fase 2 — consecuencia de caso):
 - `consequences_day_01.json` — 10 consecuencias de caso (prioridades 130-200) + 5 de rendimiento.
 - `consequences_day_02.json` — 6 consecuencias de caso (prioridades 145-200) + 6 de rendimiento.
 
+Implementado (Fase 3 — acumuladores entre días):
+- `NarrativeStateSystem.gd` — clase estática con 4 acumuladores: `institutional_trust`, `security_risk`, `civilian_harm`, `supervisor_suspicion`. Métodos: `apply_effects()`, `snapshot()`, `restore_snapshot()`, `get_accumulators()`, `get_narrative_symptom()`, `reset()`.
+- `NarrativeConsequenceSystem.gd` — llama `NarrativeStateSystem.apply_effects()` tras seleccionar consecuencia ganadora.
+- `ControlDesk.gd` — llama `NarrativeStateSystem.snapshot()` en `_ready()` antes de cargar el día.
+- `DayReport.gd` — llama `NarrativeStateSystem.restore_snapshot()` en restart (no en continue). Muestra síntoma narrativo si algún acumulador cruza umbral (sin mostrar valores al jugador).
+- `consequences_day_01.json` y `consequences_day_02.json` — todas las entradas tienen campo `effects` con deltas por acumulador.
+- Panel debug — muestra valores actuales de acumuladores (solo herramienta interna).
+
+Umbrales de síntoma visible al jugador:
+- `security_risk >= 3` → alerta de seguridad intensificada
+- `supervisor_suspicion >= 2` → revisión adicional solicitada
+- `civilian_harm >= 2` → quejas civiles registradas
+- `institutional_trust <= -2` → confianza institucional disminuida
+
 Archivos principales:
-- `game/scripts/systems/NarrativeConsequenceSystem.gd`
+- `game/scripts/systems/NarrativeStateSystem.gd` (nuevo)
+- `game/scripts/systems/NarrativeConsequenceSystem.gd` (actualizado)
 - `game/scripts/systems/DecisionSystem.gd` (actualizado)
-- `game/data/consequences/consequences_day_01.json`
-- `game/data/consequences/consequences_day_02.json`
+- `game/data/consequences/consequences_day_01.json` (actualizado — effects en todas las entradas)
+- `game/data/consequences/consequences_day_02.json` (actualizado — effects en todas las entradas)
 - `game/data/applicants/applicants_day_01.json` (actualizado)
 - `game/data/applicants/applicants_day_02.json` (actualizado)
 - `game/scripts/ui/DayReport.gd` (actualizado)
+- `game/scripts/ui/ControlDesk.gd` (actualizado)
 
 Pendientes:
-- Fase 3: persistir acumuladores narrativos entre días.
 - Fase 4: evaluar cierres terminales por acumulación extrema.
 
 ---

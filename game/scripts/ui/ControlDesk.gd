@@ -67,6 +67,7 @@ func _ready() -> void:
 	_setup_questions_area()
 	_audio = SoundManager.create_player(self)
 	_build_debug_panel()
+	NarrativeStateSystem.snapshot()
 	_load_day_data()
 
 func _load_day_data() -> void:
@@ -647,6 +648,11 @@ func _update_debug_panel(applicant: Dictionary) -> void:
 		lines.append("  Correcta:  " + ("SÍ" if ok else "NO"))
 		if delta < 0:
 			lines.append("  Créditos:  %d" % delta)
+	lines.append("")
+	lines.append("--- ACUMULADORES ---")
+	var acc := NarrativeStateSystem.get_accumulators()
+	for k in acc:
+		lines.append("  %s: %d" % [k, acc[k]])
 
 	_debug_label.text = "\n".join(lines)
 
