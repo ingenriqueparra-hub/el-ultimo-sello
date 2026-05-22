@@ -328,202 +328,34 @@ El agente debe trabajar por módulos. No debe saltar a módulos futuros si el m�
 Objetivo: crear estructura mínima del proyecto, carpetas, escena inicial y configuración base.
 
 ### Módulo 2 — Escena principal del puesto de control
-Estado: Completado
-
-Implementado:
-- Escena `ControlDesk.tscn` con layout completo de 4 zonas.
-- Panel izquierdo: solicitante (nombre, origen, destino, motivo, diálogo).
-- Panel central: área de documentos con 3 pestañas y vista activa.
-- Panel derecho: herramientas (escáner, alertas).
-- Barra inferior: botones APROBAR (verde), RETENER (ámbar), RECHAZAR (rojo).
-- Barra superior: día, título del puesto, créditos.
-- Script `ControlDesk.gd` con tema verde fósforo aplicado por código.
-- `Main.tscn` actualizado con botón COMENZAR que carga ControlDesk.
-- Script `Main.gd` con navegación de escena.
-
-Archivos principales:
-- `game/scenes/main/ControlDesk.tscn`
-- `game/scripts/ui/ControlDesk.gd`
-- `game/scenes/main/Main.tscn`
-- `game/scripts/ui/Main.gd`
-
-Pendientes:
-- Ninguno para Módulo 2.
-
----
+Objetivo: mostrar ventanilla, área de documentos, panel de solicitante y botones de decisión.
 
 ### Módulo 3 — Sistema de carga de datos JSON
-Estado: Completado
-
-Implementado:
-- `day_01.json` — configuración del día, fecha actual 298.12, lista de 10 solicitantes.
-- `applicants_day_01.json` — 10 solicitantes completos con flags, truth y diálogo.
-- `documents_day_01.json` — 17 documentos (transit_pass, bio_cert, ingress_permit) con campos comparables.
-- `rules_day_01.json` — 4 reglas del Día 1 con tipo de validación y penalización.
-- `DataLoader.gd` — clase estática con métodos load_day(), load_applicants(), load_documents(), load_rules().
-- `ControlDesk.gd` — carga datos en _ready() e imprime resumen en consola.
-
-Archivos principales:
-- `game/data/days/day_01.json`
-- `game/data/applicants/applicants_day_01.json`
-- `game/data/documents/documents_day_01.json`
-- `game/data/rules/rules_day_01.json`
-- `game/scripts/data/DataLoader.gd`
-
-Pendientes:
-- Ninguno para Módulo 3.
-
----
+Objetivo: cargar solicitantes, documentos y reglas desde archivos JSON.
 
 ### Módulo 4 — Sistema de solicitantes
-Estado: Completado
-
-Implementado:
-- `ApplicantQueue.gd` — cola con señales `applicant_changed` y `day_ended`, avance por índice.
-- `ControlDesk.gd` — muestra nombre, origen, destino, motivo y diálogo del solicitante actual.
-- Contador "SOLICITANTE X / 10" actualizado en cada cambio.
-- Botones de decisión deshabilitados al inicio y al fin del turno.
-- Escáner básico activo: detecta flags `biological_anomaly` y `suspicious_dialogue`.
-- Al terminar los 10 solicitantes muestra "TURNO CERRADO" y bloquea decisiones.
-- Pestañas de documentos (Tab1, Tab2, Tab3) conectadas a `_show_doc_by_type()`.
-
-Archivos principales:
-- `game/scripts/systems/ApplicantQueue.gd`
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Bugs corregidos:
-- `get_index()` renombrado a `get_current_index()` — conflicta con built-in `Node.get_index()` de Godot 4, causaba "Could not resolve external class member".
-- Variables `:=` desde `Dictionary.get()` explicitadas como `: String =` — Godot trata como error el warning de tipo Variant inferido.
-- `var is_active := (tab == active_btn)` → `: bool =` — Godot no puede inferir bool desde comparación en este contexto.
-- `var k := key.replace(...)` → `var k: String = str(key).replace(...)` — `key` al iterar un Dictionary es Variant, hay que convertir con `str()` antes de llamar métodos de String.
-
-Pendientes:
-- Ninguno para Módulo 4.
-
----
-
-### Nota técnica — Conflictos con métodos built-in de Node (Godot 4)
-
-**IMPORTANTE:** No usar estos nombres como métodos propios en clases que extiendan `Node` o `Control`:
-- `get_index()` → usar nombre descriptivo como `get_current_index()`.
-- `get_name()`, `get_parent()`, `get_children()`, `get_class()` → ídem.
-
-Verificar siempre que el nombre del método no exista en la API de `Node` antes de usarlo.
-
----
+Objetivo: mostrar el solicitante actual, avanzar en cola y detectar fin del día.
 
 ### Módulo 5 — Sistema de documentos
-Estado: Completado
-
-Implementado:
-- Pestañas conectadas a transit_pass, bio_cert, ingress_permit.
-- Pestañas se habilitan/deshabilitan según documentos del solicitante.
-- Primer documento disponible se muestra automáticamente.
-- `_render_document()` formatea campos del JSON como "CAMPO: valor".
-- `_set_active_tab()` resalta la pestaña activa visualmente.
-- Escáner detecta 6 tipos de flags con mensaje descriptivo.
-
-Archivos principales:
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Pendientes:
-- Ninguno para Módulo 5.
-
----
+Objetivo: renderizar documentos con campos comparables y visualmente claros.
 
 ### Módulo 6 — Sistema de decisiones
-Estado: Completado
-
-Implementado:
-- `DecisionSystem.gd` — registra decisiones, evalúa corrección vs `truth.correct_decision`, calcula delta de créditos.
-- Penalizaciones: aprobación incorrecta -10/-15 (según risk_level), rechazo incorrecto -10, retención incorrecta -5.
-- Signal `decision_recorded` actualiza créditos en barra de estado y muestra feedback en área de documentos.
-- `_make_decision()` en ControlDesk centraliza el flujo: deshabilita botones → registra → avanza cola.
-- `get_summary()` disponible para el Módulo 8 (reporte final).
-
-Archivos principales:
-- `game/scripts/systems/DecisionSystem.gd`
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Pendientes:
-- Ninguno para Módulo 6.
-
----
+Objetivo: permitir aprobar, rechazar y retener; registrar cada decisión.
 
 ### Módulo 7 — Motor de reglas e inconsistencias
-Estado: Completado
-
-Implementado:
-- `RuleEngine.gd` — clase estática, 4 tipos de validación: document_required, field_not_expired, name_consistency, field_not_empty.
-- Violaciones mostradas automáticamente al cargar cada solicitante.
-- Escáner agrega sus flags al panel sin borrar las violaciones de reglas.
-- JSON corregido: bio_cert_008, truth.violations de applicants 4 y 6.
-
-Casos que disparan reglas: applicant_002 (vencido), applicant_003 (sello PENDIENTE).
-Casos por escáner: applicants 004, 005, 007, 008, 010.
-Casos de juicio: applicants 006, 010.
-
-Archivos principales:
-- `game/scripts/systems/RuleEngine.gd`
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Pendientes:
-- Ninguno para Módulo 7.
-
----
+Objetivo: evaluar reglas simples, detectar errores y determinar si la decisión fue correcta o riesgosa.
 
 ### Módulo 8 — Reporte final del día
-Estado: Completado
-
-Implementado:
-- `DayReport.tscn` + `DayReport.gd` — escena de reporte con resumen, lista de decisiones y consecuencia.
-- `DayReport.pending_summary` (static var) recibe el resumen desde ControlDesk vía `decision_system.get_summary()`.
-- Resumen muestra: procesados, decisiones correctas, errores, créditos finales.
-- Lista de decisiones: [OK] verde / [!] rojo por cada caso, con nombre, decisión y delta de créditos.
-- Consecuencia narrativa en 4 niveles según errores (0, 1-2, 3-5, 6+), con tono institucional.
-- Botón "REINICIAR DIA" vuelve a ControlDesk y limpia el summary.
-- ControlDesk: al fin del día, espera 1.5s y navega automáticamente al reporte.
-
-Archivos principales:
-- `game/scenes/main/DayReport.tscn`
-- `game/scripts/ui/DayReport.gd`
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Pendientes:
-- Ninguno para Módulo 8.
-
----
+Objetivo: mostrar aciertos, errores, multas, reputación y consecuencia narrativa.
 
 ### Módulo 9 — Escáner básico
-Estado: Completado
+Objetivo: agregar una herramienta simple de detección de anomalías.
 
-Implementado:
-- Uso único por solicitante. Reseteo automático al llegar el siguiente.
-- Delay 0.4s con "ESCANEANDO..." antes de mostrar resultado.
-- Informe formal en área de documentos con anomalías, riesgo y recomendación institucional.
-- Alertas preservan violaciones de reglas y agregan resultados del escáner separados.
-- Botón cambia a "[ ESCANER USADO ]" y se deshabilita tras el uso.
-
-Archivos principales:
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
-
-Pendientes:
-- Ninguno para Módulo 9.
-
----
-
-### Módulo 10 — Diálogos e interrogatorio simple ✓ Completado
+### Módulo 10 — Diálogos e interrogatorio simple
 Objetivo: agregar frase inicial y 2-3 preguntas funcionales.
-Implementado: 3 botones de pregunta dinámicos (motivo/origen/carga) en el panel del solicitante. Respuestas visibles en dialogue_text. Alertas de contradicción anexadas a alerts_list cuando la respuesta contradice los documentos. Datos en applicants_day_01.json (campos questions y question_alerts).
 
-### Módulo 11 — Feedback visual y sonoro ✓ Completado
+### Módulo 11 — Feedback visual y sonoro
 Objetivo: agregar sonidos de sello, alerta, confirmación y feedback visual básico.
-Implementado: SoundManager.gd genera tonos PCM sin archivos externos (AudioStreamWAV). Sonidos: aprobar (440Hz punchy), rechazar (sweep descendente), retener (300Hz suave), alerta (900Hz corto), escáner (sweep ascendente). Flash de modulate en barra de decisiones (verde/rojo/ámbar) y flash de créditos al perder créditos.
-
-### Herramienta interna — Panel Debug (DEV-01) ✓ Completado
-Tipo: Dev/QA. No es un módulo jugable.
-Implementado: Panel superpuesto activado con tecla `Y`. Muestra verdad oculta del caso (correct_decision, risk_level, notes), flags, reglas fallidas, documentos presentes, alertas de interrogatorio y resultado de la última decisión. Oculto por defecto. mouse_filter=IGNORE para no bloquear interacción. Construido programáticamente en ControlDesk.gd sin escena separada.
-Archivos modificados: game/scripts/ui/ControlDesk.gd
 
 ### Módulo 12 — Pulido del Día 1
 Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.
@@ -531,9 +363,11 @@ Objetivo: mejorar claridad, ritmo, textos y errores del primer día jugable.
 ### Módulo 13 — Playtest interno
 Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar otro día.
 
-### Módulo 14 — Expansión a Día 2 ✓ Completado
+### Módulo 14 — Expansión a Día 2
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
-Implementado: day_to_load (static var) controla qué día carga ControlDesk. DayReport muestra header dinámico con número de día y botón "CONTINUAR — DIA N" si existe el archivo del siguiente día. RuleEngine con validación field_match (cruce de campo entre dos documentos). Día 2 completo: 7 reglas, 10 solicitantes (011-020), 19 documentos, fecha 299.01. Nueva mecánica central: Certificado Biométrico obligatorio + cruce de código de identidad entre Pase y Certificado.
+
+### Módulo 15 — Consecuencias narrativas por capas
+Objetivo: separar consecuencia de rendimiento, consecuencia de caso, acumuladores narrativos entre días y cierres terminales futuros.
 
 ---
 
@@ -1005,6 +839,234 @@ Pendientes:
 
 ---
 
+### Módulo 2 — Escena principal del puesto de control
+Estado: Completado
+
+Implementado:
+- `ControlDesk.tscn` con layout de puesto: solicitante, documentos, herramientas, barra de estado y decisiones.
+- `Main.tscn` con botón de inicio hacia el puesto de control.
+- Tema visual verde fósforo aplicado por código.
+
+Archivos principales:
+- `game/scenes/main/ControlDesk.tscn`
+- `game/scripts/ui/ControlDesk.gd`
+- `game/scenes/main/Main.tscn`
+- `game/scripts/ui/Main.gd`
+
+Pendientes:
+- Ninguno para Módulo 2.
+
+---
+
+### Módulo 3 — Sistema de carga de datos JSON
+Estado: Completado
+
+Implementado:
+- Datos del Día 1 separados en JSON: día, solicitantes, documentos y reglas.
+- `DataLoader.gd` con carga de días, solicitantes, documentos y reglas.
+- `ControlDesk.gd` carga datos al iniciar.
+
+Archivos principales:
+- `game/data/days/day_01.json`
+- `game/data/applicants/applicants_day_01.json`
+- `game/data/documents/documents_day_01.json`
+- `game/data/rules/rules_day_01.json`
+- `game/scripts/data/DataLoader.gd`
+
+Pendientes:
+- Ninguno para Módulo 3.
+
+---
+
+### Módulo 4 — Sistema de solicitantes
+Estado: Completado
+
+Implementado:
+- `ApplicantQueue.gd` con señales `applicant_changed` y `day_ended`.
+- Visualización del solicitante actual y contador de avance.
+- Fin de turno al procesar la cuota diaria.
+- Corrección técnica: evitar nombres de métodos que colisionan con `Node` en Godot 4, como `get_index()`.
+
+Archivos principales:
+- `game/scripts/systems/ApplicantQueue.gd`
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Ninguno para Módulo 4.
+
+---
+
+### Módulo 5 — Sistema de documentos
+Estado: Completado
+
+Implementado:
+- Pestañas de documentos habilitadas según documentos del solicitante.
+- Render de campos desde JSON.
+- Documento disponible mostrado automáticamente.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Ninguno para Módulo 5.
+
+---
+
+### Módulo 6 — Sistema de decisiones
+Estado: Completado
+
+Implementado:
+- `DecisionSystem.gd` registra decisiones y compara con `truth.correct_decision`.
+- Penalizaciones por decisión incorrecta según tipo de decisión y riesgo.
+- Resumen disponible para el reporte final.
+
+Archivos principales:
+- `game/scripts/systems/DecisionSystem.gd`
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Ninguno para Módulo 6.
+
+---
+
+### Módulo 7 — Motor de reglas e inconsistencias
+Estado: Completado
+
+Implementado:
+- `RuleEngine.gd` evalúa reglas documentales.
+- Validaciones base del Día 1 y validación `field_match` para Día 2.
+- Violaciones integradas con alertas y flujo de revisión.
+
+Archivos principales:
+- `game/scripts/systems/RuleEngine.gd`
+- `game/scripts/ui/ControlDesk.gd`
+- `game/data/rules/rules_day_01.json`
+- `game/data/rules/rules_day_02.json`
+
+Pendientes:
+- Ninguno para Módulo 7.
+
+---
+
+### Módulo 8 — Reporte final del día
+Estado: Completado
+
+Implementado:
+- `DayReport.tscn` y `DayReport.gd` muestran resumen del turno.
+- Lista de decisiones con resultado y delta de créditos.
+- Consecuencia narrativa básica según errores.
+- Reinicio de día y continuación al siguiente día si existe.
+
+Archivos principales:
+- `game/scenes/main/DayReport.tscn`
+- `game/scripts/ui/DayReport.gd`
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Migrar consecuencia narrativa hardcodeada a datos JSON en Módulo 15.
+
+---
+
+### Módulo 9 — Escáner básico
+Estado: Completado
+
+Implementado:
+- Escáner de uso único por solicitante.
+- Delay breve de escaneo y feedback formal.
+- Alertas del escáner separadas de violaciones de reglas.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Ninguno para Módulo 9.
+
+---
+
+### Módulo 10 — Diálogos e interrogatorio simple
+Estado: Completado
+
+Implementado:
+- Preguntas dinámicas por solicitante.
+- Respuestas visibles en panel de diálogo.
+- Alertas por contradicción entre respuesta y documentos.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd`
+- `game/data/applicants/applicants_day_01.json`
+- `game/data/applicants/applicants_day_02.json`
+
+Pendientes:
+- Ninguno para Módulo 10.
+
+---
+
+### Módulo 11 — Feedback visual y sonoro
+Estado: Completado
+
+Implementado:
+- `SoundManager.gd` genera sonidos PCM sin archivos externos.
+- Sonidos para aprobar, rechazar, retener, alerta y escáner.
+- Flash visual en barra de decisiones y créditos.
+
+Archivos principales:
+- `game/scripts/systems/SoundManager.gd`
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- Ninguno para Módulo 11.
+
+---
+
+### Herramienta interna — Panel Debug (DEV-01)
+Estado: Completado
+
+Implementado:
+- Panel superpuesto activado con tecla `Y`.
+- Muestra verdad oculta del caso, reglas fallidas, documentos, alertas y última decisión.
+- Oculto por defecto y sin bloquear interacción.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd`
+
+Pendientes:
+- No incluir en builds públicos o builds de playtest normal.
+
+---
+
+### Módulo 12 — Pulido del Día 1
+Estado: Pendiente / En validación
+
+Implementado:
+- Flujo base del Día 1 ya puede jugarse con reglas, decisiones, escáner, interrogatorio y reporte.
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd`
+- `game/scripts/ui/DayReport.gd`
+- `game/data/days/day_01.json`
+- `game/data/applicants/applicants_day_01.json`
+
+Pendientes:
+- Validar claridad, ritmo, textos y errores con playtest no asistido.
+- Ajustar solo si el playtest detecta confusión.
+
+---
+
+### Módulo 13 — Playtest interno
+Estado: Pendiente
+
+Implementado:
+- Métricas de playtest definidas en `MVP_BACKLOG.md`.
+
+Archivos principales:
+- `MVP_BACKLOG.md`
+
+Pendientes:
+- Realizar playtest interno.
+- Registrar hallazgos y priorizar ajustes.
+
+---
+
 ### Módulo 14 — Expansión a Día 2
 Estado: Completado
 
@@ -1028,6 +1090,25 @@ Archivos principales:
 
 Pendientes:
 - Ninguno para Módulo 14.
+
+---
+
+### Módulo 15 — Consecuencias narrativas por capas
+Estado: Diseñado / Pendiente de implementación
+
+Implementado:
+- Definición documental del sistema en `GAME_DESIGN.md`, `TECHNICAL_SPEC.md` y `MVP_BACKLOG.md`.
+
+Archivos principales:
+- `GAME_DESIGN.md`
+- `TECHNICAL_SPEC.md`
+- `MVP_BACKLOG.md`
+
+Pendientes:
+- Implementar consecuencia de rendimiento desde JSON.
+- Agregar consecuencias de caso con `narrative_hooks`.
+- Persistir acumuladores narrativos entre días.
+- Evaluar cierres terminales futuros solo por acumulación extrema.
 
 ---
 

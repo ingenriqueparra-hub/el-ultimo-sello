@@ -68,6 +68,8 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 | P1-04 | Agregar preguntas básicas | El jugador puede hacer 2-3 preguntas |
 | P1-05 | Agregar penalizaciones | Errores afectan salario/reputación |
 | P1-06 | Agregar consecuencia narrativa | El final cambia según una decisión clave |
+| P1-07 | Consecuencia de rendimiento desde JSON | El reporte elige una consecuencia diaria desde datos, no hardcodeada |
+| P1-08 | Consecuencia de caso | Un solicitante marcado puede activar una consecuencia narrativa principal |
 
 ---
 
@@ -90,6 +92,18 @@ Estas tareas son de soporte al desarrollo. No son features del juego final ni de
 | ID | Tarea | Criterio de aceptación |
 |---|---|---|
 | DEV-01 | Panel debug interno (tecla `Y`) | Muestra verdad oculta del caso activo; oculto por defecto; no interfiere con el flujo del jugador |
+
+---
+
+### Futuro controlado — Consecuencias acumuladas
+
+Estas tareas preparan campaña y cierres terminales. No deben implementarse antes de validar que los reportes diarios y consecuencias de caso funcionan.
+
+| ID | Tarea | Criterio de aceptación |
+|---|---|---|
+| FUT-01 | Acumuladores narrativos entre días | `institutional_trust`, `security_risk`, `civilian_harm` y `supervisor_suspicion` se actualizan por consecuencias, sin mostrarse como barras al jugador |
+| FUT-02 | Síntomas narrativos de acumuladores | El jugador percibe auditorías, notas o restricciones sin ver números internos |
+| FUT-03 | Finales anticipados | Cierres como despido, arresto, ejecución protocolaria, cuarentena o desastre solo se activan por acumulación extrema |
 
 ---
 

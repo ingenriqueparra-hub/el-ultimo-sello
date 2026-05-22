@@ -370,6 +370,7 @@ El desarrollo debe avanzar en módulos cerrados.
 | 12 | Pulido Día 1 | Mejorar claridad, ritmo y usabilidad |
 | 13 | Playtest interno | Validar comprensión y tensión |
 | 14 | Expansión Día 2 | Agregar complejidad solo después de validar el Día 1 |
+| 15 | Consecuencias narrativas por capas | Conectar rendimiento, casos especiales y memoria narrativa sin finales complejos todavía |
 
 No se debe avanzar a módulos futuros si el módulo actual no tiene flujo funcional mínimo.
 

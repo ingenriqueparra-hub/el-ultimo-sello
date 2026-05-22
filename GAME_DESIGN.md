@@ -277,7 +277,110 @@ Si en el futuro se añade un sistema de "modo estudio" o "modo entrenamiento" pa
 
 ---
 
-## 11. Condición de victoria
+## 11. Consecuencias narrativas por capas
+
+El sistema de consecuencias debe convertir las decisiones del jugador en memoria narrativa sin resolver toda la campana de una vez.
+
+Principio:
+
+> El jugador no debe sentir que perdio por un contador oculto. Debe sentir que el expediente final era la consecuencia inevitable de sus actos.
+
+### 11.1. Consecuencia de rendimiento
+
+Evalua el resultado general del dia.
+
+Variables base:
+
+- errores;
+- decisiones correctas;
+- creditos finales;
+- decisiones de alto riesgo;
+- uso excesivo de retencion, aprobacion o rechazo si el dia lo requiere.
+
+Uso:
+
+- advertencia administrativa;
+- expediente favorable;
+- auditoria;
+- penalizacion futura;
+- sospecha del supervisor.
+
+Esta consecuencia se muestra en el reporte final y no debe revelar calculos internos como si fueran estadisticas RPG.
+
+### 11.2. Consecuencia de caso
+
+Evalua una decision concreta de un solicitante marcado como narrativamente importante.
+
+Ejemplos:
+
+- aprobar mal a un caso de alto riesgo produce un incidente;
+- rechazar injustamente a una persona vulnerable deja una secuela humana;
+- retener correctamente a un sospechoso evita un problema;
+- obedecer el protocolo puede ser correcto y aun asi moralmente incomodo.
+
+Regla:
+
+- no todos los casos generan consecuencia narrativa;
+- si varios casos aplican, el reporte debe elegir una consecuencia principal por prioridad;
+- una consecuencia de caso puede superar a la consecuencia de rendimiento si es mas importante.
+
+### 11.3. Acumuladores narrativos entre dias
+
+Los acumuladores registran tendencias de largo plazo. No deben mostrarse como barras numericas al jugador.
+
+Acumuladores iniciales:
+
+- `institutional_trust`: confianza del Ministerio en el inspector;
+- `security_risk`: riesgo acumulado por amenazas dejadas pasar;
+- `civilian_harm`: dano humano causado por decisiones injustas o brutales;
+- `supervisor_suspicion`: atencion negativa del Supervisor Halvek.
+
+El jugador debe percibirlos mediante sintomas narrativos:
+
+- notas del supervisor;
+- cambios en tono del reporte;
+- auditorias;
+- rumores del puesto;
+- restricciones del dia siguiente.
+
+### 11.4. Finales anticipados o cierres terminales futuros
+
+Los finales anticipados son cierres de campana por acumulacion extrema. No pertenecen al MVP inicial ni deben activarse por un error comun aislado.
+
+Finales futuros posibles:
+
+- despido administrativo;
+- arresto;
+- ejecucion protocolaria;
+- cuarentena total;
+- sabotaje exitoso;
+- colapso del puesto;
+- desastre en ciudad-colmena.
+
+Condiciones de diseno:
+
+- deben requerir varios dias o una cadena clara de decisiones graves;
+- deben estar anticipados por sintomas narrativos;
+- deben explicar la causa en lenguaje institucional;
+- no deben crear un arbol de finales complejo en esta fase.
+
+### 11.5. Fases de implementacion
+
+Fase 1:
+- mover la consecuencia de rendimiento del reporte a datos JSON.
+
+Fase 2:
+- permitir `narrative_hooks` opcionales en solicitantes importantes.
+
+Fase 3:
+- guardar acumuladores narrativos simples entre dias.
+
+Fase 4:
+- activar cierres terminales solo con acumulacion extrema.
+
+---
+
+## 12. Condicion de victoria
 
 No debe haber una sola victoria.
 

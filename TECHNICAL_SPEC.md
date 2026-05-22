@@ -121,6 +121,43 @@ project/
 }
 ```
 
+### Narrative Consequence
+
+```json
+{
+  "id": "consequence_day_01_clean_shift",
+  "day": 1,
+  "priority": 10,
+  "type": "performance",
+  "title": "Turno sin incidentes",
+  "body": "El Ministerio registra eficiencia maxima en el puesto. El expediente queda marcado como estable.",
+  "conditions": {
+    "max_errors": 0,
+    "min_credits": 50
+  },
+  "effects": {
+    "institutional_trust": 1,
+    "supervisor_suspicion": -1
+  },
+  "follow_up_flag": "flag_clean_shift"
+}
+```
+
+Las consecuencias deben vivir en JSON por dia:
+
+- `data/consequences/consequences_day_01.json`
+- `data/consequences/consequences_day_02.json`
+
+Los solicitantes importantes pueden declarar ganchos opcionales sin obligar a todos los casos a tener consecuencia:
+
+```json
+"narrative_hooks": {
+  "on_wrong_approve": "flag_high_risk_approved",
+  "on_wrong_reject": "flag_civilian_harm",
+  "on_correct_hold": "flag_incident_prevented"
+}
+```
+
 ---
 
 ## 4. Sistemas principales
@@ -198,6 +235,51 @@ Propiedades técnicas:
 - `z_index = 100` para superponerse al resto de la UI.
 - Se actualiza automáticamente al cambiar de solicitante y tras cada decisión.
 - Activado/desactivado con `KEY_Y` en `_input()`.
+
+---
+
+### 4.8. Narrative Consequence System
+
+Responsable de seleccionar la consecuencia narrativa principal del dia.
+
+Entradas:
+
+- resumen de `DecisionSystem`;
+- decisiones registradas;
+- datos del dia;
+- consecuencias disponibles en JSON;
+- `narrative_hooks` opcionales de solicitantes;
+- estado acumulado entre dias cuando exista.
+
+Capas:
+
+1. Consecuencia de rendimiento: evalua errores, aciertos, creditos y decisiones de alto riesgo.
+2. Consecuencia de caso: evalua flags narrativos activados por decisiones sobre solicitantes marcados.
+3. Acumuladores entre dias: actualiza memoria simple de la campana.
+4. Cierres terminales futuros: evalua condiciones extremas al final de un dia.
+
+Acumuladores iniciales:
+
+- `institutional_trust`
+- `security_risk`
+- `civilian_harm`
+- `supervisor_suspicion`
+
+Reglas tecnicas:
+
+- elegir una consecuencia principal por reporte;
+- priorizar la consecuencia valida de mayor `priority`;
+- usar una consecuencia neutral si faltan datos o no hay coincidencia;
+- no mostrar valores numericos internos al jugador normal;
+- permitir ver flags y acumuladores solo en herramientas internas de debug;
+- mantener los textos, condiciones y efectos fuera de `DayReport.gd`.
+
+Fases de implementacion:
+
+1. Mover consecuencia de rendimiento a JSON.
+2. Agregar ganchos narrativos por caso.
+3. Persistir acumuladores simples entre dias.
+4. Evaluar finales anticipados o cierres terminales.
 
 ---
 
