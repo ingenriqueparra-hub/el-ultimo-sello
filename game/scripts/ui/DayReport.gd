@@ -58,9 +58,13 @@ func _add_decision_row(decision: Dictionary) -> void:
 
 	var indicator := "[OK]" if was_correct else "[!] "
 	var delta_str := ("  %d" % delta) if delta < 0 else ""
+	var correct_str := ""
+	if not was_correct:
+		var correct_dec: String = decision.get("correct_decision", "?").to_upper()
+		correct_str = "  →  %s" % correct_dec
 
 	var row := Label.new()
-	row.text = "%s  %-22s %s%s" % [indicator, name, dec, delta_str]
+	row.text = "%s  %-22s %s%s%s" % [indicator, name, dec, correct_str, delta_str]
 	row.add_theme_color_override("font_color", COLOR_OK if was_correct else COLOR_ERROR)
 	row.add_theme_font_size_override("font_size", 13)
 	decisions_list.add_child(row)
