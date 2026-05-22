@@ -256,6 +256,12 @@ func _update_debug_panel() -> void:
 			lines.append("  • %s" % str(f))
 	lines.append("")
 
+	lines.append("--- ACUMULADORES ---")
+	var acc := NarrativeStateSystem.get_accumulators()
+	for k in acc:
+		lines.append("  %s: %d" % [k, acc[k]])
+	lines.append("")
+
 	lines.append("--- CONSECUENCIA SELECCIONADA ---")
 	var c := _selected_consequence
 	if c.is_empty():
