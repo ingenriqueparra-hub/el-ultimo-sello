@@ -228,6 +228,7 @@ func _make_decision(decision: String) -> void:
 		return
 	_set_decision_buttons_enabled(false)
 	decision_system.record(decision, applicant)
+	await get_tree().create_timer(0.6).timeout
 	queue.advance()
 
 func _on_decision_recorded(result: Dictionary) -> void:
@@ -235,10 +236,17 @@ func _on_decision_recorded(result: Dictionary) -> void:
 	_update_status_bar()
 	var label := "APROBADO" if result["decision"] == "approve" \
 		else ("RETENIDO" if result["decision"] == "hold" else "RECHAZADO")
-	var feedback := "[%s]" % label
+	var lines: Array = [
+		"[ %s ]" % label,
+		"",
+		"Correctas : %d" % decision_system.get_correct(),
+		"Errores   : %d" % decision_system.get_errors(),
+		"Creditos  : %d" % credits,
+	]
 	if result["credit_delta"] < 0:
-		feedback += "  CREDITOS: %d" % result["credit_delta"]
-	doc_content.text = feedback
+		lines.append("")
+		lines.append("Penalizacion: %d creditos" % result["credit_delta"])
+	doc_content.text = "\n".join(lines)
 	_last_decision_result = result
 	if _debug_panel != null and _debug_panel.visible:
 		_update_debug_panel(_current_applicant)
