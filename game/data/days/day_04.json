@@ -1,0 +1,13 @@
+{
+  "day": 4,
+  "title": "Umbral 7 — Cuarto Turno de Control",
+  "intro": "CIRCULAR LMR-4 DEL MINISTERIO DE ADMISION PLANETARIA: A partir de este turno, todo solicitante cuyo motivo de ingreso incluya transporte, entrega, distribucion o suministro de carga o mercancias debe presentar Permiso de Carga vigente emitido por la Liga Mercantil de Rutas o el Ministerio. El destino declarado en el Permiso de Carga debe coincidir exactamente con el destino del Pase de Transito. Los Permisos de Carga vencidos invalidan el ingreso independientemente de la validez de los demas documentos. La Liga Mercantil no cubre errores administrativos de sus contratistas.",
+  "current_date": "301.00",
+  "rules_active": ["rule_001", "rule_002", "rule_003", "rule_004", "rule_005", "rule_006", "rule_007", "rule_009", "rule_010", "rule_011"],
+  "applicant_ids": [
+    "applicant_031", "applicant_032", "applicant_033", "applicant_034", "applicant_035",
+    "applicant_036", "applicant_037", "applicant_038", "applicant_039", "applicant_040"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

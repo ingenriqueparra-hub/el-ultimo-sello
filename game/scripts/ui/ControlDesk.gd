@@ -600,7 +600,7 @@ func _build_debug_panel() -> void:
 	_debug_panel = PanelContainer.new()
 	_debug_panel.visible = false
 	_debug_panel.z_index = 100
-	_debug_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_debug_panel.mouse_filter = Control.MOUSE_FILTER_PASS
 	# Posición: cubre el lado izquierdo (sobre el panel de solicitante)
 	_debug_panel.set_anchor_and_offset(SIDE_LEFT,   0.0,  4)
 	_debug_panel.set_anchor_and_offset(SIDE_RIGHT,  0.0,  394)
@@ -615,7 +615,6 @@ func _build_debug_panel() -> void:
 	_debug_panel.add_theme_stylebox_override("panel", style)
 
 	var vbox := VBoxContainer.new()
-	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var title := Label.new()
 	title.text = "[ DEBUG — SOLO DESARROLLO ]  Y: ocultar"
@@ -623,6 +622,39 @@ func _build_debug_panel() -> void:
 	title.add_theme_color_override("font_color", Color(1.0, 0.75, 0.15, 1))
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	# --- Navegacion rapida por dia ---
+	var nav_label := Label.new()
+	nav_label.text = "IR A DIA:"
+	nav_label.add_theme_font_size_override("font_size", 10)
+	nav_label.add_theme_color_override("font_color", Color(1.0, 0.75, 0.15, 1))
+	nav_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var nav_hbox := HBoxContainer.new()
+	nav_hbox.add_theme_constant_override("separation", 4)
+	for d in range(1, 10):
+		var day_path := "res://data/days/day_%02d.json" % d
+		if not FileAccess.file_exists(day_path):
+			break
+		var day_btn := Button.new()
+		day_btn.text = "DIA %d" % d
+		day_btn.add_theme_font_size_override("font_size", 11)
+		var s_nav := StyleBoxFlat.new()
+		s_nav.bg_color = Color(0.10, 0.06, 0.22, 1)
+		s_nav.border_color = Color(0.55, 0.35, 0.90, 1)
+		s_nav.set_border_width_all(1)
+		s_nav.set_content_margin_all(4)
+		var s_nav_h := StyleBoxFlat.new()
+		s_nav_h.bg_color = Color(0.18, 0.10, 0.38, 1)
+		s_nav_h.border_color = Color(0.75, 0.55, 1.0, 1)
+		s_nav_h.set_border_width_all(1)
+		s_nav_h.set_content_margin_all(4)
+		day_btn.add_theme_stylebox_override("normal", s_nav)
+		day_btn.add_theme_stylebox_override("hover",  s_nav_h)
+		day_btn.add_theme_color_override("font_color", Color(0.85, 0.70, 1.0, 1))
+		day_btn.pressed.connect(_jump_to_day.bind(d))
+		nav_hbox.add_child(day_btn)
+
+	var sep_nav := HSeparator.new()
 	var sep := HSeparator.new()
 
 	var scroll := ScrollContainer.new()
@@ -640,6 +672,9 @@ func _build_debug_panel() -> void:
 
 	scroll.add_child(_debug_label)
 	vbox.add_child(title)
+	vbox.add_child(sep_nav)
+	vbox.add_child(nav_label)
+	vbox.add_child(nav_hbox)
 	vbox.add_child(sep)
 	vbox.add_child(scroll)
 	_debug_panel.add_child(vbox)
@@ -738,6 +773,11 @@ func _style_tools_tab_active(btn: Button, active: bool) -> void:
 	btn.add_theme_stylebox_override("normal", s)
 	btn.add_theme_stylebox_override("hover",  s)
 	btn.add_theme_color_override("font_color", COLOR_TEXT if active else COLOR_TEXT_DIM)
+
+func _jump_to_day(day: int) -> void:
+	NarrativeStateSystem.reset()
+	ControlDesk.day_to_load = day
+	get_tree().change_scene_to_file("res://scenes/main/ControlDesk.tscn")
 
 func _build_regulations_section() -> void:
 	for rule in rules:

@@ -1,0 +1,283 @@
+[
+  {
+    "id": "applicant_031",
+    "name": "Nela Koss",
+    "type": "citizen",
+    "origin": "Sector Residencial Nivel 2",
+    "destination": "Oficina de Licencias Operarias, Nivel 1",
+    "purpose": "Tramite de renovacion de licencia operaria",
+    "dialogue_intro": "Buenos turnos. Vengo a renovar mi licencia operaria. El Pase y el Certificado estan al dia. Sin complicaciones.",
+    "documents": ["transit_pass_031", "bio_cert_031"],
+    "flags": [],
+    "questions": {
+      "motivo": "Renovacion de licencia operaria en el Nivel 1. Es un tramite periodico. Nada urgente.",
+      "origen": "Sector Residencial Nivel 2. Alli vivo desde hace cinco ciclos. No me he movido de alli.",
+      "carga": "Solo mis documentos personales. Nada mas."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso limpio. Sin motivo de carga: rule_009 no aplica. Introduce al jugador a las reglas heredadas mas la nueva logica del Permiso de Carga, que aqui no entra en juego."
+    }
+  },
+  {
+    "id": "applicant_032",
+    "name": "Tarev Mol",
+    "type": "merchant",
+    "origin": "Puerto Comercial Sur",
+    "destination": "Deposito Central, Nivel 3",
+    "purpose": "Entrega de filtros de aire certificados",
+    "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla. Ruta habitual.",
+    "documents": ["transit_pass_032", "bio_cert_032", "cargo_permit_032"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de filtros de aire al Deposito Central. Contrato de suministro activo con la Liga.",
+      "origen": "Puerto Comercial Sur. Base de operaciones desde hace cuatro ciclos.",
+      "carga": "Filtros de aire de grado industrial. Todo sellado, registrado en el Permiso de Carga."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso tutorial de la nueva regla. Todo en orden: Permiso de Carga vigente, destino coincidente entre Pase y Permiso, codigos y nombres consistentes. El jugador aprende como debe verse un caso de carga correcto."
+    }
+  },
+  {
+    "id": "applicant_033",
+    "name": "Brek Yall",
+    "type": "worker",
+    "origin": "Taller de Reparaciones, Sector Este",
+    "destination": "Planta de Ensamble, Nivel 4",
+    "purpose": "Turno de mantenimiento de equipos",
+    "dialogue_intro": "Operario de mantenimiento. El Pase vencio hace unos dias pero el turno es urgente. El contrato me necesita alla.",
+    "documents": ["transit_pass_033", "bio_cert_033"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Turno de mantenimiento en la planta del Nivel 4. Me llaman dos veces por ciclo.",
+      "origen": "Taller de Reparaciones, Sector Este. Siempre el mismo recorrido.",
+      "carga": "Solo mis herramientas de trabajo. Nada mas."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase de Transito vencido (300.05 < 301.00). El Certificado Biometrico es valido. Sin motivo de carga: rule_009 no aplica. Regla heredada del Dia 1."
+    }
+  },
+  {
+    "id": "applicant_034",
+    "name": "Oss Varel",
+    "type": "merchant",
+    "origin": "Almacen Flotante Sector Norte",
+    "destination": "Deposito Norte, Nivel 5",
+    "purpose": "Entrega de suministros sellados",
+    "dialogue_intro": "Comerciante habitual. El Pase y el Certificado al dia. La Liga gestiona los permisos de carga directamente. Eso no es asunto mio.",
+    "documents": ["transit_pass_034", "bio_cert_034"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de suministros sellados al Deposito Norte. Trabajo con la Liga desde hace tres ciclos.",
+      "origen": "Almacen Flotante Sector Norte. Es mi base de operaciones.",
+      "carga": "Suministros sellados de uso industrial. La Liga avala el cargamento. Nunca me habian pedido un permiso adicional."
+    },
+    "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazado por ausencia de Permiso de Carga obligatorio. Motivo de ingreso declaraba entrega de suministros. Circular LMR-4 aplicada.",
+      "wrong_note": "Comerciante admitido sin Permiso de Carga. Motivo declarado requeria presentacion de Permiso de Carga vigente."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_009"],
+      "notes": "Motivo: 'Entrega de suministros sellados al deposito'. Contiene 'entrega' y 'suministros' — rule_009 requiere Permiso de Carga. No se presenta. El jugador aprende la nueva regla en su primera aplicacion real."
+    }
+  },
+  {
+    "id": "applicant_035",
+    "name": "Davan Murl",
+    "type": "merchant",
+    "origin": "Sector Comercial Este",
+    "destination": "Planta Industrial, Nivel 6",
+    "purpose": "Distribucion de mercancias certificadas",
+    "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla, llevo este recorrido desde hace dos ciclos.",
+    "documents": ["transit_pass_035", "bio_cert_035", "cargo_permit_035"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Distribucion de mercancias al Nivel 6. Lo hago cada dos ciclos.",
+      "origen": "Sector Comercial Este. Siempre el mismo recorrido.",
+      "carga": "Mercancias certificadas. El Permiso de Carga lo tengo desde hace tiempo. Nunca lo he necesitado renovar."
+    },
+    "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazado por Permiso de Carga vencido. El Permiso expiro en ciclo 299.08. Circular LMR-4 aplicada.",
+      "wrong_note": "Comerciante admitido con Permiso de Carga vencido. Circular LMR-4 ignorada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_010"],
+      "notes": "Tiene Permiso de Carga pero esta vencido (299.08 < 301.00). El Pase y el Certificado son validos. El jugador aprende que tener el documento no basta: debe estar vigente."
+    }
+  },
+  {
+    "id": "applicant_036",
+    "name": "Rina Volss",
+    "type": "merchant",
+    "origin": "Deposito Flotante Sector Oeste",
+    "destination": "Deposito Sur, Nivel 4",
+    "purpose": "Transporte de carga industrial certificada",
+    "dialogue_intro": "Comerciante registrada. Traigo el Pase, el Certificado y el Permiso de Carga. Ruta de retorno habitual.",
+    "documents": ["transit_pass_036", "bio_cert_036", "cargo_permit_036"],
+    "flags": [],
+    "questions": {
+      "motivo": "Transporte de carga industrial. Tengo todos los papeles en regla.",
+      "origen": "Deposito Flotante Sector Oeste. Ruta de retorno desde el Oeste.",
+      "carga": "Componentes industriales de clase 3. Todo sellado y registrado en el Permiso de Carga."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_cargo_destination_mismatch_admitted",
+      "on_correct_hold": "flag_cargo_destination_held"
+    },
+    "report": {
+      "correct_note": "Retenida por inconsistencia de destino entre Pase de Transito y Permiso de Carga. Destinos de entrega en verificacion.",
+      "wrong_note": "Comerciante admitida con destino inconsistente entre Pase de Transito y Permiso de Carga. Discrepancia ignorada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_011"],
+      "notes": "El Pase declara destino 'Deposito Sur, Nivel 4'. El Permiso de Carga declara destino 'Deposito Norte, Nivel 2'. Destinos distintos. Puede ser error administrativo o carga desviada. El jugador debe comparar el campo destino entre ambos documentos."
+    }
+  },
+  {
+    "id": "applicant_037",
+    "name": "Goran Vel",
+    "type": "soldier",
+    "origin": "Estacion Orbital Sector 3",
+    "destination": "Cuartel Umbral Norte",
+    "purpose": "Reintegracion post-campana",
+    "dialogue_intro": "Veterano en retorno. Documentos en orden. La Milicia Orbital avala mi reintegracion. Sin novedades que declarar.",
+    "documents": ["transit_pass_037", "bio_cert_037"],
+    "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Reintegracion post-campana. Las ordenes del cuartel me situan aqui hoy.",
+      "origen": "Estacion Orbital Sector 3. Acabe la mision hace dos dias.",
+      "carga": "Equipo reglamentario de combate. Todo declarado en el pase."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_anomaly_d4_soldier_admitted",
+      "on_correct_hold": "flag_anomaly_d4_soldier_held"
+    },
+    "report": {
+      "correct_note": "Soldado retenido por anomalia biologica no registrada en Certificado Biometrico. Evaluacion del Oficio de Pureza Civica iniciada.",
+      "wrong_note": "Soldado con anomalia biologica no documentada admitido sin revision del Oficio de Pureza Civica."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos y codigos coincidentes. El escaner detecta anomalia biologica no registrada en el Certificado. El Certificado indica 'Ninguna registrada'. Decision ambigua: puede ser equipo de combate no actualizado o modificacion no declarada."
+    }
+  },
+  {
+    "id": "applicant_038",
+    "name": "Oryn Bel",
+    "type": "technician",
+    "origin": "Laboratorio de Sistemas, Sector Sur",
+    "destination": "Planta de Procesamiento, Nivel 3",
+    "purpose": "Revision tecnica de sistemas de filtracion",
+    "dialogue_intro": "Tecnico contratista. Vengo a revisar los sistemas de filtracion. El Pase y el Certificado los tengo al dia.",
+    "documents": ["transit_pass_038", "bio_cert_038"],
+    "flags": [],
+    "questions": {
+      "motivo": "Revision de los sistemas de filtracion del Nivel 3. Contrato de mantenimiento regular.",
+      "origen": "Laboratorio de Sistemas, Sector Sur. Trabajo alli como contratista desde hace cuatro ciclos.",
+      "carga": "Herramientas de diagnostico tecnico. Todo de uso estandar."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_003"],
+      "notes": "El nombre en el Pase de Transito es 'Oryn Bel'. El nombre en el Certificado Biometrico es 'Oryn Kel'. Diferencia de una letra. El codigo de identidad coincide. Error tipografico o identidad alterada parcialmente."
+    }
+  },
+  {
+    "id": "applicant_039",
+    "name": "Sona Vael",
+    "type": "auxiliary",
+    "origin": "Centro de Asistencia Civil, Sector Bajo",
+    "destination": "Refugio Civil Umbral",
+    "purpose": "Suministro de asistencia humanitaria al Refugio Civil",
+    "dialogue_intro": "Soy del equipo de asistencia civil. Llevamos raciones y material medico al Refugio. No tenemos Permiso de Carga. Nunca lo necesitamos antes.",
+    "documents": ["transit_pass_039", "bio_cert_039"],
+    "flags": [],
+    "questions": {
+      "motivo": "Suministro de asistencia humanitaria. El Refugio Civil lleva tres dias sin abastecimiento regular. Es urgente.",
+      "origen": "Centro de Asistencia Civil, Sector Bajo. Somos una unidad de apoyo sanitario dependiente del Ministerio.",
+      "carga": "Raciones selladas para treinta dias y reactivos basicos de primeros auxilios. Todo de uso humanitario. No es carga comercial."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_reject": "flag_humanitarian_cargo_rejected"
+    },
+    "report": {
+      "correct_note": "Rechazada por ausencia de Permiso de Carga obligatorio. El motivo declarado contiene palabra clave de suministro. La Circular LMR-4 no contempla excepciones por contexto humanitario.",
+      "wrong_note": "Auxiliar sanitaria admitida sin Permiso de Carga. La Circular LMR-4 fue ignorada por contexto humanitario declarado."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_009"],
+      "notes": "Motivo contiene 'suministro': rule_009 requiere Permiso de Carga. No presentado. La decision correcta es rechazar. El costo humano — el Refugio sin abastecimiento — se registra como consecuencia narrativa via civilian_harm. hold no aplica: la regla es clara y la ausencia del documento es visible."
+    }
+  },
+  {
+    "id": "applicant_040",
+    "name": "Torv Kael",
+    "type": "merchant",
+    "origin": "Sector Comercial Sur",
+    "destination": "Deposito Central, Nivel 2",
+    "purpose": "Entrega de carga certificada",
+    "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla. Ruta de rutina.",
+    "documents": ["transit_pass_040", "bio_cert_040", "cargo_permit_040"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de carga certificada al Deposito Central. Contrato de la Liga Mercantil en vigor.",
+      "origen": "Sector Comercial Sur. Salida hace dos dias.",
+      "carga": "Materiales de construccion estandar. Para las obras de ampliacion del Deposito. Nada especial."
+    },
+    "question_alerts": {
+      "carga": "CONTRADICCION: Declara 'materiales de construccion estandar'. El Permiso de Carga registra 'Reliquias administrativas — grado A'. No son equivalentes."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_undeclared_relic_cargo_admitted",
+      "on_correct_hold": "flag_relic_cargo_held"
+    },
+    "report": {
+      "correct_note": "Retenido por contradiccion entre declaracion verbal de carga y tipo registrado en Permiso de Carga. Revision de contenido iniciada.",
+      "wrong_note": "Comerciante admitido con discrepancia entre carga declarada verbalmente y tipo registrado en Permiso de Carga."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Todos los documentos validos: Pase vigente, Certificado vigente, Permiso de Carga vigente con destino coincidente. Solo detectable por interrogatorio: la declaracion verbal de carga no coincide con el tipo en el Permiso. 'Reliquias administrativas — grado A' requiere tramite especial que no fue solicitado. El jugador aprende que incluso con documentos correctos, el interrogatorio puede revelar inconsistencias."
+    }
+  }
+]

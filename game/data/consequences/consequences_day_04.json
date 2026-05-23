@@ -1,0 +1,210 @@
+[
+  {
+    "id": "c04_undeclared_relic_cargo_admitted",
+    "day": 4,
+    "priority": 200,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_undeclared_relic_cargo_admitted",
+    "summary_text": "Carga de reliquias administrativas admitida con declaracion falsa. Seguimiento activo.",
+    "title": "CARGA NO DECLARADA — Reliquias administrativas introducidas sin revision",
+    "body": "El comerciante Torv Kael fue admitido con Permiso de Carga que registra 'Reliquias administrativas — grado A'. Su declaracion verbal indicaba materiales de construccion estandar.\n\nEl Deposito Central ha recibido la carga sin inspeccion de contenido. El Oficio de Pureza Civica ha activado seguimiento sobre el envio. Las reliquias administrativas de grado A requieren tramite especial que no fue solicitado en el control.\n\nSu decision facilito el acceso de carga sensible sin cruce de declaraciones. El Ministerio revisa su expediente.",
+    "effects": {
+      "security_risk": 2,
+      "institutional_trust": -1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c04_anomaly_d4_soldier_admitted",
+    "day": 4,
+    "priority": 190,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_anomaly_d4_soldier_admitted",
+    "summary_text": "Soldado con anomalia biologica no registrada admitido. Protocolo de seguimiento activado.",
+    "title": "ALERTA BIOLOGICA — Soldado con anomalia en interior del Umbral",
+    "body": "El veterano Goran Vel fue admitido con una anomalia biologica no registrada en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha activado protocolo de seguimiento interior. Se desconoce el origen de la anomalia orbital. El cuartel ha sido notificado, pero el soldado ya esta en el interior del Umbral.\n\nEl Supervisor Halvek solicita informe de decision urgente.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c04_cargo_destination_mismatch_admitted",
+    "day": 4,
+    "priority": 180,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_cargo_destination_mismatch_admitted",
+    "summary_text": "Comerciante admitida con destino inconsistente entre Pase y Permiso de Carga.",
+    "title": "DESTINO INCONSISTENTE — Carga derivada a instalacion no autorizada",
+    "body": "La comerciante Rina Volss fue admitida a pesar de que el destino declarado en su Permiso de Carga no coincide con el destino de su Pase de Transito.\n\nEl Deposito Sur y el Deposito Norte son instalaciones distintas. La carga puede haberse desviado o puede haberse presentado documentacion de otro envio.\n\nEl Ministerio abre revision de la cadena de transporte. Su decision permitio el acceso sin resolver una inconsistencia documental directamente visible.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c04_relic_cargo_held",
+    "day": 4,
+    "priority": 165,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_relic_cargo_held",
+    "summary_text": "Comerciante retenido. Declaracion verbal de carga no coincide con Permiso de Carga.",
+    "title": "RETENCION CORRECTA — Contradiccion de carga detectada en interrogatorio",
+    "body": "El comerciante Torv Kael fue correctamente retenido al detectar contradiccion entre su declaracion verbal de carga y el tipo registrado en el Permiso de Carga.\n\nEl Oficio de Pureza Civica ha iniciado revision del contenido del envio. El registro indica 'Reliquias administrativas — grado A', que requiere tramite especial ante el Ministerio.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta del protocolo de interrogatorio.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c04_humanitarian_cargo_rejected",
+    "day": 4,
+    "priority": 155,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_humanitarian_cargo_rejected",
+    "summary_text": "Auxiliar sanitaria rechazada por ausencia de Permiso de Carga. El Refugio Civil sin abastecimiento.",
+    "title": "RECHAZO PROTOCOLARIO — Suministro humanitario denegado por ausencia de permiso",
+    "body": "Sona Vael fue rechazada por ausencia de Permiso de Carga. Su motivo declarado incluia suministro de asistencia humanitaria al Refugio Civil.\n\nEl Refugio Civil Umbral ha registrado demora critica en el abastecimiento. El Centro de Asistencia Civil ha emitido nota de urgencia al Ministerio.\n\nEl protocolo fue aplicado. La Circular LMR-4 no contempla excepciones por motivo humanitario. El expediente queda limpio ante la norma. El Refugio Civil, no.",
+    "effects": {
+      "civilian_harm": 1,
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c04_cargo_destination_held",
+    "day": 4,
+    "priority": 145,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_cargo_destination_held",
+    "summary_text": "Comerciante retenida por destino inconsistente entre documentos. Revision de ruta iniciada.",
+    "title": "RETENCION CORRECTA — Inconsistencia de destino en documentacion de carga",
+    "body": "La comerciante Rina Volss fue correctamente retenida al detectar discrepancia entre el destino del Pase de Transito y el del Permiso de Carga.\n\nEl Ministerio ha iniciado verificacion de la ruta de carga. El acceso queda suspendido hasta resolver la inconsistencia entre los destinos declarados.\n\nEl Supervisor Halvek registra la decision como uso correcto de la Circular LMR-4.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c04_anomaly_d4_soldier_held",
+    "day": 4,
+    "priority": 135,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_anomaly_d4_soldier_held",
+    "summary_text": "Soldado con anomalia biologica retenido para evaluacion medica.",
+    "title": "RETENCION CORRECTA — Soldado con anomalia bajo revision del Oficio",
+    "body": "El veterano Goran Vel fue correctamente retenido ante la deteccion de anomalia biologica no registrada en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha iniciado evaluacion medica del caso. La identidad del soldado ha sido verificada independientemente. Se espera clasificacion de la anomalia en la siguiente jornada.\n\nSu decision mantiene el Umbral protegido sin resolver aun la naturaleza del caso.",
+    "effects": {
+      "security_risk": -1
+    }
+  },
+  {
+    "id": "c04_eficiencia_maxima",
+    "day": 4,
+    "priority": 100,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Eficiencia registrada — Sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el cuarto turno de control.\n\nLa Circular LMR-4 fue aplicada sin errores. El convoy mercantil fue procesado con precision. El Supervisor Halvek registra conformidad. Su expediente avanza sin observaciones.",
+    "conditions": {
+      "max_errors": 0,
+      "min_credits": 50
+    },
+    "effects": {
+      "institutional_trust": 1,
+      "supervisor_suspicion": -1
+    }
+  },
+  {
+    "id": "c04_turno_sin_incidentes",
+    "day": 4,
+    "priority": 90,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del cuarto turno sin violaciones documentadas.\n\nLos Permisos de Carga fueron verificados correctamente. Su expediente se mantiene estable. El Supervisor Halvek no emite observaciones adicionales.",
+    "conditions": {
+      "max_errors": 0
+    },
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c04_creditos_criticos",
+    "day": 4,
+    "priority": 85,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Situacion economica critica",
+    "body": "Las penalizaciones acumuladas han llevado su cuenta de creditos a un nivel critico.\n\nEl Ministerio emite alerta de estabilidad economica. El Supervisor Halvek advierte que la Circular LMR-4 es de cumplimiento obligatorio. La correcta aplicacion del Permiso de Carga no admite interpretaciones.",
+    "conditions": {
+      "max_credits": 19,
+      "min_errors": 1
+    },
+    "effects": {
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c04_irregularidades_menores",
+    "day": 4,
+    "priority": 80,
+    "type": "performance",
+    "tone": "mixed",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el cuarto turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recuerda al operario que la Circular LMR-4 requiere Permiso de Carga vigente para cualquier solicitante con motivo de carga, suministro o entrega. Su expediente recibe marcador de seguimiento.",
+    "conditions": {
+      "min_errors": 1,
+      "max_errors": 2
+    },
+    "effects": {
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c04_turno_deficiente",
+    "day": 4,
+    "priority": 70,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno deficiente",
+    "body": "El cuarto turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. La Circular LMR-4 es la nueva regla operativa del Puesto. Su incumplimiento constituye fallo grave. Se aplica penalizacion adicional. Su expediente recibe marcador rojo.",
+    "conditions": {
+      "min_errors": 3,
+      "max_errors": 5
+    },
+    "effects": {
+      "supervisor_suspicion": 2,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c04_turno_catastrofico",
+    "day": 4,
+    "priority": 60,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno catastrofico",
+    "body": "El registro del cuarto turno es inaceptable.\n\nSe han procesado incorrectamente multiples casos afectados por la Circular LMR-4. El Ministerio ha notificado al Oficio de Pureza Civica. Se abre investigacion formal sobre el Puesto Umbral 7. El Supervisor Halvek suspende la calificacion de confianza.\n\nEl Sello no tolera reincidencia cuando la regla es clara.",
+    "conditions": {
+      "min_errors": 6
+    },
+    "effects": {
+      "supervisor_suspicion": 3,
+      "institutional_trust": -2
+    }
+  }
+]
