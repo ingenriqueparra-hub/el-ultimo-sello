@@ -262,39 +262,54 @@ Propiedades técnicas (ambos paneles):
 
 ### 4.8. Narrative Consequence System
 
-Responsable de seleccionar la consecuencia narrativa principal del dia.
+Responsable de generar el reporte narrativo compuesto del dia.
 
 Entradas:
 
-- resumen de `DecisionSystem`;
-- decisiones registradas;
-- datos del dia;
-- consecuencias disponibles en JSON;
-- `narrative_hooks` opcionales de solicitantes;
-- estado acumulado entre dias cuando exista.
+- resumen de `DecisionSystem` (errores, creditos, correctas, activated_flags);
+- consecuencias disponibles en JSON por dia;
+- `NarrativeStateSystem` para acumuladores;
+- `TerminalEndingSystem` para cierres terminales.
 
-Capas:
+Salida compuesta (`evaluate()` devuelve Dictionary):
 
-1. Consecuencia de rendimiento: evalua errores, aciertos, creditos y decisiones de alto riesgo.
-2. Consecuencia de caso: evalua flags narrativos activados por decisiones sobre solicitantes marcados.
-3. Acumuladores entre dias: actualiza memoria simple de la campana.
-4. Cierres terminales futuros: evalua condiciones extremas al final de un dia.
+```gdscript
+{
+  "performance":     { ...consecuencia de rendimiento... },
+  "incidents":       [ ...lista de incidentes de caso activados... ],
+  "synthesis":       "texto de sintesis institucional",
+  "effects_applied": { "institutional_trust": X, ... },
+}
+```
 
-Acumuladores iniciales:
+Logica interna:
 
-- `institutional_trust`
-- `security_risk`
-- `civilian_harm`
-- `supervisor_suspicion`
+1. `_select_performance()`: elige la mejor consecuencia `type: "performance"` por `conditions` y `priority`.
+2. `_select_incidents()`: recoge todas las consecuencias `type: "case"` cuyos `trigger_flag` esten en `activated_flags`, ordenadas por priority.
+3. `_build_synthesis()`: genera texto institucional combinando `tone` del performance y tono/severidad de los incidentes.
+4. `_merge_effects()`: suma efectos del performance + todos los incidentes → `NarrativeStateSystem.apply_effects()`.
+5. `TerminalEndingSystem.evaluate()` se llama en `DayReport` despues de que los efectos compuestos ya fueron aplicados.
+
+Campos de consecuencias en JSON:
+
+- `type`: "performance" | "case"
+- `tone`: "positive" | "negative" | "mixed" | "neutral" (para performance y case)
+- `severity`: "minor" | "major" | "critical" (para case, opcional en performance)
+- `summary_text`: texto corto para lista de incidentes en UI normal (case)
+- `priority`: entero — performance 60-100, case 130-200
+- `conditions`: objeto con min/max_errors, min/max_credits, min_correct (performance)
+- `trigger_flag`: string del flag narrativo que activa el incidente (case)
+- `effects`: deltas de acumuladores
 
 Reglas tecnicas:
 
-- elegir una consecuencia principal por reporte;
-- priorizar la consecuencia valida de mayor `priority`;
-- usar una consecuencia neutral si faltan datos o no hay coincidencia;
-- no mostrar valores numericos internos al jugador normal;
-- permitir ver flags y acumuladores solo en herramientas internas de debug;
-- mantener los textos, condiciones y efectos fuera de `DayReport.gd`.
+- el dictamen de rendimiento siempre se selecciona uno solo;
+- todos los incidentes cuyo flag este activo aparecen en el reporte;
+- la UI normal muestra max 3 incidentes; el resto queda en expediente;
+- los efectos de todos los incidentes se aplican de forma compuesta una sola vez;
+- nunca mostrar valores numericos de acumuladores al jugador normal;
+- solo el panel debug (tecla Y) muestra efectos, flags y acumuladores;
+- `NarrativeConsequenceSystem` no modifica `DayReport` directamente.
 
 Fases de implementacion:
 
@@ -302,6 +317,7 @@ Fases de implementacion:
 2. Agregar ganchos narrativos por caso.
 3. Persistir acumuladores simples entre dias.
 4. Evaluar finales anticipados o cierres terminales.
+5. Reporte narrativo compuesto: performance + incidentes + sintesis.
 
 ---
 

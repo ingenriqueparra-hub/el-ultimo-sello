@@ -366,11 +366,12 @@ Objetivo: validar comprensión, tensión, justicia del sistema y deseo de jugar 
 ### Módulo 14 — Expansión a Día 2
 Objetivo: agregar nueva regla, nuevo documento o nueva herramienta solo después de validar el Día 1.
 
-### Módulo 15 — Consecuencias narrativas por capas (✓ Completado — Fases 1, 2, 3 y 4)
+### Módulo 15 — Consecuencias narrativas por capas (✓ Completado — Fases 1-4 + Reporte Compuesto)
 Objetivo: separar consecuencia de rendimiento, consecuencia de caso, acumuladores narrativos entre días y cierres terminales futuros.
 Fases 1-2: NarrativeConsequenceSystem.gd + JSON por día con consecuencias de rendimiento y caso. narrative_hooks en solicitantes clave. DecisionSystem acumula activated_flags.
 Fase 3: NarrativeStateSystem.gd con 4 acumuladores estáticos. apply_effects() llamado al evaluar consecuencia. snapshot/restore para restart correcto. Síntomas narrativos visibles si se cruzan umbrales.
 Fase 4: TerminalEndingSystem.gd + terminal_endings.json con 8 finales anticipados. Panel rojo en DayReport al activarse. Restart terminal vuelve a Día 1 con reset completo.
+Reporte compuesto (P1-09): NarrativeConsequenceSystem.evaluate() devuelve {performance, incidents, synthesis, effects_applied}. Performance = dictamen único por rendimiento. Incidents = todos los flags activos como incidentes (tone/severity/summary_text). Synthesis = texto institucional generado. Efectos compuestos aplicados una sola vez.
 
 ---
 
@@ -1161,17 +1162,15 @@ Pendientes:
 ---
 
 ### Módulo 15 — Consecuencias narrativas por capas
-Estado: Completado (Fases 1, 2, 3 y 4)
+Estado: Completado (Fases 1, 2, 3, 4 y 5)
 
 Implementado (Fase 1 — consecuencia de rendimiento):
-- `NarrativeConsequenceSystem.gd` — clase estática. Carga `consequences_day_NN.json`, evalúa condiciones (min/max_errors, min/max_credits, min_correct), retorna la consecuencia válida de mayor prioridad. Fallback neutral si falta el archivo o no hay coincidencia.
+- `NarrativeConsequenceSystem.gd` — clase estática. Evalúa `consequences_day_NN.json`.
 - `consequences_day_01.json` — 5 consecuencias de rendimiento (prioridades 60-100).
 - `consequences_day_02.json` — 6 consecuencias de rendimiento (prioridades 60-100 + créditos críticos p85).
-- `DayReport.gd` — usa `NarrativeConsequenceSystem.evaluate()`. Muestra título dinámico en `ConsequenceTitle` y body en `ConsequenceText`. `_get_consequence()` eliminada.
 
 Implementado (Fase 2 — consecuencia de caso):
-- `DecisionSystem.gd` — acumula `_activated_flags`. Hook key: `on_correct_hold`, `on_wrong_approve`, `on_wrong_reject`, etc. Flags incluidos en `get_summary()` como `activated_flags`.
-- `NarrativeConsequenceSystem._matches()` — evalúa `trigger_flag` primero (antes que conditions). Si el flag está en `activated_flags`, la consecuencia es candidata.
+- `DecisionSystem.gd` — acumula `_activated_flags`. Flags incluidos en `get_summary()` como `activated_flags`.
 - `applicants_day_01.json` — narrative_hooks en 4 solicitantes: 003 (Sela Driva), 005 (Rhen Axis), 008 (Dara Miren), 010 (Kael Vorn).
 - `applicants_day_02.json` — narrative_hooks en 3 solicitantes: 013 (Vara Kess), 016 (Gal Nex), 019 (Thal Vor).
 - `consequences_day_01.json` — 10 consecuencias de caso (prioridades 130-200) + 5 de rendimiento.
@@ -1179,46 +1178,35 @@ Implementado (Fase 2 — consecuencia de caso):
 
 Implementado (Fase 3 — acumuladores entre días):
 - `NarrativeStateSystem.gd` — clase estática con 4 acumuladores: `institutional_trust`, `security_risk`, `civilian_harm`, `supervisor_suspicion`. Métodos: `apply_effects()`, `snapshot()`, `restore_snapshot()`, `get_accumulators()`, `get_narrative_symptom()`, `reset()`.
-- `NarrativeConsequenceSystem.gd` — llama `NarrativeStateSystem.apply_effects()` tras seleccionar consecuencia ganadora.
-- `ControlDesk.gd` — llama `NarrativeStateSystem.snapshot()` en `_ready()` antes de cargar el día.
-- `DayReport.gd` — llama `NarrativeStateSystem.restore_snapshot()` en restart (no en continue). Muestra síntoma narrativo si algún acumulador cruza umbral (sin mostrar valores al jugador).
-- `consequences_day_01.json` y `consequences_day_02.json` — todas las entradas tienen campo `effects` con deltas por acumulador.
-- Panel debug — muestra valores actuales de acumuladores (solo herramienta interna).
-
-Umbrales de síntoma visible al jugador:
-- `security_risk >= 3` → alerta de seguridad intensificada
-- `supervisor_suspicion >= 2` → revisión adicional solicitada
-- `civilian_harm >= 2` → quejas civiles registradas
-- `institutional_trust <= -2` → confianza institucional disminuida
-
-Archivos principales:
-- `game/scripts/systems/NarrativeStateSystem.gd` (nuevo)
-- `game/scripts/systems/NarrativeConsequenceSystem.gd` (actualizado)
-- `game/scripts/systems/DecisionSystem.gd` (actualizado)
-- `game/data/consequences/consequences_day_01.json` (actualizado — effects en todas las entradas)
-- `game/data/consequences/consequences_day_02.json` (actualizado — effects en todas las entradas)
-- `game/data/applicants/applicants_day_01.json` (actualizado)
-- `game/data/applicants/applicants_day_02.json` (actualizado)
-- `game/scripts/ui/DayReport.gd` (actualizado)
-- `game/scripts/ui/ControlDesk.gd` (actualizado)
+- Umbrales visibles al jugador: `security_risk >= 3`, `supervisor_suspicion >= 2`, `civilian_harm >= 2`, `institutional_trust <= -2`.
 
 Implementado (Fase 4 — cierres terminales):
-- `TerminalEndingSystem.gd` — clase estática. Carga `terminal_endings.json`, evalúa condiciones de acumuladores + `min_day`, retorna el cierre de mayor prioridad si alguno aplica. Retorna `{}` si no hay terminal.
-- `terminal_endings.json` — 8 finales anticipados: despido_administrativo, arresto_por_negligencia, ejecucion_protocolaria, cuarentena_total, sabotaje_exitoso, colapso_puesto, desastre_colmena, ascenso_oscuro. Prioridades 130-200. Todos tienen `min_day` para no dispararse prematuramente.
-- `DayReport.gd` — evalúa `TerminalEndingSystem.evaluate()` tras `NarrativeConsequenceSystem.evaluate()`. Si terminal activo: muestra panel rojo, título rojo, bloquea botón CONTINUAR, cambia REINICIAR por NUEVA PARTIDA. En restart terminal: llama `NarrativeStateSystem.reset()` y vuelve a Día 1. En restart normal: llama `restore_snapshot()` y vuelve al mismo día.
+- `TerminalEndingSystem.gd` — evalúa `terminal_endings.json` con condiciones de acumuladores + `min_day`.
+- `terminal_endings.json` — 8 finales anticipados, prioridades 130-200.
+- `DayReport.gd` — panel rojo + botón NUEVA PARTIDA + reset total en cierre terminal.
 
-Archivos principales (completos):
-- `game/scripts/systems/NarrativeStateSystem.gd` (nuevo — Fase 3)
-- `game/scripts/systems/TerminalEndingSystem.gd` (nuevo — Fase 4)
-- `game/scripts/systems/NarrativeConsequenceSystem.gd` (actualizado — Fase 1+3)
-- `game/scripts/systems/DecisionSystem.gd` (actualizado — Fase 2)
-- `game/data/consequences/consequences_day_01.json` (actualizado — Fases 1+2+3)
-- `game/data/consequences/consequences_day_02.json` (actualizado — Fases 1+2+3)
-- `game/data/endings/terminal_endings.json` (nuevo — Fase 4)
-- `game/data/applicants/applicants_day_01.json` (actualizado — Fase 2)
-- `game/data/applicants/applicants_day_02.json` (actualizado — Fase 2)
-- `game/scripts/ui/DayReport.gd` (actualizado — Fases 1+3+4)
-- `game/scripts/ui/ControlDesk.gd` (actualizado — Fase 3)
+Implementado (Fase 5 — reporte narrativo compuesto, P1-09):
+- `NarrativeConsequenceSystem.evaluate()` — devuelve `{performance, incidents, synthesis, effects_applied}`.
+- `_select_performance()` — elige un solo dictamen de rendimiento por condiciones + prioridad.
+- `_select_incidents()` — recoge TODOS los incidentes de caso con trigger_flag activo.
+- `_build_synthesis()` — genera texto institucional combinando tone del performance con tone/severity de incidentes.
+- `_merge_effects()` — suma efectos de performance + todos los incidentes; aplica una sola vez vía `NarrativeStateSystem.apply_effects()`.
+- `DayReport._show_normal_report()` — muestra dictamen de rendimiento + hasta 3 incidentes (summary_text) + síntesis + síntoma.
+- Panel debug — secciones separadas: DICTAMEN DE RENDIMIENTO, INCIDENTES DE CASO, SINTESIS, EFECTOS APLICADOS.
+- `consequences_day_01.json` y `consequences_day_02.json` — todas las entradas actualizadas con campos `tone`, `severity` (cases), `summary_text` (cases).
+
+Archivos principales:
+- `game/scripts/systems/NarrativeConsequenceSystem.gd` (reescrito — Fase 5)
+- `game/scripts/systems/NarrativeStateSystem.gd` (Fase 3)
+- `game/scripts/systems/TerminalEndingSystem.gd` (Fase 4)
+- `game/scripts/systems/DecisionSystem.gd` (Fase 2)
+- `game/data/consequences/consequences_day_01.json` (Fases 1+2+3+5)
+- `game/data/consequences/consequences_day_02.json` (Fases 1+2+3+5)
+- `game/data/endings/terminal_endings.json` (Fase 4)
+- `game/data/applicants/applicants_day_01.json` (Fase 2)
+- `game/data/applicants/applicants_day_02.json` (Fase 2)
+- `game/scripts/ui/DayReport.gd` (Fases 1+3+4+5)
+- `game/scripts/ui/ControlDesk.gd` (Fase 3)
 
 Pendientes:
 - Ninguno para Módulo 15.

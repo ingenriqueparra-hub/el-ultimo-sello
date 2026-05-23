@@ -69,7 +69,8 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 | P1-05 | Agregar penalizaciones | Errores afectan salario/reputación |
 | P1-06 | Agregar consecuencia narrativa | El final cambia según una decisión clave |
 | P1-07 | Consecuencia de rendimiento desde JSON | El reporte elige una consecuencia diaria desde datos, no hardcodeada |
-| P1-08 | Consecuencia de caso | Un solicitante marcado puede activar una consecuencia narrativa principal |
+| P1-08 | Consecuencia de caso | Un solicitante marcado puede activar un incidente narrativo en el reporte |
+| P1-09 | Reporte narrativo compuesto | El reporte combina dictamen de rendimiento + incidentes de caso + sintesis institucional; una buena accion aislada no tapa un turno desastroso |
 
 ---
 

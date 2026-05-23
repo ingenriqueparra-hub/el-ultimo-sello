@@ -316,24 +316,47 @@ Uso:
 
 Esta consecuencia se muestra en el reporte final y no debe revelar calculos internos como si fueran estadisticas RPG.
 
-### 11.2. Consecuencia de caso
+### 11.2. Consecuencia de caso (incidentes destacados)
 
-Evalua una decision concreta de un solicitante marcado como narrativamente importante.
+Evalua decisiones concretas de solicitantes marcados como narrativamente importantes.
 
 Ejemplos:
 
-- aprobar mal a un caso de alto riesgo produce un incidente;
+- aprobar mal a un caso de alto riesgo produce un incidente negativo;
 - rechazar injustamente a una persona vulnerable deja una secuela humana;
-- retener correctamente a un sospechoso evita un problema;
+- retener correctamente a un sospechoso evita un problema y genera un incidente positivo;
 - obedecer el protocolo puede ser correcto y aun asi moralmente incomodo.
 
 Regla:
 
-- no todos los casos generan consecuencia narrativa;
-- si varios casos aplican, el reporte debe elegir una consecuencia principal por prioridad;
-- una consecuencia de caso puede superar a la consecuencia de rendimiento si es mas importante.
+- no todos los casos generan incidente narrativo;
+- si varios casos aplican, todos se registran como incidentes del reporte;
+- el reporte muestra al jugador un maximo de 3 incidentes destacados;
+- si hay mas de 3, se indica que el resto queda en el expediente;
+- los incidentes no reemplazan al dictamen de rendimiento: son anotaciones adjuntas;
+- una buena accion aislada no borra un turno desastroso;
+- un incidente grave puede agravar incluso un turno con buen rendimiento.
 
-### 11.3. Acumuladores narrativos entre dias
+Cada incidente tiene:
+
+- `tone`: positive | negative | mixed | neutral;
+- `severity`: minor | major | critical;
+- `summary_text`: texto corto para la lista de incidentes en el reporte.
+
+### 11.3. Sintesis institucional
+
+Texto generado automaticamente que combina el tono del dictamen de rendimiento con los incidentes activados.
+
+Ejemplos:
+
+- Muchos errores + incidente positivo: "Aunque una accion correcta queda registrada, el patron general del turno revela negligencia operativa."
+- Buen rendimiento + incidente critico: "El rendimiento general fue estable, pero un incidente critico compromete la evaluacion del puesto."
+- Buen rendimiento + incidente positivo: "El turno queda registrado como eficiente y con intervencion destacada."
+- Mal rendimiento + incidentes negativos: "Los incidentes registrados agravan un turno ya deficiente."
+
+La sintesis no se genera si no hay incidentes activos.
+
+### 11.4. Acumuladores narrativos entre dias
 
 Los acumuladores registran tendencias de largo plazo. No deben mostrarse como barras numericas al jugador.
 
@@ -352,7 +375,7 @@ El jugador debe percibirlos mediante sintomas narrativos:
 - rumores del puesto;
 - restricciones del dia siguiente.
 
-### 11.4. Finales anticipados o cierres terminales futuros
+### 11.5. Finales anticipados o cierres terminales futuros
 
 Los finales anticipados son cierres de campana por acumulacion extrema. No pertenecen al MVP inicial ni deben activarse por un error comun aislado.
 

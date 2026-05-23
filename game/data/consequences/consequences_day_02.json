@@ -4,9 +4,12 @@
     "day": 2,
     "priority": 200,
     "type": "case",
+    "tone": "negative",
+    "severity": "critical",
     "trigger_flag": "flag_identity_fraud_admitted",
+    "summary_text": "Fraude de identidad admitido. Protocolo de busqueda activado.",
     "title": "BRECHA DE IDENTIDAD — Fraude documental admitido",
-    "body": "La individua identificada como Vara Kess cruzo el control con codigos de identidad inconsistentes entre documentos.\n\nInteligenica del Ministerio confirma que el codigo LM-4402 del Certificado Biometrico no corresponde a la identidad declarada. Se ha activado protocolo de busqueda en el interior del Umbral.\n\nSu decision de admision esta siendo revisada como posible negligencia de verificacion.",
+    "body": "La individua identificada como Vara Kess cruzo el control con codigos de identidad inconsistentes entre documentos.\n\nInteligencia del Ministerio confirma que el codigo LM-4402 del Certificado Biometrico no corresponde a la identidad declarada. Se ha activado protocolo de busqueda en el interior del Umbral.\n\nSu decision de admision esta siendo revisada como posible negligencia de verificacion.",
     "effects": {
       "security_risk": 2,
       "institutional_trust": -1,
@@ -18,7 +21,10 @@
     "day": 2,
     "priority": 190,
     "type": "case",
+    "tone": "negative",
+    "severity": "major",
     "trigger_flag": "flag_anomaly_soldier_admitted",
+    "summary_text": "Soldado con anomalia biologica no registrada admitido.",
     "title": "ALERTA BIOLOGICA — Soldado con anomalia en interior",
     "body": "El veterano Gal Nex fue admitido con una anomalia biologica no registrada en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha activado protocolo de seguimiento interior. Se desconoce el origen de la anomalia orbital.\n\nEl Supervisor Halvek solicita informe de decision urgente.",
     "effects": {
@@ -31,7 +37,10 @@
     "day": 2,
     "priority": 180,
     "type": "case",
+    "tone": "negative",
+    "severity": "minor",
     "trigger_flag": "flag_suspicious_cargo_admitted",
+    "summary_text": "Comerciante con carga contradictoria admitido sin inspeccion.",
     "title": "CARGA NO DECLARADA — Contradiccion ignorada",
     "body": "El comerciante Thal Vor fue admitido a pesar de declarar carga distinta a la registrada en el Permiso de Ingreso.\n\nEl Deposito Norte ha recibido carga de clasificacion 'Insumos de laboratorio — grado 2' sin registro de inspeccion previa.\n\nEl Ministerio abre revision de la cadena de transporte. Su decision facilito el acceso sin inspeccion.",
     "effects": {
@@ -44,9 +53,12 @@
     "day": 2,
     "priority": 175,
     "type": "case",
+    "tone": "positive",
+    "severity": "major",
     "trigger_flag": "flag_fraud_intercepted",
+    "summary_text": "Fraude biometrico interceptado. Identidad real en verificacion.",
     "title": "INTERCEPCION CORRECTA — Fraude de identidad detenido",
-    "body": "Vara Kess fue correctamente retenida ante la deteccion de inconsistencia en el codigo de identidad entre documentos.\n\nInteligenica del Ministerio confirma que la documentacion presentaba alteracion. La identidad real del solicitante esta siendo verificada.\n\nEl Supervisor Halvek registra la decision como ejemplo de aplicacion correcta del protocolo biometrico.",
+    "body": "Vara Kess fue correctamente retenida ante la deteccion de inconsistencia en el codigo de identidad entre documentos.\n\nInteligencia del Ministerio confirma que la documentacion presentaba alteracion. La identidad real del solicitante esta siendo verificada.\n\nEl Supervisor Halvek registra la decision como ejemplo de aplicacion correcta del protocolo biometrico.",
     "effects": {
       "institutional_trust": 1
     }
@@ -56,7 +68,10 @@
     "day": 2,
     "priority": 155,
     "type": "case",
+    "tone": "positive",
+    "severity": "minor",
     "trigger_flag": "flag_anomaly_soldier_detained",
+    "summary_text": "Soldado con anomalia biologica retenido para evaluacion medica.",
     "title": "RETENCION CORRECTA — Soldado con anomalia bajo revision",
     "body": "El veterano Gal Nex fue retenido correctamente ante la deteccion de anomalia biologica no registrada.\n\nEl Oficio de Pureza Civica ha iniciado evaluacion medica del caso. Se espera clasificacion en la siguiente jornada.\n\nSu decision protege el Umbral sin resolver aun la naturaleza de la anomalia.",
     "effects": {
@@ -68,7 +83,10 @@
     "day": 2,
     "priority": 145,
     "type": "case",
+    "tone": "positive",
+    "severity": "minor",
     "trigger_flag": "flag_cargo_inspected",
+    "summary_text": "Carga contradictoria derivada a inspeccion tecnica.",
     "title": "RETENCION CORRECTA — Carga contradictoria bajo inspeccion",
     "body": "El comerciante Thal Vor fue correctamente retenido tras detectar contradiccion entre su declaracion verbal y el Permiso de Ingreso.\n\nLa carga ha sido derivada a inspeccion tecnica. El Ministerio registra la intercepcion como uso correcto del protocolo de interrogatorio.\n\nEl Supervisor Halvek no emite observaciones adicionales.",
     "effects": {
@@ -80,6 +98,7 @@
     "day": 2,
     "priority": 100,
     "type": "performance",
+    "tone": "positive",
     "title": "Eficiencia registrada — Sin incidentes",
     "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el segundo turno de control.\n\nLa nueva directiva del Certificado Biometrico fue aplicada sin errores. El Supervisor Halvek registra conformidad. Su expediente avanza sin observaciones.",
     "conditions": {
@@ -96,6 +115,7 @@
     "day": 2,
     "priority": 90,
     "type": "performance",
+    "tone": "positive",
     "title": "Turno sin incidentes",
     "body": "El Ministerio de Admision Planetaria registra el cierre del segundo turno sin violaciones documentadas.\n\nSu expediente se mantiene estable. El Supervisor Halvek no emite observaciones adicionales.",
     "conditions": {
@@ -110,6 +130,7 @@
     "day": 2,
     "priority": 85,
     "type": "performance",
+    "tone": "negative",
     "title": "Situacion economica critica",
     "body": "Las penalizaciones acumuladas han llevado su cuenta de creditos a un nivel critico.\n\nEl Ministerio emite alerta de estabilidad economica. El Supervisor Halvek advierte que la continuidad del puesto puede verse afectada si la situacion no se corrige en la siguiente jornada.",
     "conditions": {
@@ -126,6 +147,7 @@
     "day": 2,
     "priority": 80,
     "type": "performance",
+    "tone": "mixed",
     "title": "Turno con irregularidades menores",
     "body": "Se registran decisiones incorrectas durante el segundo turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recuerda al operario que las nuevas directivas del Certificado Biometrico son de cumplimiento obligatorio.",
     "conditions": {
@@ -141,6 +163,7 @@
     "day": 2,
     "priority": 70,
     "type": "performance",
+    "tone": "negative",
     "title": "Turno deficiente",
     "body": "El segundo turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. Las nuevas reglas biometricas debieron haber sido comprendidas antes de este turno. Se aplica penalizacion adicional. Su expediente recibe marcador rojo.",
     "conditions": {
@@ -157,6 +180,7 @@
     "day": 2,
     "priority": 60,
     "type": "performance",
+    "tone": "negative",
     "title": "Turno catastrofico",
     "body": "El segundo turno registra un nivel de errores inaceptable para el Ministerio de Admision Planetaria.\n\nEl Oficio de Pureza Civica ha sido notificado. Se abre investigacion formal sobre la competencia del operario asignado al Puesto Umbral 7. El Supervisor Halvek suspende la calificacion de confianza.\n\nEl Sello no perdona la reincidencia.",
     "conditions": {

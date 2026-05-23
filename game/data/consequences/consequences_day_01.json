@@ -4,9 +4,12 @@
     "day": 1,
     "priority": 200,
     "type": "case",
+    "tone": "negative",
+    "severity": "critical",
     "trigger_flag": "flag_agent_admitted",
+    "summary_text": "Agente encubierto admitido. Investigacion abierta.",
     "title": "BRECHA DE SEGURIDAD — Agente infiltrado admitido",
-    "body": "El individuo identificado como Kael Vorn ha cruzado el control con documentacion falsificada.\n\nInteligenica del Ministerio confirma presencia de un agente encubierto en el interior del Umbral. El Supervisor Halvek ha sido relevado temporalmente. Se abre investigacion urgente.\n\nSu decision de admision esta siendo revisada como posible complicidad.",
+    "body": "El individuo identificado como Kael Vorn ha cruzado el control con documentacion falsificada.\n\nInteligencia del Ministerio confirma presencia de un agente encubierto en el interior del Umbral. El Supervisor Halvek ha sido relevado temporalmente. Se abre investigacion urgente.\n\nSu decision de admision esta siendo revisada como posible complicidad.",
     "effects": {
       "security_risk": 2,
       "institutional_trust": -1,
@@ -18,7 +21,10 @@
     "day": 1,
     "priority": 190,
     "type": "case",
+    "tone": "negative",
+    "severity": "major",
     "trigger_flag": "flag_implant_admitted",
+    "summary_text": "Soldado con implante neural no registrado admitido.",
     "title": "ALERTA BIOLOGICA — Implante no registrado en interior",
     "body": "El soldado Rhen Axis fue admitido con un implante neural no registrado en su Certificado Biometrico.\n\nEl Oficio de Pureza Civica ha activado protocolo de contencion interior. El Supervisor Halvek solicita informe de decision.\n\nSe desconoce el proposito del implante. Su origen orbital complica la revision.",
     "effects": {
@@ -31,7 +37,10 @@
     "day": 1,
     "priority": 180,
     "type": "case",
+    "tone": "negative",
+    "severity": "minor",
     "trigger_flag": "flag_anomaly_admitted",
+    "summary_text": "Familia con anomalia biologica admitida sin revision medica.",
     "title": "ANOMALIA BIOLOGICA — Caso sin registro admitido",
     "body": "Dara Miren y su hijo menor cruzaron el control. El escaner detectaba anomalia biologica leve en el menor.\n\nEl Ministerio de Admision ha emitido alerta sanitaria. El Centro Medico Umbral esta siendo notificado para supervision inmediata.\n\nSu decision podria haber introducido un factor de riesgo no documentado.",
     "effects": {
@@ -44,7 +53,10 @@
     "day": 1,
     "priority": 175,
     "type": "case",
+    "tone": "positive",
+    "severity": "major",
     "trigger_flag": "flag_agent_intercepted",
+    "summary_text": "Agente encubierto interceptado. Exito operacional confirmado.",
     "title": "INTERCEPCION EXITOSA — Agente neutralizado",
     "body": "El individuo identificado como Kael Vorn fue retenido correctamente antes de cruzar el control.\n\nInteligencia del Ministerio confirma que se trataba de un agente encubierto con documentacion falsificada. La intercepcion ha sido catalogada como exito operacional.\n\nEl Supervisor Halvek registra la decision como ejemplo de procedimiento correcto.",
     "effects": {
@@ -56,7 +68,10 @@
     "day": 1,
     "priority": 170,
     "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
     "trigger_flag": "flag_family_turned_away",
+    "summary_text": "Familia con caso medico urgente rechazada por protocolo.",
     "title": "RECHAZO — Caso medico urgente denegado",
     "body": "Dara Miren y su hijo fueron rechazados en el control. El menor presentaba fiebre alta y necesitaba atencion medica.\n\nEl nino no ha recibido asistencia. El Ministerio registra el rechazo como correcto por protocolo, pero emite nota interna sobre el caso.\n\nEl Supervisor Halvek no formula observaciones. El protocolo fue seguido.",
     "effects": {
@@ -68,7 +83,10 @@
     "day": 1,
     "priority": 165,
     "type": "case",
+    "tone": "negative",
+    "severity": "major",
     "trigger_flag": "flag_agent_dismissed",
+    "summary_text": "Agente encubierto rechazado — escapo sin dejar rastro.",
     "title": "RECHAZO INCORRECTO — Agente escapado por rechazo",
     "body": "El individuo identificado como Kael Vorn fue rechazado en lugar de retenido para investigacion.\n\nInteligencia del Ministerio indica que el agente conocia el procedimiento y contaba con documentos alternativos. El rechazo le ha permitido retirarse sin dejar rastro.\n\nSu expediente recibe anotacion por manejo incorrecto del caso.",
     "effects": {
@@ -81,7 +99,10 @@
     "day": 1,
     "priority": 160,
     "type": "case",
+    "tone": "positive",
+    "severity": "minor",
     "trigger_flag": "flag_implant_intercepted",
+    "summary_text": "Soldado con implante neural detenido. Revision iniciada.",
     "title": "RETENCION CORRECTA — Soldado con implante detenido",
     "body": "El soldado Rhen Axis fue correctamente retenido ante la deteccion de implante neural no registrado.\n\nEl Oficio de Pureza Civica ha iniciado revision tecnica del dispositivo. La identidad del soldado ha sido verificada independientemente.\n\nEl Supervisor Halvek califica la decision como procedimentalmente correcta.",
     "effects": {
@@ -94,7 +115,10 @@
     "day": 1,
     "priority": 150,
     "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
     "trigger_flag": "flag_family_detained",
+    "summary_text": "Familia retenida. Anomalia en menor bajo evaluacion medica.",
     "title": "RETENCION — Familia en espera de clasificacion",
     "body": "Dara Miren y su hijo menor han sido retenidos en sala de espera de control.\n\nEl Centro Medico ha sido notificado. La anomalia biologica detectada en el menor esta siendo evaluada por personal sanitario autorizado.\n\nSu decision permite revision sin comprometer la seguridad del Umbral.",
     "effects": {
@@ -106,7 +130,10 @@
     "day": 1,
     "priority": 140,
     "type": "case",
+    "tone": "negative",
+    "severity": "minor",
     "trigger_flag": "flag_unauthorized_entry",
+    "summary_text": "Refugiada con sello pendiente admitida incorrectamente.",
     "title": "ENTRADA NO AUTORIZADA — Sello pendiente ignorado",
     "body": "Sela Driva accedio al Umbral con documentacion incompleta. El sello MAP estaba pendiente de validacion.\n\nEl Ministerio registra la entrada como no autorizada. Se abre expediente de seguimiento sobre el acceso.\n\nSu decision ha introducido un caso irregular en el sistema de registro del Refugio Civil.",
     "effects": {
@@ -119,7 +146,10 @@
     "day": 1,
     "priority": 130,
     "type": "case",
+    "tone": "neutral",
+    "severity": "minor",
     "trigger_flag": "flag_refugee_detained",
+    "summary_text": "Refugiada retenida en espera de verificacion de sello MAP.",
     "title": "RETENCION — Refugiada en espera de verificacion de sello",
     "body": "Sela Driva y sus hijos han sido retenidos en zona de espera. El sello MAP de su Pase de Transito esta pendiente de validacion.\n\nEl Ministerio de Admision Planetaria ha notificado al Refugio Civil. Se estima resolucion en el siguiente turno.\n\nSu decision aplica el protocolo sin cerrar el caso definitivamente.",
     "effects": {
@@ -131,6 +161,7 @@
     "day": 1,
     "priority": 100,
     "type": "performance",
+    "tone": "positive",
     "title": "Eficiencia registrada — Sin incidentes",
     "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el primer turno de control.\n\nSu expediente se actualiza favorablemente. El Supervisor Halvek no emite observacion. Se considera al operario apto para la continuacion del servicio sin restricciones.",
     "conditions": {
@@ -147,6 +178,7 @@
     "day": 1,
     "priority": 90,
     "type": "performance",
+    "tone": "positive",
     "title": "Turno sin incidentes",
     "body": "El Ministerio de Admision Planetaria registra el cierre del primer turno sin violaciones documentadas.\n\nSu expediente queda marcado como estable. El Supervisor Halvek no requiere reunion de revision.",
     "conditions": {
@@ -161,6 +193,7 @@
     "day": 1,
     "priority": 80,
     "type": "performance",
+    "tone": "mixed",
     "title": "Turno con irregularidades menores",
     "body": "Se registran decisiones incorrectas durante el primer turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recomienda mayor atencion al protocolo en la siguiente jornada. Su expediente recibe marcador de seguimiento.",
     "conditions": {
@@ -176,6 +209,7 @@
     "day": 1,
     "priority": 70,
     "type": "performance",
+    "tone": "negative",
     "title": "Turno deficiente",
     "body": "El numero de errores cometidos supera el margen tolerado por el Ministerio de Admision.\n\nEl Supervisor Halvek solicita revision formal de su expediente. Se aplica penalizacion administrativa. Si el rendimiento no mejora, su continuidad en el Puesto Umbral 7 sera evaluada en la siguiente jornada.",
     "conditions": {
@@ -192,6 +226,7 @@
     "day": 1,
     "priority": 60,
     "type": "performance",
+    "tone": "negative",
     "title": "Turno catastrofico",
     "body": "El registro del primer turno es inaceptable.\n\nSe abre expediente disciplinario en el Oficio de Pureza Civica. El Supervisor Halvek solicita presencia inmediata en sala de revision. Su continuidad en el Puesto Umbral 7 esta en revision activa.\n\nEl Sello no perdona la negligencia.",
     "conditions": {

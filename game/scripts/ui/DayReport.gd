@@ -4,7 +4,7 @@ extends Control
 static var pending_summary: Dictionary = {}
 
 var _is_terminal: bool = false
-var _selected_consequence: Dictionary = {}
+var _report: Dictionary = {}
 var _selected_terminal: Dictionary = {}
 var _debug_panel: PanelContainer
 var _debug_label: Label
@@ -68,17 +68,40 @@ func _populate(summary: Dictionary) -> void:
 		_add_decision_row(decision)
 
 	var day: int = summary.get("day", 1)
-	_selected_consequence = NarrativeConsequenceSystem.evaluate(summary, day)
+	_report = NarrativeConsequenceSystem.evaluate(summary, day)
 	_selected_terminal = TerminalEndingSystem.evaluate(summary)
 	if not _selected_terminal.is_empty():
 		_is_terminal = true
 		_show_terminal_ending(_selected_terminal)
 	else:
-		consequence_title_label.text = str(_selected_consequence.get("title", "CONSECUENCIA"))
-		consequence_text.text = str(_selected_consequence.get("body", ""))
-		var symptom := NarrativeStateSystem.get_narrative_symptom()
-		if symptom != "":
-			consequence_text.text += "\n\n" + symptom
+		_show_normal_report(_report)
+
+func _show_normal_report(report: Dictionary) -> void:
+	var perf := report.get("performance", {})
+	consequence_title_label.text = str(perf.get("title", "TURNO REGISTRADO"))
+
+	var text := str(perf.get("body", ""))
+
+	var incidents: Array = report.get("incidents", [])
+	if not incidents.is_empty():
+		text += "\n\n— INCIDENTES DEL TURNO —"
+		var shown := 0
+		for inc in incidents:
+			if shown >= 3:
+				text += "\n[...y %d incidentes adicionales en expediente]" % (incidents.size() - 3)
+				break
+			text += "\n• " + str(inc.get("summary_text", inc.get("title", "Incidente registrado.")))
+			shown += 1
+
+	var synthesis: String = report.get("synthesis", "")
+	if synthesis != "":
+		text += "\n\n" + synthesis
+
+	var symptom := NarrativeStateSystem.get_narrative_symptom()
+	if symptom != "":
+		text += "\n\n" + symptom
+
+	consequence_text.text = text
 
 func _add_decision_row(decision: Dictionary) -> void:
 	var was_correct: bool = decision.get("was_correct", false)
@@ -262,17 +285,41 @@ func _update_debug_panel() -> void:
 		lines.append("  %s: %d" % [k, acc[k]])
 	lines.append("")
 
-	lines.append("--- CONSECUENCIA SELECCIONADA ---")
-	var c := _selected_consequence
-	if c.is_empty():
-		lines.append("  Neutral (sin datos o sin coincidencia)")
+	lines.append("--- DICTAMEN DE RENDIMIENTO ---")
+	var perf := _report.get("performance", {})
+	if perf.is_empty() or perf.get("id", "") == "neutral":
+		lines.append("  (neutral — sin coincidencia)")
 	else:
-		lines.append("  id:       %s" % c.get("id", "No disponible"))
-		lines.append("  type:     %s" % c.get("type", "No disponible"))
-		lines.append("  priority: %d" % c.get("priority", 0))
-		if c.has("trigger_flag"):
-			lines.append("  flag:     %s" % str(c["trigger_flag"]))
-		lines.append("  title:    %s" % c.get("title", "No disponible"))
+		lines.append("  id:       %s" % perf.get("id", "?"))
+		lines.append("  priority: %d" % perf.get("priority", 0))
+		lines.append("  tone:     %s" % perf.get("tone", "?"))
+		lines.append("  title:    %s" % perf.get("title", "?"))
+	lines.append("")
+
+	lines.append("--- INCIDENTES DE CASO ---")
+	var incidents: Array = _report.get("incidents", [])
+	if incidents.is_empty():
+		lines.append("  (ninguno)")
+	else:
+		for inc in incidents:
+			lines.append("  • %s" % inc.get("id", "?"))
+			lines.append("    flag:     %s" % str(inc.get("trigger_flag", "?")))
+			lines.append("    tone:     %s  severity: %s" % [inc.get("tone", "?"), inc.get("severity", "?")])
+			lines.append("    priority: %d" % inc.get("priority", 0))
+	lines.append("")
+
+	lines.append("--- SINTESIS ---")
+	var synthesis: String = _report.get("synthesis", "")
+	lines.append("  %s" % (synthesis if synthesis != "" else "(sin incidentes — sin sintesis)"))
+	lines.append("")
+
+	lines.append("--- EFECTOS APLICADOS ---")
+	var applied := _report.get("effects_applied", {})
+	if applied.is_empty():
+		lines.append("  (ninguno)")
+	else:
+		for k in applied:
+			lines.append("  %s: %+d" % [k, applied[k]])
 	lines.append("  archivo:  res://data/consequences/consequences_day_%02d.json" % day)
 	lines.append("")
 
