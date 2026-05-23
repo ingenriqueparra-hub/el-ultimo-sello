@@ -1,642 +1,587 @@
-# Plan de assets visuales — El Ultimo Sello
+# Plan visual — Cabina con giro de cuello
 
-Este documento guia la produccion e integracion de assets graficos para la terminal de **El Ultimo Sello**.
+Este documento reemplaza el plan visual anterior. A partir de ahora, la direccion de trabajo para la UI principal de **El Ultimo Sello** es:
 
-Debe consultarse antes de crear, pedir, importar o integrar cualquier asset visual de UI, terminal, documentos, botones, iconos, overlays o pantallas de reporte.
+> Cabina de inspeccion con tres monitores fisicos y cambio de mirada entre monitor izquierdo, central y derecho.
 
-## 1. Proposito
+El objetivo ya no es decorar una UI plana. El objetivo es convertir el puesto de control en una maquina fisica: vieja, pesada, sucia, institucional y legible.
 
-Crear una ruta de trabajo paso a paso para mejorar el apartado grafico sin romper:
+La clave tecnica y visual es que el juego se organiza como **tres pantallas verticales**:
 
-- la legibilidad de la UI;
-- el alcance del MVP;
-- la identidad visual propia;
-- la estructura tecnica de Godot 4;
-- la separacion entre arte, datos y codigo.
+```txt
+Pantalla 1: solicitante/interrogatorio
+Pantalla 2: expediente/documentos
+Pantalla 3: herramientas/alertas/regulaciones
+```
 
-Este documento no reemplaza a `CLAUDE.md`. Lo complementa para tareas visuales.
+En PC horizontal, esas tres pantallas verticales se ven juntas como una cabina de tres monitores.
 
-## 2. Documentos base obligatorios
+En movil vertical, se muestra una pantalla vertical a la vez y se cambia entre ellas con `1/2/3` o tabs tactiles.
 
-Antes de trabajar en assets visuales, consultar:
+Por eso, PC y movil no son dos disenos separados: son dos formas de presentar la misma estructura base.
 
-1. `CLAUDE.md` — reglas principales para agentes.
-2. `PROJECT.md` — vision y direccion visual oficial.
-3. `GAME_DESIGN.md` — funcion jugable de la terminal y documentos.
-4. `TECHNICAL_SPEC.md` — estructura tecnica Godot 4.
-5. `IP_SAFETY.md` — limites visuales para evitar similitud con IP externa.
+Decision tecnica:
 
-Si la tarea es solo produccion grafica, este archivo debe ser la guia operativa principal despues de `CLAUDE.md`.
+- El texto jugable siempre debe ser recto y rectangular.
+- No usar texto en diagonal ni UI deformada en perspectiva.
+- La perspectiva debe venir del arte de fondo, marcos, vidrio, sombras y animacion.
+- Esto protege legibilidad, scroll, botones, tooltips y soporte movil.
 
-## 3. Direccion visual
+## 1. Documentos base
 
-La direccion oficial es:
+Antes de tocar arte, UI o escenas visuales, consultar:
 
-> Retrofuturismo burocratico analogico.
+1. `CLAUDE.md`
+2. `PROJECT.md`
+3. `GAME_DESIGN.md`
+4. `TECHNICAL_SPEC.md`
+5. `IP_SAFETY.md`
 
-La UI debe sentirse como una terminal administrativa vieja, institucional, pesada y opresiva. No debe parecer una interfaz futurista limpia ni depender solo de texto verde plano.
+Este archivo funciona como guia operativa para el apartado visual. Si contradice `CLAUDE.md`, manda `CLAUDE.md`.
 
-Prioridades visuales:
+## 2. Nueva direccion visual
 
-1. Legibilidad.
-2. Tension burocratica.
-3. Identidad propia.
-4. Claridad de decision.
-5. Atmosfera opresiva.
+La pantalla principal debe representar una cabina de control con:
 
-Evitar:
+- monitor izquierdo;
+- monitor central;
+- monitor derecho;
+- consola inferior fisica;
+- vidrio grueso, suciedad, desgaste y scanlines;
+- texto e interfaz encima de cada monitor.
 
-- pixel art como obligacion;
-- hologramas modernos y limpios;
-- UI decorativa que dificulte comparar datos;
-- simbolos o siluetas demasiado cercanas a franquicias existentes;
-- interfaz monocromatica sin jerarquia.
+No queremos una pantalla plana con marcos verdes. Queremos una estacion de inspeccion que parezca usada durante anos por una burocracia decadente.
 
-## 4. Resolucion base y escalado
+La cabina debe tener tres pantallas funcionales:
 
-Resolucion base del juego:
+```txt
+Pantalla 1: monitor izquierdo / solicitante.
+Pantalla 2: monitor central / expediente.
+Pantalla 3: monitor derecho / herramientas.
+```
+
+En PC pueden verse juntas dentro de una cabina horizontal. En movil vertical se navegan una por una.
+
+Intensidad del movimiento:
+
+```txt
+PC horizontal:
+movimiento leve de foco/parallax.
+Las 3 pantallas siguen visibles.
+
+Movil vertical:
+movimiento amplio entre pantallas.
+Solo una pantalla principal visible a la vez.
+```
+
+## 3. Regla de IP
+
+La referencia visual compartida sirve solo como composicion general:
+
+- tres monitores;
+- cabina oscura;
+- pantallas verdes;
+- maquina vieja y opresiva.
+
+No copiar:
+
+- simbolos reconocibles de franquicias existentes;
+- aguilas imperiales reconocibles;
+- composicion exacta;
+- textos, emblemas o iconografia protegida;
+- estilo demasiado cercano a Warhammer 40k.
+
+La version propia debe usar identidad del mundo:
+
+- Ministerio de Admision Planetaria;
+- Puesto Umbral 7;
+- sellos MAP-7;
+- simbolos administrativos propios;
+- marcas industriales originales.
+
+## 4. Distribucion de los tres monitores
+
+### Monitor izquierdo — Solicitante
+
+Contenido:
+
+- numero de solicitante;
+- nombre;
+- origen;
+- destino;
+- motivo;
+- dialogo;
+- preguntas de interrogatorio.
+
+Funcion:
+
+- representar la revision humana del caso;
+- mantener informacion personal y dialogo separados del expediente documental.
+
+### Monitor central — Expediente
+
+Contenido:
+
+- documentos;
+- pestanas de documentos;
+- contenido del documento activo;
+- informe de escaner cuando se use;
+- regulaciones importantes si hace falta.
+
+Funcion:
+
+- ser el foco principal de lectura y comparacion;
+- ocupar el monitor mas grande.
+
+### Monitor derecho — Herramientas
+
+Contenido:
+
+- escaner;
+- alertas;
+- regulaciones;
+- sintomas narrativos o estado institucional futuro.
+
+Funcion:
+
+- concentrar herramientas auxiliares;
+- no competir visualmente con el monitor central.
+
+### Consola inferior — Decisiones
+
+Contenido:
+
+- APROBAR;
+- RETENER;
+- RECHAZAR;
+- indicadores de credito o estado si conviene.
+
+Funcion:
+
+- sentirse como botones fisicos de una consola;
+- mantener decisiones fuera de los monitores.
+
+## 5. Resolucion base
+
+La base conceptual es una pantalla vertical repetible. PC horizontal equivale a tres pantallas verticales juntas.
+
+Base PC:
 
 ```txt
 1280 x 720
-```
-
-Aspecto objetivo:
-
-```txt
 16:9
 ```
 
-Configuracion recomendada en Godot:
+Base movil vertical sugerida:
 
 ```txt
-Viewport Width: 1280
-Viewport Height: 720
-Stretch Mode: canvas_items
-Stretch Aspect: keep
+720 x 1280
+9:16
 ```
 
-Los assets deben disenarse para 1280x720 y dejar que Godot escale la UI. No crear versiones separadas por cada resolucion mientras el objetivo sea PC 16:9.
+Regla:
 
-## 5. Carpeta recomendada
+- Disenar cada pantalla funcional como si pudiera vivir sola en vertical.
+- En PC, componer las tres pantallas en horizontal.
+- En movil, mostrar una pantalla a la vez con controles tactiles.
 
-Crear esta estructura cuando empiece la integracion real:
+## 6. Assets principales requeridos
+
+Los primeros assets reales de esta nueva direccion deben contemplar PC horizontal y pantalla vertical individual:
 
 ```txt
-game/assets/ui/terminal/
-game/assets/ui/panels/
-game/assets/ui/buttons/
-game/assets/ui/icons/
+game/assets/ui/cockpit/cockpit_three_screens_pc.png
+game/assets/ui/cockpit/mobile_screen_frame.png
+```
+
+Medida:
+
+```txt
+cockpit_three_screens_pc.png: 1280 x 720
+mobile_screen_frame.png: 720 x 1280
+```
+
+`cockpit_three_screens_pc.png` debe contener:
+
+- fondo de cabina;
+- tres monitores verticales;
+- marcos fisicos industriales;
+- consola inferior;
+- desgaste, tornillos, metal, polvo;
+- espacios claros donde se colocara texto encima.
+
+`mobile_screen_frame.png` debe contener:
+
+- un monitor vertical casi completo;
+- marco fisico;
+- vidrio/suciedad;
+- espacio central amplio para texto;
+- zona inferior para tabs/decisiones.
+
+No debe contener:
+
+- texto jugable;
+- botones con texto;
+- documentos escritos;
+- iconografia protegida;
+- detalles tan fuertes que impidan leer encima.
+
+## 7. Rectangulos UI base
+
+Los textos y controles actuales deben colocarse dentro de tres rectangulos funcionales. Estos rectangulos deben servir tanto para PC como para movil.
+
+Propuesta PC horizontal:
+
+```txt
+Pantalla 1 / Solicitante:
+x: 24
+y: 88
+w: 360
+h: 500
+
+Pantalla 2 / Expediente:
+x: 410
+y: 78
+w: 460
+h: 520
+
+Pantalla 3 / Herramientas:
+x: 896
+y: 88
+w: 360
+h: 500
+
+Consola inferior:
+x: 180
+y: 620
+w: 920
+h: 80
+```
+
+Propuesta movil vertical:
+
+```txt
+Pantalla activa:
+x: 32
+y: 96
+w: 656
+h: 850
+
+Tabs 1/2/3:
+x: 32
+y: 970
+w: 656
+h: 70
+
+Decisiones:
+x: 32
+y: 1060
+w: 656
+h: 180
+```
+
+Regla:
+
+- Cada pantalla funcional debe poder operar sola.
+- En PC se ven las tres pantallas al mismo tiempo.
+- En movil se muestra una pantalla activa y se cambia con `1/2/3`.
+- No meter los tres monitores completos en movil vertical.
+- No rotar ni inclinar labels, botones o areas de texto.
+- Si una pantalla lateral se ve en perspectiva, su UI jugable debe ir dentro de una zona util rectangular.
+
+## 8. Capas visuales
+
+Orden recomendado:
+
+```txt
+1. fondo de cabina PC o marco movil
+2. UI/texto de Godot dentro de pantalla(s) funcional(es)
+3. scanlines por monitor o globales
+4. vidrio/suciedad encima
+5. foco/parallax leve en PC o transicion amplia en movil
+6. efectos animados sutiles
+```
+
+Importante:
+
+- El vidrio debe ir encima del texto, pero con opacidad baja.
+- La suciedad debe notarse en pantalla completa, no impedir leer.
+- Las animaciones deben ser sutiles.
+
+## 9. Estructura de carpetas
+
+Crear o usar:
+
+```txt
+game/assets/ui/cockpit/
 game/assets/ui/overlays/
-game/assets/fonts/
-```
-
-Si Godot ya tiene una estructura de assets distinta al momento de implementar, respetar la estructura existente y documentar la decision.
-
-## 6. Kit visual minimo del terminal
-
-El primer objetivo no es hacer todo el arte final. Es crear un kit minimo reutilizable:
-
-```txt
-terminal_background.png
-scanline_overlay.png
-panel_frame_9patch.png
-button_normal_9patch.png
-button_hover_9patch.png
-button_pressed_9patch.png
-button_danger_9patch.png
-alert_icon.png
-seal_icon.png
-scanner_frame.png
-```
-
-Este kit debe permitir mejorar:
-
-- pantalla principal del puesto;
-- paneles de documentos;
-- botones de decision;
-- alertas;
-- reporte final del dia;
-- cierres terminales.
-
-## 7. Medidas iniciales recomendadas
-
-Usar estas medidas como punto de partida. La medida definitiva debe verificarse en Godot revisando el `Size` de cada `Control`.
-
-| Asset | Medida base |
-| --- | --- |
-| Fondo completo de terminal | 1280x720 |
-| Overlay de scanlines | 1280x720 |
-| Panel principal | 1200x620 aprox. |
-| Panel de reporte | 1200x500 aprox. |
-| Boton grande | 260x52 aprox. |
-| Boton con dos lineas | 260x60 o 280x64 |
-| Icono pequeno | 24x24 o 32x32 |
-| Icono de alerta | 48x48 o 64x64 |
-| Textura NinePatch | 64x64, 96x96 o 128x128 |
-
-Para paneles y botones escalables, preferir `NinePatchRect` o `StyleBoxTexture` en vez de imagenes planas rigidas.
-
-## 8. Flujo por pasos
-
-## Referencias visuales recibidas
-
-Estas referencias vienen de capturas compartidas por el desarrollador y deben usarse como memoria visual del estado actual antes de crear assets.
-
-### Foto 1 - Pantalla principal durante un caso
-
-Estado observado:
-
-- Resolucion visible: 1280x720.
-- Layout dividido en 4 zonas: encabezado superior, panel izquierdo de solicitante/dialogo, panel central de documentos, panel derecho de herramientas, barra inferior de decisiones.
-- Estilo actual: fondo verde oscuro, lineas finas verde fosforo, texto verde, botones planos de color.
-- Documento principal muy centrado y con mucho espacio vacio.
-- Botones de decision ya tienen jerarquia por color: aprobar verde, retener amarillo/marron, rechazar rojo.
-
-Necesidades visuales:
-
-- Fondo de terminal completo.
-- Marcos/paneles con mas peso institucional.
-- Estilos de botones con estados normal, hover, pressed y disabled.
-- Jerarquia visual mas rica para documentos sin perder lectura.
-
-### Foto 2 - Alerta/escaner activo
-
-Estado observado:
-
-- El resultado del escaner reemplaza el contenido del documento central.
-- Panel derecho muestra estado de escaner usado.
-- El resultado textual es claro, pero visualmente se parece demasiado al documento normal.
-
-Necesidades visuales:
-
-- Asset o marco propio para informe de escaner.
-- Icono de escaner o sello tecnico.
-- Diferenciar visualmente "sin anomalias" de "alerta real".
-- Overlay sutil o cabecera tecnica para que el escaner se sienta como herramienta, no como otro texto plano.
-
-### Foto 3 - Reporte del turno parte 1
-
-Estado observado:
-
-- Reporte usa cabecera superior, bloque de resumen, auditoria del turno y botones inferiores.
-- El scroll vertical aparece en el lado derecho.
-- La auditoria es legible, pero todos los bloques se sienten muy parecidos.
-
-Necesidades visuales:
-
-- Marco de reporte/auditoria institucional.
-- Separadores visuales por expediente.
-- Estilo diferente para resumen, auditoria e incidentes.
-- Mejor jerarquia para "expediente validado/observado".
-
-### Foto 4 - Reporte del turno parte 2
-
-Estado observado:
-
-- La lista larga de expedientes se mantiene legible.
-- Mucho texto comparte el mismo tono verde.
-- Los casos importantes pueden perderse dentro del scroll.
-
-Necesidades visuales:
-
-- Estados visuales por expediente: validado, observado, sancionado, incidente.
-- Pequenos iconos o sellos para destacar entradas relevantes.
-- Espaciado y separadores mas expresivos.
-
-### Foto 5 - Reporte del turno parte 3
-
-Estado observado:
-
-- El bloque final de consecuencia narrativa aparece despues de la auditoria.
-- La consecuencia e incidentes son importantes, pero visualmente no dominan tanto como deberian.
-- Botones inferiores permanecen claros.
-
-Necesidades visuales:
-
-- Panel especial para dictamen de rendimiento.
-- Panel de incidentes del turno.
-- Variante visual de cierre terminal cuando exista.
-- Posible sello institucional o alerta roja/ambar para consecuencias graves.
-
-### Diagnostico visual inicial
-
-La UI actual ya funciona y es legible. El problema no es de estructura, sino de identidad y jerarquia visual. La primera mejora no debe redibujar todo: debe vestir la terminal con assets modulares.
-
-Prioridad recomendada:
-
-1. `terminal_background.png` y `scanline_overlay.png`.
-2. `panel_frame_9patch.png`.
-3. `button_*_9patch.png`.
-4. Marco especial para escaner.
-5. Marco especial para reporte y consecuencia narrativa.
-
-### Paso 1 — Inventario visual actual
-
-Objetivo:
-Registrar que pantallas y controles existen antes de crear assets.
-
-Acciones:
-
-- Revisar escenas principales en `game/scenes/main/`.
-- Revisar scripts UI en `game/scripts/ui/`.
-- Identificar botones, paneles, labels, reportes, alertas y documentos.
-- Anotar medidas aproximadas de los controles principales.
-
-Entregable:
-
-- Lista de elementos UI a intervenir.
-- Medidas base de cada elemento.
-- Prioridad: alta, media o baja.
-
-Criterio de aceptacion:
-
-- Se sabe que asset necesita cada zona de la UI.
-
-#### Inventario realizado - estado actual
-
-Base tecnica observada:
-
-- Escenas revisadas: `ControlDesk.tscn` y `DayReport.tscn`.
-- Scripts UI revisados: `ControlDesk.gd` y `DayReport.gd`.
-- La UI usa `ColorRect`, `PanelContainer`, `VBoxContainer`, `HBoxContainer`, `Button`, `Label` y `ScrollContainer`.
-- Los estilos actuales se aplican por codigo con `StyleBoxFlat`.
-- Esto permite integrar assets progresivamente con `TextureRect`, `NinePatchRect` o `StyleBoxTexture`, sin tocar reglas, decisiones ni JSON.
-
-Resolucion y layout base:
-
-```txt
-Pantalla base: 1280x720
-StatusBar: 44 px alto
-DecisionBar/Footer: 72 px alto
-Area principal aproximada: 1280x604
-Panel solicitante: 270 px ancho
-Panel herramientas: 190 px ancho
-Panel documentos: ancho flexible, aprox. 820 px
-Botones principales: 220x52 px
-Botones de reporte: 280x50 px
-```
-
-| Zona | Nodo / escena | Medida aproximada | Asset recomendado | Prioridad |
-| --- | --- | --- | --- | --- |
-| Fondo general de terminal | `BG` en `ControlDesk` y `DayReport` | 1280x720 | `terminal_background.png` + `scanline_overlay.png` | Alta |
-| Barra superior del puesto | `StatusBar` | 1280x44 | `panel_header_9patch.png` o estilo compartido | Media |
-| Panel solicitante | `ApplicantPanel` | 270x604 aprox. | `panel_frame_9patch.png` | Alta |
-| Panel documentos | `DocumentArea` | 820x604 aprox. | `panel_frame_9patch.png` | Alta |
-| Vista interna de documento | `DocumentView` | 796x522 aprox. | `document_view_9patch.png` | Alta |
-| Pestañas de documentos | `Tab1`, `Tab2`, `Tab3` | 260x28 aprox. cada una | `tab_active_9patch.png`, `tab_inactive_9patch.png`, `tab_disabled_9patch.png` | Media |
-| Panel herramientas | `ToolsPanel` | 190x604 aprox. | `panel_frame_9patch.png` | Alta |
-| Boton escaner | `ScannerButton` | 174x34 aprox. | `button_tool_9patch.png`, icono opcional | Alta |
-| Pestañas alertas/regulaciones | `TabAlertas`, `TabRegs` | 85x25 aprox. | `tab_small_*_9patch.png` | Baja |
-| Barra inferior decisiones | `DecisionBar` | 1280x72 | `panel_footer_9patch.png` | Media |
-| Botones aprobar/retener/rechazar | `ApproveButton`, `HoldButton`, `RejectButton` | 220x52 | `button_approve_*_9patch.png`, `button_hold_*_9patch.png`, `button_reject_*_9patch.png` | Alta |
-| Botones de preguntas | creados por `ControlDesk.gd` | 250x30 aprox. | `button_question_9patch.png` | Media |
-| Reporte - cabecera | `Header` en `DayReport` | 1280x52 | `panel_header_9patch.png` | Media |
-| Reporte - resumen | `SummaryPanel` | 1260x150 aprox. variable | `report_summary_9patch.png` | Media |
-| Reporte - auditoria | `DecisionsPanel` | 1260xvariable | `report_audit_9patch.png` | Alta |
-| Reporte - consecuencia | `ConsequencePanel` | 1260xvariable | `report_consequence_9patch.png` | Alta |
-| Reporte - cierre terminal | `ConsequencePanel` con estilo rojo | 1260xvariable | `report_terminal_9patch.png` | Alta |
-| Reporte - botones inferiores | `RestartBtn`, continue button dinamico | 280x50 | `button_report_*_9patch.png` | Media |
-| Debug con Y | panel dinamico | 390-420 px ancho | Mantener estilo tecnico simple, no prioridad de arte | Baja |
-
-#### Lectura de riesgo visual
-
-- Riesgo principal: que el overlay o los marcos decorativos reduzcan la legibilidad.
-- Riesgo secundario: que botones con texturas fijas no soporten dos lineas, especialmente `RETENER / Enviar a revision`.
-- Riesgo tecnico: actualmente no hay carpeta `game/assets/`; se debe crear recien en Paso 3.
-- Decision recomendada: comenzar con assets `NinePatch` para paneles y botones, mas un fondo/overlay en `TextureRect`.
-
-### Paso 2 — Definir kit grafico minimo
-
-Objetivo:
-Decidir exactamente que imagenes se van a producir primero.
-
-Acciones:
-
-- Confirmar el kit minimo del punto 6.
-- Definir si cada asset sera `PNG`, `WEBP`, `SVG` o NinePatch.
-- Definir nombres finales de archivo.
-- Definir que pantalla usara cada asset.
-
-Entregable:
-
-- Tabla de assets con nombre, formato, medida y uso.
-
-Criterio de aceptacion:
-
-- No hay assets ambiguos ni duplicados innecesarios.
-
-#### Kit grafico minimo definido
-
-El kit se divide en dos tandas. La primera tanda debe producirse antes de integrar arte en escenas. La segunda queda preparada para cuando el primer look funcione en juego.
-
-##### Tanda 1 - Integracion visual base
-
-| Archivo final | Carpeta destino | Formato | Medida base | Tipo Godot recomendado | Uso |
-| --- | --- | --- | --- | --- | --- |
-| `terminal_background.png` | `game/assets/ui/terminal/` | PNG | 1280x720 | `TextureRect` | Fondo general del puesto y reporte. Debe ser oscuro, sobrio y no competir con texto. |
-| `scanline_overlay.png` | `game/assets/ui/overlays/` | PNG con alpha | 1280x720 | `TextureRect` | Scanlines, ruido o desgaste sutil. Opacidad baja. |
-| `panel_frame_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` / `NinePatchRect` | Panel general reutilizable para solicitante, documentos, herramientas y bloques de reporte. |
-| `document_view_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` / `NinePatchRect` | Interior del documento o area central de lectura. Debe ser mas oscuro que el panel general. |
-| `button_approve_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x64 | `StyleBoxTexture` | Boton APROBAR. Verde institucional, legible. |
-| `button_hold_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x64 | `StyleBoxTexture` | Boton RETENER. Debe soportar dos lineas de texto. |
-| `button_reject_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x64 | `StyleBoxTexture` | Boton RECHAZAR. Rojo oscuro, grave, no chillón. |
-| `button_tool_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x48 | `StyleBoxTexture` | Boton de ESCANER y herramientas. Azul/verde tecnico. |
-| `scanner_frame_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` / `NinePatchRect` | Variante visual para informe de escaner dentro del panel central. |
-
-##### Tanda 2 - Reporte, estados e iconos
-
-| Archivo final | Carpeta destino | Formato | Medida base | Tipo Godot recomendado | Uso |
-| --- | --- | --- | --- | --- | --- |
-| `report_summary_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` | Bloque RESUMEN del reporte. |
-| `report_audit_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` | Bloque AUDITORIA DEL TURNO. |
-| `report_consequence_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` | Dictamen de rendimiento e incidentes. |
-| `report_terminal_9patch.png` | `game/assets/ui/panels/` | PNG NinePatch | 96x96 o 128x128 | `StyleBoxTexture` | Cierre terminal. Variante roja/ambar de emergencia. |
-| `tab_active_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x32 | `StyleBoxTexture` | Pestaña activa de documentos y herramientas. |
-| `tab_inactive_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x32 | `StyleBoxTexture` | Pestaña inactiva. |
-| `tab_disabled_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x32 | `StyleBoxTexture` | Pestaña bloqueada o documento ausente. |
-| `button_question_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 96x40 | `StyleBoxTexture` | Botones de interrogatorio. |
-| `button_report_9patch.png` | `game/assets/ui/buttons/` | PNG NinePatch | 128x64 | `StyleBoxTexture` | Reiniciar dia / continuar dia. |
-| `alert_icon.png` | `game/assets/ui/icons/` | PNG con alpha | 32x32 o 48x48 | `TextureRect` | Alertas de regla, riesgo o consecuencia. |
-| `seal_icon.png` | `game/assets/ui/icons/` | PNG con alpha | 32x32 o 48x48 | `TextureRect` | Sello institucional, validacion o auditoria. |
-| `scanner_icon.png` | `game/assets/ui/icons/` | PNG con alpha | 32x32 | `TextureRect` | Boton o encabezado de escaner. |
-
-#### Estados por asset
-
-Para botones, evitar crear cuatro archivos por estado al inicio. Primero producir una textura base por tipo de boton y usar modulacion o estilos en Godot para:
-
-- normal;
-- hover;
-- pressed;
-- disabled.
-
-Solo crear archivos separados por estado si la textura base no escala bien o si el resultado visual queda pobre.
-
-#### Reglas para los NinePatch
-
-- Mantener esquinas y bordes con detalle.
-- Dejar el centro simple y oscuro.
-- No poner texto dentro del asset.
-- Reservar margenes internos amplios para labels.
-- Diseñar pensando en escalado horizontal y vertical.
-
-Medidas recomendadas:
-
-```txt
-Paneles: 128x128
-Botones principales: 96x64
-Botones pequenos/tabs: 96x32 o 96x40
-Iconos: 32x32 o 48x48
-Fondos/overlays: 1280x720
-```
-
-#### Criterio de cierre del Paso 2
-
-El Paso 2 queda cerrado con esta lista. Para pasar al Paso 3 no hace falta crear todos los assets: basta con producir o importar la Tanda 1.
-
-### Paso 3 — Crear o importar assets base
-
-Objetivo:
-Generar o incorporar los archivos graficos sin conectarlos todavia a la logica.
-
-Acciones:
-
-- Crear las carpetas de assets.
-- Importar los archivos.
-- Mantener nombres simples y consistentes.
-- Evitar referencias visuales de IP externa.
-
-Entregable:
-
-- Assets dentro de `game/assets/`.
-
-Criterio de aceptacion:
-
-- Godot importa los assets sin errores.
-
-#### Paso 3 ejecutado - Tanda 1 base
-
-Se creo la estructura inicial de carpetas:
-
-```txt
-game/assets/ui/terminal/
-game/assets/ui/panels/
 game/assets/ui/buttons/
-game/assets/ui/icons/
-game/assets/ui/overlays/
-game/assets/fonts/
+game/assets/ui/panels/
 ```
 
-Assets base generados:
+Assets nuevos previstos:
 
-| Archivo | Estado | Nota |
-| --- | --- | --- |
-| `game/assets/ui/terminal/terminal_background.png` | Creado | Fondo 1280x720 oscuro con grilla institucional sutil. |
-| `game/assets/ui/overlays/scanline_overlay.png` | Creado | Overlay 1280x720 con scanlines transparentes. |
-| `game/assets/ui/panels/panel_frame_9patch.png` | Creado | Marco general 128x128. |
-| `game/assets/ui/panels/document_view_9patch.png` | Creado | Marco oscuro para area de documento. |
-| `game/assets/ui/panels/scanner_frame_9patch.png` | Creado | Marco tecnico azulado para informe de escaner. |
-| `game/assets/ui/buttons/button_approve_9patch.png` | Creado | Base verde para aprobar. |
-| `game/assets/ui/buttons/button_hold_9patch.png` | Creado | Base ambar para retener. |
-| `game/assets/ui/buttons/button_reject_9patch.png` | Creado | Base roja para rechazar. |
-| `game/assets/ui/buttons/button_tool_9patch.png` | Creado | Base azul/tecnica para escaner y herramientas. |
+```txt
+cockpit_three_screens_pc.png
+mobile_screen_frame.png
+monitor_glass_left.png
+monitor_glass_center.png
+monitor_glass_right.png
+monitor_scanlines.png
+console_button_frame_9patch.png
+scan_sweep_overlay.png
+glitch_band_overlay.png
+```
+
+## 10. Fases de implementacion
+
+### Paso 1 — Mockups base PC + movil
+
+Objetivo:
+
+Crear o importar los dos fondos base que comparten la misma estructura de tres pantallas:
+
+Archivos:
+
+- `game/assets/ui/cockpit/cockpit_three_screens_pc.png`
+- `game/assets/ui/cockpit/mobile_screen_frame.png`
+
+Criterio de aceptacion:
+
+- La cabina PC se entiende sin texto.
+- Las tres pantallas PC tienen espacio suficiente para UI legible.
+- El marco movil permite mostrar una pantalla vertical completa.
+- Ambos formatos comparten la misma logica 1/2/3.
+- No hay iconografia riesgosa.
+
+Estado:
+
+```txt
+Ejecutado como mockup base reemplazable.
+```
+
+Assets creados:
+
+```txt
+game/assets/ui/cockpit/cockpit_three_screens_pc.png
+game/assets/ui/cockpit/mobile_screen_frame.png
+```
 
 Notas:
 
-- Estos assets son una primera base funcional, no arte final.
-- Deben poder reemplazarse por versiones mejores sin cambiar nombres ni rutas.
-- Antes de integrarlos en escenas, Godot debe importarlos y generar sus `.import`.
-- El siguiente paso debe probarlos en UI real y ajustar margen/escala si el NinePatch se deforma.
+- Son placeholders funcionales para medir y reorganizar UI.
+- No son arte final.
+- Mantienen texto fuera de la imagen.
+- Permiten avanzar al Paso 2: medir rectangulos exactos.
 
-### Paso 4 — Integrar fondo, overlays y marcos
+### Paso 2 — Medir monitores
 
 Objetivo:
-Aplicar el look de terminal sin cambiar reglas, decisiones ni datos.
 
-Acciones:
-
-- Usar `TextureRect` para fondo completo.
-- Usar overlay sutil para scanlines/glitch.
-- Usar `NinePatchRect` o estilos equivalentes para paneles.
-- Mantener texto legible.
+Definir rectangulos exactos para PC y movil.
 
 Entregable:
 
-- Terminal principal con identidad visual mejorada.
+```txt
+pc_screen_1_rect
+pc_screen_2_rect
+pc_screen_3_rect
+pc_console_rect
+mobile_active_screen_rect
+mobile_tabs_rect
+mobile_decisions_rect
+```
 
 Criterio de aceptacion:
 
-- La pantalla se ve mas propia sin perder claridad.
+- Cada panel actual tiene un destino claro.
+- El texto cabe dentro de cada monitor.
 
-#### Paso 4 ejecutado - Integracion base
-
-Archivos modificados:
-
-- `game/scripts/ui/ControlDesk.gd`
-- `game/scripts/ui/DayReport.gd`
-
-Integrado:
-
-- Fondo visual `terminal_background.png` como `TextureRect` de pantalla completa.
-- Overlay `scanline_overlay.png` como capa superior con opacidad baja y `mouse_filter = ignore`.
-- `panel_frame_9patch.png` como base para paneles principales.
-- `document_view_9patch.png` para el area interna de documentos.
-- `scanner_frame_9patch.png` para el informe de escaner.
-- Botones principales usando texturas base:
-  - `button_approve_9patch.png`
-  - `button_hold_9patch.png`
-  - `button_reject_9patch.png`
-  - `button_tool_9patch.png`
-
-Decisiones tecnicas:
-
-- La integracion se hizo por codigo para evitar reestructurar escenas.
-- Si un asset no carga, el sistema cae al estilo plano anterior.
-- El escaner cambia temporalmente el marco del area central y vuelve al marco de documento al seleccionar/cargar documentos.
-- Los estados `hover`, `pressed` y `disabled` se generan por modulacion de la textura base, no con archivos separados.
-
-Pendiente de validacion:
-
-- Abrir Godot para que genere `.import`.
-- Revisar si los margenes NinePatch necesitan ajuste fino.
-- Confirmar que el overlay no reduce legibilidad.
-- Confirmar que `RETENER / Enviar a revision` sigue cabiendo bien.
-
-#### Correccion visual inmediata
-
-La primera version de assets resulto demasiado brillante y decorativa: los marcos parecian tubos neon y no una terminal burocratica. Se reemplazaron por una version mas sobria:
-
-- fondo casi plano, oscuro, con lineas horizontales muy sutiles;
-- marcos NinePatch sin dobles bordes internos;
-- botones menos luminosos;
-- overlay de scanlines reducido de `0.22` a `0.10`;
-- modulacion de botones reducida de `lightened(0.35)` a `lightened(0.08)`.
-
-Regla aprendida:
-
-- La terminal debe sentirse vieja, pesada e institucional, no una interfaz de energia/circuitos.
-- Los assets deben agregar textura y peso, no dominar sobre el texto.
-
-#### Capa de envejecimiento agregada
-
-Para evitar que la UI se vea demasiado limpia, se agregaron capas de desgaste separadas de los marcos:
-
-| Archivo | Uso | Opacidad inicial |
-| --- | --- | --- |
-| `game/assets/ui/overlays/grime_overlay.png` | polvo, manchas, rayones y suciedad general de pantalla | `0.24` |
-| `game/assets/ui/overlays/crt_wear_overlay.png` | bandas oscuras, desgaste CRT y borde quemado sutil | `0.12` |
-| `game/assets/ui/overlays/terminal_watermark.png` | marca institucional tenue MAP-7 / Ministerio | `0.20` |
-| `game/assets/ui/overlays/glass_overlay.png` | vidrio grueso del monitor: tinte opaco, reflejo muerto, manchas y viñeta | `0.34` |
-
-Integracion:
-
-- `ControlDesk.gd`
-- `DayReport.gd`
-
-Regla de uso:
-
-- La suciedad debe ir como overlay transparente, no dentro de todos los paneles.
-- Si dificulta lectura, bajar opacidad antes de redibujar assets.
-- No usar detalles brillantes ni circuitos visibles como decoracion principal.
-- El vidrio debe sentirse como una capa fisica sobre la pantalla, no como un fondo decorativo.
-
-### Paso 5 — Integrar botones e iconos
+### Paso 3 — Reorganizar ControlDesk
 
 Objetivo:
-Mejorar las acciones del jugador y la lectura de alertas.
 
-Acciones:
+Adaptar la escena principal a la cabina sin cambiar logica de juego.
 
-- Aplicar estilos a aprobar, rechazar y retener.
-- Mantener labels claros:
-  - `APROBAR`
-  - `RECHAZAR`
-  - `RETENER`
-- Para `RETENER`, mantener subtitulo:
-  - `Enviar a revision`
-- Agregar tooltip:
-  - `Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior.`
-- Agregar iconos solo si ayudan a leer la accion.
+Cambios:
 
-Entregable:
+- Fondo de cabina full screen segun vista activa.
+- PC: tres pantallas visibles al mismo tiempo.
+- Movil: una pantalla activa visible.
+- Pantalla 1: panel solicitante/interrogatorio.
+- Pantalla 2: documentos/escaner.
+- Pantalla 3: herramientas/alertas/regulaciones.
+- Botones de decision sobre consola inferior.
 
-- Botones de decision y alertas visualmente diferenciados.
+No tocar:
+
+- reglas;
+- JSON;
+- DecisionSystem;
+- RuleEngine;
+- NarrativeState;
+- flujo de dias.
 
 Criterio de aceptacion:
 
-- El jugador entiende cada accion sin explicar el sistema fuera de la UI.
+- El juego funciona igual.
+- La UI se percibe como una cabina de tres pantallas en PC.
+- La UI se percibe como un monitor vertical navegable en movil.
+- Se puede aprobar, rechazar, retener, escanear y preguntar igual que antes.
+- El texto permanece recto y legible en todos los modos.
 
-### Paso 6 — Mejorar documentos y reportes
+### Paso 4 — Navegacion 1/2/3 y giro de mirada
 
 Objetivo:
-Hacer que documentos y auditoria final sean mas memorables sin ocultar informacion.
 
-Acciones:
+Implementar la navegacion entre pantallas como parte del flujo principal de la UI.
 
-- Diferenciar visualmente tipos de documentos.
-- Aplicar marcos o cabeceras por documento.
-- Mantener campos comparables.
-- Mejorar jerarquia en reporte final: resumen, auditoria, incidentes, cierre terminal.
+Controles:
 
-Entregable:
+```txt
+1 = pantalla solicitante/interrogatorio
+2 = pantalla expediente/documentos
+3 = pantalla herramientas/alertas/regulaciones
+```
 
-- Documentos y reporte con mayor identidad institucional.
+Comportamiento PC:
+
+- Las tres pantallas siguen visibles.
+- La pantalla activa recibe foco visual.
+- Las pantallas no activas bajan intensidad o quedan como contexto.
+- El cambio debe sentirse como enfocar otro monitor, no como cambiar de menu.
+- El movimiento debe ser leve: pequeno parallax, pulso de brillo o desplazamiento sutil.
+
+Comportamiento movil:
+
+- Solo una pantalla principal queda visible.
+- `1/2/3` o tabs tactiles cambian la pantalla activa.
+- El cambio puede ser amplio: slide, paneo o transicion de mirada.
+- La pantalla activa ocupa casi todo el espacio vertical disponible.
+
+No hacer:
+
+- No rotar texto.
+- No deformar UI con perspectiva.
+- No ocultar botones de decision durante el cambio.
+- No perder estado del caso, documento activo, alertas ni escaner usado.
 
 Criterio de aceptacion:
 
-- La comparacion de datos sigue siendo rapida.
+- `1/2/3` cambia pantalla activa sin romper otros atajos.
+- En PC se entiende que el jugador enfoca otra pantalla.
+- En movil se entiende que el jugador cambia a otra pantalla vertical.
+- El texto sigue recto y legible.
+- El estado del caso no se reinicia al cambiar de pantalla.
 
-### Paso 7 — QA visual
+### Paso 5 — Adaptar DayReport
 
 Objetivo:
-Validar que el arte no rompa la usabilidad.
 
-Acciones:
+Mostrar el reporte usando la misma cabina o una variante de pantalla de auditoria.
 
-- Probar en 1280x720.
-- Probar escalado 1920x1080 si es posible.
-- Revisar que no haya texto cortado.
-- Revisar contraste de texto.
-- Revisar que overlays no tapen informacion.
-- Revisar que botones sigan siendo clicables.
+Opciones:
 
-Entregable:
-
-- Lista de ajustes visuales.
+- usar vista central para reporte principal;
+- en PC, usar laterales para resumen/incidentes;
+- en movil, usar pantallas 1/2/3 para resumen, auditoria e incidentes;
+- mantener reporte actual temporalmente si el cambio pone en riesgo el MVP.
 
 Criterio de aceptacion:
 
-- La UI se ve mejor y se juega igual o mas claro que antes.
+- El reporte sigue siendo legible.
+- No se pierde informacion de auditoria.
 
-## 9. Reglas de integracion en Godot
+### Paso 6 — Vidrio y suciedad por monitor
 
-- Fondos completos: `TextureRect` con layout full rect.
-- Paneles escalables: `NinePatchRect` o `StyleBoxTexture`.
-- Botones escalables: estilos por estado normal, hover, pressed y disabled.
-- Iconos simples: preferir PNG pequeno o SVG propio.
-- Overlays: usar transparencia baja para no dañar lectura.
-- Fuentes: importar en `game/assets/fonts/` y probar acentos si hay textos en espanol.
-- No meter textos importantes dentro de imagenes si cambian por idioma o balance.
+Objetivo:
 
-## 10. Criterios de aceptacion generales
+Aplicar capas de vidrio fisico encima de cada monitor.
 
-Un asset esta listo cuando:
+Assets:
 
-- respeta la direccion visual;
-- no copia IP externa;
-- funciona en 1280x720;
-- escala sin deformarse cuando corresponde;
-- no reduce legibilidad;
-- tiene nombre claro;
-- esta ubicado en la carpeta correcta;
-- puede ser reemplazado sin tocar logica jugable.
+```txt
+monitor_glass_left.png
+monitor_glass_center.png
+monitor_glass_right.png
+```
 
-## 11. Pendientes futuros
+Criterio de aceptacion:
 
-Estos puntos quedan para cuando el kit minimo funcione:
+- Se siente como vidrio grueso y viejo.
+- No tapa texto.
 
-- variante visual para Dia 4 en adelante;
-- estados de dano o alerta de terminal;
-- animaciones sutiles de pantalla;
-- vista del solicitante fuera de la terminal;
-- identidad visual por faccion o institucion;
-- assets para pagina de Steam y screenshots.
+### Paso 7 — Animaciones sutiles
+
+Objetivo:
+
+Agregar vida de terminal sin convertirlo en arcade.
+
+Efectos:
+
+- flicker muy leve;
+- barrido horizontal;
+- glitch corto al cambiar solicitante;
+- barrido de escaner;
+- pulso suave en alertas.
+
+Implementacion recomendada:
+
+```txt
+game/scripts/ui/TerminalEffects.gd
+```
+
+Criterio de aceptacion:
+
+- La cabina se siente viva.
+- No distrae de leer documentos.
+
+### Paso 8 — QA visual
+
+Objetivo:
+
+Validar que el cambio grande no rompa la jugabilidad.
+
+Checklist:
+
+- texto legible en 1280x720;
+- texto legible en 720x1280;
+- botones clicables;
+- botones tactiles grandes en movil;
+- scroll si hace falta;
+- preguntas caben en pantalla 1;
+- documentos caben en pantalla 2;
+- alertas caben en pantalla 3;
+- teclas `1/2/3` cambian de vista sin romper atajos actuales;
+- debug con Y no queda inutilizable;
+- reporte final sigue claro.
+
+## 11. Reglas de diseno
+
+- Primero cabina, despues efectos.
+- Primero legibilidad, despues suciedad.
+- Primero estructura comun PC/movil, despues perspectiva decorativa.
+- Texto recto siempre; perspectiva solo en arte y efectos.
+- No poner texto jugable dentro de imagenes.
+- No hacer todo verde brillante.
+- No usar simbolos de IP externa.
+- No redisenar sistemas de juego durante este cambio.
+- Mantener el cambio dividido en fases.
+
+## 12. Estado actual
+
+Estado:
+
+```txt
+Paso 1 ejecutado con mockups base reemplazables.
+Pendiente Paso 2: medir rectangulos exactos para PC y movil.
+```
+
+Notas:
+
+- Los assets anteriores de overlays y paneles pueden quedar como material temporal.
+- La direccion anterior de UI plana queda descartada como objetivo final.
+- El foco base ahora es comun: tres pantallas verticales.
+- PC horizontal muestra las tres pantallas juntas.
+- Movil vertical muestra una pantalla a la vez.
+- El siguiente trabajo debe empezar por `cockpit_three_screens_pc.png` y `mobile_screen_frame.png`.
