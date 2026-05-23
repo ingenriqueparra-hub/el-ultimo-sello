@@ -15,6 +15,16 @@ const COLOR_REJECT := Color(0.42, 0.06, 0.06, 1)
 const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
+const ASSET_TERMINAL_BG := "res://assets/ui/terminal/terminal_background.png"
+const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
+const ASSET_PANEL_FRAME := "res://assets/ui/panels/panel_frame_9patch.png"
+const ASSET_DOCUMENT_VIEW := "res://assets/ui/panels/document_view_9patch.png"
+const ASSET_SCANNER_FRAME := "res://assets/ui/panels/scanner_frame_9patch.png"
+const ASSET_BUTTON_APPROVE := "res://assets/ui/buttons/button_approve_9patch.png"
+const ASSET_BUTTON_HOLD := "res://assets/ui/buttons/button_hold_9patch.png"
+const ASSET_BUTTON_REJECT := "res://assets/ui/buttons/button_reject_9patch.png"
+const ASSET_BUTTON_TOOL := "res://assets/ui/buttons/button_tool_9patch.png"
+
 @onready var day_label: Label = $VBox/StatusBar/StatusHBox/DayLabel
 @onready var credits_label: Label = $VBox/StatusBar/StatusHBox/CreditsLabel
 @onready var panel_title: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/PanelTitle
@@ -60,6 +70,7 @@ var _debug_panel: PanelContainer
 var _debug_label: Label
 
 func _ready() -> void:
+	_install_visual_layers()
 	_apply_theme()
 	_setup_tools_tabs()
 	approve_btn.text = "APROBAR (A)"
@@ -151,15 +162,19 @@ func _apply_theme() -> void:
 	_style_panel($VBox/MainArea/DocumentArea, COLOR_PANEL, COLOR_BORDER)
 	_style_panel($VBox/MainArea/ToolsPanel, COLOR_PANEL, COLOR_BORDER)
 	_style_panel($VBox/DecisionBar, COLOR_PANEL, COLOR_BORDER)
-	_style_panel($VBox/MainArea/DocumentArea/DocumentVBox/DocumentView, COLOR_PANEL_DARK, COLOR_BORDER)
-	_style_button(approve_btn, COLOR_APPROVE)
-	_style_button(hold_btn, COLOR_HOLD)
-	_style_button(reject_btn, COLOR_REJECT)
-	_style_button(scanner_btn, COLOR_TOOL)
+	_style_document_view(false)
+	_style_button(approve_btn, COLOR_APPROVE, ASSET_BUTTON_APPROVE)
+	_style_button(hold_btn, COLOR_HOLD, ASSET_BUTTON_HOLD)
+	_style_button(reject_btn, COLOR_REJECT, ASSET_BUTTON_REJECT)
+	_style_button(scanner_btn, COLOR_TOOL, ASSET_BUTTON_TOOL)
 	_apply_labels_color(self)
 	_style_tab_buttons()
 
 func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
+	var textured := _make_texture_style(ASSET_PANEL_FRAME, 14, 8)
+	if textured != null:
+		panel.add_theme_stylebox_override("panel", textured)
+		return
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg
 	style.border_color = border
@@ -167,30 +182,11 @@ func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
 	style.set_content_margin_all(8)
 	panel.add_theme_stylebox_override("panel", style)
 
-func _style_button(btn: Button, color: Color) -> void:
-	var s_normal := StyleBoxFlat.new()
-	s_normal.bg_color = color
-	s_normal.border_color = color.lightened(0.3)
-	s_normal.set_border_width_all(1)
-	s_normal.set_content_margin_all(8)
-
-	var s_hover := StyleBoxFlat.new()
-	s_hover.bg_color = color.lightened(0.2)
-	s_hover.border_color = color.lightened(0.5)
-	s_hover.set_border_width_all(1)
-	s_hover.set_content_margin_all(8)
-
-	var s_pressed := StyleBoxFlat.new()
-	s_pressed.bg_color = color.darkened(0.2)
-	s_pressed.border_color = color.lightened(0.3)
-	s_pressed.set_border_width_all(1)
-	s_pressed.set_content_margin_all(8)
-
-	var s_disabled := StyleBoxFlat.new()
-	s_disabled.bg_color = color.darkened(0.5)
-	s_disabled.border_color = color.darkened(0.3)
-	s_disabled.set_border_width_all(1)
-	s_disabled.set_content_margin_all(8)
+func _style_button(btn: Button, color: Color, texture_path: String = "") -> void:
+	var s_normal: StyleBox = _make_button_style(texture_path, color)
+	var s_hover: StyleBox = _make_button_style(texture_path, color.lightened(0.18))
+	var s_pressed: StyleBox = _make_button_style(texture_path, color.darkened(0.18))
+	var s_disabled: StyleBox = _make_button_style(texture_path, color.darkened(0.45))
 
 	btn.add_theme_stylebox_override("normal", s_normal)
 	btn.add_theme_stylebox_override("hover", s_hover)
@@ -199,6 +195,59 @@ func _style_button(btn: Button, color: Color) -> void:
 	btn.add_theme_color_override("font_color", Color(0.9, 0.95, 0.9, 1))
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", Color(0.4, 0.45, 0.4, 1))
+
+func _install_visual_layers() -> void:
+	_add_full_rect_texture(ASSET_TERMINAL_BG, -10, 1.0, "TerminalBackground")
+	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.22, "ScanlineOverlay")
+
+func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
+	if get_node_or_null(node_name) != null:
+		return
+	var texture := load(path)
+	if texture == null:
+		return
+	var rect := TextureRect.new()
+	rect.name = node_name
+	rect.texture = texture
+	rect.stretch_mode = TextureRect.STRETCH_SCALE
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.z_index = z
+	rect.modulate = Color(1, 1, 1, alpha)
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(rect)
+	if node_name == "TerminalBackground":
+		move_child(rect, 1)
+
+func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
+	var texture := load(path)
+	if texture == null:
+		return null
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.set_texture_margin_all(texture_margin)
+	style.set_content_margin_all(content_margin)
+	style.draw_center = true
+	return style
+
+func _make_button_style(path: String, color: Color) -> StyleBox:
+	var textured := _make_texture_style(path, 10, 8)
+	if textured != null:
+		textured.modulate_color = color.lightened(0.35)
+		return textured
+	var flat := StyleBoxFlat.new()
+	flat.bg_color = color
+	flat.border_color = color.lightened(0.3)
+	flat.set_border_width_all(1)
+	flat.set_content_margin_all(8)
+	return flat
+
+func _style_document_view(scanner_mode: bool) -> void:
+	var path := ASSET_SCANNER_FRAME if scanner_mode else ASSET_DOCUMENT_VIEW
+	var textured := _make_texture_style(path, 16, 8)
+	if textured != null:
+		$VBox/MainArea/DocumentArea/DocumentVBox/DocumentView.add_theme_stylebox_override("panel", textured)
+		return
+	_style_panel($VBox/MainArea/DocumentArea/DocumentVBox/DocumentView, COLOR_PANEL_DARK, COLOR_BORDER)
 
 func _apply_labels_color(node: Node) -> void:
 	for child in node.get_children():
@@ -316,6 +365,7 @@ func _on_scanner_pressed() -> void:
 	scanner_btn.text = "[ ESCANER USADO ]"
 
 func _show_scan_results() -> void:
+	_style_document_view(true)
 	var applicant := queue.get_current()
 	var flags: Array = applicant.get("flags", [])
 	var risk: String = applicant.get("truth", {}).get("risk_level", "low")
@@ -393,6 +443,7 @@ func _run_rules(applicant: Dictionary) -> void:
 # --- Sistema de documentos ---
 
 func _load_applicant_documents(applicant: Dictionary) -> void:
+	_style_document_view(false)
 	_applicant_docs = {}
 	for doc_id in applicant.get("documents", []):
 		if documents.has(doc_id):
@@ -414,6 +465,7 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	if not _applicant_docs.has(dtype):
 		return
+	_style_document_view(false)
 	_set_active_tab(active_btn)
 	_render_document(_applicant_docs[dtype])
 

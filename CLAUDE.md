@@ -228,6 +228,28 @@ Usar cuando la tarea tenga que ver con:
 
 ---
 
+### 2.9. `VISUAL_ASSET_PLAN.md`
+
+Fuente principal de:
+
+- produccion de assets visuales;
+- medidas base de UI;
+- estructura de carpetas para assets;
+- flujo por pasos para integrar arte en Godot;
+- criterios de aceptacion visual.
+
+Usar cuando la tarea tenga que ver con:
+
+- terminal;
+- botones;
+- iconos;
+- overlays;
+- documentos visuales;
+- reportes;
+- importacion o generacion de assets graficos.
+
+---
+
 ## 3. Reglas de consulta obligatoria
 
 Si la tarea requiere código, consultar primero:
@@ -259,6 +281,14 @@ Si la tarea afecta estética, símbolos, marketing público o referencias de fra
 1. `IP_SAFETY.md`
 2. `STEAM_MARKETING.md`
 3. `PROJECT.md`
+
+Si la tarea afecta assets visuales de UI, terminal, documentos, botones, iconos u overlays, consultar primero:
+
+1. `VISUAL_ASSET_PLAN.md`
+2. `PROJECT.md`
+3. `TECHNICAL_SPEC.md`
+4. `GAME_DESIGN.md`
+5. `IP_SAFETY.md`
 
 ---
 
