@@ -869,6 +869,7 @@ Cuando el agente trabaje interfaz:
 5. El jugador debe poder tomar una decisión con pocos clics.
 6. Los errores deben ser entendibles después del reporte.
 7. La UI del MVP puede ser simple, pero debe ser clara.
+8. No sobreescribir labels estáticos definidos en la escena. Si un nodo tiene texto fijo en el `.tscn` (nombre de pestaña, etiqueta de botón, título de sección) y ese texto no cambia con datos del juego, el código no debe asignar `.text` sobre ese nodo. Solo asignar `.text` por código cuando el contenido es dinámico (nombre del solicitante, campos de documentos, alertas, contadores). Antes de agregar una asignación `.text`, verificar si el valor ya está correcto en la escena.
 
 ---
 

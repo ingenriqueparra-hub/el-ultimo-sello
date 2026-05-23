@@ -464,8 +464,6 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 			_tab3_doc_type = dtype
 			break
 	tab3.disabled = _tab3_doc_type == ""
-	if _tab3_doc_type != "":
-		tab3.text = _doc_type_tab_label(_tab3_doc_type)
 	# Mostrar primer documento disponible
 	if _applicant_docs.has("transit_pass"):
 		_show_doc_by_type("transit_pass", tab1)
@@ -476,10 +474,6 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 	else:
 		doc_content.text = "[ Sin documentos ]"
 
-func _doc_type_tab_label(dtype: String) -> String:
-	match dtype:
-		"ingress_permit": return "PERMISO"
-	return dtype.to_upper().left(12)
 
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	if not _applicant_docs.has(dtype):
