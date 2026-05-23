@@ -3,6 +3,17 @@ extends Control
 
 static var day_to_load: int = 1
 
+var _focused_screen: int = 2  # 1=solicitante 2=documentos 3=herramientas
+var _cockpit_frame: CockpitFrame = null
+
+# Posiciones de panel por vista: [face_left, face_center, face_right]
+# Cada vista: [applicant_rect, docs_rect, tools_rect]  — coincide con las screen areas de CockpitFrame
+const PANEL_RECTS := [
+	[ Rect2(22,50,700,580),  Rect2(762,55,284,575), Rect2(1082,98,176,525) ],  # izquierda
+	[ Rect2(32,75,316,450),  Rect2(410,54,460,515), Rect2(931,75,314,450)  ],  # centro
+	[ Rect2(20,98,176,525),  Rect2(234,55,284,575), Rect2(558,50,696,580)  ],  # derecha
+]
+
 const COLOR_BG := Color(0.03, 0.05, 0.03, 1)
 const COLOR_PANEL := Color(0.06, 0.10, 0.06, 1)
 const COLOR_PANEL_DARK := Color(0.02, 0.04, 0.02, 1)
@@ -15,7 +26,7 @@ const COLOR_REJECT := Color(0.42, 0.06, 0.06, 1)
 const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
-const ASSET_TERMINAL_BG := "res://assets/ui/terminal/terminal_background.png"
+const ASSET_TERMINAL_BG    := "res://assets/ui/cockpit/cockpit_three_screens_pc.png"
 const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
 const ASSET_GRIME := "res://assets/ui/overlays/grime_overlay.png"
 const ASSET_CRT_WEAR := "res://assets/ui/overlays/crt_wear_overlay.png"
@@ -52,6 +63,13 @@ const ASSET_BUTTON_TOOL := "res://assets/ui/buttons/button_tool_9patch.png"
 @onready var tab3: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab3
 @onready var applicant_vbox: VBoxContainer = $VBox/MainArea/ApplicantPanel/ApplicantVBox
 @onready var tools_vbox: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox
+@onready var _document_view: PanelContainer = $VBox/MainArea/DocumentArea/DocumentVBox/DocumentView
+@onready var _panel_status:    PanelContainer = $VBox/StatusBar
+@onready var _panel_applicant: PanelContainer = $VBox/MainArea/ApplicantPanel
+@onready var _panel_docs:      PanelContainer = $VBox/MainArea/DocumentArea
+@onready var _panel_tools:     PanelContainer = $VBox/MainArea/ToolsPanel
+@onready var _panel_decisions: PanelContainer = $VBox/DecisionBar
+@onready var _vbox: VBoxContainer             = $VBox
 
 var current_day: int = 1
 var credits: int = 50
@@ -78,6 +96,7 @@ var _debug_label: Label
 func _ready() -> void:
 	_install_visual_layers()
 	_apply_theme()
+	_position_panels_on_cockpit()
 	_setup_tools_tabs()
 	approve_btn.text = "APROBAR (A)"
 	reject_btn.text  = "RECHAZAR (D)"
@@ -160,17 +179,49 @@ func _on_day_ended(total: int) -> void:
 	DayReport.pending_summary = summary
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
+func _position_panels_on_cockpit() -> void:
+	# Reparenta los paneles directamente al root Control con posición absoluta.
+	# Debe llamarse DESPUÉS de _apply_theme() para que los $VBox/... paths sean válidos.
+	var main_area := $VBox/MainArea
+	main_area.remove_child(_panel_applicant)
+	main_area.remove_child(_panel_docs)
+	main_area.remove_child(_panel_tools)
+	_vbox.remove_child(_panel_status)
+	_vbox.remove_child(_panel_decisions)
+	_vbox.visible = false
+	add_child(_panel_status)
+	add_child(_panel_applicant)
+	add_child(_panel_docs)
+	add_child(_panel_tools)
+	add_child(_panel_decisions)
+	_place(_panel_status,    0, 0, 1280, 38)
+	_place(_panel_decisions, 300, 608, 680, 72)
+	# Posición inicial: vista central (índice 1)
+	var center := PANEL_RECTS[1]
+	_place(_panel_applicant, int(center[0].position.x), int(center[0].position.y),
+		int(center[0].size.x), int(center[0].size.y))
+	_place(_panel_docs,      int(center[1].position.x), int(center[1].position.y),
+		int(center[1].size.x), int(center[1].size.y))
+	_place(_panel_tools,     int(center[2].position.x), int(center[2].position.y),
+		int(center[2].size.x), int(center[2].size.y))
+	_focus_screen(2)
+
+func _place(ctrl: Control, x: int, y: int, w: int, h: int) -> void:
+	ctrl.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	ctrl.set_position(Vector2(x, y))
+	ctrl.set_size(Vector2(w, h))
+
 func _set_decision_buttons_enabled(enabled: bool) -> void:
 	approve_btn.disabled = not enabled
 	hold_btn.disabled = not enabled
 	reject_btn.disabled = not enabled
 
 func _apply_theme() -> void:
-	_style_panel($VBox/StatusBar, COLOR_PANEL, COLOR_BORDER)
-	_style_panel($VBox/MainArea/ApplicantPanel, COLOR_PANEL, COLOR_BORDER)
-	_style_panel($VBox/MainArea/DocumentArea, COLOR_PANEL, COLOR_BORDER)
-	_style_panel($VBox/MainArea/ToolsPanel, COLOR_PANEL, COLOR_BORDER)
-	_style_panel($VBox/DecisionBar, COLOR_PANEL, COLOR_BORDER)
+	_style_panel(_panel_status,    Color(0.02, 0.04, 0.02, 0.75), COLOR_BORDER)
+	_style_panel(_panel_applicant, Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_docs,      Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_tools,     Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_decisions, Color(0, 0, 0, 0), Color(0, 0, 0, 0))
 	_style_document_view(false)
 	_style_button(approve_btn, COLOR_APPROVE, ASSET_BUTTON_APPROVE)
 	_style_button(hold_btn, COLOR_HOLD, ASSET_BUTTON_HOLD)
@@ -206,7 +257,10 @@ func _style_button(btn: Button, color: Color, texture_path: String = "") -> void
 	btn.add_theme_color_override("font_disabled_color", Color(0.4, 0.45, 0.4, 1))
 
 func _install_visual_layers() -> void:
-	_add_full_rect_texture(ASSET_TERMINAL_BG, -10, 1.0, "TerminalBackground")
+	# Marco procedural de cabina (tres monitores dibujados por código)
+	_cockpit_frame = CockpitFrame.new()
+	add_child(_cockpit_frame)
+	move_child(_cockpit_frame, 0)
 	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.20, "TerminalWatermark")
 	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
 	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay")
@@ -258,9 +312,9 @@ func _style_document_view(scanner_mode: bool) -> void:
 	var path := ASSET_SCANNER_FRAME if scanner_mode else ASSET_DOCUMENT_VIEW
 	var textured := _make_texture_style(path, 16, 8)
 	if textured != null:
-		$VBox/MainArea/DocumentArea/DocumentVBox/DocumentView.add_theme_stylebox_override("panel", textured)
+		_document_view.add_theme_stylebox_override("panel", textured)
 		return
-	_style_panel($VBox/MainArea/DocumentArea/DocumentVBox/DocumentView, COLOR_PANEL_DARK, COLOR_BORDER)
+	_style_panel(_document_view, COLOR_PANEL_DARK, COLOR_BORDER)
 
 func _apply_labels_color(node: Node) -> void:
 	for child in node.get_children():
@@ -298,10 +352,35 @@ func _input(event: InputEvent) -> void:
 			_cycle_doc_tab()
 		KEY_Q:
 			_press_next_question()
+		KEY_1:
+			_focus_screen(1)
+		KEY_2:
+			_focus_screen(2)
+		KEY_3:
+			_focus_screen(3)
 		_:
 			handled = false
 	if handled:
 		get_viewport().set_input_as_handled()
+
+func _focus_screen(screen: int) -> void:
+	var prev := _focused_screen
+	_focused_screen = screen
+	const DIM  := Color(0.55, 0.65, 0.55, 0.85)
+	const FULL := Color(1.00, 1.00, 1.00, 1.00)
+	const DURATION := 0.38
+	var panels := [_panel_applicant, _panel_docs, _panel_tools]
+	var rects: Array = PANEL_RECTS[screen - 1]
+	for i in 3:
+		var p: Control = panels[i]
+		var r: Rect2   = rects[i]
+		var t := create_tween().set_parallel(true)
+		t.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		t.tween_property(p, "position", r.position, DURATION)
+		t.tween_property(p, "size",     r.size,     DURATION)
+		t.tween_property(p, "modulate", FULL if i + 1 == screen else DIM, DURATION * 0.6)
+	if prev != screen and _cockpit_frame != null:
+		_cockpit_frame.set_focus(screen - 1)
 
 func _update_status_bar() -> void:
 	var current_date: String = day_data.get("current_date", "")
@@ -528,9 +607,9 @@ func _flash_decision_bar(decision: String) -> void:
 	match decision:
 		"reject": flash = Color(1.0, 0.88, 0.88, 1)
 		"hold":   flash = Color(1.0, 0.96, 0.82, 1)
-	$VBox/DecisionBar.modulate = flash
+	_panel_decisions.modulate = flash
 	var tween := create_tween()
-	tween.tween_property($VBox/DecisionBar, "modulate", Color.WHITE, 0.35)
+	tween.tween_property(_panel_decisions, "modulate", Color.WHITE, 0.35)
 
 func _flash_credits_label() -> void:
 	credits_label.add_theme_color_override("font_color", Color.WHITE)
