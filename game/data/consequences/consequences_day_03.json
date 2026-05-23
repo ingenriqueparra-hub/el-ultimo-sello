@@ -1,0 +1,148 @@
+[
+  {
+    "id": "c03_quarantine_breach_vulnerable",
+    "day": 3,
+    "priority": 200,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_quarantine_breach_vulnerable",
+    "summary_text": "Madre con hijo desde zona en cuarentena admitida. Riesgo sanitario activo.",
+    "title": "BRECHA SANITARIA — Sujeto de zona en cuarentena admitido",
+    "body": "Alya Mohr y su hijo menor, procedentes del Bloque Ceniza-9 bajo cuarentena activa, cruzaron el control.\n\nEl Oficio de Pureza Civica ha emitido alerta sanitaria interior. El Centro Medico del Umbral ha iniciado protocolo de seguimiento. Se desconoce el estado de exposicion del menor.\n\nSu decision de admision esta siendo revisada como posible vulneracion del protocolo de cuarentena.",
+    "effects": {
+      "security_risk": 2,
+      "civilian_harm": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c03_suspicious_identity_admitted",
+    "day": 3,
+    "priority": 180,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_suspicious_identity_admitted",
+    "summary_text": "Supervisor con nombre inconsistente admitido. Identidad sin verificar.",
+    "title": "INCONSISTENCIA DE IDENTIDAD — Solicitante admitido sin verificacion",
+    "body": "El individuo identificado como Davan Reth fue admitido a pesar de presentar nombres distintos entre el Pase de Transito y el Certificado Biometrico.\n\nInteligencia del Ministerio ha abierto seguimiento sobre el acceso. La discrepancia de una letra en el apellido puede indicar error administrativo o identidad suplantada.\n\nSu decision permite el acceso sin verificacion de una inconsistencia documental detectable.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c03_suspicious_identity_held",
+    "day": 3,
+    "priority": 160,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_suspicious_identity_held",
+    "summary_text": "Supervisor con identidad inconsistente retenido para verificacion.",
+    "title": "RETENCION CORRECTA — Inconsistencia de identidad detectada",
+    "body": "El individuo identificado como Davan Reth fue correctamente retenido ante la discrepancia entre el nombre del Pase de Transito y el Certificado Biometrico.\n\nEl Ministerio ha iniciado verificacion de identidad. El acceso queda suspendido hasta confirmacion.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta del protocolo de consistencia documental.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c03_medic_quarantine_held",
+    "day": 3,
+    "priority": 145,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_medic_quarantine_held",
+    "summary_text": "Medica con contacto reciente en zona de cuarentena retenida para evaluacion.",
+    "title": "RETENCION PREVENTIVA — Personal sanitario con exposicion declarada",
+    "body": "La medica Ysa Mel fue retenida tras declarar en interrogatorio haber prestado asistencia en Sector Rojo K-12 durante los tres turnos previos.\n\nEl Oficio de Pureza Civica ha iniciado evaluacion de exposicion. Sus documentos son validos y su sector de domicilio es seguro, pero el contacto declarado con zona de cuarentena activa justifica la revision.\n\nSu decision aplica el protocolo sanitario mas alla de los documentos.",
+    "effects": {
+      "security_risk": -1,
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c03_eficiencia_maxima",
+    "day": 3,
+    "priority": 100,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Eficiencia registrada — Sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el tercer turno de control.\n\nLa nueva directiva de cuarentena fue aplicada sin errores. El Supervisor Halvek registra conformidad. Su expediente avanza sin observaciones.",
+    "conditions": {
+      "max_errors": 0,
+      "min_credits": 50
+    },
+    "effects": {
+      "institutional_trust": 1,
+      "supervisor_suspicion": -1
+    }
+  },
+  {
+    "id": "c03_turno_sin_incidentes",
+    "day": 3,
+    "priority": 90,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del tercer turno sin violaciones documentadas.\n\nEl protocolo de cuarentena fue respetado. Su expediente se mantiene estable. El Supervisor Halvek no emite observaciones adicionales.",
+    "conditions": {
+      "max_errors": 0
+    },
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c03_irregularidades_menores",
+    "day": 3,
+    "priority": 80,
+    "type": "performance",
+    "tone": "mixed",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el tercer turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recuerda al operario que el protocolo de cuarentena no admite excepciones ni argumentos verbales. Su expediente recibe marcador de seguimiento.",
+    "conditions": {
+      "min_errors": 1,
+      "max_errors": 2
+    },
+    "effects": {
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c03_turno_deficiente",
+    "day": 3,
+    "priority": 70,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno deficiente",
+    "body": "El tercer turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. El protocolo de cuarentena es de aplicacion obligatoria e inmediata. La omision de la nueva regla constituye fallo grave. Se aplica penalizacion adicional.",
+    "conditions": {
+      "min_errors": 3,
+      "max_errors": 5
+    },
+    "effects": {
+      "supervisor_suspicion": 2,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c03_turno_catastrofico",
+    "day": 3,
+    "priority": 60,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno catastrofico",
+    "body": "El registro del tercer turno es inaceptable.\n\nSe han admitido o procesado incorrectamente multiples casos durante una alerta de cuarentena activa. El Oficio de Pureza Civica ha sido notificado. Se abre investigacion formal sobre el Puesto Umbral 7.\n\nEl Supervisor Halvek suspende la calificacion de confianza. El Sello no acepta negligencia durante una emergencia sanitaria.",
+    "conditions": {
+      "min_errors": 6
+    },
+    "effects": {
+      "supervisor_suspicion": 3,
+      "institutional_trust": -2,
+      "security_risk": 1
+    }
+  }
+]

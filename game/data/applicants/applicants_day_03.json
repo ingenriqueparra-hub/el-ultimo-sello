@@ -1,0 +1,254 @@
+[
+  {
+    "id": "applicant_021",
+    "name": "Nara Vel",
+    "type": "citizen",
+    "origin": "Nivel Residencial 3",
+    "destination": "Centro Administrativo Umbral",
+    "purpose": "Tramite de transferencia de residencia",
+    "dialogue_intro": "Buenos dias. Vengo a tramitar mi transferencia. Traigo el Pase y el Certificado al dia. Sin novedades.",
+    "documents": ["transit_pass_021", "bio_cert_021"],
+    "flags": [],
+    "questions": {
+      "motivo": "Transferencia de residencia al Nivel 4. Es un tramite de rutina, nada urgente.",
+      "origen": "Nivel Residencial 3. Llevo cuatro ciclos viviendo alli. No he salido del area autorizada.",
+      "carga": "Solo mis documentos y efectos personales. Nada declarable."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso limpio. Introduce al jugador a las reglas heredadas del Dia 2 mas la nueva regla de cuarentena, que aqui no aplica. Todo en orden."
+    }
+  },
+  {
+    "id": "applicant_022",
+    "name": "Kern Bas",
+    "type": "worker",
+    "origin": "Sector Rojo K-12",
+    "destination": "Planta Termofusion, Nivel Industrial 2",
+    "purpose": "Turno de operacion asignado",
+    "dialogue_intro": "Operario de turno. Mis documentos estan al dia. El contrato me llama al Nivel 2.",
+    "documents": ["transit_pass_022", "bio_cert_022"],
+    "flags": [],
+    "questions": {
+      "motivo": "Turno de operacion en la planta termofusion. Me llaman dos veces por ciclo.",
+      "origen": "Sector Rojo K-12. Vivo alli desde hace anos. Nunca ha habido ningun problema antes.",
+      "carga": "Solo mi uniforme y credenciales de operario."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "medium",
+      "violations": ["rule_008"],
+      "notes": "Documentos perfectamente validos: pase vigente, bio_cert vigente, codigos coincidentes. Pero el origen es Sector Rojo K-12, bajo cuarentena activa. El jugador debe aprender que 'documentos en orden' no equivale a 'entrada autorizada'."
+    }
+  },
+  {
+    "id": "applicant_023",
+    "name": "Alya Mohr",
+    "type": "refugee",
+    "origin": "Bloque Ceniza-9",
+    "destination": "Refugio Civil Umbral",
+    "purpose": "Evacuacion por alerta sanitaria",
+    "dialogue_intro": "Por favor. Venimos del Bloque. El Oficio nos dijo que evacuaramos. Tengo a mi hijo. El esta enfermo. Solo tengo el Pase.",
+    "documents": ["transit_pass_023"],
+    "flags": ["vulnerable_minor"],
+    "questions": {
+      "motivo": "El Oficio de Pureza Civica decreto la evacuacion del Bloque Ceniza-9 hace dos dias. Nos dijeron que fuera al Refugio Civil.",
+      "origen": "Bloque Ceniza-9. El Oficio cerro el sector. No podimos quedarnos.",
+      "carga": "Nada. Lo que tenemos puesto. Mi hijo necesita medicacion."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_quarantine_breach_vulnerable"
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "high",
+      "violations": ["rule_005", "rule_008"],
+      "notes": "Dos violaciones: sin Certificado Biometrico y origen en cuarentena activa. Caso moralmente extremo: madre con hijo enfermo que fue evacuada del sector en cuarentena. El protocolo es claro: rechazo. La incomodidad es intencional. El jugador aprende que seguir la regla puede tener un costo humano."
+    }
+  },
+  {
+    "id": "applicant_024",
+    "name": "Relas Torv",
+    "type": "merchant",
+    "origin": "Sector Rojo K-12",
+    "destination": "Mercado Central, Nivel 3",
+    "purpose": "Distribucion de bienes perecederos",
+    "dialogue_intro": "Comerciante registrado. Ruta habitual. Tengo todos los documentos al dia. El sector tiene cuarentena pero mis papeles son validos.",
+    "documents": ["transit_pass_024", "bio_cert_024"],
+    "flags": [],
+    "questions": {
+      "motivo": "Distribucion de alimentos perecederos al Mercado Central. Contrato de suministro activo.",
+      "origen": "Sector Rojo K-12. Tengo bodega alli. Pero yo estoy sano, el Certificado lo confirma.",
+      "carga": "Alimentos perecederos certificados. La Liga Mercantil avala el cargamento."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "medium",
+      "violations": ["rule_008"],
+      "notes": "Documentos impecables y el solicitante argumenta su caso. El origen sigue siendo Sector Rojo K-12. La regla no distingue entre residentes 'sanos' y 'en riesgo': el sector esta bloqueado. Confirma al jugador que la regla es absoluta."
+    }
+  },
+  {
+    "id": "applicant_025",
+    "name": "Sael Dorn",
+    "type": "soldier",
+    "origin": "Base Orbital Sector 4",
+    "destination": "Cuartel Umbral Este",
+    "purpose": "Reintegracion de mision exterior",
+    "dialogue_intro": "Soldado en reintegracion. Vengo de la Base Orbital. El Pase esta vigente. El Certificado... tuvo un problema de renovacion.",
+    "documents": ["transit_pass_025", "bio_cert_025"],
+    "flags": ["expired_bio_cert"],
+    "questions": {
+      "motivo": "Reintegracion post-mision. El cuartel espera mi regreso para revision de equipo.",
+      "origen": "Base Orbital Sector 4. Acabo de bajar. La base no esta en cuarentena.",
+      "carga": "Equipo reglamentario. Todo declarado en el pase."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_006"],
+      "notes": "Origen seguro, pase vigente, nombres coincidentes. Solo el Certificado Biometrico esta vencido. El jugador confirma que un sector permitido mas un documento invalido sigue siendo rechazo."
+    }
+  },
+  {
+    "id": "applicant_026",
+    "name": "Orin Vast",
+    "type": "civilian",
+    "origin": "Nivel Comercial 2",
+    "destination": "Registro Central, Nivel 1",
+    "purpose": "Actualizacion de registro de propiedad",
+    "dialogue_intro": "Vengo a actualizar un registro. Se que el Pase vencio hace poco pero el tramite es urgente.",
+    "documents": ["transit_pass_026", "bio_cert_026"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Registro de propiedad. Si no lo actualizo en este ciclo pierdo el titulo.",
+      "origen": "Nivel Comercial 2. No esta en ninguna lista de restriccion.",
+      "carga": "Solo mis documentos de propiedad."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase de Transito vencido. Bio_cert vigente. Sector permitido. Caso documental simple heredado del Dia 1."
+    }
+  },
+  {
+    "id": "applicant_027",
+    "name": "Brin Oss",
+    "type": "clergy",
+    "origin": "Bloque Ceniza-9",
+    "destination": "Capilla de Transito, Umbral 7",
+    "purpose": "Servicio religioso de cierre de ciclo",
+    "dialogue_intro": "El Sello os guarde. Vengo del Bloque a oficiar el rito de cierre de ciclo. El Clero del Sello tiene exencion en casos de servicio ritual. Es doctrina establecida.",
+    "documents": ["transit_pass_027", "bio_cert_027"],
+    "flags": [],
+    "questions": {
+      "motivo": "El rito de cierre de ciclo debe realizarse en la Capilla de Transito. Es obligacion del Clero.",
+      "origen": "Bloque Ceniza-9. El Templo esta alli. Pero el Clero del Sello no queda sujeto a bloqueos sectoriales segun el Articulo 7 del Concordato.",
+      "carga": "Los ornamentos del rito. Todo sellado por el Clero."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "medium",
+      "violations": ["rule_008"],
+      "notes": "Documentos validos. El solicitante invoca exencion religiosa que no esta documentada en ningun papel. El protocolo del dia no contempla excepciones. El jugador aprende que la presion moral o institucional verbal no reemplaza los documentos."
+    }
+  },
+  {
+    "id": "applicant_028",
+    "name": "Leva Kors",
+    "type": "civilian",
+    "origin": "Sector Industrial Norte",
+    "destination": "Nivel Residencial 4",
+    "purpose": "Traslado de residencia autorizado",
+    "dialogue_intro": "Traslado autorizado al Nivel 4. Aqui esta todo. Dos documentos al dia.",
+    "documents": ["transit_pass_028", "bio_cert_028"],
+    "flags": [],
+    "questions": {
+      "motivo": "Traslado de residencia. Mi contrato de trabajo cambio al Nivel 4.",
+      "origen": "Sector Industrial Norte. No esta en ninguna lista de restriccion.",
+      "carga": "Efectos personales. Nada declarable."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Segundo caso limpio del dia. Confirma que la nueva capa de cuarentena no afecta a sectores permitidos con documentos en orden."
+    }
+  },
+  {
+    "id": "applicant_029",
+    "name": "Davan Reth",
+    "type": "unknown",
+    "origin": "Corredor Palido",
+    "destination": "Sector Logistico, Nivel 2",
+    "purpose": "Supervision de carga en transito",
+    "dialogue_intro": "Supervisor de carga. Ruta habitual desde el Corredor. Traigo el Pase y el Certificado.",
+    "documents": ["transit_pass_029", "bio_cert_029"],
+    "flags": [],
+    "questions": {
+      "motivo": "Supervision de un cargamento en transito en el Nivel 2. Trabajo para una empresa logistica.",
+      "origen": "Corredor Palido. No es un sector bloqueado.",
+      "carga": "Solo mis credenciales de supervisor. La carga ya paso por otro control."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_suspicious_identity_admitted",
+      "on_correct_hold": "flag_suspicious_identity_held"
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": ["rule_003"],
+      "notes": "El nombre en el Pase es 'Davan Reth'. El nombre en el Certificado Biometrico es 'Davan Ret'. Diferencia de una letra. El codigo de identidad coincide. Error tipografico o identidad suplantada parcialmente. El jugador debe comparar los campos de nombre entre documentos."
+    }
+  },
+  {
+    "id": "applicant_030",
+    "name": "Ysa Mel",
+    "type": "medic",
+    "origin": "Subnivel Brasa",
+    "destination": "Enfermeria Central, Nivel 3",
+    "purpose": "Incorporacion a turno sanitario",
+    "dialogue_intro": "Personal sanitario. Incorporacion a turno. Subnivel Brasa es un sector autorizado. Todo en regla.",
+    "documents": ["transit_pass_030", "bio_cert_030"],
+    "flags": [],
+    "questions": {
+      "motivo": "Turno sanitario en la enfermeria del Nivel 3. Trabajo alli desde hace dos ciclos.",
+      "origen": "Subnivel Brasa. Es mi domicilio registrado. Pero... los ultimos tres turnos estuve prestando asistencia medica en el Sector Rojo K-12. Hay muchos enfermos alli.",
+      "carga": "Equipo medico basico. Todo autorizado."
+    },
+    "question_alerts": {
+      "origen": "ALERTA DE INTERROGATORIO: La solicitante declara haber prestado asistencia en Sector Rojo K-12 durante los tres turnos previos. Posible exposicion al agente de cuarentena activa. Sus documentos declaran origen Subnivel Brasa, pero su contacto reciente con zona bloqueada no esta registrado."
+    },
+    "narrative_hooks": {
+      "on_correct_hold": "flag_medic_quarantine_held"
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "high",
+      "violations": [],
+      "notes": "Sin violaciones documentales. Sector de domicilio es seguro. Pero el interrogatorio revela contacto reciente con Sector Rojo K-12. El jugador aprende que el interrogatorio puede revelar riesgos que los documentos no muestran. Requiere usar la capa de preguntas para detectar la anomalia."
+    }
+  }
+]

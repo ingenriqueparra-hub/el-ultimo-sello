@@ -1217,6 +1217,41 @@ Pendientes:
 
 ---
 
+### Módulo 16 — Expansión Día 3: Sectores en cuarentena
+Estado: Completado
+
+Implementado:
+- Nueva validación `field_not_in_list` en `RuleEngine.gd`: verifica que un campo de documento no contenga un valor de una lista prohibida. Comparación exacta (case-sensitive). Sin violación si el campo está vacío o el documento no existe.
+- `day_03.json` — Día 3 con fecha 300.00, 8 reglas activas (001-008), 10 solicitantes (021-030), créditos inicio 50.
+- `rules_day_03.json` — 7 reglas heredadas de Día 2 + rule_008 (`field_not_in_list` sobre `origen` del `transit_pass`). Sectores bloqueados: "Sector Rojo K-12", "Bloque Ceniza-9".
+- `applicants_day_03.json` — 10 casos: 2 aprobaciones limpias, 3 rechazos por cuarentena con docs válidos, 1 rechazo moral (madre con hijo desde cuarentena), 2 rechazos por documento inválido, 1 retención por nombre inconsistente, 1 retención por interrogatorio (contacto en cuarentena sin violación documental).
+- `documents_day_03.json` — 19 documentos: 9 transit_pass + 9 bio_cert + 1 transit_pass solo (refugiada sin bio_cert).
+- `consequences_day_03.json` — 4 consecuencias de caso + 5 de rendimiento. Flags: `flag_quarantine_breach_vulnerable`, `flag_suspicious_identity_admitted`, `flag_suspicious_identity_held`, `flag_medic_quarantine_held`.
+- `DayReport.gd` — botón "CONTINUAR — DIA 3" aparece automáticamente al terminar Día 2 porque detecta `day_03.json`.
+
+Nueva capa jugable:
+- El jugador aprende que un documento válido no garantiza entrada si el sector de origen está bloqueado.
+- La regulación diaria (rule_008) tiene prioridad sobre la validez documental.
+- El interrogatorio puede revelar riesgos que los documentos no muestran (Ysa Mel, applicant_030).
+
+Narrative hooks activados:
+- applicant_023 (Alya Mohr): `on_wrong_approve` → `flag_quarantine_breach_vulnerable`
+- applicant_029 (Davan Reth): `on_wrong_approve` → `flag_suspicious_identity_admitted`, `on_correct_hold` → `flag_suspicious_identity_held`
+- applicant_030 (Ysa Mel): `on_correct_hold` → `flag_medic_quarantine_held`
+
+Archivos principales:
+- `game/scripts/systems/RuleEngine.gd` (actualizado — `field_not_in_list`)
+- `game/data/days/day_03.json` (nuevo)
+- `game/data/rules/rules_day_03.json` (nuevo)
+- `game/data/applicants/applicants_day_03.json` (nuevo)
+- `game/data/documents/documents_day_03.json` (nuevo)
+- `game/data/consequences/consequences_day_03.json` (nuevo)
+
+Pendientes:
+- Ninguno para Módulo 16.
+
+---
+
 ## 22. Reglas para control de alcance
 
 Cada vez que aparezca una idea nueva, evaluar:

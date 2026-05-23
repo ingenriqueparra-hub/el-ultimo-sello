@@ -1,0 +1,13 @@
+{
+  "day": 3,
+  "title": "Umbral 7 — Tercer Turno de Control",
+  "intro": "ALERTA DEL OFICIO DE PUREZA CIVICA: Sector Rojo K-12 y Bloque Ceniza-9 bajo cuarentena sanitaria activa. Prohibido el ingreso de cualquier solicitante proveniente de dichos sectores, independientemente de la validez de sus documentos. El protocolo no admite excepciones ni permisos de emergencia. Documente y rechace.",
+  "current_date": "300.00",
+  "rules_active": ["rule_001", "rule_002", "rule_003", "rule_004", "rule_005", "rule_006", "rule_007", "rule_008"],
+  "applicant_ids": [
+    "applicant_021", "applicant_022", "applicant_023", "applicant_024", "applicant_025",
+    "applicant_026", "applicant_027", "applicant_028", "applicant_029", "applicant_030"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

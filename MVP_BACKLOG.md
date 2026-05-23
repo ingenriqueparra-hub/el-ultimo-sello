@@ -96,6 +96,19 @@ Estas tareas son de soporte al desarrollo. No son features del juego final ni de
 
 ---
 
+### Expansión controlada — Días adicionales de campaña
+
+Estos días expanden la campaña después de validar el loop del Día 1. Cada uno introduce una nueva capa jugable.
+
+| ID | Tarea | Criterio de aceptación |
+|---|---|---|
+| EXP-01 | Día 2 — Certificado biométrico | El jugador cruza datos entre documentos. Implementado. |
+| EXP-02 | Día 3 — Sectores en cuarentena | El jugador detecta origen prohibido aunque los documentos sean válidos. Implementado. |
+| EXP-03 | Día 4 — Permiso de carga | El jugador revisa mercancías, peso y destino. No implementado. |
+| EXP-04 | Día 5 — Facciones | El jugador gestiona privilegios y órdenes contradictorias. No implementado. |
+
+---
+
 ### Futuro controlado — Consecuencias acumuladas
 
 Estas tareas preparan campaña y cierres terminales. No deben implementarse antes de validar que los reportes diarios y consecuencias de caso funcionan.

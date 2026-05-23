@@ -236,6 +236,40 @@ La dificultad no debe crecer agregando demasiados campos por solicitante. Debe c
 
 El jugador debe sentir que domina una capa antes de recibir la siguiente.
 
+### Detalle de Día 3 — Sectores en cuarentena
+
+Nueva regla: `field_not_in_list` sobre el campo `origen` del Pase de Tránsito.
+
+Sectores bloqueados en el MVP: Sector Rojo K-12, Bloque Ceniza-9.
+
+Qué aprende el jugador:
+- Un documento puede ser completamente válido y aun así el ingreso está prohibido.
+- La regulación diaria externa tiene prioridad sobre la validez documental.
+- El interrogatorio puede revelar riesgos que los documentos no muestran (contacto con zona en cuarentena).
+
+Riesgo principal:
+- Admitir a alguien de un sector bloqueado, aunque sus documentos sean perfectos.
+- Rechazar a personas vulnerables (madre con hijo enfermo) que vienen del sector en cuarentena.
+
+Diferencias respecto a Día 1 y Día 2:
+- Día 1: revisar si el documento es válido.
+- Día 2: cruzar datos entre documentos.
+- Día 3: revisar si el origen del solicitante está permitido, aunque los documentos sean correctos.
+
+Tensión moral específica del Día 3:
+- Algunos solicitantes tienen todo en orden pero provienen de zona bloqueada.
+- El jugador aprende que "documentos correctos" ≠ "entrada autorizada".
+- El clérigo que invoca exención religiosa verbal (sin papel que la respalde) enseña que la presión institucional no reemplaza el protocolo.
+- La médica con exposición declarada enseña que el interrogatorio puede activar una retención que los documentos no justifican.
+
+Casos de diseño del Día 3:
+- 2 aprobaciones limpias (sector OK, docs OK): applicant_021, applicant_028.
+- 3 rechazos por cuarentena con docs válidos: applicant_022, applicant_024, applicant_027.
+- 1 rechazo moral (cuarentena + vulnerabilidad): applicant_023.
+- 2 rechazos por documento inválido con sector OK: applicant_025, applicant_026.
+- 1 retención por inconsistencia de nombre: applicant_029.
+- 1 retención por interrogatorio (contacto en cuarentena): applicant_030.
+
 ### Ejemplo de escalada
 
 Día 1:

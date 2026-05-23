@@ -186,6 +186,33 @@ Responsable de:
 - calcular si una decisión fue aceptable;
 - registrar errores.
 
+Tipos de validación implementados en `RuleEngine.gd`:
+
+| Tipo | Descripción | Introducido en |
+|---|---|---|
+| `document_required` | Verifica que el tipo de documento exista en el expediente | Día 1 |
+| `field_not_expired` | Compara el campo `expira` contra la fecha del día | Día 1 |
+| `name_consistency` | Verifica que el campo `nombre` sea idéntico en todos los documentos | Día 1 |
+| `field_not_empty` | Verifica que un campo no esté vacío ni tenga un valor inválido (ej. sello PENDIENTE) | Día 1 |
+| `field_match` | Compara un campo entre dos tipos de documento específicos (ej. `codigo_identidad`) | Día 2 |
+| `field_not_in_list` | Detecta si un campo contiene un valor prohibido de una lista (ej. sectores en cuarentena) | Día 3 |
+
+Ejemplo de regla `field_not_in_list` (Día 3):
+
+```json
+{
+  "id": "rule_008",
+  "validation": {
+    "type": "field_not_in_list",
+    "document_type": "transit_pass",
+    "field": "origen",
+    "invalid_values": ["Sector Rojo K-12", "Bloque Ceniza-9"]
+  }
+}
+```
+
+La comparación es exacta (case-sensitive). Si el campo no existe o está vacío, no se genera violación (la presencia del documento es responsabilidad de `document_required`).
+
 ### 4.4. Decision System
 Responsable de:
 
