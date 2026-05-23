@@ -181,6 +181,29 @@ El juego debe registrar:
 - salud, dinero y seguridad familiar;
 - estabilidad del puesto de control.
 
+### 7.6. Auditoria institucional inicial
+
+Los primeros 7 dias funcionan como una campana inicial auditada. El jugador es un operario nuevo del Puesto Umbral 7 y el Ministerio no confia todavia en su criterio.
+
+Durante este periodo, el reporte final puede mostrar una auditoria completa del turno:
+
+- expedientes validados;
+- expedientes observados;
+- accion registrada por el jugador;
+- accion protocolaria omitida;
+- sancion aplicada;
+- incidentes posteriores al cierre.
+
+Esta claridad inicial no contradice la tension del juego: forma parte del control institucional. El jugador aprende bajo vigilancia.
+
+Cuando el juego avance hacia dias dinamicos, la auditoria debe cambiar:
+
+- sera parcial;
+- podra estar influida por politica o facciones;
+- algunos errores se descubriran tarde;
+- algunos incidentes quedaran ocultos;
+- el reporte dejara de explicar siempre cada decision.
+
 ---
 
 ## 8. Tono narrativo

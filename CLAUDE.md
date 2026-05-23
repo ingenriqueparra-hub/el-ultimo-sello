@@ -372,6 +372,7 @@ Fases 1-2: NarrativeConsequenceSystem.gd + JSON por día con consecuencias de re
 Fase 3: NarrativeStateSystem.gd con 4 acumuladores estáticos. apply_effects() llamado al evaluar consecuencia. snapshot/restore para restart correcto. Síntomas narrativos visibles si se cruzan umbrales.
 Fase 4: TerminalEndingSystem.gd + terminal_endings.json con 8 finales anticipados. Panel rojo en DayReport al activarse. Restart terminal vuelve a Día 1 con reset completo.
 Reporte compuesto (P1-09): NarrativeConsequenceSystem.evaluate() devuelve {performance, incidents, synthesis, effects_applied}. Performance = dictamen único por rendimiento. Incidents = todos los flags activos como incidentes (tone/severity/summary_text). Synthesis = texto institucional generado. Efectos compuestos aplicados una sola vez.
+Auditoria inicial (P1-10): durante los primeros 7 dias, el reporte final debe leerse como auditoria institucional completa del Ministerio sobre un operario nuevo. Puede explicar expedientes validados/observados, accion registrada, accion protocolaria omitida y sancion aplicada. En dias dinamicos futuros, la auditoria debe volverse parcial, politica e incompleta.
 
 ---
 
@@ -1198,6 +1199,12 @@ Implementado (Fase 5 — reporte narrativo compuesto, P1-09):
 - `DayReport._show_normal_report()` — muestra dictamen de rendimiento + hasta 3 incidentes (summary_text) + síntesis + síntoma.
 - Panel debug — secciones separadas: DICTAMEN DE RENDIMIENTO, INCIDENTES DE CASO, SINTESIS, EFECTOS APLICADOS.
 - `consequences_day_01.json` y `consequences_day_02.json` — todas las entradas actualizadas con campos `tone`, `severity` (cases), `summary_text` (cases).
+
+Documentado (P1-10 — auditoria institucional):
+- Dias 1-7 forman un Periodo de Evaluacion Inicial: el Ministerio audita todos los expedientes para entrenar y vigilar al operario nuevo.
+- El reporte debe expresarse como auditoria institucional, no como pantalla de respuestas correctas.
+- Lenguaje recomendado: expediente validado/observado, accion registrada, accion protocolaria omitida y sancion aplicada.
+- En dias dinamicos futuros, la auditoria debe poder ser parcial, politica o incompleta.
 
 Archivos principales:
 - `game/scripts/systems/NarrativeConsequenceSystem.gd` (reescrito — Fase 5)

@@ -230,6 +230,37 @@ Responsable de:
 - calcular multas;
 - mostrar consecuencia narrativa.
 
+#### 4.5.1. Auditoria institucional en DayReport
+
+Durante los Dias 1-7, `DayReport` debe presentarse como auditoria institucional completa del Periodo de Evaluacion Inicial.
+
+La UI normal debe evitar lenguaje de depuracion como "respuesta correcta" y preferir lenguaje del mundo:
+
+- accion registrada;
+- expediente validado;
+- expediente observado;
+- accion protocolaria omitida;
+- sancion aplicada;
+- incidente registrado.
+
+Los valores internos se mantienen en ingles para codigo y JSON:
+
+- `approve`
+- `reject`
+- `hold`
+
+Mapeo visual obligatorio:
+
+- `approve` -> `APROBADO`
+- `reject` -> `RECHAZADO`
+- `hold` -> `RETENIDO`
+
+En los primeros 7 dias, la auditoria puede mostrar todos los expedientes y observaciones para ensenar reglas y justificar sanciones.
+
+En dias dinamicos futuros, el sistema de reporte debe poder ocultar, resumir o diferir parte de esta informacion. La auditoria dejara de ser total y pasara a ser parcial, politica o incompleta.
+
+El panel debug con `Y` conserva siempre la verdad tecnica completa: IDs, flags, hooks, decisiones internas, acumuladores y cierres terminales.
+
 ### 4.6. Dialogue System
 Responsable de:
 

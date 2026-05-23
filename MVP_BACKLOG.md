@@ -71,6 +71,7 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 | P1-07 | Consecuencia de rendimiento desde JSON | El reporte elige una consecuencia diaria desde datos, no hardcodeada |
 | P1-08 | Consecuencia de caso | Un solicitante marcado puede activar un incidente narrativo en el reporte |
 | P1-09 | Reporte narrativo compuesto | El reporte combina dictamen de rendimiento + incidentes de caso + sintesis institucional; una buena accion aislada no tapa un turno desastroso |
+| P1-10 | Auditoria institucional del turno | Durante Dias 1-7 el reporte se presenta como auditoria del Ministerio: expedientes validados/observados, accion registrada, accion protocolaria omitida y sancion aplicada |
 
 ---
 
@@ -118,6 +119,7 @@ Estas tareas preparan campaña y cierres terminales. No deben implementarse ante
 | FUT-01 | Acumuladores narrativos entre días | `institutional_trust`, `security_risk`, `civilian_harm` y `supervisor_suspicion` se actualizan por consecuencias, sin mostrarse como barras al jugador |
 | FUT-02 | Síntomas narrativos de acumuladores | El jugador percibe auditorías, notas o restricciones sin ver números internos |
 | FUT-03 | Finales anticipados | Cierres como despido, arresto, ejecución protocolaria, cuarentena o desastre solo se activan por acumulación extrema |
+| FUT-04 | Auditoria parcial en dias dinamicos | Tras los 7 dias iniciales, el reporte deja de explicar todo: puede ocultar, retrasar o politizar observaciones |
 
 ---
 

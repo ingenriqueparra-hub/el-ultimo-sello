@@ -328,6 +328,37 @@ Principio:
 
 > El jugador no debe sentir que perdio por un contador oculto. Debe sentir que el expediente final era la consecuencia inevitable de sus actos.
 
+### 11.0. Auditoria del turno y periodo de evaluacion inicial
+
+Durante los primeros 7 dias, el jugador esta bajo **Periodo de Evaluacion Inicial**. El Ministerio de Admision Planetaria y el Supervisor Halvek auditan todos los movimientos del nuevo operario.
+
+Esto justifica que el reporte final pueda explicar sanciones, expedientes observados y acciones protocolarias omitidas. No debe sentirse como una pantalla pedagogica que revela "la respuesta correcta", sino como una revision institucional posterior al cierre del turno.
+
+Lenguaje recomendado:
+
+- "Auditoria del turno" en lugar de "registro de decisiones" cuando el contexto lo permita.
+- "Expediente validado" para decisiones aceptadas por el protocolo.
+- "Expediente observado" para decisiones con sancion o irregularidad.
+- "Accion registrada" para la decision tomada por el jugador.
+- "Accion protocolaria omitida" para explicar que procedimiento esperaba el Ministerio.
+- "Sancion aplicada" para creditos perdidos o marcas administrativas.
+
+Reglas para Dias 1-7:
+
+- la auditoria puede revisar todos los expedientes del turno;
+- las observaciones deben ayudar a entender por que hubo sancion;
+- el tono debe ser frio, administrativo y opresivo;
+- no mostrar acumuladores internos como numeros al jugador normal;
+- los datos completos siguen reservados para debug con `Y`.
+
+Regla futura para dias dinamicos:
+
+- despues del periodo inicial, la auditoria debe volverse parcial, politica e incompleta;
+- algunos errores pueden descubrirse dias despues;
+- algunos aciertos no seran reconocidos;
+- algunas facciones podran ocultar, alterar o presionar informes;
+- el jugador ya no debe recibir siempre una explicacion completa de cada expediente.
+
 ### 11.1. Consecuencia de rendimiento
 
 Evalua el resultado general del dia.
