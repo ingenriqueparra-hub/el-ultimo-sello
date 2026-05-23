@@ -1,0 +1,332 @@
+[
+  {
+    "id": "transit_pass_031",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Nela Koss",
+      "codigo_identidad": "CV-3311",
+      "origen": "Sector Residencial Nivel 2",
+      "destino": "Oficina de Licencias Operarias, Nivel 1",
+      "expira": "305.00",
+      "motivo": "Tramite de renovacion de licencia operaria",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_031",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Nela Koss",
+      "codigo_identidad": "CV-3311",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_032",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Tarev Mol",
+      "codigo_identidad": "LM-8802",
+      "origen": "Puerto Comercial Sur",
+      "destino": "Deposito Central, Nivel 3",
+      "expira": "305.00",
+      "motivo": "Entrega de filtros de aire certificados",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_032",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Tarev Mol",
+      "codigo_identidad": "LM-8802",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "cargo_permit_032",
+    "type": "cargo_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Tarev Mol",
+      "numero_permiso": "LMR-CP-03210",
+      "tipo_carga": "Filtros de aire — grado industrial",
+      "peso_max": "2.8 Tm",
+      "destino": "Deposito Central, Nivel 3",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "305.00",
+      "sello_emisor": "LMR-ACTIVO"
+    }
+  },
+  {
+    "id": "transit_pass_033",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Brek Yall",
+      "codigo_identidad": "TC-5543",
+      "origen": "Taller de Reparaciones, Sector Este",
+      "destino": "Planta de Ensamble, Nivel 4",
+      "expira": "300.05",
+      "motivo": "Turno de mantenimiento de equipos",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_033",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Brek Yall",
+      "codigo_identidad": "TC-5543",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "325.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_034",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Oss Varel",
+      "codigo_identidad": "LM-9910",
+      "origen": "Almacen Flotante Sector Norte",
+      "destino": "Deposito Norte, Nivel 5",
+      "expira": "305.00",
+      "motivo": "Entrega de suministros sellados al deposito",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_034",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Oss Varel",
+      "codigo_identidad": "LM-9910",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "310.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_035",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Davan Murl",
+      "codigo_identidad": "LM-7754",
+      "origen": "Sector Comercial Este",
+      "destino": "Planta Industrial, Nivel 6",
+      "expira": "305.00",
+      "motivo": "Distribucion de mercancias certificadas",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_035",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Davan Murl",
+      "codigo_identidad": "LM-7754",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "315.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "cargo_permit_035",
+    "type": "cargo_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Davan Murl",
+      "numero_permiso": "LMR-CP-07540",
+      "tipo_carga": "Mercancias diversas — clasificacion B",
+      "peso_max": "4.1 Tm",
+      "destino": "Planta Industrial, Nivel 6",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "299.08",
+      "sello_emisor": "LMR-VENCIDO"
+    }
+  },
+  {
+    "id": "transit_pass_036",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Rina Volss",
+      "codigo_identidad": "LM-4466",
+      "origen": "Deposito Flotante Sector Oeste",
+      "destino": "Deposito Sur, Nivel 4",
+      "expira": "305.00",
+      "motivo": "Transporte de carga industrial certificada",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_036",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Rina Volss",
+      "codigo_identidad": "LM-4466",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "cargo_permit_036",
+    "type": "cargo_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Rina Volss",
+      "numero_permiso": "LMR-CP-04463",
+      "tipo_carga": "Componentes industriales — clase 3",
+      "peso_max": "5.0 Tm",
+      "destino": "Deposito Norte, Nivel 2",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "310.00",
+      "sello_emisor": "LMR-ACTIVO"
+    }
+  },
+  {
+    "id": "transit_pass_037",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Goran Vel",
+      "codigo_identidad": "MO-1127",
+      "origen": "Estacion Orbital Sector 3",
+      "destino": "Cuartel Umbral Norte",
+      "expira": "315.00",
+      "motivo": "Reintegracion post-campana",
+      "sello_autoridad": "MO-9"
+    }
+  },
+  {
+    "id": "bio_cert_037",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Goran Vel",
+      "codigo_identidad": "MO-1127",
+      "tipo_biologico": "Modificado — Grado Combate",
+      "anomalias": "Ninguna registrada",
+      "expira": "330.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_038",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Oryn Bel",
+      "codigo_identidad": "TC-6629",
+      "origen": "Laboratorio de Sistemas, Sector Sur",
+      "destino": "Planta de Procesamiento, Nivel 3",
+      "expira": "305.00",
+      "motivo": "Revision tecnica de sistemas de filtracion",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_038",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Oryn Kel",
+      "codigo_identidad": "TC-6629",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_039",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Sona Vael",
+      "codigo_identidad": "MAP-3378",
+      "origen": "Centro de Asistencia Civil, Sector Bajo",
+      "destino": "Refugio Civil Umbral",
+      "expira": "305.00",
+      "motivo": "Suministro de asistencia humanitaria al Refugio Civil",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_039",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Sona Vael",
+      "codigo_identidad": "MAP-3378",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "330.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_040",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Torv Kael",
+      "codigo_identidad": "LM-5582",
+      "origen": "Sector Comercial Sur",
+      "destino": "Deposito Central, Nivel 2",
+      "expira": "305.00",
+      "motivo": "Entrega de carga certificada",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_040",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Torv Kael",
+      "codigo_identidad": "LM-5582",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "325.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "cargo_permit_040",
+    "type": "cargo_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Torv Kael",
+      "numero_permiso": "LMR-CP-05589",
+      "tipo_carga": "Reliquias administrativas — grado A",
+      "peso_max": "1.2 Tm",
+      "destino": "Deposito Central, Nivel 2",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "305.00",
+      "sello_emisor": "LMR-ACTIVO"
+    }
+  }
+]

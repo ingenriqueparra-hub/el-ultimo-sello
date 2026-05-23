@@ -1273,6 +1273,44 @@ Pendientes:
 
 ---
 
+### Módulo 17 — Expansión Día 4: Permiso de carga
+Estado: Completado
+
+Implementado:
+- Nueva validación `document_required_if_field` en `RuleEngine.gd`: verifica si un campo de un documento contiene cualquiera de una lista de palabras clave y, si es así, exige que otro tipo de documento esté presente. Comparación case-insensitive con `String.contains()`. Devuelve null si el documento condición no existe o si ninguna palabra clave coincide.
+- `day_04.json` — Día 4 con fecha 301.00, 10 reglas activas (001-007 + 009-011, sin rule_008 cuarentena levantada), 10 solicitantes (031-040), créditos inicio 50.
+- `rules_day_04.json` — 7 reglas heredadas (001-007 con current_date 301.00) + 3 nuevas: rule_009 (`document_required_if_field` para cargo_permit si motivo contiene carga/mercancia/suministro/entrega), rule_010 (`field_not_expired` sobre cargo_permit), rule_011 (`field_match` destino entre transit_pass y cargo_permit).
+- `applicants_day_04.json` — 10 casos: 2 aprobaciones limpias (031 sin carga, 032 cargo completo), pase vencido (033), sin cargo_permit pese a motivo de entrega (034), cargo_permit vencido (035), destino inconsistente entre Pase y Permiso (036, hold), anomalía biológica en soldado (037, hold), nombre inconsistente (038, hold), caso moral auxiliar sanitaria rechazada por falta de permiso (039, civilian_harm), contradicción en interrogatorio de cargo (040, hold).
+- `documents_day_04.json` — 24 documentos: 10 transit_pass + 10 bio_cert + 4 cargo_permit (032, 035, 036, 040). Nuevo tipo: cargo_permit con campos: titular, numero_permiso, tipo_carga, peso_max, destino, emisor, expira, sello_emisor.
+- `consequences_day_04.json` — 7 consecuencias de caso (prioridades 135-200) + 6 de rendimiento. Flags: flag_undeclared_relic_cargo_admitted, flag_anomaly_d4_soldier_admitted, flag_cargo_destination_mismatch_admitted, flag_relic_cargo_held, flag_humanitarian_cargo_rejected, flag_cargo_destination_held, flag_anomaly_d4_soldier_held.
+- `DayReport.gd` — botón "CONTINUAR — DIA 4" aparece automáticamente al terminar Día 3 porque detecta `day_04.json`.
+
+Nueva capa jugable:
+- El jugador aprende que el motivo declarado en el Pase puede activar un requerimiento documental adicional (Permiso de Carga).
+- Tener el documento no basta: debe estar vigente (cargo_permit_035 vencido).
+- La coincidencia de destino entre dos documentos se convierte en un nuevo vector de inconsistencia (rule_011, cargo_permit_036).
+- El interrogatorio sigue siendo la única forma de detectar contradicciones que los documentos no revelan (Torv Kael, applicant_040).
+- El caso moral (Sona Vael, auxiliar humanitaria) introduce por primera vez la tensión entre suministro civil y exigencia burocrática sin flexibilización narrativa.
+
+Narrative hooks activados:
+- applicant_036 (Rina Volss): on_wrong_approve → flag_cargo_destination_mismatch_admitted, on_correct_hold → flag_cargo_destination_held
+- applicant_037 (Goran Vel): on_wrong_approve → flag_anomaly_d4_soldier_admitted, on_correct_hold → flag_anomaly_d4_soldier_held
+- applicant_039 (Sona Vael): on_correct_reject → flag_humanitarian_cargo_rejected
+- applicant_040 (Torv Kael): on_wrong_approve → flag_undeclared_relic_cargo_admitted, on_correct_hold → flag_relic_cargo_held
+
+Archivos principales:
+- `game/scripts/systems/RuleEngine.gd` (actualizado — `document_required_if_field`)
+- `game/data/days/day_04.json` (nuevo)
+- `game/data/rules/rules_day_04.json` (nuevo)
+- `game/data/applicants/applicants_day_04.json` (nuevo)
+- `game/data/documents/documents_day_04.json` (nuevo)
+- `game/data/consequences/consequences_day_04.json` (nuevo)
+
+Pendientes:
+- Ninguno para Módulo 17.
+
+---
+
 ## 22. Reglas para control de alcance
 
 Cada vez que aparezca una idea nueva, evaluar:

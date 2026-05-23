@@ -23,6 +23,8 @@ static func _check_rule(rule: Dictionary, docs: Dictionary, current_date: String
 			return _check_field_match(rule, validation, docs)
 		"field_not_in_list":
 			return _check_field_not_in_list(rule, validation, docs)
+		"document_required_if_field":
+			return _check_document_required_if_field(rule, validation, docs)
 	return null
 
 static func _check_document_required(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:
@@ -90,6 +92,22 @@ static func _check_field_not_in_list(rule: Dictionary, validation: Dictionary, d
 	var value: String = docs[dtype].get("fields", {}).get(field, "")
 	if value != "" and value in invalid:
 		return _violation(rule, "Sector bloqueado: \"%s\"" % value)
+	return null
+
+static func _check_document_required_if_field(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:
+	var cond_dtype: String = validation.get("condition_document_type", "")
+	var cond_field: String = validation.get("condition_field", "")
+	var cond_values: Array = validation.get("condition_values", [])
+	var req_dtype: String  = validation.get("required_document_type", "")
+	if not docs.has(cond_dtype):
+		return null
+	var field_val: String = docs[cond_dtype].get("fields", {}).get(cond_field, "").to_lower()
+	for cv in cond_values:
+		if field_val.contains(str(cv).to_lower()):
+			if not docs.has(req_dtype):
+				var motivo: String = docs[cond_dtype].get("fields", {}).get(cond_field, "")
+				return _violation(rule, "Permiso de carga requerido. Motivo: \"%s\"" % motivo)
+			return null
 	return null
 
 static func _violation(rule: Dictionary, detail: String) -> Dictionary:
