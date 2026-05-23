@@ -77,10 +77,10 @@ func _populate(summary: Dictionary) -> void:
 		_show_normal_report(_report)
 
 func _show_normal_report(report: Dictionary) -> void:
-	var perf := report.get("performance", {})
+	var perf: Dictionary = report.get("performance", {})
 	consequence_title_label.text = str(perf.get("title", "TURNO REGISTRADO"))
 
-	var text := str(perf.get("body", ""))
+	var text: String = str(perf.get("body", ""))
 
 	var incidents: Array = report.get("incidents", [])
 	if not incidents.is_empty():
@@ -286,7 +286,7 @@ func _update_debug_panel() -> void:
 	lines.append("")
 
 	lines.append("--- DICTAMEN DE RENDIMIENTO ---")
-	var perf := _report.get("performance", {})
+	var perf: Dictionary = _report.get("performance", {})
 	if perf.is_empty() or perf.get("id", "") == "neutral":
 		lines.append("  (neutral — sin coincidencia)")
 	else:
@@ -314,7 +314,7 @@ func _update_debug_panel() -> void:
 	lines.append("")
 
 	lines.append("--- EFECTOS APLICADOS ---")
-	var applied := _report.get("effects_applied", {})
+	var applied: Dictionary = _report.get("effects_applied", {})
 	if applied.is_empty():
 		lines.append("  (ninguno)")
 	else:

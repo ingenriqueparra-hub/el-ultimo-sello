@@ -1027,6 +1027,10 @@ Archivos principales:
 - `game/scripts/ui/DayReport.gd`
 - `game/scripts/ui/ControlDesk.gd`
 
+Bugs corregidos:
+- `var perf := report.get("performance", {})` → `var perf: Dictionary =` — Dictionary.get() devuelve Variant, `:=` no puede inferir el tipo.
+- `var text := str(perf.get("body", ""))` → `var text: String =` — mismo problema.
+
 Pendientes:
 - Migrar consecuencia narrativa hardcodeada a datos JSON en Módulo 15.
 
