@@ -67,6 +67,10 @@
       "on_wrong_approve": "flag_unauthorized_entry",
       "on_correct_hold": "flag_refugee_detained"
     },
+    "report": {
+      "correct_note": "Retenida para verificacion de sello de autoridad. Situacion de desplazada registrada en evaluacion.",
+      "wrong_note": "Entrada autorizada sin sello de autoridad requerido. Protocolo de admision vulnerado."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -92,6 +96,10 @@
     },
     "question_alerts": {
       "carga": "CONTRADICCION: Declara 'componentes electronicos'. El permiso registra 'chatarra industrial procesada'."
+    },
+    "report": {
+      "correct_note": "Carga retenida para inspeccion. Contradiccion entre declaracion verbal y permiso detectada.",
+      "wrong_note": "Comerciante admitido con contradiccion entre carga declarada y carga registrada en permiso."
     },
     "truth": {
       "should_allow": false,
@@ -120,6 +128,10 @@
     "narrative_hooks": {
       "on_wrong_approve": "flag_implant_admitted",
       "on_correct_hold": "flag_implant_intercepted"
+    },
+    "report": {
+      "correct_note": "Soldado retenido por implante neural no declarado en documentacion biometrica.",
+      "wrong_note": "Soldado con implante neural no registrado admitido sin revision del Oficio."
     },
     "truth": {
       "should_allow": false,
@@ -171,6 +183,10 @@
     "question_alerts": {
       "carga": "OBJETO NO DECLARADO: Equipo de diagnostico avanzado no figura en el permiso de ingreso."
     },
+    "report": {
+      "correct_note": "Tecnico retenido. Equipo de diagnostico no declarado en permiso de ingreso detectado en interrogatorio.",
+      "wrong_note": "Tecnico admitido con dispositivo no declarado en su permiso de ingreso."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -199,6 +215,10 @@
       "on_wrong_approve": "flag_anomaly_admitted",
       "on_wrong_reject": "flag_family_turned_away",
       "on_correct_hold": "flag_family_detained"
+    },
+    "report": {
+      "correct_note": "Madre e hijo retenidos para evaluacion biometrica. Anomalia en menor derivada al Oficio de Pureza Civica.",
+      "wrong_note": "Menor con anomalia biometrica admitido sin revision del Oficio de Pureza Civica."
     },
     "truth": {
       "should_allow": false,
@@ -254,6 +274,10 @@
       "on_wrong_approve": "flag_agent_admitted",
       "on_wrong_reject": "flag_agent_dismissed",
       "on_correct_hold": "flag_agent_intercepted"
+    },
+    "report": {
+      "correct_note": "Comerciante retenido por contradiccion de origen entre declaracion verbal y documentos.",
+      "wrong_note": "Solicitante admitido con origen declarado inconsistente con Pase de Transito registrado."
     },
     "truth": {
       "should_allow": false,

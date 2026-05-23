@@ -9,6 +9,8 @@ var _selected_terminal: Dictionary = {}
 var _debug_panel: PanelContainer
 var _debug_label: Label
 
+const _DECISION_LABELS := {"approve": "APROBADO", "reject": "RECHAZADO", "hold": "RETENIDO"}
+
 const COLOR_PANEL  := Color(0.06, 0.10, 0.06, 1)
 const COLOR_BORDER := Color(0.15, 0.45, 0.15, 1)
 const COLOR_TEXT   := Color(0.18, 0.82, 0.18, 1)
@@ -55,8 +57,8 @@ func _populate(summary: Dictionary) -> void:
 
 	var quota: int = summary.get("quota", total)
 	processed_label.text = "Procesados:           %d / %d" % [total, quota]
-	correct_label.text   = "Decisiones correctas: %d" % correct
-	errors_label.text    = "Errores:              %d" % errors
+	correct_label.text   = "Expedientes validados:  %d" % correct
+	errors_label.text    = "Expedientes observados: %d" % errors
 	credits_label.text   = "Creditos finales:     %d" % credits
 
 	if errors > 0:
@@ -65,7 +67,7 @@ func _populate(summary: Dictionary) -> void:
 		credits_label.add_theme_color_override("font_color", COLOR_ERROR)
 
 	for decision in summary.get("decisions", []):
-		_add_decision_row(decision)
+		_add_audit_block(decision)
 
 	var day: int = summary.get("day", 1)
 	_report = NarrativeConsequenceSystem.evaluate(summary, day)
@@ -103,24 +105,48 @@ func _show_normal_report(report: Dictionary) -> void:
 
 	consequence_text.text = text
 
-func _add_decision_row(decision: Dictionary) -> void:
-	var was_correct: bool = decision.get("was_correct", false)
-	var name: String      = decision.get("applicant_name", "?")
-	var dec: String       = decision.get("decision", "?").to_upper()
-	var delta: int        = decision.get("credit_delta", 0)
+func _add_audit_block(decision: Dictionary) -> void:
+	var was_correct: bool   = decision.get("was_correct", false)
+	var name: String        = decision.get("applicant_name", "?")
+	var dec: String         = decision.get("decision", "approve")
+	var delta: int          = decision.get("credit_delta", 0)
+	var report: Dictionary  = decision.get("report", {})
+	var dec_label: String   = _DECISION_LABELS.get(dec, dec.to_upper())
+	var correct_dec: String = decision.get("correct_decision", "")
+	var correct_label_str: String = _DECISION_LABELS.get(correct_dec, correct_dec.to_upper())
 
-	var indicator := "[OK]" if was_correct else "[!] "
-	var delta_str := ("  %d" % delta) if delta < 0 else ""
-	var correct_str := ""
-	if not was_correct:
-		var correct_dec: String = decision.get("correct_decision", "?").to_upper()
-		correct_str = "  →  %s" % correct_dec
+	var header_color: Color = COLOR_OK if was_correct else COLOR_ERROR
+	var header_prefix: String = "EXPEDIENTE VALIDADO" if was_correct else "EXPEDIENTE OBSERVADO"
+	_add_block_line("%s — %s" % [header_prefix, name], header_color, 13)
+	_add_block_line("  Accion registrada:  %s" % dec_label, COLOR_DIM, 12)
 
-	var row := Label.new()
-	row.text = "%s  %-22s %s%s%s" % [indicator, name, dec, correct_str, delta_str]
-	row.add_theme_color_override("font_color", COLOR_OK if was_correct else COLOR_ERROR)
-	row.add_theme_font_size_override("font_size", 13)
-	decisions_list.add_child(row)
+	if was_correct:
+		var note: String = str(report.get("correct_note", ""))
+		if note != "":
+			_add_block_line("  Resultado: %s" % note, COLOR_DIM, 12)
+		if delta == 0:
+			_add_block_line("  Sin sancion.", COLOR_DIM, 12)
+	else:
+		var note: String = str(report.get("wrong_note", ""))
+		if note != "":
+			_add_block_line("  Observacion: %s" % note, COLOR_ERROR.lightened(0.15), 12)
+		if correct_dec != "":
+			_add_block_line("  Accion protocolaria omitida: %s" % correct_label_str, COLOR_DIM, 12)
+		if delta < 0:
+			_add_block_line("  Sancion aplicada: %d creditos" % delta, COLOR_ERROR, 12)
+
+	var spacer := Label.new()
+	spacer.text = " "
+	spacer.add_theme_font_size_override("font_size", 5)
+	decisions_list.add_child(spacer)
+
+func _add_block_line(text: String, color: Color, size: int) -> void:
+	var lbl := Label.new()
+	lbl.text = text
+	lbl.add_theme_color_override("font_color", color)
+	lbl.add_theme_font_size_override("font_size", size)
+	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	decisions_list.add_child(lbl)
 
 func _apply_theme() -> void:
 	_style_panel($VBox/Header, COLOR_PANEL, COLOR_BORDER)
@@ -268,6 +294,9 @@ func _update_debug_panel() -> void:
 			var viols: Array = d.get("violations", [])
 			if not viols.is_empty():
 				lines.append("     viols:   %s" % ", ".join(viols))
+			var nflag: String = d.get("narrative_flag", "")
+			if nflag != "":
+				lines.append("     flag:    %s" % nflag)
 	lines.append("")
 
 	lines.append("--- FLAGS NARRATIVOS ---")

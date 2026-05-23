@@ -39,6 +39,10 @@
       "carga": "Solo mi uniforme y credenciales de operario."
     },
     "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazado por origen en sector bajo cuarentena activa. Protocolo sanitario aplicado correctamente.",
+      "wrong_note": "Operario de sector en cuarentena activa admitido. Directiva sanitaria ignorada."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "reject",
@@ -65,6 +69,10 @@
     "question_alerts": {},
     "narrative_hooks": {
       "on_wrong_approve": "flag_quarantine_breach_vulnerable"
+    },
+    "report": {
+      "correct_note": "Rechazada. Procedencia de zona en cuarentena y ausencia de Certificado Biometrico. Protocolo aplicado.",
+      "wrong_note": "Madre con menor admitida desde zona en cuarentena activa sin Certificado Biometrico. Doble violacion de protocolo."
     },
     "truth": {
       "should_allow": false,
@@ -162,6 +170,10 @@
       "carga": "Los ornamentos del rito. Todo sellado por el Clero."
     },
     "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazado. Origen en sector en cuarentena. Exencion religiosa no acreditada documentalmente.",
+      "wrong_note": "Religioso de zona en cuarentena admitido sobre la base de exencion verbal no documentada."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "reject",
@@ -214,6 +226,10 @@
       "on_wrong_approve": "flag_suspicious_identity_admitted",
       "on_correct_hold": "flag_suspicious_identity_held"
     },
+    "report": {
+      "correct_note": "Retenido por inconsistencia de nombre entre Pase de Transito y Certificado Biometrico. Identidad en verificacion.",
+      "wrong_note": "Solicitante admitido con nombres inconsistentes entre documentos. Identidad sin verificar."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -242,6 +258,10 @@
     },
     "narrative_hooks": {
       "on_correct_hold": "flag_medic_quarantine_held"
+    },
+    "report": {
+      "correct_note": "Retenida por contacto declarado con zona en cuarentena activa durante turno previo. Evaluacion sanitaria iniciada.",
+      "wrong_note": "Personal sanitario admitido con exposicion reciente a zona en cuarentena activa declarada en interrogatorio."
     },
     "truth": {
       "should_allow": false,

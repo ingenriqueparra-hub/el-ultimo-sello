@@ -32,22 +32,28 @@ func record(decision: String, applicant: Dictionary) -> Dictionary:
 
 	var hooks: Dictionary = applicant.get("narrative_hooks", {})
 	var hook_key := "on_%s_%s" % ["correct" if was_correct else "wrong", decision]
+	var narrative_flag: String = ""
 	if hooks.has(hook_key):
-		var flag: String = str(hooks[hook_key])
-		if flag != "" and flag not in _activated_flags:
-			_activated_flags.append(flag)
-			print("[NarrativeHook] Flag activado: %s (solicitante: %s)" % [flag, applicant.get("name", "?")])
+		narrative_flag = str(hooks[hook_key])
+		if narrative_flag != "" and narrative_flag not in _activated_flags:
+			_activated_flags.append(narrative_flag)
+			print("[NarrativeHook] Flag activado: %s (solicitante: %s)" % [narrative_flag, applicant.get("name", "?")])
 
 	var result := {
-		"applicant_id": applicant.get("id", ""),
-		"applicant_name": applicant.get("name", ""),
-		"decision": decision,
-		"correct_decision": correct_decision,
-		"was_correct": was_correct,
-		"risk_level": risk,
-		"violations": truth.get("violations", []),
-		"credit_delta": delta,
-		"credits_after": _credits,
+		"applicant_id":      applicant.get("id", ""),
+		"applicant_name":    applicant.get("name", ""),
+		"applicant_type":    applicant.get("type", ""),
+		"applicant_origin":  applicant.get("origin", ""),
+		"applicant_purpose": applicant.get("purpose", ""),
+		"decision":          decision,
+		"correct_decision":  correct_decision,
+		"was_correct":       was_correct,
+		"risk_level":        risk,
+		"violations":        truth.get("violations", []),
+		"credit_delta":      delta,
+		"credits_after":     _credits,
+		"narrative_flag":    narrative_flag,
+		"report":            applicant.get("report", {}),
 	}
 	_decisions.append(result)
 	decision_recorded.emit(result)

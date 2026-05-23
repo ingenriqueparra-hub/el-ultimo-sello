@@ -1019,21 +1019,28 @@ Estado: Completado
 
 Implementado:
 - `DayReport.tscn` y `DayReport.gd` muestran resumen del turno.
-- Lista de decisiones con resultado y delta de créditos.
-- Consecuencia narrativa básica según errores.
+- Auditoría institucional: bloques por solicitante con encabezado "EXPEDIENTE VALIDADO/OBSERVADO — Nombre", acción registrada, nota narrativa (si existe), omisión protocolaria y sanción.
+- Etiquetas traducidas al español institucional: `approve`→`APROBADO`, `reject`→`RECHAZADO`, `hold`→`RETENIDO`.
+- Resumen: "Expedientes validados" / "Expedientes observados" (antes: "Decisiones correctas" / "Errores").
+- Campo `report: {correct_note, wrong_note}` opcional en solicitantes para notas específicas por caso.
+- Consecuencia narrativa compuesta (rendimiento + incidentes + síntesis) desde JSON.
 - Reinicio de día y continuación al siguiente día si existe.
 
 Archivos principales:
 - `game/scenes/main/DayReport.tscn`
 - `game/scripts/ui/DayReport.gd`
 - `game/scripts/ui/ControlDesk.gd`
+- `game/scripts/systems/DecisionSystem.gd`
+- `game/data/applicants/applicants_day_01.json` (report fields en 6 casos)
+- `game/data/applicants/applicants_day_02.json` (report fields en 3 casos)
+- `game/data/applicants/applicants_day_03.json` (report fields en 5 casos)
 
 Bugs corregidos:
 - `var perf := report.get("performance", {})` → `var perf: Dictionary =` — Dictionary.get() devuelve Variant, `:=` no puede inferir el tipo.
 - `var text := str(perf.get("body", ""))` → `var text: String =` — mismo problema.
 
 Pendientes:
-- Migrar consecuencia narrativa hardcodeada a datos JSON en Módulo 15.
+- Ninguno para Módulo 8.
 
 ---
 

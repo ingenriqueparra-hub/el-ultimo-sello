@@ -67,6 +67,10 @@
       "on_wrong_approve": "flag_identity_fraud_admitted",
       "on_correct_hold": "flag_fraud_intercepted"
     },
+    "report": {
+      "correct_note": "Tecnica retenida por codigo de identidad inconsistente entre Pase de Transito y Certificado Biometrico.",
+      "wrong_note": "Tecnica admitida con codigos de identidad inconsistentes entre documentos. Posible fraude de identidad."
+    },
     "truth": {
       "should_allow": false,
       "correct_decision": "hold",
@@ -142,6 +146,10 @@
     "narrative_hooks": {
       "on_wrong_approve": "flag_anomaly_soldier_admitted",
       "on_correct_hold": "flag_anomaly_soldier_detained"
+    },
+    "report": {
+      "correct_note": "Soldado retenido por anomalia biologica no registrada en Certificado Biometrico.",
+      "wrong_note": "Soldado con anomalia biologica no documentada admitido sin retencion ni revision."
     },
     "truth": {
       "should_allow": false,
@@ -220,6 +228,10 @@
     "narrative_hooks": {
       "on_wrong_approve": "flag_suspicious_cargo_admitted",
       "on_correct_hold": "flag_cargo_inspected"
+    },
+    "report": {
+      "correct_note": "Comerciante retenido. Declaracion de carga inconsistente con Permiso de Ingreso.",
+      "wrong_note": "Comerciante admitido con carga declarada que no coincide con la registrada en su permiso."
     },
     "truth": {
       "should_allow": false,

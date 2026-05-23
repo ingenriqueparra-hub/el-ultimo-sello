@@ -113,13 +113,27 @@ project/
 
 ```json
 {
-  "applicant_id": "applicant_001",
-  "decision": "approve",
-  "was_correct": true,
-  "errors": [],
-  "consequence_tags": ["order_preserved"]
+  "applicant_id":      "applicant_001",
+  "applicant_name":    "Elias Vorn",
+  "applicant_type":    "citizen",
+  "applicant_origin":  "Sector Bajo Ceniza",
+  "applicant_purpose": "Trabajo temporal en fundicion",
+  "decision":          "approve",
+  "correct_decision":  "approve",
+  "was_correct":       true,
+  "risk_level":        "low",
+  "violations":        [],
+  "credit_delta":      0,
+  "credits_after":     50,
+  "narrative_flag":    "",
+  "report": {
+    "correct_note": "texto institucional cuando la decision fue correcta (opcional)",
+    "wrong_note":   "texto institucional cuando la decision fue incorrecta (opcional)"
+  }
 }
 ```
+
+El campo `report` es opcional en los datos del solicitante. Solo se define en casos con contexto narrativo relevante. Si no existe, el bloque de auditoría muestra solo acción, omisión y sanción sin nota.
 
 ### Narrative Consequence
 
