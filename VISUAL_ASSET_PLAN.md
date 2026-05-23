@@ -501,6 +501,21 @@ Pendiente de validacion:
 - Confirmar que el overlay no reduce legibilidad.
 - Confirmar que `RETENER / Enviar a revision` sigue cabiendo bien.
 
+#### Correccion visual inmediata
+
+La primera version de assets resulto demasiado brillante y decorativa: los marcos parecian tubos neon y no una terminal burocratica. Se reemplazaron por una version mas sobria:
+
+- fondo casi plano, oscuro, con lineas horizontales muy sutiles;
+- marcos NinePatch sin dobles bordes internos;
+- botones menos luminosos;
+- overlay de scanlines reducido de `0.22` a `0.10`;
+- modulacion de botones reducida de `lightened(0.35)` a `lightened(0.08)`.
+
+Regla aprendida:
+
+- La terminal debe sentirse vieja, pesada e institucional, no una interfaz de energia/circuitos.
+- Los assets deben agregar textura y peso, no dominar sobre el texto.
+
 ### Paso 5 — Integrar botones e iconos
 
 Objetivo:

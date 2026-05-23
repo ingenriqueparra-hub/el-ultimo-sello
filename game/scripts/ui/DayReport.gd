@@ -183,7 +183,7 @@ func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
 
 func _install_visual_layers() -> void:
 	_add_full_rect_texture(ASSET_TERMINAL_BG, -10, 1.0, "TerminalBackground")
-	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.22, "ScanlineOverlay")
+	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
 
 func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
 	if get_node_or_null(node_name) != null:
@@ -217,7 +217,7 @@ func _make_texture_style(path: String, content_margin: int, texture_margin: int)
 func _make_button_style(path: String, color: Color) -> StyleBox:
 	var textured := _make_texture_style(path, 10, 8)
 	if textured != null:
-		textured.modulate_color = color.lightened(0.35)
+		textured.modulate_color = color.lightened(0.08)
 		return textured
 	var flat := StyleBoxFlat.new()
 	flat.bg_color = color
