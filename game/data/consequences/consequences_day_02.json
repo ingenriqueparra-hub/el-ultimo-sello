@@ -94,6 +94,22 @@
     }
   },
   {
+    "id": "c02_refugee_biometric_rejected_by_protocol",
+    "day": 2,
+    "priority": 130,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_refugee_biometric_rejected_by_protocol",
+    "summary_text": "Refugiado rechazado por ausencia de Certificado Biometrico.",
+    "title": "RECHAZO PROTOCOLARIO — Asilo sin certificado biometrico",
+    "body": "Edan Voss fue rechazado por no presentar Certificado Biometrico vigente.\n\nEl Ministerio registra aplicacion correcta de la directiva OPC-3. El Registro Civil anexa que el solicitante provenia de una evacuacion sin infraestructura documental.\n\nEl protocolo fue claro. La consecuencia tambien.",
+    "effects": {
+      "civilian_harm": 1,
+      "institutional_trust": 1
+    }
+  },
+  {
     "id": "c02_eficiencia_maxima",
     "day": 2,
     "priority": 100,

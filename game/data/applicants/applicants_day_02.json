@@ -95,12 +95,19 @@
       "carga": "Solo lo que cargamos en la evacuacion. Documentos basicos."
     },
     "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_reject": "flag_refugee_biometric_rejected_by_protocol"
+    },
+    "report": {
+      "correct_note": "Rechazado por ausencia de Certificado Biometrico obligatorio. Protocolo aplicado. Contexto de evacuacion registrado en nota interna.",
+      "wrong_note": "Refugiado sin Certificado Biometrico admitido. Directiva OPC-3 ignorada."
+    },
     "truth": {
       "should_allow": false,
-      "correct_decision": "hold",
+      "correct_decision": "reject",
       "risk_level": "low",
       "violations": ["rule_005"],
-      "notes": "Falta el Certificado Biometrico. El Pase es valido. Situacion de refugiado. Decision de juicio: la regla exige el certificado, pero el contexto es una evacuacion. Retener es mas justo que rechazar."
+      "notes": "Falta Certificado Biometrico obligatorio desde el Dia 2. La regla exige rechazar. El contexto de evacuacion causa dano civil registrado como consecuencia narrativa mediante civilian_harm. hold queda reservado para ambiguedad real."
     }
   },
   {

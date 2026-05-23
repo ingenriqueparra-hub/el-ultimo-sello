@@ -142,18 +142,19 @@
     }
   },
   {
-    "id": "c01_refugee_detained",
+    "id": "c01_refugee_rejected_by_protocol",
     "day": 1,
     "priority": 130,
     "type": "case",
-    "tone": "neutral",
+    "tone": "mixed",
     "severity": "minor",
-    "trigger_flag": "flag_refugee_detained",
-    "summary_text": "Refugiada retenida en espera de verificacion de sello MAP.",
-    "title": "RETENCION — Refugiada en espera de verificacion de sello",
-    "body": "Sela Driva y sus hijos han sido retenidos en zona de espera. El sello MAP de su Pase de Transito esta pendiente de validacion.\n\nEl Ministerio de Admision Planetaria ha notificado al Refugio Civil. Se estima resolucion en el siguiente turno.\n\nSu decision aplica el protocolo sin cerrar el caso definitivamente.",
+    "trigger_flag": "flag_refugee_rejected_by_protocol",
+    "summary_text": "Refugiada rechazada por sello pendiente. Dano civil anexado.",
+    "title": "RECHAZO PROTOCOLARIO — Refugiada sin sello valido",
+    "body": "Sela Driva y sus hijos fueron rechazados por presentar Pase de Transito con sello pendiente.\n\nEl Ministerio registra cumplimiento del protocolo. El Refugio Civil registra demora critica en la atencion del grupo familiar.\n\nEl expediente queda limpio ante la norma. No ante la ciudad.",
     "effects": {
-      "civilian_harm": 1
+      "civilian_harm": 1,
+      "institutional_trust": 1
     }
   },
   {

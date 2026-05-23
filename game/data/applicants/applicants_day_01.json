@@ -65,18 +65,18 @@
     "question_alerts": {},
     "narrative_hooks": {
       "on_wrong_approve": "flag_unauthorized_entry",
-      "on_correct_hold": "flag_refugee_detained"
+      "on_correct_reject": "flag_refugee_rejected_by_protocol"
     },
     "report": {
-      "correct_note": "Retenida para verificacion de sello de autoridad. Situacion de desplazada registrada en evaluacion.",
+      "correct_note": "Rechazada por sello MAP pendiente. Protocolo aplicado. El Refugio Civil registra demora critica en la atencion del grupo familiar.",
       "wrong_note": "Entrada autorizada sin sello de autoridad requerido. Protocolo de admision vulnerado."
     },
     "truth": {
       "should_allow": false,
-      "correct_decision": "hold",
+      "correct_decision": "reject",
       "risk_level": "low",
       "violations": ["rule_004"],
-      "notes": "Falta sello MAP. No hay amenaza. Decision moral: aplicar la regla o reconocer la situacion. Retener es mas justo que rechazar."
+      "notes": "Sello MAP marcado como PENDIENTE — no es un sello valido. La regla exige rechazar. El costo humano se registra como consecuencia narrativa mediante civilian_harm, no como cambio de la decision correcta. hold queda reservado para ambiguedad real, no para compasion."
     }
   },
   {

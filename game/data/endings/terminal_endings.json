@@ -75,6 +75,17 @@
     }
   },
   {
+    "id": "terminal_disturbio_civil",
+    "priority": 175,
+    "title": "DISTURBIO — El puesto fue tomado durante la noche",
+    "body": "Durante los primeros turnos, el Puesto Umbral 7 cumplio el protocolo con eficiencia suficiente para sostener la confianza del Ministerio.\n\nLos expedientes rechazados fueron archivados correctamente. Las personas no.\n\nFamiliares, desplazados y trabajadores sin admision rodearon la ventanilla exterior antes del inicio del siguiente ciclo. La Milicia Orbital llego tarde. El registro de seguridad indica que el operario fue identificado por nombre antes de la ruptura del blindaje.\n\nEl Ministerio clasifica el incidente como violencia civil no autorizada.\n\nEl expediente del operario queda cerrado por fallecimiento en servicio.\n\nEl protocolo fue cumplido. La ciudad no lo perdono.",
+    "conditions": {
+      "civilian_harm_min": 3,
+      "institutional_trust_min": 2,
+      "min_day": 3
+    }
+  },
+  {
     "id": "terminal_ascenso_oscuro",
     "priority": 130,
     "title": "TRASLADO — Perfil de obediencia institucional detectado",
