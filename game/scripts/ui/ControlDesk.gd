@@ -64,6 +64,7 @@ var decision_system: DecisionSystem
 var _applicant_docs: Dictionary = {}
 var _scanner_used: bool = false
 var _tab3_doc_type: String = ""
+var _active_tab_index: int = 0
 var _questions_container: VBoxContainer
 var _audio: AudioStreamPlayer
 
@@ -81,6 +82,9 @@ func _ready() -> void:
 	approve_btn.text = "APROBAR (A)"
 	reject_btn.text  = "RECHAZAR (D)"
 	hold_btn.text    = "RETENER (S)\nEnviar a revision"
+	tab1.text += " (W)"
+	tab2.text += " (W)"
+	tab3.text += " (W)"
 	hold_btn.tooltip_text = "Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior."
 	hold_btn.add_theme_font_size_override("font_size", 15)
 	_connect_signals()
@@ -290,6 +294,8 @@ func _input(event: InputEvent) -> void:
 			if not reject_btn.disabled:  _on_reject_pressed()
 		KEY_E:
 			if not scanner_btn.disabled: _on_scanner_pressed()
+		KEY_W:
+			_cycle_doc_tab()
 		KEY_Q:
 			_press_next_question()
 		_:
@@ -485,7 +491,12 @@ func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	_render_document(_applicant_docs[dtype])
 
 func _set_active_tab(active_btn: Button) -> void:
-	for tab in [tab1, tab2, tab3]:
+	var tabs := [tab1, tab2, tab3]
+	for i in tabs.size():
+		if tabs[i] == active_btn:
+			_active_tab_index = i
+			break
+	for tab in tabs:
 		var is_active: bool = (tab == active_btn)
 		var s := StyleBoxFlat.new()
 		s.bg_color = Color(0.10, 0.22, 0.10, 1) if is_active else Color(0.05, 0.10, 0.05, 1)
@@ -590,6 +601,14 @@ func _style_question_button(btn: Button) -> void:
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", COLOR_TEXT_DIM)
 	btn.add_theme_font_size_override("font_size", 12)
+
+func _cycle_doc_tab() -> void:
+	var tabs := [tab1, tab2, tab3]
+	for i in tabs.size():
+		var idx := (_active_tab_index + 1 + i) % tabs.size()
+		if not tabs[idx].disabled:
+			tabs[idx].pressed.emit()
+			return
 
 func _press_next_question() -> void:
 	for btn in _questions_container.get_children():
