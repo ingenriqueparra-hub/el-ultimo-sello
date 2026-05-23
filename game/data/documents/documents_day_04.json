@@ -54,8 +54,8 @@
     }
   },
   {
-    "id": "cargo_permit_032",
-    "type": "cargo_permit",
+    "id": "ingress_permit_032",
+    "type": "ingress_permit",
     "label": "Permiso de Carga",
     "fields": {
       "titular": "Tarev Mol",
@@ -150,8 +150,8 @@
     }
   },
   {
-    "id": "cargo_permit_035",
-    "type": "cargo_permit",
+    "id": "ingress_permit_035",
+    "type": "ingress_permit",
     "label": "Permiso de Carga",
     "fields": {
       "titular": "Davan Murl",
@@ -192,8 +192,8 @@
     }
   },
   {
-    "id": "cargo_permit_036",
-    "type": "cargo_permit",
+    "id": "ingress_permit_036",
+    "type": "ingress_permit",
     "label": "Permiso de Carga",
     "fields": {
       "titular": "Rina Volss",
@@ -315,8 +315,8 @@
     }
   },
   {
-    "id": "cargo_permit_040",
-    "type": "cargo_permit",
+    "id": "ingress_permit_040",
+    "type": "ingress_permit",
     "label": "Permiso de Carga",
     "fields": {
       "titular": "Torv Kael",

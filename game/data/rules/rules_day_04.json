@@ -130,7 +130,7 @@
       "condition_document_type": "transit_pass",
       "condition_field": "motivo",
       "condition_values": ["carga", "mercancia", "suministro", "entrega"],
-      "required_document_type": "cargo_permit"
+      "required_document_type": "ingress_permit"
     },
     "penalty_on_fail": {
       "credits": -15,
@@ -146,7 +146,7 @@
     "display_text": "CIRCULAR LMR-4: Permiso de Carga vencido invalida el ingreso independientemente de los demas documentos.",
     "validation": {
       "type": "field_not_expired",
-      "document_type": "cargo_permit",
+      "document_type": "ingress_permit",
       "field": "expira",
       "current_date": "301.00"
     },
@@ -165,7 +165,7 @@
     "validation": {
       "type": "field_match",
       "document_type_a": "transit_pass",
-      "document_type_b": "cargo_permit",
+      "document_type_b": "ingress_permit",
       "field": "destino"
     },
     "penalty_on_fail": {
