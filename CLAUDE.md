@@ -373,6 +373,7 @@ Fase 3: NarrativeStateSystem.gd con 4 acumuladores estáticos. apply_effects() l
 Fase 4: TerminalEndingSystem.gd + terminal_endings.json con 8 finales anticipados. Panel rojo en DayReport al activarse. Restart terminal vuelve a Día 1 con reset completo.
 Reporte compuesto (P1-09): NarrativeConsequenceSystem.evaluate() devuelve {performance, incidents, synthesis, effects_applied}. Performance = dictamen único por rendimiento. Incidents = todos los flags activos como incidentes (tone/severity/summary_text). Synthesis = texto institucional generado. Efectos compuestos aplicados una sola vez.
 Auditoria inicial (P1-10): durante los primeros 7 dias, el reporte final debe leerse como auditoria institucional completa del Ministerio sobre un operario nuevo. Puede explicar expedientes validados/observados, accion registrada, accion protocolaria omitida y sancion aplicada. En dias dinamicos futuros, la auditoria debe volverse parcial, politica e incompleta.
+Casos morales (P1-11): si una regla visible exige rechazo, la decision correcta debe ser `reject`. No usar `hold` como comodin compasivo. El costo humano de obedecer una norma cruel debe expresarse mediante `narrative_hooks`, consecuencias de caso y `civilian_harm`.
 
 ---
 
@@ -1212,6 +1213,12 @@ Documentado (P1-10 — auditoria institucional):
 - El reporte debe expresarse como auditoria institucional, no como pantalla de respuestas correctas.
 - Lenguaje recomendado: expediente validado/observado, accion registrada, accion protocolaria omitida y sancion aplicada.
 - En dias dinamicos futuros, la auditoria debe poder ser parcial, politica o incompleta.
+
+Documentado (P1-11 — normalizacion de casos morales):
+- Si una regla visible exige rechazo, la decision correcta es `reject`.
+- `hold` queda reservado para verificacion adicional, custodia temporal o revision superior.
+- El dano humano por obedecer reglas crueles debe registrarse con `narrative_hooks` y `civilian_harm`.
+- Todo dia futuro debe evitar respuestas ocultas donde la compasion cambie la decision correcta sin regulacion visible.
 
 Archivos principales:
 - `game/scripts/systems/NarrativeConsequenceSystem.gd` (reescrito — Fase 5)

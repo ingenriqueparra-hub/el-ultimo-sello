@@ -59,6 +59,15 @@ Riesgo:
 - puede ser abuso de autoridad;
 - puede molestar a facciones poderosas.
 
+Uso correcto:
+- identidad dudosa;
+- contradicción entre documentos o interrogatorio;
+- anomalía que requiere verificación;
+- carga, implante o permiso que necesita inspección;
+- orden o excepción que exige revisión superior.
+
+`Retener` no debe usarse como sustituto moral de `Rechazar` si una norma vigente indica rechazo directo. Si el protocolo es claro, la decisión correcta debe seguir el protocolo y la consecuencia moral debe registrarse mediante narrativa y acumuladores.
+
 ### Escalar
 Pide decisión superior.
 
@@ -391,6 +400,27 @@ Ejemplos:
 - rechazar injustamente a una persona vulnerable deja una secuela humana;
 - retener correctamente a un sospechoso evita un problema y genera un incidente positivo;
 - obedecer el protocolo puede ser correcto y aun asi moralmente incomodo.
+
+### 11.2.1. Regla para casos morales
+
+Un caso moral no debe cambiar la decisión protocolaria si la norma activa es clara.
+
+Regla:
+
+- si una regla visible exige rechazo, la decisión correcta es `reject`;
+- si una regla visible exige retención o verificación, la decisión correcta es `hold`;
+- si no hay regla clara y existe sospecha razonable, `hold` puede ser la decisión correcta;
+- no usar `hold` como comodín compasivo cuando el protocolo visible dice rechazo.
+
+La tensión moral debe expresarse en consecuencias, no en respuestas ocultas.
+
+Ejemplo:
+
+- una persona vulnerable sin documento obligatorio debe ser rechazada si la regulación dice que el documento es obligatorio;
+- si el jugador rechaza correctamente, puede activarse un incidente con `civilian_harm`;
+- el reporte debe dejar claro que el protocolo fue cumplido, pero produjo daño humano.
+
+Todo caso moral futuro debe declarar `narrative_hooks` que permitan aumentar `civilian_harm` cuando una decisión protocolariamente correcta cause daño civil.
 
 Regla:
 

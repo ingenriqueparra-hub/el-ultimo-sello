@@ -72,6 +72,7 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 | P1-08 | Consecuencia de caso | Un solicitante marcado puede activar un incidente narrativo en el reporte |
 | P1-09 | Reporte narrativo compuesto | El reporte combina dictamen de rendimiento + incidentes de caso + sintesis institucional; una buena accion aislada no tapa un turno desastroso |
 | P1-10 | Auditoria institucional del turno | Durante Dias 1-7 el reporte se presenta como auditoria del Ministerio: expedientes validados/observados, accion registrada, accion protocolaria omitida y sancion aplicada |
+| P1-11 | Normalizar casos morales | Si una regla visible exige rechazo, la decision correcta es `reject`; el costo moral se registra con `civilian_harm`, no usando `hold` como comodin compasivo |
 
 ---
 

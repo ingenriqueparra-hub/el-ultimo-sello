@@ -168,7 +168,26 @@ Los solicitantes importantes pueden declarar ganchos opcionales sin obligar a to
 "narrative_hooks": {
   "on_wrong_approve": "flag_high_risk_approved",
   "on_wrong_reject": "flag_civilian_harm",
-  "on_correct_hold": "flag_incident_prevented"
+  "on_correct_hold": "flag_incident_prevented",
+  "on_correct_reject": "flag_protocol_cruelty"
+}
+```
+
+Para casos morales, no cambiar la decisión correcta si la regla visible es clara. Si el protocolo exige rechazo, usar `correct_decision: "reject"` y registrar el costo humano con un hook como `on_correct_reject`.
+
+Ejemplo:
+
+```json
+"narrative_hooks": {
+  "on_correct_reject": "flag_vulnerable_rejected_by_protocol"
+}
+```
+
+La consecuencia asociada puede aplicar:
+
+```json
+"effects": {
+  "civilian_harm": 1
 }
 ```
 
@@ -235,6 +254,12 @@ Responsable de:
 - retener;
 - emitir resultado;
 - actualizar variables del día.
+
+Regla de contenido:
+
+- `hold` se usa para expedientes que requieren verificacion adicional, custodia temporal o revision superior.
+- No usar `hold` como salida compasiva cuando una regla visible exige `reject`.
+- En casos morales con regla clara, la decision correcta sigue siendo la protocolaria y el costo moral se expresa mediante `narrative_hooks` y `civilian_harm`.
 
 ### 4.5. Report System
 Responsable de:
