@@ -85,16 +85,19 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Origen: ---"
+autowrap_mode = 3
 
 [node name="ApplicantDestination" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=1173255925]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Destino: ---"
+autowrap_mode = 3
 
 [node name="ApplicantPurpose" type="Label" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=190328877]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Motivo: ---"
+autowrap_mode = 3
 
 [node name="HSep2" type="HSeparator" parent="VBox/MainArea/ApplicantPanel/ApplicantVBox" unique_id=139107782]
 layout_mode = 2
@@ -149,12 +152,16 @@ text = "Permiso de Ingreso"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DocContent" type="Label" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocumentView" unique_id=349508034]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocumentView"]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="DocContent" type="Label" parent="VBox/MainArea/DocumentArea/DocumentVBox/DocumentView/ScrollContainer" unique_id=349508034]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 text = "[ Sin documento activo ]"
-horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="ToolsPanel" type="PanelContainer" parent="VBox/MainArea" unique_id=59860049]
@@ -197,9 +204,14 @@ text = "REGULACIONES"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AlertsList" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer" unique_id=831745659]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AlertsList" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer/ScrollContainer" unique_id=831745659]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "--- Sin alertas ---"
 autowrap_mode = 3
