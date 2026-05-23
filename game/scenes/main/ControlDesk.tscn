@@ -178,17 +178,36 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "[ ESCANER ]"
 
-[node name="AlertsLabel" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=807277283]
+[node name="ToolsTabHBox" type="HBoxContainer" parent="VBox/MainArea/ToolsPanel/ToolsVBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "ALERTAS:"
 
-[node name="AlertsList" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox" unique_id=831745659]
+[node name="TabAlertas" type="Button" parent="VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "ALERTAS"
+
+[node name="TabRegs" type="Button" parent="VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "REGULACIONES"
+
+[node name="AlertsContainer" type="VBoxContainer" parent="VBox/MainArea/ToolsPanel/ToolsVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AlertsList" type="Label" parent="VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer" unique_id=831745659]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 12
 text = "--- Sin alertas ---"
 autowrap_mode = 3
+
+[node name="RegsContainer" type="VBoxContainer" parent="VBox/MainArea/ToolsPanel/ToolsVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+visible = false
 
 [node name="DecisionBar" type="PanelContainer" parent="VBox" unique_id=119294482]
 custom_minimum_size = Vector2(0, 72)

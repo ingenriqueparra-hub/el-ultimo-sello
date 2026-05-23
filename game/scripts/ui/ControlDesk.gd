@@ -24,7 +24,11 @@ const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 @onready var applicant_purpose: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/ApplicantPurpose
 @onready var dialogue_text: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/DialogueText
 @onready var doc_content: Label = $VBox/MainArea/DocumentArea/DocumentVBox/DocumentView/DocContent
-@onready var alerts_list: Label = $VBox/MainArea/ToolsPanel/ToolsVBox/AlertsList
+@onready var alerts_list: Label = $VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer/AlertsList
+@onready var _tab_alertas: Button = $VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox/TabAlertas
+@onready var _tab_regs: Button = $VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox/TabRegs
+@onready var _alerts_container: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer
+@onready var _regs_container: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox/RegsContainer
 @onready var approve_btn: Button = $VBox/DecisionBar/DecisionHBox/ApproveButton
 @onready var hold_btn: Button = $VBox/DecisionBar/DecisionHBox/HoldButton
 @onready var reject_btn: Button = $VBox/DecisionBar/DecisionHBox/RejectButton
@@ -57,9 +61,12 @@ var _debug_label: Label
 
 func _ready() -> void:
 	_apply_theme()
+	_setup_tools_tabs()
 	approve_btn.text = "APROBAR (A)"
-	reject_btn.text  = "RECHAZAR (S)"
-	hold_btn.text    = "RETENER (D)"
+	reject_btn.text  = "RECHAZAR (D)"
+	hold_btn.text    = "RETENER (S)\nEnviar a revision"
+	hold_btn.tooltip_text = "Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior."
+	hold_btn.add_theme_font_size_override("font_size", 15)
 	_connect_signals()
 	current_day = ControlDesk.day_to_load
 	_update_status_bar()
@@ -220,9 +227,9 @@ func _input(event: InputEvent) -> void:
 		KEY_A:
 			if not approve_btn.disabled: _on_approve_pressed()
 		KEY_S:
-			if not reject_btn.disabled:  _on_reject_pressed()
-		KEY_D:
 			if not hold_btn.disabled:    _on_hold_pressed()
+		KEY_D:
+			if not reject_btn.disabled:  _on_reject_pressed()
 		KEY_E:
 			if not scanner_btn.disabled: _on_scanner_pressed()
 		KEY_Q:
@@ -603,7 +610,10 @@ func _update_debug_panel(applicant: Dictionary) -> void:
 	lines.append("TIPO:     " + applicant.get("type", "No disponible"))
 	lines.append("")
 	lines.append("--- VERDAD OCULTA ---")
-	lines.append("Decisión: " + truth.get("correct_decision", "No disponible").to_upper())
+	var correct_dec: String = truth.get("correct_decision", "")
+	lines.append("  [ %s ] APROBAR"  % ("X" if correct_dec == "approve" else " "))
+	lines.append("  [ %s ] RETENER"  % ("X" if correct_dec == "hold"    else " "))
+	lines.append("  [ %s ] RECHAZAR" % ("X" if correct_dec == "reject"  else " "))
 	lines.append("Riesgo:   " + truth.get("risk_level", "No disponible").to_upper())
 	lines.append("Notas:    " + truth.get("notes", "No disponible"))
 	lines.append("")
@@ -656,17 +666,28 @@ func _update_debug_panel(applicant: Dictionary) -> void:
 
 	_debug_label.text = "\n".join(lines)
 
+func _setup_tools_tabs() -> void:
+	_show_tools_tab("alertas")
+	_tab_alertas.pressed.connect(func(): _show_tools_tab("alertas"))
+	_tab_regs.pressed.connect(func():    _show_tools_tab("regs"))
+
+func _show_tools_tab(tab: String) -> void:
+	_alerts_container.visible = (tab == "alertas")
+	_regs_container.visible   = (tab == "regs")
+	_style_tools_tab_active(_tab_alertas, tab == "alertas")
+	_style_tools_tab_active(_tab_regs,    tab == "regs")
+
+func _style_tools_tab_active(btn: Button, active: bool) -> void:
+	var s := StyleBoxFlat.new()
+	s.bg_color    = Color(0.08, 0.18, 0.08, 1) if active else Color(0.03, 0.06, 0.03, 1)
+	s.border_color = COLOR_TEXT if active else COLOR_BORDER
+	s.set_border_width_all(1)
+	s.set_content_margin_all(4)
+	btn.add_theme_stylebox_override("normal", s)
+	btn.add_theme_stylebox_override("hover",  s)
+	btn.add_theme_color_override("font_color", COLOR_TEXT if active else COLOR_TEXT_DIM)
+
 func _build_regulations_section() -> void:
-	tools_vbox.add_child(HSeparator.new())
-
-	var title := Label.new()
-	title.text = "REGULACIONES"
-	title.add_theme_font_size_override("font_size", 11)
-	title.add_theme_color_override("font_color", COLOR_TEXT_DIM)
-	tools_vbox.add_child(title)
-
-	tools_vbox.add_child(HSeparator.new())
-
 	for rule in rules:
 		var display: String = rule.get("display_text", rule.get("description", ""))
 		if display == "":
@@ -676,7 +697,7 @@ func _build_regulations_section() -> void:
 		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		lbl.add_theme_font_size_override("font_size", 10)
 		lbl.add_theme_color_override("font_color", COLOR_TEXT_DIM)
-		tools_vbox.add_child(lbl)
+		_regs_container.add_child(lbl)
 
 func _style_tab_buttons() -> void:
 	for tab in [tab1, tab2, tab3]:
