@@ -49,6 +49,7 @@ var queue: ApplicantQueue
 var decision_system: DecisionSystem
 var _applicant_docs: Dictionary = {}
 var _scanner_used: bool = false
+var _tab3_doc_type: String = ""
 var _questions_container: VBoxContainer
 var _audio: AudioStreamPlayer
 
@@ -213,7 +214,7 @@ func _connect_signals() -> void:
 	scanner_btn.pressed.connect(_on_scanner_pressed)
 	tab1.pressed.connect(func(): _show_doc_by_type("transit_pass", tab1))
 	tab2.pressed.connect(func(): _show_doc_by_type("bio_cert", tab2))
-	tab3.pressed.connect(func(): _show_doc_by_type("ingress_permit", tab3))
+	tab3.pressed.connect(func(): _show_doc_by_type(_tab3_doc_type, tab3))
 
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
@@ -400,16 +401,29 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 			_applicant_docs[doc.get("type", "")] = doc
 	tab1.disabled = not _applicant_docs.has("transit_pass")
 	tab2.disabled = not _applicant_docs.has("bio_cert")
-	tab3.disabled = not _applicant_docs.has("ingress_permit")
+	_tab3_doc_type = ""
+	for dtype in _applicant_docs:
+		if dtype not in ["transit_pass", "bio_cert"]:
+			_tab3_doc_type = dtype
+			break
+	tab3.disabled = _tab3_doc_type == ""
+	if _tab3_doc_type != "":
+		tab3.text = _doc_type_tab_label(_tab3_doc_type)
 	# Mostrar primer documento disponible
 	if _applicant_docs.has("transit_pass"):
 		_show_doc_by_type("transit_pass", tab1)
 	elif _applicant_docs.has("bio_cert"):
 		_show_doc_by_type("bio_cert", tab2)
-	elif _applicant_docs.has("ingress_permit"):
-		_show_doc_by_type("ingress_permit", tab3)
+	elif _tab3_doc_type != "":
+		_show_doc_by_type(_tab3_doc_type, tab3)
 	else:
 		doc_content.text = "[ Sin documentos ]"
+
+func _doc_type_tab_label(dtype: String) -> String:
+	match dtype:
+		"ingress_permit": return "PERMISO ING."
+		"cargo_permit":   return "PERMISO CRG."
+	return dtype.to_upper().left(12)
 
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	if not _applicant_docs.has(dtype):
