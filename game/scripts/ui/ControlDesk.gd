@@ -472,8 +472,7 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 
 func _doc_type_tab_label(dtype: String) -> String:
 	match dtype:
-		"ingress_permit": return "PERMISO ING."
-		"cargo_permit":   return "PERMISO CRG."
+		"ingress_permit": return "PERMISO"
 	return dtype.to_upper().left(12)
 
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:

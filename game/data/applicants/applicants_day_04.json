@@ -31,7 +31,7 @@
     "destination": "Deposito Central, Nivel 3",
     "purpose": "Entrega de filtros de aire certificados",
     "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla. Ruta habitual.",
-    "documents": ["transit_pass_032", "bio_cert_032", "cargo_permit_032"],
+    "documents": ["transit_pass_032", "bio_cert_032", "ingress_permit_032"],
     "flags": [],
     "questions": {
       "motivo": "Entrega de filtros de aire al Deposito Central. Contrato de suministro activo con la Liga.",
@@ -107,7 +107,7 @@
     "destination": "Planta Industrial, Nivel 6",
     "purpose": "Distribucion de mercancias certificadas",
     "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla, llevo este recorrido desde hace dos ciclos.",
-    "documents": ["transit_pass_035", "bio_cert_035", "cargo_permit_035"],
+    "documents": ["transit_pass_035", "bio_cert_035", "ingress_permit_035"],
     "flags": ["expired_document"],
     "questions": {
       "motivo": "Distribucion de mercancias al Nivel 6. Lo hago cada dos ciclos.",
@@ -135,7 +135,7 @@
     "destination": "Deposito Sur, Nivel 4",
     "purpose": "Transporte de carga industrial certificada",
     "dialogue_intro": "Comerciante registrada. Traigo el Pase, el Certificado y el Permiso de Carga. Ruta de retorno habitual.",
-    "documents": ["transit_pass_036", "bio_cert_036", "cargo_permit_036"],
+    "documents": ["transit_pass_036", "bio_cert_036", "ingress_permit_036"],
     "flags": [],
     "questions": {
       "motivo": "Transporte de carga industrial. Tengo todos los papeles en regla.",
@@ -254,7 +254,7 @@
     "destination": "Deposito Central, Nivel 2",
     "purpose": "Entrega de carga certificada",
     "dialogue_intro": "Comerciante de la Liga. Traigo el Pase, el Certificado y el Permiso de Carga. Todo en regla. Ruta de rutina.",
-    "documents": ["transit_pass_040", "bio_cert_040", "cargo_permit_040"],
+    "documents": ["transit_pass_040", "bio_cert_040", "ingress_permit_040"],
     "flags": [],
     "questions": {
       "motivo": "Entrega de carga certificada al Deposito Central. Contrato de la Liga Mercantil en vigor.",
