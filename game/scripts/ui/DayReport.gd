@@ -21,6 +21,9 @@ const COLOR_BTN    := Color(0.08, 0.36, 0.08, 1)
 
 const ASSET_TERMINAL_BG := "res://assets/ui/terminal/terminal_background.png"
 const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
+const ASSET_GRIME := "res://assets/ui/overlays/grime_overlay.png"
+const ASSET_CRT_WEAR := "res://assets/ui/overlays/crt_wear_overlay.png"
+const ASSET_WATERMARK := "res://assets/ui/overlays/terminal_watermark.png"
 const ASSET_PANEL_FRAME := "res://assets/ui/panels/panel_frame_9patch.png"
 const ASSET_BUTTON_APPROVE := "res://assets/ui/buttons/button_approve_9patch.png"
 const ASSET_BUTTON_REJECT := "res://assets/ui/buttons/button_reject_9patch.png"
@@ -183,7 +186,10 @@ func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
 
 func _install_visual_layers() -> void:
 	_add_full_rect_texture(ASSET_TERMINAL_BG, -10, 1.0, "TerminalBackground")
+	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.14, "TerminalWatermark")
 	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
+	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay")
+	_add_full_rect_texture(ASSET_GRIME, 92, 0.16, "GrimeOverlay")
 
 func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
 	if get_node_or_null(node_name) != null:

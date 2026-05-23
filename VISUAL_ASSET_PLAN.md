@@ -516,6 +516,27 @@ Regla aprendida:
 - La terminal debe sentirse vieja, pesada e institucional, no una interfaz de energia/circuitos.
 - Los assets deben agregar textura y peso, no dominar sobre el texto.
 
+#### Capa de envejecimiento agregada
+
+Para evitar que la UI se vea demasiado limpia, se agregaron capas de desgaste separadas de los marcos:
+
+| Archivo | Uso | Opacidad inicial |
+| --- | --- | --- |
+| `game/assets/ui/overlays/grime_overlay.png` | polvo, manchas, rayones y suciedad general de pantalla | `0.16` |
+| `game/assets/ui/overlays/crt_wear_overlay.png` | bandas oscuras, desgaste CRT y borde quemado sutil | `0.12` |
+| `game/assets/ui/overlays/terminal_watermark.png` | marca institucional tenue MAP-7 / Ministerio | `0.14` |
+
+Integracion:
+
+- `ControlDesk.gd`
+- `DayReport.gd`
+
+Regla de uso:
+
+- La suciedad debe ir como overlay transparente, no dentro de todos los paneles.
+- Si dificulta lectura, bajar opacidad antes de redibujar assets.
+- No usar detalles brillantes ni circuitos visibles como decoracion principal.
+
 ### Paso 5 — Integrar botones e iconos
 
 Objetivo:
