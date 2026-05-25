@@ -261,11 +261,6 @@ func _install_visual_layers() -> void:
 	_cockpit_frame = CockpitFrame.new()
 	add_child(_cockpit_frame)
 	move_child(_cockpit_frame, 0)
-	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.20, "TerminalWatermark")
-	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
-	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay")
-	_add_full_rect_texture(ASSET_GRIME, 92, 0.24, "GrimeOverlay")
-	_add_full_rect_texture(ASSET_GLASS, 93, 0.34, "GlassOverlay")
 
 func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
 	if get_node_or_null(node_name) != null:
