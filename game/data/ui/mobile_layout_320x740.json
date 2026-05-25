@@ -1,759 +1,1398 @@
 {
-"canvas": {
-"width": 320,
-"height": 740,
-"unit": "px"
-},
-"zones": [
-{
-"id": "top_status_bar",
-"name": "Barra superior de estado",
-"parent_id": null,
-"rect": { "x": 0, "y": 0, "w": 320, "h": 47 },
-"safe_rect": { "x": 6, "y": 6, "w": 308, "h": 35 },
-"type": "ui_and_frame",
-"priority": "high",
-"content": ["indicador_dia_turno", "contador_creditos", "medidor_sospecha", "icono_estado_alerta"],
-"godot_node_suggestion": "HBoxContainer",
-"asset_policy": "frame_asset_allowed",
-"suggested_asset_name": "frame_top_status_bar.png",
-"notes": "La estructura metálica puede ser asset; textos, números, medidores e iconos deben renderizarse como UI real."
-},
-{
-"id": "status_day_panel",
-"name": "Panel de día y turno",
-"parent_id": "top_status_bar",
-"rect": { "x": 6, "y": 5, "w": 74, "h": 38 },
-"safe_rect": { "x": 10, "y": 9, "w": 66, "h": 30 },
-"type": "ui",
-"priority": "high",
-"content": ["dia_actual", "turno_actual", "hora_turno"],
-"godot_node_suggestion": "VBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Mantener tipografía monoespaciada y alto contraste."
-},
-{
-"id": "status_credits_panel",
-"name": "Panel de créditos",
-"parent_id": "top_status_bar",
-"rect": { "x": 85, "y": 5, "w": 87, "h": 38 },
-"safe_rect": { "x": 90, "y": 9, "w": 78, "h": 30 },
-"type": "ui",
-"priority": "medium",
-"content": ["icono_creditos_original", "texto_creditos", "valor_creditos"],
-"godot_node_suggestion": "HBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Usar símbolo propio tipo ficha administrativa o cubo de crédito, no moneda reconocible."
-},
-{
-"id": "status_suspicion_panel",
-"name": "Panel de sospecha",
-"parent_id": "top_status_bar",
-"rect": { "x": 176, "y": 5, "w": 138, "h": 38 },
-"safe_rect": { "x": 182, "y": 9, "w": 126, "h": 30 },
-"type": "ui",
-"priority": "high",
-"content": ["label_sospecha", "barra_sospecha_segmentada", "icono_riesgo_original"],
-"godot_node_suggestion": "HBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "El medidor debe ser dinámico. Reemplazar calavera por símbolo propio: ojo técnico, torre o marca MAP-7."
-},
-{
-"id": "dossier_panel",
-"name": "Panel principal de expediente",
-"parent_id": null,
-"rect": { "x": 5, "y": 52, "w": 310, "h": 225 },
-"safe_rect": { "x": 18, "y": 69, "w": 284, "h": 195 },
-"type": "ui_and_frame",
-"priority": "high",
-"content": ["titulo_panel", "tabs_vistas", "retrato_solicitante", "campos_expediente", "estado_escaneo", "notas_sistema"],
-"godot_node_suggestion": "PanelContainer",
-"asset_policy": "frame_asset_allowed",
-"suggested_asset_name": "frame_dossier_panel.png",
-"notes": "Panel crítico de lectura. El marco puede ser imagen, pero todo dato debe ser Control real."
-},
-{
-"id": "dossier_title",
-"name": "Título de expediente",
-"parent_id": "dossier_panel",
-"rect": { "x": 35, "y": 63, "w": 138, "h": 15 },
-"safe_rect": { "x": 38, "y": 65, "w": 132, "h": 11 },
-"type": "ui",
-"priority": "medium",
-"content": ["titulo_modulo_actual"],
-"godot_node_suggestion": "Label",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Debe poder cambiar por localización o estado del juego."
-},
-{
-"id": "dossier_tabs",
-"name": "Pestañas de vistas del expediente",
-"parent_id": "dossier_panel",
-"rect": { "x": 24, "y": 82, "w": 274, "h": 22 },
-"safe_rect": { "x": 27, "y": 84, "w": 268, "h": 18 },
-"type": "interactive",
-"priority": "high",
-"content": ["tab_identidad", "tab_documentos", "tab_biometria", "tab_antecedentes", "tab_carga", "tab_alertas"],
-"godot_node_suggestion": "TabBar",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Usar botones reales. La pestaña activa debe tener estado visual independiente."
-},
-{
-"id": "portrait_area",
-"name": "Área de retrato del solicitante",
-"parent_id": "dossier_panel",
-"rect": { "x": 30, "y": 105, "w": 94, "h": 127 },
-"safe_rect": { "x": 35, "y": 110, "w": 84, "h": 117 },
-"type": "ui_and_frame",
-"priority": "high",
-"content": ["imagen_retrato", "marco_retrato", "efecto_scanline"],
-"godot_node_suggestion": "TextureRect",
-"asset_policy": "separate_asset",
-"suggested_asset_name": "applicant_portrait_dynamic.png",
-"notes": "El retrato debe cambiar por personaje. El marco y efecto CRT pueden ser overlay reutilizable."
-},
-{
-"id": "dossier_fields",
-"name": "Campos de datos del expediente",
-"parent_id": "dossier_panel",
-"rect": { "x": 133, "y": 105, "w": 158, "h": 126 },
-"safe_rect": { "x": 139, "y": 111, "w": 146, "h": 114 },
-"type": "ui",
-"priority": "high",
-"content": ["lista_de_datos", "iconos_administrativos", "valores_dinamicos", "boton_copiar_id"],
-"godot_node_suggestion": "GridContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Cada fila debe ser UI real para permitir validaciones, colores por riesgo y actualización dinámica."
-},
-{
-"id": "scan_status",
-"name": "Estado de escaneo",
-"parent_id": "dossier_panel",
-"rect": { "x": 31, "y": 235, "w": 98, "h": 29 },
-"safe_rect": { "x": 35, "y": 239, "w": 90, "h": 21 },
-"type": "ui",
-"priority": "medium",
-"content": ["texto_estado_escaneo", "check_estado", "barra_progreso_escaneo", "porcentaje_escaneo"],
-"godot_node_suggestion": "VBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "La barra debe ser ProgressBar o conjunto de segmentos renderizados por código."
-},
-{
-"id": "system_notes_area",
-"name": "Notas del sistema",
-"parent_id": "dossier_panel",
-"rect": { "x": 132, "y": 234, "w": 158, "h": 32 },
-"safe_rect": { "x": 137, "y": 238, "w": 148, "h": 24 },
-"type": "ui",
-"priority": "medium",
-"content": ["titulo_notas", "mensaje_notas", "marca_administrativa_opaca"],
-"godot_node_suggestion": "PanelContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "La marca de agua debe ser símbolo propio: sello geométrico, circuito o torre."
-},
-{
-"id": "applicant_viewport",
-"name": "Ventana de atención del solicitante",
-"parent_id": null,
-"rect": { "x": 5, "y": 282, "w": 310, "h": 232 },
-"safe_rect": { "x": 16, "y": 295, "w": 288, "h": 205 },
-"type": "background",
-"priority": "high",
-"content": ["fondo_puesto_fronterizo", "solicitante_frontal", "documento_en_mano", "profundidad_ambiente", "vidrio_marco"],
-"godot_node_suggestion": "TextureRect",
-"asset_policy": "background_asset",
-"suggested_asset_name": "bg_applicant_checkpoint_view.png",
-"notes": "Separar fondo, personaje y documento si se animará. Evitar emblemas reconocibles en señales."
-},
-{
-"id": "dialogue_box",
-"name": "Caja de declaración del solicitante",
-"parent_id": "applicant_viewport",
-"rect": { "x": 17, "y": 304, "w": 115, "h": 58 },
-"safe_rect": { "x": 23, "y": 311, "w": 103, "h": 45 },
-"type": "ui",
-"priority": "high",
-"content": ["titulo_declaracion", "texto_dialogo", "icono_audio"],
-"godot_node_suggestion": "PanelContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Debe soportar varias líneas, audio, cambios de idioma y estados de interrogatorio."
-},
-{
-"id": "applicant_character_area",
-"name": "Personaje atendido",
-"parent_id": "applicant_viewport",
-"rect": { "x": 88, "y": 302, "w": 178, "h": 205 },
-"safe_rect": { "x": 96, "y": 309, "w": 162, "h": 191 },
-"type": "background",
-"priority": "high",
-"content": ["sprite_solicitante", "expresion_facial", "pose_documento"],
-"godot_node_suggestion": "AnimatedSprite2D",
-"asset_policy": "separate_asset",
-"suggested_asset_name": "applicant_worker_sprite.png",
-"notes": "Conviene separarlo del fondo para animar reacción, parpadeo, aprobación, rechazo o salida."
-},
-{
-"id": "desk_console_area",
-"name": "Consola física inferior",
-"parent_id": null,
-"rect": { "x": 0, "y": 514, "w": 320, "h": 106 },
-"safe_rect": { "x": 8, "y": 523, "w": 304, "h": 88 },
-"type": "background",
-"priority": "high",
-"content": ["mesa_metalica", "soportes", "suciedad", "ranuras", "elementos_fisicos"],
-"godot_node_suggestion": "TextureRect",
-"asset_policy": "background_asset",
-"suggested_asset_name": "bg_desk_console.png",
-"notes": "Puede ser asset base sin texto jugable. Los controles interactivos van encima como nodos UI."
-},
-{
-"id": "document_scanner_area",
-"name": "Área de escáner documental",
-"parent_id": "desk_console_area",
-"rect": { "x": 107, "y": 523, "w": 106, "h": 72 },
-"safe_rect": { "x": 116, "y": 535, "w": 88, "h": 49 },
-"type": "interactive",
-"priority": "high",
-"content": ["bandeja_documento", "zona_scan", "label_colocar_documento", "indicador_documento_actual"],
-"godot_node_suggestion": "Button",
-"asset_policy": "frame_asset_allowed",
-"suggested_asset_name": "frame_document_scanner.png",
-"notes": "La bandeja puede ser asset; el texto, documento detectado y estado de escaneo deben ser UI real."
-},
-{
-"id": "scanner_device_area",
-"name": "Dispositivo escáner físico",
-"parent_id": "desk_console_area",
-"rect": { "x": 13, "y": 525, "w": 56, "h": 67 },
-"safe_rect": { "x": 18, "y": 532, "w": 45, "h": 53 },
-"type": "interactive",
-"priority": "medium",
-"content": ["dispositivo_escaneo", "luz_estado", "boton_uso"],
-"godot_node_suggestion": "Button",
-"asset_policy": "separate_asset",
-"suggested_asset_name": "prop_scanner_device.png",
-"notes": "Debe tener área clickeable más grande que el objeto visual para usabilidad en 320 px."
-},
-{
-"id": "physical_stamp_area",
-"name": "Sello físico y reglamento",
-"parent_id": "desk_console_area",
-"rect": { "x": 232, "y": 520, "w": 74, "h": 79 },
-"safe_rect": { "x": 238, "y": 527, "w": 62, "h": 66 },
-"type": "interactive",
-"priority": "medium",
-"content": ["sello_fisico", "manual_reglamento", "lapiz_herramienta"],
-"godot_node_suggestion": "Control",
-"asset_policy": "separate_asset",
-"suggested_asset_name": "prop_stamp_and_manual.png",
-"notes": "Separar manual como botón interactivo que abre overlay de reglas. El texto del manual debe ser UI si debe leerse."
-},
-{
-"id": "decision_buttons",
-"name": "Botones principales de decisión",
-"parent_id": null,
-"rect": { "x": 5, "y": 620, "w": 310, "h": 72 },
-"safe_rect": { "x": 11, "y": 628, "w": 298, "h": 56 },
-"type": "interactive",
-"priority": "high",
-"content": ["boton_aprobar", "boton_inspeccionar", "boton_denegar"],
-"godot_node_suggestion": "HBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Botones críticos. Deben tener estados normal, hover, pressed, disabled, confirmed y error."
-},
-{
-"id": "approve_button",
-"name": "Botón aprobar",
-"parent_id": "decision_buttons",
-"rect": { "x": 10, "y": 629, "w": 92, "h": 53 },
-"safe_rect": { "x": 16, "y": 636, "w": 80, "h": 39 },
-"type": "interactive",
-"priority": "high",
-"content": ["icono_aprobar_original", "texto_aprobar", "subtexto_aprobar"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Usar icono propio: marca MAP-7, llave o check geométrico original."
-},
-{
-"id": "inspect_button",
-"name": "Botón inspeccionar",
-"parent_id": "decision_buttons",
-"rect": { "x": 113, "y": 629, "w": 97, "h": 53 },
-"safe_rect": { "x": 119, "y": 636, "w": 85, "h": 39 },
-"type": "interactive",
-"priority": "high",
-"content": ["icono_inspeccion", "texto_inspeccionar", "subtexto_inspeccionar"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Debe abrir flujo de revisión detallada sin ejecutar aprobación o rechazo."
-},
-{
-"id": "deny_button",
-"name": "Botón denegar",
-"parent_id": "decision_buttons",
-"rect": { "x": 220, "y": 629, "w": 91, "h": 53 },
-"safe_rect": { "x": 226, "y": 636, "w": 79, "h": 39 },
-"type": "interactive",
-"priority": "high",
-"content": ["icono_denegar_original", "texto_denegar", "subtexto_denegar"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Usar símbolo propio de bloqueo administrativo, no iconografía de franquicia."
-},
-{
-"id": "tools_bar",
-"name": "Barra inferior de herramientas",
-"parent_id": null,
-"rect": { "x": 0, "y": 693, "w": 320, "h": 47 },
-"safe_rect": { "x": 7, "y": 699, "w": 306, "h": 35 },
-"type": "interactive",
-"priority": "medium",
-"content": ["herramienta_escaner", "herramienta_luz_uv", "herramienta_verificador", "herramienta_sello", "herramienta_alerta", "registro_manual"],
-"godot_node_suggestion": "HBoxContainer",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Cada herramienta debe ser Button con icono original, contador y estado de disponibilidad."
-},
-{
-"id": "tool_scanner",
-"name": "Herramienta escáner",
-"parent_id": "tools_bar",
-"rect": { "x": 20, "y": 704, "w": 40, "h": 34 },
-"safe_rect": { "x": 23, "y": 707, "w": 34, "h": 28 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_escaner", "contador_uso", "label_herramienta"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "El icono debe ser original y coherente con tecnología decadente."
-},
-{
-"id": "tool_uv",
-"name": "Herramienta luz UV",
-"parent_id": "tools_bar",
-"rect": { "x": 67, "y": 704, "w": 40, "h": 34 },
-"safe_rect": { "x": 70, "y": 707, "w": 34, "h": 28 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_luz_uv", "contador_uso", "label_herramienta"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Puede activar overlay de iluminación sobre documentos."
-},
-{
-"id": "tool_verifier",
-"name": "Herramienta verificador",
-"parent_id": "tools_bar",
-"rect": { "x": 115, "y": 704, "w": 40, "h": 34 },
-"safe_rect": { "x": 118, "y": 707, "w": 34, "h": 28 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_verificador", "contador_uso", "label_herramienta"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Usar símbolo de ojo técnico o circuito, no lupa genérica copiada."
-},
-{
-"id": "tool_stamp",
-"name": "Herramienta sello",
-"parent_id": "tools_bar",
-"rect": { "x": 164, "y": 704, "w": 40, "h": 34 },
-"safe_rect": { "x": 167, "y": 707, "w": 34, "h": 28 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_sello", "contador_uso", "label_herramienta"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Puede cambiar entre sello aprobado, observado y rechazado."
-},
-{
-"id": "tool_alert",
-"name": "Herramienta alerta",
-"parent_id": "tools_bar",
-"rect": { "x": 211, "y": 704, "w": 40, "h": 34 },
-"safe_rect": { "x": 214, "y": 707, "w": 34, "h": 28 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_alerta", "contador_uso", "label_herramienta"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Debe activar llamada a seguridad o marcar sospecha."
-},
-{
-"id": "tool_registry",
-"name": "Registro manual",
-"parent_id": "tools_bar",
-"rect": { "x": 259, "y": 700, "w": 50, "h": 38 },
-"safe_rect": { "x": 264, "y": 704, "w": 40, "h": 30 },
-"type": "interactive",
-"priority": "medium",
-"content": ["icono_registro", "contador_registros", "label_registro"],
-"godot_node_suggestion": "Button",
-"asset_policy": "text_as_ui",
-"suggested_asset_name": null,
-"notes": "Puede abrir historial de atención o bitácora del turno."
-},
-{
-"id": "overlay_area",
-"name": "Área para overlays emergentes",
-"parent_id": null,
-"rect": { "x": 16, "y": 100, "w": 288, "h": 560 },
-"safe_rect": { "x": 24, "y": 112, "w": 272, "h": 536 },
-"type": "overlay",
-"priority": "medium",
-"content": ["reglamento_abierto", "resultado_aprobacion", "alerta_sistema", "modal_confirmacion"],
-"godot_node_suggestion": "CanvasLayer",
-"asset_policy": "no_asset",
-"suggested_asset_name": null,
-"notes": "Reservar para manual, confirmaciones y alertas. Debe poder bloquear o no bloquear input según caso."
-}
-],
-"layers": [
-{
-"order": 0,
-"id": "background_base",
-"description": "Fondo general oscuro, metal, suciedad, iluminación ambiental y bordes exteriores.",
-"godot_node_suggestion": "TextureRect"
-},
-{
-"order": 1,
-"id": "physical_scene_assets",
-"description": "Fondo del puesto fronterizo, consola física, escáner, sello, manual cerrado y soportes visuales.",
-"godot_node_suggestion": "TextureRect"
-},
-{
-"order": 2,
-"id": "character_layer",
-"description": "Solicitante atendido, documento en mano, retrato dinámico y variaciones de expresión.",
-"godot_node_suggestion": "AnimatedSprite2D"
-},
-{
-"order": 3,
-"id": "frame_layer",
-"description": "Marcos metálicos, biseles, vidrio, divisiones, sombras internas y overlays CRT sin texto.",
-"godot_node_suggestion": "TextureRect"
-},
-{
-"order": 4,
-"id": "hud_static_controls",
-"description": "Contenedores de UI, paneles, cajas de diálogo, botones base, tabs, tool slots y zonas de input.",
-"godot_node_suggestion": "Control"
-},
-{
-"order": 5,
-"id": "hud_dynamic_text",
-"description": "Todo texto jugable, valores, números, etiquetas, datos del expediente, diálogo y contadores.",
-"godot_node_suggestion": "Control"
-},
-{
-"order": 6,
-"id": "hud_dynamic_icons",
-"description": "Iconos administrativos originales, medidores, barras, checks, alertas y estados interactivos.",
-"godot_node_suggestion": "Control"
-},
-{
-"order": 7,
-"id": "effects_layer",
-"description": "Brillos verdes, scanlines, parpadeos, estado seleccionado, feedback de aprobar o denegar.",
-"godot_node_suggestion": "CanvasLayer"
-},
-{
-"order": 8,
-"id": "modal_overlay_layer",
-"description": "Reglamento abierto, alertas detectadas, confirmaciones, inspección detallada y bloqueo contextual.",
-"godot_node_suggestion": "CanvasLayer"
-}
-],
-"assets_to_create": [
-{
-"id": "asset_top_status_frame",
-"filename": "frame_top_status_bar.png",
-"rect_source": "top_status_bar",
-"target_size": { "w": 320, "h": 47 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "números", "iconografía protegida", "calavera"],
-"purpose": "Marco metálico superior reutilizable para contener datos dinámicos."
-},
-{
-"id": "asset_dossier_frame",
-"filename": "frame_dossier_panel.png",
-"rect_source": "dossier_panel",
-"target_size": { "w": 310, "h": 225 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "datos personales", "emblemas alados", "siglas reconocibles"],
-"purpose": "Marco CRT del expediente sin contenido textual."
-},
-{
-"id": "asset_portrait_frame",
-"filename": "frame_portrait_scan.png",
-"rect_source": "portrait_area",
-"target_size": { "w": 94, "h": 127 },
-"transparent_background": true,
-"must_not_include": ["rostro del personaje", "texto jugable"],
-"purpose": "Marco y efecto escáner para retratos variables."
-},
-{
-"id": "asset_applicant_view_background",
-"filename": "bg_applicant_checkpoint_view.png",
-"rect_source": "applicant_viewport",
-"target_size": { "w": 310, "h": 232 },
-"transparent_background": false,
-"must_not_include": ["texto legible", "emblemas alados", "logos", "símbolos de franquicias"],
-"purpose": "Fondo del puesto de control y ambiente decadente sin personaje ni UI."
-},
-{
-"id": "asset_applicant_worker_sprite",
-"filename": "applicant_worker_sprite.png",
-"rect_source": "applicant_character_area",
-"target_size": { "w": 178, "h": 205 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "siglas reconocibles", "emblemas copiados"],
-"purpose": "Personaje atendido con poses y expresiones intercambiables."
-},
-{
-"id": "asset_desk_console_base",
-"filename": "bg_desk_console.png",
-"rect_source": "desk_console_area",
-"target_size": { "w": 320, "h": 106 },
-"transparent_background": false,
-"must_not_include": ["texto jugable", "botones con texto", "iconografía protegida"],
-"purpose": "Base física de la consola inferior."
-},
-{
-"id": "asset_document_scanner_frame",
-"filename": "frame_document_scanner.png",
-"rect_source": "document_scanner_area",
-"target_size": { "w": 106, "h": 72 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "documentos con datos"],
-"purpose": "Bandeja de escaneo para recibir documentos dinámicos."
-},
-{
-"id": "asset_scanner_device",
-"filename": "prop_scanner_device.png",
-"rect_source": "scanner_device_area",
-"target_size": { "w": 56, "h": 67 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "marca reconocible"],
-"purpose": "Objeto físico de escáner como herramienta clickeable."
-},
-{
-"id": "asset_stamp_prop",
-"filename": "prop_physical_stamp.png",
-"rect_source": "physical_stamp_area",
-"target_size": { "w": 36, "h": 45 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "sellos oficiales reales"],
-"purpose": "Sello físico decorativo e interactivo."
-},
-{
-"id": "asset_rulebook_closed",
-"filename": "prop_rulebook_closed.png",
-"rect_source": "physical_stamp_area",
-"target_size": { "w": 44, "h": 40 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "emblemas alados", "siglas reconocibles"],
-"purpose": "Manual cerrado que funciona como botón para abrir reglamento."
-},
-{
-"id": "asset_generic_button_frame_green",
-"filename": "frame_button_green.png",
-"rect_source": "approve_button",
-"target_size": { "w": 92, "h": 53 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "iconos protegidos"],
-"purpose": "Base visual del botón aprobar con texto renderizado por UI."
-},
-{
-"id": "asset_generic_button_frame_yellow",
-"filename": "frame_button_yellow.png",
-"rect_source": "inspect_button",
-"target_size": { "w": 97, "h": 53 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "iconos protegidos"],
-"purpose": "Base visual del botón inspeccionar con texto renderizado por UI."
-},
-{
-"id": "asset_generic_button_frame_red",
-"filename": "frame_button_red.png",
-"rect_source": "deny_button",
-"target_size": { "w": 91, "h": 53 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "iconos protegidos"],
-"purpose": "Base visual del botón denegar con texto renderizado por UI."
-},
-{
-"id": "asset_tool_slot_frame",
-"filename": "frame_tool_slot.png",
-"rect_source": "tools_bar",
-"target_size": { "w": 40, "h": 34 },
-"transparent_background": true,
-"must_not_include": ["texto jugable", "iconos protegidos"],
-"purpose": "Contenedor reutilizable para herramientas inferiores."
-}
-],
-"dynamic_ui": [
-{
-"id": "ui_day_shift_time",
-"zone_id": "status_day_panel",
-"content_type": "text",
-"reason": "Día, turno y hora cambian durante el ciclo de juego."
-},
-{
-"id": "ui_credits_counter",
-"zone_id": "status_credits_panel",
-"content_type": "text",
-"reason": "El valor de créditos cambia por decisiones, penalizaciones y recompensas."
-},
-{
-"id": "ui_suspicion_meter",
-"zone_id": "status_suspicion_panel",
-"content_type": "progress_bar",
-"reason": "El nivel de sospecha debe actualizarse por acciones del jugador y eventos."
-},
-{
-"id": "ui_dossier_tabs",
-"zone_id": "dossier_tabs",
-"content_type": "tabs",
-"reason": "Las vistas del expediente deben cambiar contenido sin generar imágenes nuevas."
-},
-{
-"id": "ui_dossier_fields",
-"zone_id": "dossier_fields",
-"content_type": "data_list",
-"reason": "Los campos del solicitante cambian por cada caso y deben poder resaltarse por inconsistencias."
-},
-{
-"id": "ui_scan_progress",
-"zone_id": "scan_status",
-"content_type": "progress_bar",
-"reason": "El escaneo puede estar incompleto, fallar, completarse o mostrar inconsistencias."
-},
-{
-"id": "ui_system_notes",
-"zone_id": "system_notes_area",
-"content_type": "text",
-"reason": "Las notas deben variar según antecedentes, permisos, alertas o tutoriales."
-},
-{
-"id": "ui_dialogue_text",
-"zone_id": "dialogue_box",
-"content_type": "text",
-"reason": "La declaración cambia por personaje, mentira, idioma o interrogatorio."
-},
-{
-"id": "ui_document_scanner_label",
-"zone_id": "document_scanner_area",
-"content_type": "text",
-"reason": "El escáner debe mostrar instrucciones, estado del documento y errores."
-},
-{
-"id": "ui_decision_buttons",
-"zone_id": "decision_buttons",
-"content_type": "button",
-"reason": "Aprobar, inspeccionar y denegar son acciones centrales con estados dinámicos."
-},
-{
-"id": "ui_tool_buttons",
-"zone_id": "tools_bar",
-"content_type": "button",
-"reason": "Las herramientas requieren input, cooldown, contador, bloqueo y feedback."
-},
-{
-"id": "ui_tool_counters",
-"zone_id": "tools_bar",
-"content_type": "text",
-"reason": "Los contadores de herramientas deben cambiar según uso o disponibilidad."
-},
-{
-"id": "ui_original_admin_icons",
-"zone_id": "dossier_fields",
-"content_type": "icon",
-"reason": "Los iconos deben ser vectoriales o atlas propio para evitar copiar iconografía protegida."
-},
-{
-"id": "ui_rulebook_overlay",
-"zone_id": "overlay_area",
-"content_type": "data_list",
-"reason": "El reglamento debe abrirse como overlay consultable con texto navegable y actualizable."
-}
-],
-"ip_risks": [
-{
-"source_element": "Calavera dentro del medidor de sospecha",
-"risk": "Puede parecer iconografía de facción, advertencia o franquicia existente si se copia directamente.",
-"safe_alternative": "Usar un ojo técnico MAP-7, una torre de control abstracta o un hexágono con circuito de riesgo."
-},
-{
-"source_element": "Emblemas alados en paneles, señales y documentos",
-"risk": "Los emblemas alados pueden asociarse a organizaciones ficticias o reales ya existentes.",
-"safe_alternative": "Crear un sello geométrico propio con torre, archivo, llave y circuito, sin alas."
-},
-{
-"source_element": "Siglas visibles en documento del solicitante",
-"risk": "Copiar siglas o marcas de la referencia puede generar identidad visual no original.",
-"safe_alternative": "Usar marca ficticia original MAP-7, ARCO-13 o Registro Orbital Local."
-},
-{
-"source_element": "Composición de botones verde, amarillo y rojo con los mismos textos",
-"risk": "La estructura funcional es común, pero el texto y estilo exacto no deben copiarse como arte final.",
-"safe_alternative": "Renderizar textos desde UI real y diseñar botones propios con bordes geométricos originales."
-},
-{
-"source_element": "Retrato del trabajador de la referencia",
-"risk": "No debe replicarse el rostro exacto, pose exacta o rasgos identificables de la imagen generada.",
-"safe_alternative": "Crear varios trabajadores originales con rasgos, edades, uniformes y expresiones diferentes."
-},
-{
-"source_element": "Señales del fondo con composición y emblemas de la referencia",
-"risk": "Copiar señales, emblemas y layout textual del fondo puede volver reconocible la referencia.",
-"safe_alternative": "Usar señalética propia: Zona MAP-7, Puerta 04, Control de Tránsito Laboral, con símbolos abstractos."
-},
-{
-"source_element": "Manual Reglamento Fronterizo con emblema decorativo",
-"risk": "Un manual con emblema y estilo idéntico puede parecer copia directa del diseño objetivo.",
-"safe_alternative": "Diseñar manual como placa administrativa MAP-7 con iconos de archivo, llave, torre y circuito."
-},
-{
-"source_element": "Iconos de herramientas inferiores",
-"risk": "Copiar forma exacta de escáner, UV, sello, alerta o registro puede fijar una identidad visual derivada.",
-"safe_alternative": "Crear iconos vectoriales propios, simplificados y consistentes con tecnología burocrática decadente."
-}
-],
-"implementation_notes": [
-"Usar resolución base 320x740 y escalar con viewport stretch manteniendo aspecto vertical.",
-"Separar assets físicos de UI dinámica: ningún asset debe contener texto jugable permanente.",
-"Usar Control como raíz de interfaz y organizar con anchors porcentuales solo después de validar coordenadas base.",
-"Para Godot 4, usar CanvasLayer para HUD y overlays, PanelContainer para marcos y Button para zonas interactivas.",
-"Mantener el dossier_panel como zona de lectura prioritaria; evitar animaciones agresivas sobre texto.",
-"El tamaño mínimo de fuente sugerido para datos críticos en 320 px es 6 a 8 px con fuente pixel/monoespaciada legible.",
-"Los botones de decisión deben tener áreas clickeables mayores que su arte visible para evitar errores en móvil.",
-"El applicant_viewport debe admitir capas: fondo, personaje, documento, diálogo y efectos de aprobación o rechazo.",
-"El reglamento cerrado debe funcionar como objeto físico interactivo que abre overlay, no como simple decoración.",
-"Las pestañas del dossier deben cambiar el contenido del panel sin alterar el marco principal.",
-"Crear tema UI propio en Godot con colores: verde oscuro, verde fósforo, ámbar, rojo industrial y metal negro.",
-"No usar logos, calaveras, alas, águilas ni siglas heredadas de la referencia; sustituir por sistema visual administrativo original.",
-"Para El Último Sello, reforzar identidad propia con marca MAP-7, sello geométrico, torre de control, archivo, ojo técnico, llave y circuito.",
-"Usar NinePatchRect para marcos y botones si se desea escalar a resolución de monitor sin deformar bordes.",
-"Crear estados de botón: normal, hover, pressed, selected, confirmed, disabled y error.",
-"Para versión PC, la misma estructura puede redistribuirse: expediente a la izquierda, viewport del solicitante a la derecha y consola abajo."
-]
+  "canvas": {
+    "width": 320,
+    "height": 740,
+    "unit": "px"
+  },
+  "zones": [
+    {
+      "id": "top_status_bar",
+      "name": "Barra superior de estado",
+      "parent_id": null,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 320,
+        "h": 47
+      },
+      "safe_rect": {
+        "x": 6,
+        "y": 6,
+        "w": 308,
+        "h": 35
+      },
+      "type": "ui_and_frame",
+      "priority": "high",
+      "content": [
+        "indicador_dia_turno",
+        "contador_creditos",
+        "medidor_sospecha",
+        "icono_estado_alerta"
+      ],
+      "godot_node_suggestion": "HBoxContainer",
+      "asset_policy": "frame_asset_allowed",
+      "suggested_asset_name": "frame_top_status_bar.png",
+      "notes": "La estructura metálica puede ser asset; textos, números, medidores e iconos deben renderizarse como UI real."
+    },
+    {
+      "id": "status_day_panel",
+      "name": "Panel de día y turno",
+      "parent_id": "top_status_bar",
+      "rect": {
+        "x": 6,
+        "y": 5,
+        "w": 74,
+        "h": 38
+      },
+      "safe_rect": {
+        "x": 10,
+        "y": 9,
+        "w": 66,
+        "h": 30
+      },
+      "type": "ui",
+      "priority": "high",
+      "content": [
+        "dia_actual",
+        "turno_actual",
+        "progreso_solicitante"
+      ],
+      "godot_node_suggestion": "VBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Mantener tipografía monoespaciada y alto contraste. El tercer renglón se usa para progreso del solicitante, no para hora real."
+    },
+    {
+      "id": "status_credits_panel",
+      "name": "Panel de créditos",
+      "parent_id": "top_status_bar",
+      "rect": {
+        "x": 85,
+        "y": 5,
+        "w": 87,
+        "h": 38
+      },
+      "safe_rect": {
+        "x": 90,
+        "y": 9,
+        "w": 78,
+        "h": 30
+      },
+      "type": "ui",
+      "priority": "medium",
+      "content": [
+        "icono_creditos_original",
+        "texto_creditos",
+        "valor_creditos"
+      ],
+      "godot_node_suggestion": "HBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Usar símbolo propio tipo ficha administrativa o cubo de crédito, no moneda reconocible."
+    },
+    {
+      "id": "status_suspicion_panel",
+      "name": "Panel de sospecha",
+      "parent_id": "top_status_bar",
+      "rect": {
+        "x": 176,
+        "y": 5,
+        "w": 138,
+        "h": 38
+      },
+      "safe_rect": {
+        "x": 182,
+        "y": 9,
+        "w": 126,
+        "h": 30
+      },
+      "type": "ui",
+      "priority": "high",
+      "content": [
+        "label_sospecha",
+        "barra_sospecha_segmentada",
+        "icono_riesgo_original"
+      ],
+      "godot_node_suggestion": "HBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "El medidor debe ser dinámico. Reemplazar calavera por símbolo propio: ojo técnico, torre o marca MAP-7."
+    },
+    {
+      "id": "dossier_panel",
+      "name": "Panel principal de expediente",
+      "parent_id": null,
+      "rect": {
+        "x": 5,
+        "y": 52,
+        "w": 310,
+        "h": 225
+      },
+      "safe_rect": {
+        "x": 18,
+        "y": 69,
+        "w": 284,
+        "h": 195
+      },
+      "type": "ui_and_frame",
+      "priority": "high",
+      "content": [
+        "titulo_panel",
+        "tabs_vistas",
+        "retrato_solicitante",
+        "campos_expediente",
+        "contenido_tab_activo",
+        "feedback_decision"
+      ],
+      "godot_node_suggestion": "PanelContainer",
+      "asset_policy": "frame_asset_allowed",
+      "suggested_asset_name": "frame_dossier_panel.png",
+      "notes": "Panel crítico de lectura. El marco puede ser imagen, pero todo dato debe ser Control real."
+    },
+    {
+      "id": "dossier_title",
+      "name": "Título de expediente",
+      "parent_id": "dossier_panel",
+      "rect": {
+        "x": 35,
+        "y": 63,
+        "w": 138,
+        "h": 15
+      },
+      "safe_rect": {
+        "x": 38,
+        "y": 65,
+        "w": 132,
+        "h": 11
+      },
+      "type": "ui",
+      "priority": "medium",
+      "content": [
+        "titulo_modulo_actual"
+      ],
+      "godot_node_suggestion": "Label",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Debe poder cambiar por localización o estado del juego."
+    },
+    {
+      "id": "dossier_tabs",
+      "name": "Pestañas de vistas del expediente",
+      "parent_id": "dossier_panel",
+      "rect": {
+        "x": 24,
+        "y": 82,
+        "w": 274,
+        "h": 22
+      },
+      "safe_rect": {
+        "x": 27,
+        "y": 84,
+        "w": 268,
+        "h": 18
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "tab_identidad",
+        "tab_documentos",
+        "tab_biometria",
+        "tab_antecedentes",
+        "tab_carga",
+        "tab_alertas"
+      ],
+      "godot_node_suggestion": "TabBar",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Usar botones reales. La pestaña activa debe tener estado visual independiente."
+    },
+    {
+      "id": "dossier_tab_content",
+      "name": "Contenido activo de pestaña del expediente",
+      "parent_id": "dossier_panel",
+      "rect": {
+        "x": 24,
+        "y": 105,
+        "w": 267,
+        "h": 161
+      },
+      "safe_rect": {
+        "x": 30,
+        "y": 111,
+        "w": 255,
+        "h": 149
+      },
+      "type": "ui",
+      "priority": "high",
+      "content": [
+        "vista_identidad",
+        "vista_documentos",
+        "vista_biometria",
+        "vista_carga",
+        "vista_alertas",
+        "feedback_decision"
+      ],
+      "godot_node_suggestion": "PanelContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Contenedor dinámico para el contenido activo de dossier_tabs. En identidad contiene portrait_area y dossier_fields; en documentos, biometría y carga muestra el documento activo; en alertas muestra todas las alertas actuales del MVP; tras una decisión muestra feedback reciente. El reglamento y el informe completo del escáner se abren en overlay_area."
+    },
+    {
+      "id": "portrait_area",
+      "name": "Área de retrato del solicitante",
+      "parent_id": "dossier_tab_content",
+      "rect": {
+        "x": 30,
+        "y": 105,
+        "w": 94,
+        "h": 127
+      },
+      "safe_rect": {
+        "x": 35,
+        "y": 110,
+        "w": 84,
+        "h": 117
+      },
+      "type": "ui_and_frame",
+      "priority": "high",
+      "content": [
+        "imagen_retrato",
+        "marco_retrato",
+        "efecto_scanline"
+      ],
+      "godot_node_suggestion": "TextureRect",
+      "asset_policy": "separate_asset",
+      "suggested_asset_name": "applicant_portrait_dynamic.png",
+      "notes": "El retrato debe cambiar por personaje. El marco y efecto CRT pueden ser overlay reutilizable."
+    },
+    {
+      "id": "dossier_fields",
+      "name": "Campos de datos del expediente",
+      "parent_id": "dossier_tab_content",
+      "rect": {
+        "x": 133,
+        "y": 105,
+        "w": 158,
+        "h": 126
+      },
+      "safe_rect": {
+        "x": 139,
+        "y": 111,
+        "w": 146,
+        "h": 114
+      },
+      "type": "ui",
+      "priority": "high",
+      "content": [
+        "lista_de_datos",
+        "iconos_administrativos",
+        "valores_dinamicos",
+        "boton_copiar_id"
+      ],
+      "godot_node_suggestion": "GridContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Cada fila debe ser UI real para permitir validaciones, colores por riesgo y actualización dinámica."
+    },
+    {
+      "id": "applicant_viewport",
+      "name": "Ventana de atención del solicitante",
+      "parent_id": null,
+      "rect": {
+        "x": 5,
+        "y": 282,
+        "w": 310,
+        "h": 232
+      },
+      "safe_rect": {
+        "x": 16,
+        "y": 295,
+        "w": 288,
+        "h": 205
+      },
+      "type": "background",
+      "priority": "high",
+      "content": [
+        "fondo_puesto_fronterizo",
+        "solicitante_frontal",
+        "documento_en_mano",
+        "profundidad_ambiente",
+        "vidrio_marco"
+      ],
+      "godot_node_suggestion": "TextureRect",
+      "asset_policy": "background_asset",
+      "suggested_asset_name": "bg_applicant_checkpoint_view.png",
+      "notes": "Separar fondo, personaje y documento si se animará. Evitar emblemas reconocibles en señales."
+    },
+    {
+      "id": "dialogue_box",
+      "name": "Caja de declaración del solicitante",
+      "parent_id": "applicant_viewport",
+      "rect": {
+        "x": 17,
+        "y": 304,
+        "w": 115,
+        "h": 58
+      },
+      "safe_rect": {
+        "x": 23,
+        "y": 311,
+        "w": 103,
+        "h": 45
+      },
+      "type": "ui",
+      "priority": "high",
+      "content": [
+        "titulo_declaracion",
+        "texto_dialogo",
+        "icono_audio"
+      ],
+      "godot_node_suggestion": "PanelContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Debe soportar varias líneas, audio, cambios de idioma y estados de interrogatorio."
+    },
+    {
+      "id": "applicant_character_area",
+      "name": "Personaje atendido",
+      "parent_id": "applicant_viewport",
+      "rect": {
+        "x": 88,
+        "y": 302,
+        "w": 178,
+        "h": 205
+      },
+      "safe_rect": {
+        "x": 96,
+        "y": 309,
+        "w": 162,
+        "h": 191
+      },
+      "type": "background",
+      "priority": "high",
+      "content": [
+        "sprite_solicitante",
+        "expresion_facial",
+        "pose_documento"
+      ],
+      "godot_node_suggestion": "AnimatedSprite2D",
+      "asset_policy": "separate_asset",
+      "suggested_asset_name": "applicant_worker_sprite.png",
+      "notes": "Conviene separarlo del fondo para animar reacción, parpadeo, aprobación, rechazo o salida."
+    },
+    {
+      "id": "question_buttons_area",
+      "name": "Área de botones de interrogatorio",
+      "parent_id": "applicant_viewport",
+      "rect": {
+        "x": 18,
+        "y": 426,
+        "w": 66,
+        "h": 84
+      },
+      "safe_rect": {
+        "x": 22,
+        "y": 430,
+        "w": 58,
+        "h": 76
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "boton_motivo",
+        "boton_origen",
+        "boton_carga"
+      ],
+      "godot_node_suggestion": "VBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Ubicado dentro del viewport del solicitante, a la izquierda, debajo de la caja de diálogo. No tapa rostro, documento, expediente ni botones principales."
+    },
+    {
+      "id": "question_button_motivo",
+      "name": "Botón de interrogatorio: motivo",
+      "parent_id": "question_buttons_area",
+      "rect": {
+        "x": 22,
+        "y": 430,
+        "w": 58,
+        "h": 20
+      },
+      "safe_rect": {
+        "x": 26,
+        "y": 434,
+        "w": 50,
+        "h": 12
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "texto_motivo",
+        "estado_boton"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Pregunta al solicitante por el motivo de ingreso o tránsito."
+    },
+    {
+      "id": "question_button_origen",
+      "name": "Botón de interrogatorio: origen",
+      "parent_id": "question_buttons_area",
+      "rect": {
+        "x": 22,
+        "y": 458,
+        "w": 58,
+        "h": 20
+      },
+      "safe_rect": {
+        "x": 26,
+        "y": 462,
+        "w": 50,
+        "h": 12
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "texto_origen",
+        "estado_boton"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Pregunta al solicitante por su procedencia o ruta previa."
+    },
+    {
+      "id": "question_button_carga",
+      "name": "Botón de interrogatorio: carga",
+      "parent_id": "question_buttons_area",
+      "rect": {
+        "x": 22,
+        "y": 486,
+        "w": 58,
+        "h": 20
+      },
+      "safe_rect": {
+        "x": 26,
+        "y": 490,
+        "w": 50,
+        "h": 12
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "texto_carga",
+        "estado_boton"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Pregunta al solicitante si transporta carga, mercancías o artículos declarables."
+    },
+    {
+      "id": "desk_console_area",
+      "name": "Consola física inferior",
+      "parent_id": null,
+      "rect": {
+        "x": 0,
+        "y": 514,
+        "w": 320,
+        "h": 106
+      },
+      "safe_rect": {
+        "x": 8,
+        "y": 523,
+        "w": 304,
+        "h": 88
+      },
+      "type": "background",
+      "priority": "high",
+      "content": [
+        "mesa_metalica",
+        "soportes",
+        "suciedad",
+        "ranuras",
+        "elementos_fisicos"
+      ],
+      "godot_node_suggestion": "TextureRect",
+      "asset_policy": "background_asset",
+      "suggested_asset_name": "bg_desk_console.png",
+      "notes": "Puede ser asset base sin texto jugable. Los controles interactivos van encima como nodos UI."
+    },
+    {
+      "id": "document_scanner_area",
+      "name": "Área de escáner documental",
+      "parent_id": "desk_console_area",
+      "rect": {
+        "x": 107,
+        "y": 523,
+        "w": 106,
+        "h": 72
+      },
+      "safe_rect": {
+        "x": 116,
+        "y": 535,
+        "w": 88,
+        "h": 49
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "bandeja_documento",
+        "zona_scan",
+        "label_colocar_documento",
+        "indicador_documento_actual"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "frame_asset_allowed",
+      "suggested_asset_name": "frame_document_scanner.png",
+      "notes": "La bandeja puede ser asset; el texto, documento detectado y estado de escaneo deben ser UI real."
+    },
+    {
+      "id": "scanner_device_area",
+      "name": "Dispositivo escáner físico",
+      "parent_id": "desk_console_area",
+      "rect": {
+        "x": 13,
+        "y": 525,
+        "w": 56,
+        "h": 67
+      },
+      "safe_rect": {
+        "x": 18,
+        "y": 532,
+        "w": 45,
+        "h": 53
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "dispositivo_escaneo",
+        "luz_estado",
+        "boton_uso"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "separate_asset",
+      "suggested_asset_name": "prop_scanner_device.png",
+      "notes": "Debe tener área clickeable más grande que el objeto visual para usabilidad en 320 px."
+    },
+    {
+      "id": "physical_stamp_area",
+      "name": "Sello físico y reglamento",
+      "parent_id": "desk_console_area",
+      "rect": {
+        "x": 232,
+        "y": 520,
+        "w": 74,
+        "h": 79
+      },
+      "safe_rect": {
+        "x": 238,
+        "y": 527,
+        "w": 62,
+        "h": 66
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "sello_fisico",
+        "manual_reglamento",
+        "lapiz_herramienta"
+      ],
+      "godot_node_suggestion": "Control",
+      "asset_policy": "separate_asset",
+      "suggested_asset_name": "prop_stamp_and_manual.png",
+      "notes": "Separar manual como botón interactivo que abre overlay de reglas. El texto del manual debe ser UI si debe leerse."
+    },
+    {
+      "id": "decision_buttons",
+      "name": "Botones principales de decisión",
+      "parent_id": null,
+      "rect": {
+        "x": 5,
+        "y": 620,
+        "w": 310,
+        "h": 72
+      },
+      "safe_rect": {
+        "x": 11,
+        "y": 628,
+        "w": 298,
+        "h": 56
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "boton_aprobar",
+        "boton_inspeccionar",
+        "boton_denegar"
+      ],
+      "godot_node_suggestion": "HBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Botones críticos. Deben tener estados normal, hover, pressed, disabled, confirmed y error."
+    },
+    {
+      "id": "approve_button",
+      "name": "Botón aprobar",
+      "parent_id": "decision_buttons",
+      "rect": {
+        "x": 10,
+        "y": 629,
+        "w": 92,
+        "h": 53
+      },
+      "safe_rect": {
+        "x": 16,
+        "y": 636,
+        "w": 80,
+        "h": 39
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "icono_aprobar_original",
+        "texto_aprobar",
+        "subtexto_aprobar"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Usar icono propio: marca MAP-7, llave o check geométrico original."
+    },
+    {
+      "id": "inspect_button",
+      "name": "Botón inspeccionar",
+      "parent_id": "decision_buttons",
+      "rect": {
+        "x": 113,
+        "y": 629,
+        "w": 97,
+        "h": 53
+      },
+      "safe_rect": {
+        "x": 119,
+        "y": 636,
+        "w": 85,
+        "h": 39
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "icono_inspeccion",
+        "texto_inspeccionar",
+        "subtexto_inspeccionar"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Debe abrir flujo de revisión detallada sin ejecutar aprobación o rechazo."
+    },
+    {
+      "id": "deny_button",
+      "name": "Botón denegar",
+      "parent_id": "decision_buttons",
+      "rect": {
+        "x": 220,
+        "y": 629,
+        "w": 91,
+        "h": 53
+      },
+      "safe_rect": {
+        "x": 226,
+        "y": 636,
+        "w": 79,
+        "h": 39
+      },
+      "type": "interactive",
+      "priority": "high",
+      "content": [
+        "icono_denegar_original",
+        "texto_denegar",
+        "subtexto_denegar"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Usar símbolo propio de bloqueo administrativo, no iconografía de franquicia."
+    },
+    {
+      "id": "tools_bar",
+      "name": "Barra inferior de herramientas",
+      "parent_id": null,
+      "rect": {
+        "x": 0,
+        "y": 693,
+        "w": 320,
+        "h": 47
+      },
+      "safe_rect": {
+        "x": 7,
+        "y": 699,
+        "w": 306,
+        "h": 35
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "herramienta_escaner",
+        "herramienta_luz_uv",
+        "herramienta_verificador",
+        "herramienta_sello",
+        "herramienta_alerta",
+        "registro_manual"
+      ],
+      "godot_node_suggestion": "HBoxContainer",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Cada herramienta debe ser Button con icono original, contador y estado de disponibilidad."
+    },
+    {
+      "id": "tool_scanner",
+      "name": "Herramienta escáner",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 20,
+        "y": 704,
+        "w": 40,
+        "h": 34
+      },
+      "safe_rect": {
+        "x": 23,
+        "y": 707,
+        "w": 34,
+        "h": 28
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_escaner",
+        "contador_uso",
+        "label_herramienta"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "El icono debe ser original y coherente con tecnología decadente."
+    },
+    {
+      "id": "tool_uv",
+      "name": "Herramienta luz UV",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 67,
+        "y": 704,
+        "w": 40,
+        "h": 34
+      },
+      "safe_rect": {
+        "x": 70,
+        "y": 707,
+        "w": 34,
+        "h": 28
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_luz_uv",
+        "contador_uso",
+        "label_herramienta"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Puede activar overlay de iluminación sobre documentos."
+    },
+    {
+      "id": "tool_verifier",
+      "name": "Herramienta verificador",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 115,
+        "y": 704,
+        "w": 40,
+        "h": 34
+      },
+      "safe_rect": {
+        "x": 118,
+        "y": 707,
+        "w": 34,
+        "h": 28
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_verificador",
+        "contador_uso",
+        "label_herramienta"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Usar símbolo de ojo técnico o circuito, no lupa genérica copiada."
+    },
+    {
+      "id": "tool_stamp",
+      "name": "Herramienta sello",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 164,
+        "y": 704,
+        "w": 40,
+        "h": 34
+      },
+      "safe_rect": {
+        "x": 167,
+        "y": 707,
+        "w": 34,
+        "h": 28
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_sello",
+        "contador_uso",
+        "label_herramienta"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Puede cambiar entre sello aprobado, observado y rechazado."
+    },
+    {
+      "id": "tool_alert",
+      "name": "Herramienta alerta",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 211,
+        "y": 704,
+        "w": 40,
+        "h": 34
+      },
+      "safe_rect": {
+        "x": 214,
+        "y": 707,
+        "w": 34,
+        "h": 28
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_alerta",
+        "contador_uso",
+        "label_herramienta"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Debe activar llamada a seguridad o marcar sospecha."
+    },
+    {
+      "id": "tool_registry",
+      "name": "Registro manual",
+      "parent_id": "tools_bar",
+      "rect": {
+        "x": 259,
+        "y": 700,
+        "w": 50,
+        "h": 38
+      },
+      "safe_rect": {
+        "x": 264,
+        "y": 704,
+        "w": 40,
+        "h": 30
+      },
+      "type": "interactive",
+      "priority": "medium",
+      "content": [
+        "icono_registro",
+        "contador_registros",
+        "label_registro"
+      ],
+      "godot_node_suggestion": "Button",
+      "asset_policy": "text_as_ui",
+      "suggested_asset_name": null,
+      "notes": "Puede abrir historial de atención o bitácora del turno."
+    },
+    {
+      "id": "overlay_area",
+      "name": "Área para overlays emergentes",
+      "parent_id": null,
+      "rect": {
+        "x": 16,
+        "y": 100,
+        "w": 288,
+        "h": 560
+      },
+      "safe_rect": {
+        "x": 24,
+        "y": 112,
+        "w": 272,
+        "h": 536
+      },
+      "type": "overlay",
+      "priority": "medium",
+      "content": [
+        "manual_reglamento",
+        "informe_escaner_completo",
+        "modal_confirmacion_futuro"
+      ],
+      "godot_node_suggestion": "CanvasLayer",
+      "asset_policy": "no_asset",
+      "suggested_asset_name": null,
+      "notes": "Reservado para overlays consultables o bloqueantes: manual/reglamento, informe completo del escáner y confirmaciones futuras. En el MVP actual, las alertas normales no se separan por gravedad y se muestran en dossier_tab_content."
+    }
+  ],
+  "layers": [
+    {
+      "order": 0,
+      "id": "background_base",
+      "description": "Fondo general oscuro, metal, suciedad, iluminación ambiental y bordes exteriores.",
+      "godot_node_suggestion": "TextureRect"
+    },
+    {
+      "order": 1,
+      "id": "physical_scene_assets",
+      "description": "Fondo del puesto fronterizo, consola física, escáner, sello, manual cerrado y soportes visuales.",
+      "godot_node_suggestion": "TextureRect"
+    },
+    {
+      "order": 2,
+      "id": "character_layer",
+      "description": "Solicitante atendido, documento en mano, retrato dinámico y variaciones de expresión.",
+      "godot_node_suggestion": "AnimatedSprite2D"
+    },
+    {
+      "order": 3,
+      "id": "frame_layer",
+      "description": "Marcos metálicos, biseles, vidrio, divisiones, sombras internas y overlays CRT sin texto.",
+      "godot_node_suggestion": "TextureRect"
+    },
+    {
+      "order": 4,
+      "id": "hud_static_controls",
+      "description": "Contenedores de UI, paneles, cajas de diálogo, botones base, tabs, tool slots y zonas de input.",
+      "godot_node_suggestion": "Control"
+    },
+    {
+      "order": 5,
+      "id": "hud_dynamic_text",
+      "description": "Todo texto jugable, valores, números, etiquetas, datos del expediente, diálogo y contadores.",
+      "godot_node_suggestion": "Control"
+    },
+    {
+      "order": 6,
+      "id": "hud_dynamic_icons",
+      "description": "Iconos administrativos originales, medidores, barras, checks, alertas y estados interactivos.",
+      "godot_node_suggestion": "Control"
+    },
+    {
+      "order": 7,
+      "id": "effects_layer",
+      "description": "Brillos verdes, scanlines, parpadeos, estado seleccionado, feedback de aprobar o denegar.",
+      "godot_node_suggestion": "CanvasLayer"
+    },
+    {
+      "order": 8,
+      "id": "modal_overlay_layer",
+      "description": "Reglamento abierto, alertas detectadas, confirmaciones, inspección detallada y bloqueo contextual.",
+      "godot_node_suggestion": "CanvasLayer"
+    }
+  ],
+  "assets_to_create": [
+    {
+      "id": "asset_top_status_frame",
+      "filename": "frame_top_status_bar.png",
+      "rect_source": "top_status_bar",
+      "target_size": {
+        "w": 320,
+        "h": 47
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "números",
+        "iconografía protegida",
+        "calavera"
+      ],
+      "purpose": "Marco metálico superior reutilizable para contener datos dinámicos."
+    },
+    {
+      "id": "asset_dossier_frame",
+      "filename": "frame_dossier_panel.png",
+      "rect_source": "dossier_panel",
+      "target_size": {
+        "w": 310,
+        "h": 225
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "datos personales",
+        "emblemas alados",
+        "siglas reconocibles"
+      ],
+      "purpose": "Marco CRT del expediente sin contenido textual."
+    },
+    {
+      "id": "asset_portrait_frame",
+      "filename": "frame_portrait_scan.png",
+      "rect_source": "portrait_area",
+      "target_size": {
+        "w": 94,
+        "h": 127
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "rostro del personaje",
+        "texto jugable"
+      ],
+      "purpose": "Marco y efecto escáner para retratos variables."
+    },
+    {
+      "id": "asset_applicant_view_background",
+      "filename": "bg_applicant_checkpoint_view.png",
+      "rect_source": "applicant_viewport",
+      "target_size": {
+        "w": 310,
+        "h": 232
+      },
+      "transparent_background": false,
+      "must_not_include": [
+        "texto legible",
+        "emblemas alados",
+        "logos",
+        "símbolos de franquicias"
+      ],
+      "purpose": "Fondo del puesto de control y ambiente decadente sin personaje ni UI."
+    },
+    {
+      "id": "asset_applicant_worker_sprite",
+      "filename": "applicant_worker_sprite.png",
+      "rect_source": "applicant_character_area",
+      "target_size": {
+        "w": 178,
+        "h": 205
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "siglas reconocibles",
+        "emblemas copiados"
+      ],
+      "purpose": "Personaje atendido con poses y expresiones intercambiables."
+    },
+    {
+      "id": "asset_desk_console_base",
+      "filename": "bg_desk_console.png",
+      "rect_source": "desk_console_area",
+      "target_size": {
+        "w": 320,
+        "h": 106
+      },
+      "transparent_background": false,
+      "must_not_include": [
+        "texto jugable",
+        "botones con texto",
+        "iconografía protegida"
+      ],
+      "purpose": "Base física de la consola inferior."
+    },
+    {
+      "id": "asset_document_scanner_frame",
+      "filename": "frame_document_scanner.png",
+      "rect_source": "document_scanner_area",
+      "target_size": {
+        "w": 106,
+        "h": 72
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "documentos con datos"
+      ],
+      "purpose": "Bandeja de escaneo para recibir documentos dinámicos."
+    },
+    {
+      "id": "asset_scanner_device",
+      "filename": "prop_scanner_device.png",
+      "rect_source": "scanner_device_area",
+      "target_size": {
+        "w": 56,
+        "h": 67
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "marca reconocible"
+      ],
+      "purpose": "Objeto físico de escáner como herramienta clickeable."
+    },
+    {
+      "id": "asset_stamp_prop",
+      "filename": "prop_physical_stamp.png",
+      "rect_source": "physical_stamp_area",
+      "target_size": {
+        "w": 36,
+        "h": 45
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "sellos oficiales reales"
+      ],
+      "purpose": "Sello físico decorativo e interactivo."
+    },
+    {
+      "id": "asset_rulebook_closed",
+      "filename": "prop_rulebook_closed.png",
+      "rect_source": "physical_stamp_area",
+      "target_size": {
+        "w": 44,
+        "h": 40
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "emblemas alados",
+        "siglas reconocibles"
+      ],
+      "purpose": "Manual cerrado que funciona como botón para abrir reglamento."
+    },
+    {
+      "id": "asset_generic_button_frame_green",
+      "filename": "frame_button_green.png",
+      "rect_source": "approve_button",
+      "target_size": {
+        "w": 92,
+        "h": 53
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "iconos protegidos"
+      ],
+      "purpose": "Base visual del botón aprobar con texto renderizado por UI."
+    },
+    {
+      "id": "asset_generic_button_frame_yellow",
+      "filename": "frame_button_yellow.png",
+      "rect_source": "inspect_button",
+      "target_size": {
+        "w": 97,
+        "h": 53
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "iconos protegidos"
+      ],
+      "purpose": "Base visual del botón inspeccionar con texto renderizado por UI."
+    },
+    {
+      "id": "asset_generic_button_frame_red",
+      "filename": "frame_button_red.png",
+      "rect_source": "deny_button",
+      "target_size": {
+        "w": 91,
+        "h": 53
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "iconos protegidos"
+      ],
+      "purpose": "Base visual del botón denegar con texto renderizado por UI."
+    },
+    {
+      "id": "asset_tool_slot_frame",
+      "filename": "frame_tool_slot.png",
+      "rect_source": "tools_bar",
+      "target_size": {
+        "w": 40,
+        "h": 34
+      },
+      "transparent_background": true,
+      "must_not_include": [
+        "texto jugable",
+        "iconos protegidos"
+      ],
+      "purpose": "Contenedor reutilizable para herramientas inferiores."
+    }
+  ],
+  "dynamic_ui": [
+    {
+      "id": "ui_day_shift_time",
+      "zone_id": "status_day_panel",
+      "content_type": "text",
+      "reason": "Día, turno y hora cambian durante el ciclo de juego."
+    },
+    {
+      "id": "ui_credits_counter",
+      "zone_id": "status_credits_panel",
+      "content_type": "text",
+      "reason": "El valor de créditos cambia por decisiones, penalizaciones y recompensas."
+    },
+    {
+      "id": "ui_suspicion_meter",
+      "zone_id": "status_suspicion_panel",
+      "content_type": "progress_bar",
+      "reason": "El nivel de sospecha debe actualizarse por acciones del jugador y eventos."
+    },
+    {
+      "id": "ui_dossier_tabs",
+      "zone_id": "dossier_tabs",
+      "content_type": "tabs",
+      "reason": "Las vistas del expediente deben cambiar contenido sin generar imágenes nuevas."
+    },
+    {
+      "id": "ui_dossier_tab_content",
+      "zone_id": "dossier_tab_content",
+      "content_type": "data_list",
+      "reason": "El contenido cambia según la pestaña activa: identidad, documentos, biometría, carga, alertas, regulaciones, informe de escáner o feedback de decisión."
+    },
+    {
+      "id": "ui_dossier_fields",
+      "zone_id": "dossier_fields",
+      "content_type": "data_list",
+      "reason": "Los campos del solicitante cambian por cada caso y deben poder resaltarse por inconsistencias."
+    },
+    {
+      "id": "ui_dialogue_text",
+      "zone_id": "dialogue_box",
+      "content_type": "text",
+      "reason": "La declaración cambia por personaje, mentira, idioma o interrogatorio."
+    },
+    {
+      "id": "ui_document_scanner_label",
+      "zone_id": "document_scanner_area",
+      "content_type": "text",
+      "reason": "El escáner debe mostrar instrucciones, estado del documento y errores."
+    },
+    {
+      "id": "ui_decision_buttons",
+      "zone_id": "decision_buttons",
+      "content_type": "button",
+      "reason": "Aprobar, inspeccionar y denegar son acciones centrales con estados dinámicos."
+    },
+    {
+      "id": "ui_tool_buttons",
+      "zone_id": "tools_bar",
+      "content_type": "button",
+      "reason": "Las herramientas requieren input, cooldown, contador, bloqueo y feedback."
+    },
+    {
+      "id": "ui_tool_counters",
+      "zone_id": "tools_bar",
+      "content_type": "text",
+      "reason": "Los contadores de herramientas deben cambiar según uso o disponibilidad."
+    },
+    {
+      "id": "ui_original_admin_icons",
+      "zone_id": "dossier_fields",
+      "content_type": "icon",
+      "reason": "Los iconos deben ser vectoriales o atlas propio para evitar copiar iconografía protegida."
+    },
+    {
+      "id": "ui_question_buttons",
+      "zone_id": "question_buttons_area",
+      "content_type": "button",
+      "reason": "Los botones de interrogatorio deben ser UI real porque activan líneas de diálogo, pueden habilitarse o bloquearse según el caso, y deben reflejar estados como disponible, usado, seleccionado o con contradicción detectada."
+    },
+    {
+      "id": "ui_rulebook_overlay",
+      "zone_id": "overlay_area",
+      "content_type": "data_list",
+      "reason": "El manual/reglamento debe abrirse como overlay consultable con texto navegable y actualizable."
+    },
+    {
+      "id": "ui_scanner_report_overlay",
+      "zone_id": "overlay_area",
+      "content_type": "data_list",
+      "reason": "El informe completo del escáner puede contener varias líneas y debe abrirse como overlay consultable, no como zona fija del dossier."
+    }
+  ],
+  "ip_risks": [
+    {
+      "source_element": "Calavera dentro del medidor de sospecha",
+      "risk": "Puede parecer iconografía de facción, advertencia o franquicia existente si se copia directamente.",
+      "safe_alternative": "Usar un ojo técnico MAP-7, una torre de control abstracta o un hexágono con circuito de riesgo."
+    },
+    {
+      "source_element": "Emblemas alados en paneles, señales y documentos",
+      "risk": "Los emblemas alados pueden asociarse a organizaciones ficticias o reales ya existentes.",
+      "safe_alternative": "Crear un sello geométrico propio con torre, archivo, llave y circuito, sin alas."
+    },
+    {
+      "source_element": "Siglas visibles en documento del solicitante",
+      "risk": "Copiar siglas o marcas de la referencia puede generar identidad visual no original.",
+      "safe_alternative": "Usar marca ficticia original MAP-7, ARCO-13 o Registro Orbital Local."
+    },
+    {
+      "source_element": "Composición de botones verde, amarillo y rojo con los mismos textos",
+      "risk": "La estructura funcional es común, pero el texto y estilo exacto no deben copiarse como arte final.",
+      "safe_alternative": "Renderizar textos desde UI real y diseñar botones propios con bordes geométricos originales."
+    },
+    {
+      "source_element": "Retrato del trabajador de la referencia",
+      "risk": "No debe replicarse el rostro exacto, pose exacta o rasgos identificables de la imagen generada.",
+      "safe_alternative": "Crear varios trabajadores originales con rasgos, edades, uniformes y expresiones diferentes."
+    },
+    {
+      "source_element": "Señales del fondo con composición y emblemas de la referencia",
+      "risk": "Copiar señales, emblemas y layout textual del fondo puede volver reconocible la referencia.",
+      "safe_alternative": "Usar señalética propia: Zona MAP-7, Puerta 04, Control de Tránsito Laboral, con símbolos abstractos."
+    },
+    {
+      "source_element": "Manual Reglamento Fronterizo con emblema decorativo",
+      "risk": "Un manual con emblema y estilo idéntico puede parecer copia directa del diseño objetivo.",
+      "safe_alternative": "Diseñar manual como placa administrativa MAP-7 con iconos de archivo, llave, torre y circuito."
+    },
+    {
+      "source_element": "Iconos de herramientas inferiores",
+      "risk": "Copiar forma exacta de escáner, UV, sello, alerta o registro puede fijar una identidad visual derivada.",
+      "safe_alternative": "Crear iconos vectoriales propios, simplificados y consistentes con tecnología burocrática decadente."
+    }
+  ],
+  "implementation_notes": [
+    "Usar resolución base 320x740 y escalar con viewport stretch manteniendo aspecto vertical.",
+    "Separar assets físicos de UI dinámica: ningún asset debe contener texto jugable permanente.",
+    "Usar Control como raíz de interfaz y organizar con anchors porcentuales solo después de validar coordenadas base.",
+    "Para Godot 4, usar CanvasLayer para HUD y overlays, PanelContainer para marcos y Button para zonas interactivas.",
+    "Mantener el dossier_panel como zona de lectura prioritaria; evitar animaciones agresivas sobre texto.",
+    "El tamaño mínimo de fuente sugerido para datos críticos en 320 px es 6 a 8 px con fuente pixel/monoespaciada legible.",
+    "Los botones de decisión deben tener áreas clickeables mayores que su arte visible para evitar errores en móvil.",
+    "El applicant_viewport debe admitir capas: fondo, personaje, documento, diálogo y efectos de aprobación o rechazo.",
+    "El reglamento cerrado debe funcionar como objeto físico interactivo que abre overlay, no como simple decoración.",
+    "Las pestañas del dossier deben cambiar el contenido del panel sin alterar el marco principal.",
+    "Crear tema UI propio en Godot con colores: verde oscuro, verde fósforo, ámbar, rojo industrial y metal negro.",
+    "No usar logos, calaveras, alas, águilas ni siglas heredadas de la referencia; sustituir por sistema visual administrativo original.",
+    "Para El Último Sello, reforzar identidad propia con marca MAP-7, sello geométrico, torre de control, archivo, ojo técnico, llave y circuito.",
+    "Usar NinePatchRect para marcos y botones si se desea escalar a resolución de monitor sin deformar bordes.",
+    "Crear estados de botón: normal, hover, pressed, selected, confirmed, disabled y error.",
+    "Para versión PC, la misma estructura puede redistribuirse: expediente a la izquierda, viewport del solicitante a la derecha y consola abajo.",
+    "Implementar question_buttons_area como VBoxContainer anclado dentro de applicant_viewport.",
+    "Cada botón de interrogatorio debe tener estados normal, hover, pressed, selected y disabled.",
+    "Los textos MOTIVO, ORIGEN y CARGA deben renderizarse como Button text, no como parte de una imagen.",
+    "Mantener los botones por encima del fondo del viewport pero por debajo de overlays críticos como alertas o reglamento abierto.",
+    "Usar estilo visual coherente con la interfaz: borde verde tenue, fondo oscuro, brillo suave y texto monoespaciado legible.",
+    "dossier_tab_content es el contenedor único para la pestaña activa del expediente: identidad, documentos, biometría, carga, alertas o feedback de decisión.",
+    "tab_alertas debe mostrar alertas y regulaciones dentro de dossier_tab_content, no en una zona separada.",
+    "tab_documentos, tab_biometria y tab_carga deben mostrar sus documentos activos dentro de dossier_tab_content.",
+    "status_day_panel reutiliza progreso_solicitante en lugar de hora_turno.",
+    "debug_overlay_dev_only no forma parte de la UI normal; se mantiene como overlay interno activado con Y para QA/desarrollo.",
+    "scan_status y system_notes_area no son zonas fijas en el MVP; su espacio queda absorbido por dossier_tab_content.",
+    "El informe de escáner debe mostrarse como vista dentro de dossier_tab_content, no en una zona permanente separada.",
+    "Las notas del sistema, si se necesitan, deben mostrarse como contenido contextual dentro de dossier_tab_content.",
+    "En el MVP actual no existe clasificación formal entre alertas breves, graves o bloqueantes; todas las alertas normales se muestran en dossier_tab_content/vista_alertas.",
+    "manual_reglamento se muestra en overlay_area como contenido consultable.",
+    "El informe completo del escáner se muestra en overlay_area; dossier_tab_content puede mostrar solo feedback breve si hace falta.",
+    "resultado_aprobacion o feedback de decisión reciente se muestra en dossier_tab_content, no como overlay, salvo una consecuencia futura especial.",
+    "modal_confirmacion queda reservado para futuro; no debe usarse en el MVP para aprobar, retener o rechazar porque ralentiza el flujo.",
+    "Atajos actuales de ControlDesk: A aprobar, S retener, D rechazar, E escáner, W cambiar documento, Q siguiente pregunta, Y debug. Mantenerlos durante la migración visual.",
+    "Los tabs actuales de herramientas (Alertas/Regulaciones) son implementación previa: en el layout nuevo las alertas normales van a dossier_tab_content/vista_alertas y el reglamento va a overlay_area/manual_reglamento.",
+    "El título persistente PUESTO DE CONTROL - UMBRAL 7 no forma parte del HUD principal del layout vertical; puede aparecer en inicio de turno, reporte o auditoría.",
+    "debug_overlay_dev_only debe conservar datos técnicos y navegación interna por día solo para desarrollo/QA; no forma parte de la UI normal del jugador."
+  ]
 }

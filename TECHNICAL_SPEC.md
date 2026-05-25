@@ -63,6 +63,8 @@ Uso:
 - define la composicion vertical base `320 x 740`;
 - registra zonas funcionales, `rect`, `safe_rect`, capas, assets recomendados y riesgos IP;
 - sirve para pedir assets puntuales y para migrar `ControlDesk` sin cambiar reglas, JSON de casos ni sistemas;
+- usa `dossier_tab_content` como contenedor dinamico del expediente; alertas normales, documentos y feedback reciente cambian ahi segun la pestana activa;
+- reserva `overlay_area` para manual/reglamento, informe completo del escaner y confirmaciones futuras;
 - no debe contener texto jugable fijo ni reemplazar escenas de Godot.
 
 ---

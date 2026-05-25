@@ -82,11 +82,11 @@ tools_bar:             x 0   y 693  w 320 h 47
 Subzonas importantes:
 
 - `dossier_tabs`
+- `dossier_tab_content`
 - `portrait_area`
 - `dossier_fields`
-- `scan_status`
-- `system_notes_area`
 - `dialogue_box`
+- `question_buttons_area`
 - `document_scanner_area`
 - `scanner_device_area`
 - `physical_stamp_area`
@@ -105,7 +105,21 @@ El JSON puede contener nombres visuales de la referencia. Para el MVP se interpr
 | `suspicion_meter` | Indicador visual futuro; no introducir logica nueva sin diseno. |
 | `tool_uv`, `tool_verifier`, `tool_alert`, `tool_registry` | Futuro / bloqueado / decorativo hasta que entren al backlog. |
 | `applicant_character_area` | Asset visual dinamico futuro; no debe bloquear el loop actual. |
-| `overlay_area` | Reservado para reglamento, alertas o confirmaciones. |
+| `dossier_tab_content` | Contenedor unico del contenido activo del expediente: identidad, documentos, biometria, carga, alertas normales y feedback reciente. |
+| `question_buttons_area` | Botones reales de interrogatorio: motivo, origen y carga. |
+| `overlay_area` | Reservado para manual/reglamento, informe completo del escaner y confirmaciones futuras. |
+| `modal_confirmacion_futuro` | No se usa en MVP para aprobar, retener o rechazar; queda reservado para decisiones futuras especiales. |
+
+Reglas especificas del expediente:
+
+- `scan_status` y `system_notes_area` no son zonas fijas en el MVP; su espacio pertenece a `dossier_tab_content`.
+- `tab_alertas` muestra todas las alertas actuales del MVP dentro de `dossier_tab_content`.
+- `tab_documentos`, `tab_biometria` y `tab_carga` muestran el documento activo dentro de `dossier_tab_content`.
+- El resultado breve de una decision se muestra en `dossier_tab_content`.
+- El informe completo del escaner se muestra en `overlay_area`.
+- El manual/reglamento se muestra en `overlay_area`.
+- El titulo persistente `PUESTO DE CONTROL - UMBRAL 7` no forma parte del HUD principal; puede aparecer en inicio de turno, reporte o auditoria.
+- El debug interno activado con `Y` sigue siendo `debug_overlay_dev_only`, no UI normal del jugador.
 
 No tocar durante la migracion visual:
 
