@@ -19,16 +19,6 @@ const COLOR_ERROR  := Color(0.82, 0.22, 0.22, 1)
 const COLOR_DIM    := Color(0.35, 0.55, 0.35, 1)
 const COLOR_BTN    := Color(0.08, 0.36, 0.08, 1)
 
-const ASSET_TERMINAL_BG := "res://assets/ui/terminal/terminal_background.png"
-const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
-const ASSET_GRIME := "res://assets/ui/overlays/grime_overlay.png"
-const ASSET_CRT_WEAR := "res://assets/ui/overlays/crt_wear_overlay.png"
-const ASSET_WATERMARK := "res://assets/ui/overlays/terminal_watermark.png"
-const ASSET_GLASS := "res://assets/ui/overlays/glass_overlay.png"
-const ASSET_PANEL_FRAME := "res://assets/ui/panels/panel_frame_9patch.png"
-const ASSET_BUTTON_APPROVE := "res://assets/ui/buttons/button_approve_9patch.png"
-const ASSET_BUTTON_REJECT := "res://assets/ui/buttons/button_reject_9patch.png"
-
 @onready var header_label: Label      = $VBox/Header/HeaderLabel
 @onready var processed_label: Label   = $VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox/ProcessedLabel
 @onready var correct_label: Label     = $VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox/CorrectLabel
@@ -167,17 +157,13 @@ func _apply_theme() -> void:
 	_style_panel($VBox/Footer, COLOR_PANEL, COLOR_BORDER)
 	_apply_labels_color(self)
 
-	var s_btn: StyleBox = _make_button_style(ASSET_BUTTON_APPROVE, COLOR_BTN)
-	var s_hover: StyleBox = _make_button_style(ASSET_BUTTON_APPROVE, COLOR_BTN.lightened(0.2))
+	var s_btn: StyleBox = _make_button_style("", COLOR_BTN)
+	var s_hover: StyleBox = _make_button_style("", COLOR_BTN.lightened(0.2))
 	restart_btn.add_theme_stylebox_override("normal", s_btn)
 	restart_btn.add_theme_stylebox_override("hover", s_hover)
 	restart_btn.add_theme_color_override("font_color", COLOR_TEXT)
 
 func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
-	var textured := _make_texture_style(ASSET_PANEL_FRAME, 14, 8)
-	if textured != null:
-		panel.add_theme_stylebox_override("panel", textured)
-		return
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg
 	style.border_color = border
@@ -186,12 +172,7 @@ func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
 	panel.add_theme_stylebox_override("panel", style)
 
 func _install_visual_layers() -> void:
-	_add_full_rect_texture(ASSET_TERMINAL_BG, -10, 1.0, "TerminalBackground")
-	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.20, "TerminalWatermark")
-	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
-	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay")
-	_add_full_rect_texture(ASSET_GRIME, 92, 0.24, "GrimeOverlay")
-	_add_full_rect_texture(ASSET_GLASS, 93, 0.34, "GlassOverlay")
+	pass
 
 func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
 	if get_node_or_null(node_name) != null:
@@ -212,6 +193,8 @@ func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: Strin
 		move_child(rect, 1)
 
 func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
+	if path == "":
+		return null
 	var texture := load(path)
 	if texture == null:
 		return null
@@ -248,8 +231,8 @@ func _maybe_add_continue_button(current_day: int) -> void:
 	btn.text = "CONTINUAR — DIA %d" % next_day
 	btn.custom_minimum_size = Vector2(280, 50)
 	btn.add_theme_font_size_override("font_size", 18)
-	var s: StyleBox = _make_button_style(ASSET_BUTTON_REJECT, Color(0.04, 0.16, 0.36, 1))
-	var s_hover: StyleBox = _make_button_style(ASSET_BUTTON_REJECT, Color(0.06, 0.24, 0.52, 1))
+	var s: StyleBox = _make_button_style("", Color(0.04, 0.16, 0.36, 1))
+	var s_hover: StyleBox = _make_button_style("", Color(0.06, 0.24, 0.52, 1))
 	btn.add_theme_stylebox_override("normal", s)
 	btn.add_theme_stylebox_override("hover", s_hover)
 	btn.add_theme_color_override("font_color", COLOR_TEXT)

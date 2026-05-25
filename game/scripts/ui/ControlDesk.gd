@@ -26,20 +26,6 @@ const COLOR_REJECT := Color(0.42, 0.06, 0.06, 1)
 const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
-const ASSET_TERMINAL_BG    := "res://assets/ui/cockpit/cockpit_three_screens_pc.png"
-const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
-const ASSET_GRIME := "res://assets/ui/overlays/grime_overlay.png"
-const ASSET_CRT_WEAR := "res://assets/ui/overlays/crt_wear_overlay.png"
-const ASSET_WATERMARK := "res://assets/ui/overlays/terminal_watermark.png"
-const ASSET_GLASS := "res://assets/ui/overlays/glass_overlay.png"
-const ASSET_PANEL_FRAME := "res://assets/ui/panels/panel_frame_9patch.png"
-const ASSET_DOCUMENT_VIEW := "res://assets/ui/panels/document_view_9patch.png"
-const ASSET_SCANNER_FRAME := "res://assets/ui/panels/scanner_frame_9patch.png"
-const ASSET_BUTTON_APPROVE := "res://assets/ui/buttons/button_approve_9patch.png"
-const ASSET_BUTTON_HOLD := "res://assets/ui/buttons/button_hold_9patch.png"
-const ASSET_BUTTON_REJECT := "res://assets/ui/buttons/button_reject_9patch.png"
-const ASSET_BUTTON_TOOL := "res://assets/ui/buttons/button_tool_9patch.png"
-
 @onready var day_label: Label = $VBox/StatusBar/StatusHBox/DayLabel
 @onready var credits_label: Label = $VBox/StatusBar/StatusHBox/CreditsLabel
 @onready var panel_title: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/PanelTitle
@@ -223,18 +209,14 @@ func _apply_theme() -> void:
 	_style_panel(_panel_tools,     Color(0, 0, 0, 0), Color(0, 0, 0, 0))
 	_style_panel(_panel_decisions, Color(0, 0, 0, 0), Color(0, 0, 0, 0))
 	_style_document_view(false)
-	_style_button(approve_btn, COLOR_APPROVE, ASSET_BUTTON_APPROVE)
-	_style_button(hold_btn, COLOR_HOLD, ASSET_BUTTON_HOLD)
-	_style_button(reject_btn, COLOR_REJECT, ASSET_BUTTON_REJECT)
-	_style_button(scanner_btn, COLOR_TOOL, ASSET_BUTTON_TOOL)
+	_style_button(approve_btn, COLOR_APPROVE)
+	_style_button(hold_btn, COLOR_HOLD)
+	_style_button(reject_btn, COLOR_REJECT)
+	_style_button(scanner_btn, COLOR_TOOL)
 	_apply_labels_color(self)
 	_style_tab_buttons()
 
 func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
-	var textured := _make_texture_style(ASSET_PANEL_FRAME, 14, 8)
-	if textured != null:
-		panel.add_theme_stylebox_override("panel", textured)
-		return
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg
 	style.border_color = border
@@ -281,6 +263,8 @@ func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: Strin
 		move_child(rect, 1)
 
 func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
+	if path == "":
+		return null
 	var texture := load(path)
 	if texture == null:
 		return null
@@ -304,11 +288,6 @@ func _make_button_style(path: String, color: Color) -> StyleBox:
 	return flat
 
 func _style_document_view(scanner_mode: bool) -> void:
-	var path := ASSET_SCANNER_FRAME if scanner_mode else ASSET_DOCUMENT_VIEW
-	var textured := _make_texture_style(path, 16, 8)
-	if textured != null:
-		_document_view.add_theme_stylebox_override("panel", textured)
-		return
 	_style_panel(_document_view, COLOR_PANEL_DARK, COLOR_BORDER)
 
 func _apply_labels_color(node: Node) -> void:
