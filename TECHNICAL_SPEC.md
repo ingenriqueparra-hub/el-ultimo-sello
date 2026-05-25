@@ -32,7 +32,8 @@ project/
 │   ├── applicants/
 │   ├── documents/
 │   ├── rules/
-│   └── days/
+│   ├── days/
+│   └── ui/
 ├── scenes/
 │   ├── main/
 │   ├── ui/
@@ -46,6 +47,23 @@ project/
 ├── tests/
 └── docs/
 ```
+
+### 2.1. Datos de UI
+
+Los datos de layout visual pueden vivir en `data/ui/` cuando funcionen como contrato de implementacion y no como contenido jugable.
+
+Archivo actual:
+
+```txt
+data/ui/mobile_layout_320x740.json
+```
+
+Uso:
+
+- define la composicion vertical base `320 x 740`;
+- registra zonas funcionales, `rect`, `safe_rect`, capas, assets recomendados y riesgos IP;
+- sirve para pedir assets puntuales y para migrar `ControlDesk` sin cambiar reglas, JSON de casos ni sistemas;
+- no debe contener texto jugable fijo ni reemplazar escenas de Godot.
 
 ---
 

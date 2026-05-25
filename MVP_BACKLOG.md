@@ -82,7 +82,7 @@ El MVP representa el Día 1. No debe implementar toda la progresión, pero debe 
 |---|---|---|
 | P2-01 | Mockup visual de documentos | Documentos tienen estilo propio |
 | P2-02 | Fondo del puerto | Se percibe ambiente de ciudad/estación |
-| P2-03 | UI retrofuturista | Colores y paneles coherentes |
+| P2-03 | UI retrofuturista | Layout vertical documentado en `game/data/ui/mobile_layout_320x740.json`; colores, paneles y zonas coherentes; texto y datos dinamicos como UI real, no dentro de assets |
 | P2-04 | Pantalla de menú | Permite iniciar partida |
 | P2-05 | Pantalla de cierre del día | Presenta resumen con tono narrativo |
 
