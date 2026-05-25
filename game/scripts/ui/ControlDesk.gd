@@ -3,8 +3,6 @@ extends Control
 
 static var day_to_load: int = 1
 
-var _cockpit_frame: CockpitFrame = null
-
 const PANEL_RECTS := [
 	Rect2(32,  75, 316, 450),  # solicitante
 	Rect2(410, 54, 460, 515),  # documentos
@@ -77,7 +75,6 @@ var _debug_panel: PanelContainer
 var _debug_label: Label
 
 func _ready() -> void:
-	_install_visual_layers()
 	_apply_theme()
 	_position_panels_on_cockpit()
 	_setup_tools_tabs()
@@ -229,30 +226,6 @@ func _style_button(btn: Button, color: Color, texture_path: String = "") -> void
 	btn.add_theme_color_override("font_color", Color(0.9, 0.95, 0.9, 1))
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", Color(0.4, 0.45, 0.4, 1))
-
-func _install_visual_layers() -> void:
-	# Marco procedural de cabina (tres monitores dibujados por código)
-	_cockpit_frame = CockpitFrame.new()
-	add_child(_cockpit_frame)
-	move_child(_cockpit_frame, 0)
-
-func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
-	if get_node_or_null(node_name) != null:
-		return
-	var texture := load(path)
-	if texture == null:
-		return
-	var rect := TextureRect.new()
-	rect.name = node_name
-	rect.texture = texture
-	rect.stretch_mode = TextureRect.STRETCH_SCALE
-	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	rect.z_index = z
-	rect.modulate = Color(1, 1, 1, alpha)
-	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(rect)
-	if node_name == "TerminalBackground":
-		move_child(rect, 1)
 
 func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
 	if path == "":
