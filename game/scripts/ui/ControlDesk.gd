@@ -15,35 +15,41 @@ const COLOR_REJECT := Color(0.42, 0.06, 0.06, 1)
 const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
-@onready var day_label: Label = $VBox/StatusBar/StatusHBox/DayLabel
-@onready var credits_label: Label = $VBox/StatusBar/StatusHBox/CreditsLabel
-@onready var panel_title: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/PanelTitle
-@onready var applicant_name: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantName
-@onready var applicant_origin: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantOrigin
-@onready var applicant_destination: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantDestination
-@onready var applicant_purpose: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantPurpose
-@onready var dialogue_text: Label = $VBox/DialogueArea/DialogueVBox/DialogueText
-@onready var doc_content: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/DocContent
-@onready var alerts_list: Label = $VBox/ConsoleArea/ConsoleVBox/AlertsContainer/ScrollContainer/AlertsList
-@onready var _tab_alertas: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ToolsTabHBox/TabAlertas
-@onready var _tab_regs: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ToolsTabHBox/TabRegs
-@onready var _alerts_container: VBoxContainer = $VBox/ConsoleArea/ConsoleVBox/AlertsContainer
-@onready var _regs_container: VBoxContainer = $VBox/ConsoleArea/ConsoleVBox/RegsContainer
-@onready var approve_btn: Button = $VBox/DecisionBar/DecisionHBox/ApproveButton
-@onready var hold_btn: Button = $VBox/DecisionBar/DecisionHBox/HoldButton
-@onready var reject_btn: Button = $VBox/DecisionBar/DecisionHBox/RejectButton
-@onready var scanner_btn: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ScannerButton
-@onready var tab1: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab1
-@onready var tab2: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab2
-@onready var tab3: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab3
-@onready var _tab_solicitante: Button = $VBox/DossierPanel/DossierVBox/DocTabs/TabSolicitante
-@onready var applicant_vbox: VBoxContainer = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox
-@onready var _document_view: PanelContainer = $VBox/DossierPanel/DossierVBox/DocumentView
-@onready var _panel_status:    PanelContainer = $VBox/StatusBar
-@onready var _panel_dossier:   PanelContainer = $VBox/DossierPanel
-@onready var _panel_dialogue:  PanelContainer = $VBox/DialogueArea
-@onready var _panel_console:   PanelContainer = $VBox/ConsoleArea
-@onready var _panel_decisions: PanelContainer = $VBox/DecisionBar
+@onready var day_label: Label = $StatusBar/StatusHBox/DayLabel
+@onready var credits_label: Label = $StatusBar/StatusHBox/CreditsLabel
+@onready var _suspicion_bar: ProgressBar = $StatusBar/StatusHBox/SuspicionBox/SuspicionBar
+@onready var _alert_icon: Label = $StatusBar/StatusHBox/AlertIcon
+@onready var _overlay_panel: PanelContainer = $OverlayLayer/OverlayPanel
+@onready var _overlay_title: Label = $OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar/OverlayTitle
+@onready var _overlay_content: Label = $OverlayLayer/OverlayPanel/OverlayVBox/OverlayScroll/OverlayContent
+@onready var _overlay_close_btn: Button = $OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar/OverlayCloseBtn
+@onready var panel_title: Label = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/PanelTitle
+@onready var applicant_origin: Label = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantOrigin
+@onready var applicant_destination: Label = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantDestination
+@onready var applicant_purpose: Label = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantPurpose
+@onready var dialogue_text: Label = $DialogueArea/DialogueBox/DialogueVBox/DialogueText
+@onready var _question_buttons_area: VBoxContainer = $DialogueArea/QuestionButtonsArea
+@onready var doc_content: Label = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/DocContent
+@onready var alerts_list: Label = $DossierPanel/AlertsContainer/ScrollAlertas/AlertsList
+@onready var _tab_alertas: Button = $DossierPanel/DocTabs/TabAlertas
+@onready var _alerts_container: VBoxContainer = $DossierPanel/AlertsContainer
+@onready var _regs_container: VBoxContainer = $DossierPanel/RegsContainer
+@onready var approve_btn: Button = $DecisionBar/DecisionHBox/ApproveButton
+@onready var hold_btn: Button = $DecisionBar/DecisionHBox/HoldButton
+@onready var reject_btn: Button = $DecisionBar/DecisionHBox/RejectButton
+@onready var scanner_btn: Button = $ConsoleArea/ScannerButton
+@onready var _regs_btn: Button = $ConsoleArea/RegsButton
+@onready var tab1: Button = $DossierPanel/DocTabs/Tab1
+@onready var tab2: Button = $DossierPanel/DocTabs/Tab2
+@onready var tab3: Button = $DossierPanel/DocTabs/Tab3
+@onready var _tab_solicitante: Button = $DossierPanel/DocTabs/TabSolicitante
+@onready var applicant_vbox: VBoxContainer = $DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox
+@onready var _document_view: PanelContainer = $DossierPanel/DocumentView
+@onready var _panel_status:    PanelContainer = $StatusBar
+@onready var _panel_dossier:   Control = $DossierPanel
+@onready var _panel_dialogue:  Control = $DialogueArea
+@onready var _panel_console:   Control = $ConsoleArea
+@onready var _panel_decisions: PanelContainer = $DecisionBar
 
 var current_day: int = 1
 var credits: int = 50
@@ -72,9 +78,9 @@ func _ready() -> void:
 	_setup_tools_tabs()
 	approve_btn.text = "APROBAR"
 	reject_btn.text  = "RECHAZAR"
-	hold_btn.text    = "RETENER"
+	hold_btn.text    = "INSPECC."
 	hold_btn.tooltip_text = "Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior."
-	hold_btn.add_theme_font_size_override("font_size", 16)
+	hold_btn.add_theme_font_size_override("font_size", 13)
 	_connect_signals()
 	current_day = ControlDesk.day_to_load
 	_update_status_bar()
@@ -113,8 +119,8 @@ func _on_applicant_changed(applicant: Dictionary) -> void:
 	_last_decision_result = {}
 	var pos := queue.get_current_index() + 1
 	var total := queue.get_total()
-	panel_title.text = "SOLICITANTE %d / %d" % [pos, total]
-	applicant_name.text = applicant.get("name", "---")
+	panel_title.text = applicant.get("name", "---")
+	_update_status_bar()
 	applicant_origin.text = "Origen: " + applicant.get("origin", "---")
 	applicant_destination.text = "Destino: " + applicant.get("destination", "---")
 	applicant_purpose.text = "Motivo: " + applicant.get("purpose", "---")
@@ -129,7 +135,6 @@ func _on_applicant_changed(applicant: Dictionary) -> void:
 
 func _on_day_ended(total: int) -> void:
 	panel_title.text = "TURNO CERRADO"
-	applicant_name.text = "--- FIN DEL TURNO ---"
 	applicant_origin.text = "Procesados: %d / %d" % [total, applicants.size()]
 	applicant_destination.text = ""
 	applicant_purpose.text = ""
@@ -165,16 +170,18 @@ func _apply_theme() -> void:
 	_style_button(hold_btn, COLOR_HOLD)
 	_style_button(reject_btn, COLOR_REJECT)
 	_style_button(scanner_btn, COLOR_TOOL)
+	_style_button(_regs_btn, COLOR_TOOL)
 	_apply_labels_color(self)
 	_style_tab_buttons()
 
-func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg
-	style.border_color = border
-	style.set_border_width_all(1)
-	style.set_content_margin_all(8)
-	panel.add_theme_stylebox_override("panel", style)
+func _style_panel(panel: Control, bg: Color, border: Color) -> void:
+	if panel is PanelContainer:
+		var style := StyleBoxFlat.new()
+		style.bg_color = bg
+		style.border_color = border
+		style.set_border_width_all(1)
+		style.set_content_margin_all(8)
+		panel.add_theme_stylebox_override("panel", style)
 
 func _style_button(btn: Button, color: Color, texture_path: String = "") -> void:
 	var s_normal: StyleBox = _make_button_style(texture_path, color)
@@ -189,6 +196,10 @@ func _style_button(btn: Button, color: Color, texture_path: String = "") -> void
 	btn.add_theme_color_override("font_color", Color(0.9, 0.95, 0.9, 1))
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", Color(0.4, 0.45, 0.4, 1))
+	var s_focus: StyleBox = _make_button_style(texture_path, color.lightened(0.25))
+	btn.add_theme_stylebox_override("focus", s_focus)
+	btn.add_theme_color_override("font_pressed_color", Color(1.0, 1.0, 1.0, 1))
+	btn.add_theme_color_override("font_focus_color", Color(1.0, 1.0, 1.0, 1))
 
 func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
 	if path == "":
@@ -215,6 +226,24 @@ func _make_button_style(path: String, color: Color) -> StyleBox:
 	flat.set_content_margin_all(8)
 	return flat
 
+func _style_button_selected(btn: Button, color: Color) -> void:
+	var s := StyleBoxFlat.new()
+	s.bg_color = color.lightened(0.12)
+	s.border_color = Color(0.15, 0.45, 0.15, 1)
+	s.set_border_width_all(1)
+	s.set_content_margin_all(6)
+	btn.add_theme_stylebox_override("normal", s)
+	btn.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1))
+
+func _style_button_error(btn: Button) -> void:
+	var s := StyleBoxFlat.new()
+	s.bg_color = Color(0.45, 0.04, 0.04, 1)
+	s.border_color = Color(1.0, 0.2, 0.2, 1)
+	s.set_border_width_all(2)
+	s.set_content_margin_all(8)
+	btn.add_theme_stylebox_override("normal", s)
+	btn.add_theme_color_override("font_color", Color(1.0, 0.5, 0.5, 1))
+
 func _style_document_view(scanner_mode: bool) -> void:
 	_style_panel(_document_view, COLOR_PANEL_DARK, COLOR_BORDER)
 
@@ -233,6 +262,8 @@ func _connect_signals() -> void:
 	tab1.pressed.connect(func(): _show_doc_by_type("transit_pass", tab1))
 	tab2.pressed.connect(func(): _show_doc_by_type("bio_cert", tab2))
 	tab3.pressed.connect(func(): _show_doc_by_type(_tab3_doc_type, tab3))
+	_overlay_close_btn.pressed.connect(_close_overlay)
+	_regs_btn.pressed.connect(func(): _show_tools_tab("regs"))
 
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
@@ -261,14 +292,18 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _update_status_bar() -> void:
-	var current_date: String = day_data.get("current_date", "")
-	var date_str := ("  —  CICLO %s" % current_date) if current_date != "" else ""
-	day_label.text = "DIA %d%s" % [current_day, date_str]
+	var pos := queue.get_current_index() + 1 if queue != null else 0
+	var total := queue.get_total() if queue != null else 0
+	day_label.text = "DIA %d\n%d / %d" % [current_day, pos, total]
 	credits_label.text = "CREDITOS: %d" % credits
+	var acc := NarrativeStateSystem.get_accumulators()
+	var suspicion: float = acc.get("suspicion", 0.0)
+	_suspicion_bar.value = clamp(suspicion, 0.0, 100.0)
+	var has_alerts := alerts_list.text != "Sin irregularidades." and alerts_list.text != "--- Sin alertas ---"
+	_alert_icon.modulate = Color(1.0, 0.2, 0.2, 1) if has_alerts else Color(0.2, 0.6, 0.2, 1)
 
 func _reset_applicant_panel() -> void:
 	panel_title.text = "SOLICITANTE"
-	applicant_name.text = "--- EN ESPERA ---"
 	applicant_origin.text = "Origen: ---"
 	applicant_destination.text = "Destino: ---"
 	applicant_purpose.text = "Motivo: ---"
@@ -338,7 +373,7 @@ func _on_scanner_pressed() -> void:
 	SoundManager.play_scan(_audio)
 	await get_tree().create_timer(0.4).timeout
 	_show_scan_results()
-	scanner_btn.text = "[ ESCANER USADO ]"
+	scanner_btn.text = "E/"
 
 func _show_scan_results() -> void:
 	_style_document_view(true)
@@ -347,7 +382,7 @@ func _show_scan_results() -> void:
 	var risk: String = applicant.get("truth", {}).get("risk_level", "low")
 
 	var lines: Array = [
-		"=== INFORME DE ESCANER — UMBRAL 7 ===",
+		"INFORME DE ESCANER — UMBRAL 7",
 		"",
 		"SUJETO:  " + applicant.get("name", "?"),
 		"ORIGEN:  " + applicant.get("origin", "?"),
@@ -368,9 +403,7 @@ func _show_scan_results() -> void:
 
 	lines.append("")
 	lines.append(_risk_line(risk))
-	doc_content.text = "\n".join(lines)
-	applicant_vbox.visible = false
-	doc_content.visible = true
+	_show_overlay("INFORME ESCANER", "\n".join(lines))
 
 	var rule_alerts: String = alerts_list.text
 	var scanner_block: String = "\n".join(alert_texts)
@@ -383,7 +416,7 @@ func _show_scan_results() -> void:
 
 func _reset_scanner() -> void:
 	_scanner_used = false
-	scanner_btn.text = "[ ESCANER ] (E)"
+	scanner_btn.text = "[ E ]"
 	scanner_btn.disabled = false
 
 func _flag_description(flag: String) -> String:
@@ -439,6 +472,9 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 
 
 func _show_tab_solicitante() -> void:
+	_document_view.visible = true
+	_alerts_container.visible = false
+	_regs_container.visible = false
 	applicant_vbox.visible = true
 	doc_content.visible = false
 	_set_active_tab(_tab_solicitante)
@@ -446,6 +482,9 @@ func _show_tab_solicitante() -> void:
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	if not _applicant_docs.has(dtype):
 		return
+	_document_view.visible = true
+	_alerts_container.visible = false
+	_regs_container.visible = false
 	applicant_vbox.visible = false
 	doc_content.visible = true
 	_style_document_view(false)
@@ -453,25 +492,18 @@ func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	_render_document(_applicant_docs[dtype])
 
 func _set_active_tab(active_btn: Button) -> void:
-	var tabs := [_tab_solicitante, tab1, tab2, tab3]
+	var tabs := [_tab_solicitante, tab1, tab2, tab3, _tab_alertas]
 	for i in tabs.size():
 		if tabs[i] == active_btn:
 			_active_tab_index = i
 			break
-	for tab in tabs:
-		var is_active: bool = (tab == active_btn)
-		var s := StyleBoxFlat.new()
-		s.bg_color = Color(0.10, 0.22, 0.10, 1) if is_active else Color(0.05, 0.10, 0.05, 1)
-		s.border_color = COLOR_TEXT if is_active else COLOR_BORDER
-		s.set_border_width_all(2 if is_active else 1)
-		s.set_content_margin_all(6)
-		tab.add_theme_stylebox_override("normal", s)
-		tab.add_theme_color_override("font_color", COLOR_TEXT if is_active else COLOR_TEXT_DIM)
+	_style_tab_buttons()
+	_style_button_selected(active_btn, Color(0.10, 0.22, 0.10, 1))
 
 func _render_document(doc: Dictionary) -> void:
 	var label: String = doc.get("label", "DOCUMENTO")
 	var fields: Dictionary = doc.get("fields", {})
-	var lines: Array = ["=== %s ===" % label.to_upper(), ""]
+	var lines: Array = [label.to_upper(), ""]
 	for key in fields:
 		var k: String = str(key).replace("_", " ").to_upper()
 		lines.append("%s: %s" % [k, str(fields[key])])
@@ -503,18 +535,9 @@ func _flash_credits_label() -> void:
 # --- Sistema de preguntas ---
 
 func _setup_questions_area() -> void:
-	var sep := HSeparator.new()
-	applicant_vbox.add_child(sep)
-
-	var title := Label.new()
-	title.text = "PREGUNTAS"
-	title.add_theme_font_size_override("font_size", 11)
-	title.add_theme_color_override("font_color", COLOR_TEXT_DIM)
-	applicant_vbox.add_child(title)
-
 	_questions_container = VBoxContainer.new()
 	_questions_container.add_theme_constant_override("separation", 4)
-	applicant_vbox.add_child(_questions_container)
+	_question_buttons_area.add_child(_questions_container)
 
 func _reset_questions(applicant: Dictionary) -> void:
 	for child in _questions_container.get_children():
@@ -524,9 +547,9 @@ func _reset_questions(applicant: Dictionary) -> void:
 	var questions: Dictionary = applicant.get("questions", {})
 	var question_alerts: Dictionary = applicant.get("question_alerts", {})
 	var question_labels := {
-		"motivo": "[ ¿Cual es el motivo? ] (Q)",
-		"origen": "[ ¿De donde proviene? ] (Q)",
-		"carga":  "[ ¿Que lleva consigo? ] (Q)"
+		"motivo": "MOTIVO",
+		"origen": "ORIGEN",
+		"carga":  "CARGA"
 	}
 	for key in ["motivo", "origen", "carga"]:
 		if not questions.has(key):
@@ -562,14 +585,13 @@ func _style_question_button(btn: Button) -> void:
 	btn.add_theme_color_override("font_color", COLOR_TEXT)
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0, 1))
 	btn.add_theme_color_override("font_disabled_color", COLOR_TEXT_DIM)
-	btn.add_theme_font_size_override("font_size", 12)
+	btn.add_theme_font_size_override("font_size", 10)
 
 func _cycle_doc_tab() -> void:
-	var tabs := [tab1, tab2, tab3]
-	# _active_tab_index: 0=solicitante, 1=tab1, 2=tab2, 3=tab3 — restar 1 para indexar docs
-	var doc_idx := _active_tab_index - 1
+	var tabs := [_tab_solicitante, tab1, tab2, tab3, _tab_alertas]
+	var next_start := (_active_tab_index + 1) % tabs.size()
 	for i in tabs.size():
-		var idx := (doc_idx + 1 + i) % tabs.size()
+		var idx := (next_start + i) % tabs.size()
 		if not tabs[idx].disabled:
 			tabs[idx].pressed.emit()
 			return
@@ -754,23 +776,20 @@ func _update_debug_panel(applicant: Dictionary) -> void:
 func _setup_tools_tabs() -> void:
 	_show_tools_tab("alertas")
 	_tab_alertas.pressed.connect(func(): _show_tools_tab("alertas"))
-	_tab_regs.pressed.connect(func():    _show_tools_tab("regs"))
 
 func _show_tools_tab(tab: String) -> void:
+	_document_view.visible    = false
 	_alerts_container.visible = (tab == "alertas")
+	if tab == "regs":
+		var regs_lines: Array = []
+		for child in _regs_container.get_children():
+			if child is Label:
+				regs_lines.append(child.text)
+		_show_overlay("REGLAMENTO ACTIVO", "\n\n".join(regs_lines))
+		return
 	_regs_container.visible   = (tab == "regs")
-	_style_tools_tab_active(_tab_alertas, tab == "alertas")
-	_style_tools_tab_active(_tab_regs,    tab == "regs")
+	_set_active_tab(_tab_alertas)
 
-func _style_tools_tab_active(btn: Button, active: bool) -> void:
-	var s := StyleBoxFlat.new()
-	s.bg_color    = Color(0.08, 0.18, 0.08, 1) if active else Color(0.03, 0.06, 0.03, 1)
-	s.border_color = COLOR_TEXT if active else COLOR_BORDER
-	s.set_border_width_all(1)
-	s.set_content_margin_all(4)
-	btn.add_theme_stylebox_override("normal", s)
-	btn.add_theme_stylebox_override("hover",  s)
-	btn.add_theme_color_override("font_color", COLOR_TEXT if active else COLOR_TEXT_DIM)
 
 func _jump_to_day(day: int) -> void:
 	NarrativeStateSystem.reset()
@@ -789,8 +808,16 @@ func _build_regulations_section() -> void:
 		lbl.add_theme_color_override("font_color", COLOR_TEXT_DIM)
 		_regs_container.add_child(lbl)
 
+func _show_overlay(title: String, content: String) -> void:
+	_overlay_title.text = title
+	_overlay_content.text = content
+	_overlay_panel.visible = true
+
+func _close_overlay() -> void:
+	_overlay_panel.visible = false
+
 func _style_tab_buttons() -> void:
-	for tab in [_tab_solicitante, tab1, tab2, tab3]:
+	for tab in [_tab_solicitante, tab1, tab2, tab3, _tab_alertas]:
 		var s := StyleBoxFlat.new()
 		s.bg_color = Color(0.05, 0.10, 0.05, 1)
 		s.border_color = COLOR_BORDER
