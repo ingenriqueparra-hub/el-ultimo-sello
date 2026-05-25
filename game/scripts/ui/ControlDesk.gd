@@ -3,16 +3,11 @@ extends Control
 
 static var day_to_load: int = 1
 
-var _focused_screen: int = 2  # 1=solicitante 2=documentos 3=herramientas
+var _focused_screen: int = 0  # inicializado por _focus_screen() en _ready
 var _cockpit_frame: CockpitFrame = null
 
 # Posiciones de panel por vista: [face_left, face_center, face_right]
 # Cada vista: [applicant_rect, docs_rect, tools_rect]  — coincide con las screen areas de CockpitFrame
-const PANEL_RECTS := [
-	[ Rect2(22,50,700,580),  Rect2(762,55,284,575), Rect2(1082,98,176,525) ],  # izquierda
-	[ Rect2(32,75,316,450),  Rect2(410,54,460,515), Rect2(931,75,314,450)  ],  # centro
-	[ Rect2(20,98,176,525),  Rect2(234,55,284,575), Rect2(558,50,696,580)  ],  # derecha
-]
 
 const COLOR_BG := Color(0.03, 0.05, 0.03, 1)
 const COLOR_PANEL := Color(0.06, 0.10, 0.06, 1)
@@ -27,6 +22,12 @@ const COLOR_TOOL := Color(0.05, 0.20, 0.30, 1)
 const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
 const ASSET_TERMINAL_BG    := "res://assets/ui/cockpit/cockpit_three_screens_pc.png"
+const ASSET_COCKPIT_LEFT   := "res://assets/ui/cockpit/focus_left.png"
+const ASSET_COCKPIT_CENTER := "res://assets/ui/cockpit/focus_center.png"
+const ASSET_COCKPIT_RIGHT  := "res://assets/ui/cockpit/focus_right.png"
+
+# Zona fija donde se muestra el panel activo — igual en las 3 imágenes de fondo
+const PANEL_ZONE := Rect2(409, 152, 462, 378)
 const ASSET_SCANLINES := "res://assets/ui/overlays/scanline_overlay.png"
 const ASSET_GRIME := "res://assets/ui/overlays/grime_overlay.png"
 const ASSET_CRT_WEAR := "res://assets/ui/overlays/crt_wear_overlay.png"
@@ -92,6 +93,11 @@ var _last_violations: Array = []
 var _last_decision_result: Dictionary = {}
 var _debug_panel: PanelContainer
 var _debug_label: Label
+var _bg_current: TextureRect = null
+var _bg_next: TextureRect = null
+var _swipe_start: Vector2 = Vector2.ZERO
+var _swipe_active: bool = false
+var _swipe_threshold: float = 80.0
 
 func _ready() -> void:
 	_install_visual_layers()
@@ -106,6 +112,9 @@ func _ready() -> void:
 	tab3.text += " (W)"
 	hold_btn.tooltip_text = "Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior."
 	hold_btn.add_theme_font_size_override("font_size", 15)
+	approve_btn.add_theme_font_size_override("font_size", 11)
+	reject_btn.add_theme_font_size_override("font_size", 11)
+	hold_btn.add_theme_font_size_override("font_size", 11)
 	_connect_signals()
 	current_day = ControlDesk.day_to_load
 	_update_status_bar()
@@ -115,6 +124,9 @@ func _ready() -> void:
 	_build_debug_panel()
 	NarrativeStateSystem.snapshot()
 	_load_day_data()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_focus_screen(2)
 
 func _load_day_data() -> void:
 	day_data = DataLoader.load_day(current_day)
@@ -180,31 +192,77 @@ func _on_day_ended(total: int) -> void:
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
 func _position_panels_on_cockpit() -> void:
-	# Reparenta los paneles directamente al root Control con posición absoluta.
-	# Debe llamarse DESPUÉS de _apply_theme() para que los $VBox/... paths sean válidos.
 	var main_area := $VBox/MainArea
 	main_area.remove_child(_panel_applicant)
 	main_area.remove_child(_panel_docs)
 	main_area.remove_child(_panel_tools)
+
+	_panel_applicant.size_flags_vertical = 0
+	_panel_docs.size_flags_vertical      = 0
+	_panel_tools.size_flags_vertical     = 0
+
 	_vbox.remove_child(_panel_status)
 	_vbox.remove_child(_panel_decisions)
 	_vbox.visible = false
+
+	# Fondos apilados para crossfade
+	_bg_current = TextureRect.new()
+	_bg_current.name = "BgCurrent"
+	_bg_current.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bg_current.z_index = -1
+	_bg_current.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	var center_tex := ResourceLoader.load(ASSET_COCKPIT_CENTER) as Texture2D
+	if center_tex == null:
+		push_error("[ControlDesk] No se encontró: " + ASSET_COCKPIT_CENTER)
+	else:
+		_bg_current.texture = center_tex
+	add_child(_bg_current)
+	_bg_current.custom_minimum_size = Vector2(1280, 720)
+	_bg_current.position = Vector2.ZERO
+	_bg_current.size = Vector2(1280, 720)
+
+	_bg_next = TextureRect.new()
+	_bg_next.name = "BgNext"
+	_bg_next.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bg_next.z_index = -1
+	_bg_next.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_bg_next.visible = false
+	add_child(_bg_next)
+	_bg_next.custom_minimum_size = Vector2(1280, 720)
+	_bg_next.position = Vector2.ZERO
+	_bg_next.size = Vector2(1280, 720)
+
+	if _cockpit_frame != null:
+		_cockpit_frame.visible = false
+	var bg_rect := get_node_or_null("BG")
+	if bg_rect:
+		bg_rect.visible = false
+
 	add_child(_panel_status)
 	add_child(_panel_applicant)
 	add_child(_panel_docs)
 	add_child(_panel_tools)
 	add_child(_panel_decisions)
-	_place(_panel_status,    0, 0, 1280, 38)
-	_place(_panel_decisions, 300, 608, 680, 72)
-	# Posición inicial: vista central (índice 1)
-	var center := PANEL_RECTS[1]
-	_place(_panel_applicant, int(center[0].position.x), int(center[0].position.y),
-		int(center[0].size.x), int(center[0].size.y))
-	_place(_panel_docs,      int(center[1].position.x), int(center[1].position.y),
-		int(center[1].size.x), int(center[1].size.y))
-	_place(_panel_tools,     int(center[2].position.x), int(center[2].position.y),
-		int(center[2].size.x), int(center[2].size.y))
-	_focus_screen(2)
+
+	var dw := 460
+	var dx := int(PANEL_ZONE.position.x + (PANEL_ZONE.size.x - dw) / 2.0)
+	_place(_panel_decisions, dx, 630, dw, 72)
+	_place(_panel_status, 409, 620, 462, 38)
+
+	var vp := get_viewport_rect().size
+	if vp.x < 600:
+		var scale := vp.x / (PANEL_ZONE.size.x + 20.0)
+		var offset_x := -(PANEL_ZONE.position.x * scale) + (vp.x - PANEL_ZONE.size.x * scale) / 2.0
+		var offset_y := 0.0
+		get_viewport().canvas_transform = Transform2D(0, Vector2(scale, scale), 0, Vector2(offset_x, offset_y))
+
+	# Paneles ocultos — _focus_screen(2) los posiciona tras await en _ready()
+	_panel_applicant.visible = false
+	_panel_docs.visible      = false
+	_panel_tools.visible     = false
+	_panel_applicant.custom_minimum_size = Vector2.ZERO
+	_panel_docs.custom_minimum_size      = Vector2.ZERO
+	_panel_tools.custom_minimum_size     = Vector2.ZERO
 
 func _place(ctrl: Control, x: int, y: int, w: int, h: int) -> void:
 	ctrl.set_anchors_preset(Control.PRESET_TOP_LEFT)
@@ -261,14 +319,25 @@ func _install_visual_layers() -> void:
 	_cockpit_frame = CockpitFrame.new()
 	add_child(_cockpit_frame)
 	move_child(_cockpit_frame, 0)
-	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.20, "TerminalWatermark")
-	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay")
-	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay")
-	_add_full_rect_texture(ASSET_GRIME, 92, 0.24, "GrimeOverlay")
-	_add_full_rect_texture(ASSET_GLASS, 93, 0.34, "GlassOverlay")
 
-func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String) -> void:
-	if get_node_or_null(node_name) != null:
+	var overlay_container := Control.new()
+	overlay_container.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	overlay_container.position = Vector2(409, 152)
+	overlay_container.size = Vector2(462, 378)
+	overlay_container.clip_contents = true
+	overlay_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay_container.z_index = 90
+	add_child(overlay_container)
+
+	_add_full_rect_texture(ASSET_WATERMARK, 5, 0.20, "TerminalWatermark", overlay_container)
+	_add_full_rect_texture(ASSET_SCANLINES, 90, 0.10, "ScanlineOverlay", overlay_container)
+	_add_full_rect_texture(ASSET_CRT_WEAR, 91, 0.12, "CrtWearOverlay", overlay_container)
+	_add_full_rect_texture(ASSET_GRIME, 92, 0.24, "GrimeOverlay", overlay_container)
+	_add_full_rect_texture(ASSET_GLASS, 93, 0.34, "GlassOverlay", overlay_container)
+
+func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: String, parent: Control = null) -> void:
+	var target: Control = parent if parent != null else self
+	if target.get_node_or_null(node_name) != null:
 		return
 	var texture := load(path)
 	if texture == null:
@@ -280,9 +349,14 @@ func _add_full_rect_texture(path: String, z: int, alpha: float, node_name: Strin
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rect.z_index = z
 	rect.modulate = Color(1, 1, 1, alpha)
-	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(rect)
-	if node_name == "TerminalBackground":
+	if parent != null:
+		rect.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		rect.position = Vector2.ZERO
+		rect.size = Vector2(462, 378)
+	else:
+		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	target.add_child(rect)
+	if parent == null and node_name == "TerminalBackground":
 		move_child(rect, 1)
 
 func _make_texture_style(path: String, content_margin: int, texture_margin: int) -> StyleBoxTexture:
@@ -332,6 +406,34 @@ func _connect_signals() -> void:
 	tab3.pressed.connect(func(): _show_doc_by_type(_tab3_doc_type, tab3))
 
 func _input(event: InputEvent) -> void:
+	# TOUCH — swipe horizontal
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			_swipe_start = event.position
+			_swipe_active = true
+		else:
+			if _swipe_active:
+				var delta: float = event.position.x - _swipe_start.x
+				if abs(delta) > _swipe_threshold:
+					if delta < 0 and _focused_screen < 3:
+						_focus_screen(_focused_screen + 1)
+					elif delta > 0 and _focused_screen > 1:
+						_focus_screen(_focused_screen - 1)
+			_swipe_active = false
+		return
+
+	if event is InputEventScreenDrag:
+		if _swipe_active:
+			var drag_x: float = event.position.x - _swipe_start.x
+			var vp := get_viewport_rect().size
+			if vp.x < 600:
+				var scale: float = vp.x / (PANEL_ZONE.size.x + 20.0)
+				var base_ox: float = -(PANEL_ZONE.position.x * scale) + (vp.x - PANEL_ZONE.size.x * scale) / 2.0
+				var offset_x: float = base_ox + drag_x * 0.3
+				var offset_y: float = vp.y - (720.0 * scale)
+				get_viewport().canvas_transform = Transform2D(0, Vector2(scale, scale), 0, Vector2(offset_x, offset_y))
+		return
+
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var handled := true
@@ -364,23 +466,54 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _focus_screen(screen: int) -> void:
-	var prev := _focused_screen
+	if screen == _focused_screen:
+		return
 	_focused_screen = screen
-	const DIM  := Color(0.55, 0.65, 0.55, 0.85)
-	const FULL := Color(1.00, 1.00, 1.00, 1.00)
-	const DURATION := 0.38
+
+	# Imagen de fondo según pantalla
+	var images := [ASSET_COCKPIT_LEFT, ASSET_COCKPIT_CENTER, ASSET_COCKPIT_RIGHT]
+	var new_tex := ResourceLoader.load(images[screen - 1]) as Texture2D
+	if new_tex == null:
+		push_error("[ControlDesk] Textura no encontrada: " + images[screen - 1])
+
+	var vp2 := get_viewport_rect().size
+	if vp2.x < 600:
+		# Móvil: cambio instantáneo sin crossfade
+		if _bg_current != null and new_tex != null:
+			_bg_current.texture = new_tex
+	else:
+		# PC: crossfade normal
+		if new_tex != null and _bg_next != null:
+			_bg_next.texture = new_tex
+			_bg_next.modulate.a = 0.0
+			_bg_next.visible = true
+			var tween := create_tween()
+			tween.tween_property(_bg_next, "modulate:a", 1.0, 0.15)
+			tween.tween_callback(func():
+				if _bg_current != null:
+					_bg_current.texture = new_tex
+				_bg_next.visible = false
+			)
+
+	# Canvas transform para móvil
+	var vp := get_viewport_rect().size
+	if vp.x < 600:
+		var scale: float = vp.x / (PANEL_ZONE.size.x + 20.0)
+		var offset_x: float = -(PANEL_ZONE.position.x * scale) + (vp.x - PANEL_ZONE.size.x * scale) / 2.0
+		var offset_y: float = vp.y - (720.0 * scale)
+		get_viewport().canvas_transform = Transform2D(0, Vector2(scale, scale), 0, Vector2(offset_x, offset_y))
+
+	# Mostrar solo el panel activo en la zona fija
+	var zone := PANEL_ZONE
 	var panels := [_panel_applicant, _panel_docs, _panel_tools]
-	var rects: Array = PANEL_RECTS[screen - 1]
 	for i in 3:
 		var p: Control = panels[i]
-		var r: Rect2   = rects[i]
-		var t := create_tween().set_parallel(true)
-		t.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		t.tween_property(p, "position", r.position, DURATION)
-		t.tween_property(p, "size",     r.size,     DURATION)
-		t.tween_property(p, "modulate", FULL if i + 1 == screen else DIM, DURATION * 0.6)
-	if prev != screen and _cockpit_frame != null:
-		_cockpit_frame.set_focus(screen - 1)
+		p.visible = (i + 1 == screen)
+		if i + 1 == screen:
+			_place(p, int(zone.position.x), int(zone.position.y),
+				int(zone.size.x), int(zone.size.y))
+			p.size = zone.size
+			p.position = zone.position
 
 func _update_status_bar() -> void:
 	var current_date: String = day_data.get("current_date", "")
