@@ -166,6 +166,7 @@ text = "DIALOGO"
 
 [node name="DialogueText" type="Label" parent="VBox/DialogueArea/DialogueVBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 13
 text = "Esperando al proximo solicitante."
 autowrap_mode = 3
@@ -233,27 +234,30 @@ layout_mode = 2
 alignment = 1
 
 [node name="ApproveButton" type="Button" parent="VBox/DecisionBar/DecisionHBox"]
-custom_minimum_size = Vector2(220, 52)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "APROBAR"
 
 [node name="Spacer1" type="Control" parent="VBox/DecisionBar/DecisionHBox"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="HoldButton" type="Button" parent="VBox/DecisionBar/DecisionHBox"]
-custom_minimum_size = Vector2(220, 52)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "RETENER"
 
 [node name="Spacer2" type="Control" parent="VBox/DecisionBar/DecisionHBox"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="RejectButton" type="Button" parent="VBox/DecisionBar/DecisionHBox"]
-custom_minimum_size = Vector2(220, 52)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 19
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
 text = "RECHAZAR"

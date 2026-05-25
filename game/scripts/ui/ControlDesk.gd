@@ -70,14 +70,11 @@ var _debug_label: Label
 func _ready() -> void:
 	_apply_theme()
 	_setup_tools_tabs()
-	approve_btn.text = "APROBAR (A)"
-	reject_btn.text  = "RECHAZAR (D)"
-	hold_btn.text    = "RETENER (S)\nEnviar a revision"
-	tab1.text += " (W)"
-	tab2.text += " (W)"
-	tab3.text += " (W)"
+	approve_btn.text = "APROBAR"
+	reject_btn.text  = "RECHAZAR"
+	hold_btn.text    = "RETENER"
 	hold_btn.tooltip_text = "Usar cuando el expediente requiera verificacion adicional, custodia temporal o revision superior."
-	hold_btn.add_theme_font_size_override("font_size", 15)
+	hold_btn.add_theme_font_size_override("font_size", 16)
 	_connect_signals()
 	current_day = ControlDesk.day_to_load
 	_update_status_bar()
