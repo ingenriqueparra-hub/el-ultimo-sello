@@ -3,12 +3,6 @@ extends Control
 
 static var day_to_load: int = 1
 
-const PANEL_RECTS := [
-	Rect2(32,  75, 316, 450),  # solicitante
-	Rect2(410, 54, 460, 515),  # documentos
-	Rect2(931, 75, 314, 450),  # herramientas
-]
-
 const COLOR_BG := Color(0.03, 0.05, 0.03, 1)
 const COLOR_PANEL := Color(0.06, 0.10, 0.06, 1)
 const COLOR_PANEL_DARK := Color(0.02, 0.04, 0.02, 1)
@@ -23,34 +17,33 @@ const COLOR_QUESTION := Color(0.04, 0.14, 0.22, 1)
 
 @onready var day_label: Label = $VBox/StatusBar/StatusHBox/DayLabel
 @onready var credits_label: Label = $VBox/StatusBar/StatusHBox/CreditsLabel
-@onready var panel_title: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/PanelTitle
-@onready var applicant_name: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/ApplicantName
-@onready var applicant_origin: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/ApplicantOrigin
-@onready var applicant_destination: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/ApplicantDestination
-@onready var applicant_purpose: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/ApplicantPurpose
-@onready var dialogue_text: Label = $VBox/MainArea/ApplicantPanel/ApplicantVBox/DialogueText
-@onready var doc_content: Label = $VBox/MainArea/DocumentArea/DocumentVBox/DocumentView/ScrollContainer/DocContent
-@onready var alerts_list: Label = $VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer/ScrollContainer/AlertsList
-@onready var _tab_alertas: Button = $VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox/TabAlertas
-@onready var _tab_regs: Button = $VBox/MainArea/ToolsPanel/ToolsVBox/ToolsTabHBox/TabRegs
-@onready var _alerts_container: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox/AlertsContainer
-@onready var _regs_container: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox/RegsContainer
+@onready var panel_title: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/PanelTitle
+@onready var applicant_name: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantName
+@onready var applicant_origin: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantOrigin
+@onready var applicant_destination: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantDestination
+@onready var applicant_purpose: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox/ApplicantPurpose
+@onready var dialogue_text: Label = $VBox/DialogueArea/DialogueVBox/DialogueText
+@onready var doc_content: Label = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/DocContent
+@onready var alerts_list: Label = $VBox/ConsoleArea/ConsoleVBox/AlertsContainer/ScrollContainer/AlertsList
+@onready var _tab_alertas: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ToolsTabHBox/TabAlertas
+@onready var _tab_regs: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ToolsTabHBox/TabRegs
+@onready var _alerts_container: VBoxContainer = $VBox/ConsoleArea/ConsoleVBox/AlertsContainer
+@onready var _regs_container: VBoxContainer = $VBox/ConsoleArea/ConsoleVBox/RegsContainer
 @onready var approve_btn: Button = $VBox/DecisionBar/DecisionHBox/ApproveButton
 @onready var hold_btn: Button = $VBox/DecisionBar/DecisionHBox/HoldButton
 @onready var reject_btn: Button = $VBox/DecisionBar/DecisionHBox/RejectButton
-@onready var scanner_btn: Button = $VBox/MainArea/ToolsPanel/ToolsVBox/ScannerButton
-@onready var tab1: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab1
-@onready var tab2: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab2
-@onready var tab3: Button = $VBox/MainArea/DocumentArea/DocumentVBox/DocTabs/Tab3
-@onready var applicant_vbox: VBoxContainer = $VBox/MainArea/ApplicantPanel/ApplicantVBox
-@onready var tools_vbox: VBoxContainer = $VBox/MainArea/ToolsPanel/ToolsVBox
-@onready var _document_view: PanelContainer = $VBox/MainArea/DocumentArea/DocumentVBox/DocumentView
+@onready var scanner_btn: Button = $VBox/ConsoleArea/ConsoleVBox/ConsoleTopHBox/ScannerButton
+@onready var tab1: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab1
+@onready var tab2: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab2
+@onready var tab3: Button = $VBox/DossierPanel/DossierVBox/DocTabs/Tab3
+@onready var _tab_solicitante: Button = $VBox/DossierPanel/DossierVBox/DocTabs/TabSolicitante
+@onready var applicant_vbox: VBoxContainer = $VBox/DossierPanel/DossierVBox/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox
+@onready var _document_view: PanelContainer = $VBox/DossierPanel/DossierVBox/DocumentView
 @onready var _panel_status:    PanelContainer = $VBox/StatusBar
-@onready var _panel_applicant: PanelContainer = $VBox/MainArea/ApplicantPanel
-@onready var _panel_docs:      PanelContainer = $VBox/MainArea/DocumentArea
-@onready var _panel_tools:     PanelContainer = $VBox/MainArea/ToolsPanel
+@onready var _panel_dossier:   PanelContainer = $VBox/DossierPanel
+@onready var _panel_dialogue:  PanelContainer = $VBox/DialogueArea
+@onready var _panel_console:   PanelContainer = $VBox/ConsoleArea
 @onready var _panel_decisions: PanelContainer = $VBox/DecisionBar
-@onready var _vbox: VBoxContainer             = $VBox
 
 var current_day: int = 1
 var credits: int = 50
@@ -76,7 +69,6 @@ var _debug_label: Label
 
 func _ready() -> void:
 	_apply_theme()
-	_position_panels_on_cockpit()
 	_setup_tools_tabs()
 	approve_btn.text = "APROBAR (A)"
 	reject_btn.text  = "RECHAZAR (D)"
@@ -159,32 +151,6 @@ func _on_day_ended(total: int) -> void:
 	DayReport.pending_summary = summary
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
-func _position_panels_on_cockpit() -> void:
-	var main_area := $VBox/MainArea
-	main_area.remove_child(_panel_applicant)
-	main_area.remove_child(_panel_docs)
-	main_area.remove_child(_panel_tools)
-	_vbox.remove_child(_panel_status)
-	_vbox.remove_child(_panel_decisions)
-	_vbox.visible = false
-	add_child(_panel_status)
-	add_child(_panel_applicant)
-	add_child(_panel_docs)
-	add_child(_panel_tools)
-	add_child(_panel_decisions)
-	_place(_panel_status,    0, 0, 1280, 38)
-	_place(_panel_decisions, 300, 608, 680, 72)
-	_place(_panel_applicant, int(PANEL_RECTS[0].position.x), int(PANEL_RECTS[0].position.y),
-		int(PANEL_RECTS[0].size.x), int(PANEL_RECTS[0].size.y))
-	_place(_panel_docs,      int(PANEL_RECTS[1].position.x), int(PANEL_RECTS[1].position.y),
-		int(PANEL_RECTS[1].size.x), int(PANEL_RECTS[1].size.y))
-	_place(_panel_tools,     int(PANEL_RECTS[2].position.x), int(PANEL_RECTS[2].position.y),
-		int(PANEL_RECTS[2].size.x), int(PANEL_RECTS[2].size.y))
-
-func _place(ctrl: Control, x: int, y: int, w: int, h: int) -> void:
-	ctrl.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	ctrl.set_position(Vector2(x, y))
-	ctrl.set_size(Vector2(w, h))
 
 func _set_decision_buttons_enabled(enabled: bool) -> void:
 	approve_btn.disabled = not enabled
@@ -193,9 +159,9 @@ func _set_decision_buttons_enabled(enabled: bool) -> void:
 
 func _apply_theme() -> void:
 	_style_panel(_panel_status,    Color(0.02, 0.04, 0.02, 0.75), COLOR_BORDER)
-	_style_panel(_panel_applicant, Color(0, 0, 0, 0), Color(0, 0, 0, 0))
-	_style_panel(_panel_docs,      Color(0, 0, 0, 0), Color(0, 0, 0, 0))
-	_style_panel(_panel_tools,     Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_dossier,   Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_dialogue,  Color(0, 0, 0, 0), Color(0, 0, 0, 0))
+	_style_panel(_panel_console,   Color(0, 0, 0, 0), Color(0, 0, 0, 0))
 	_style_panel(_panel_decisions, Color(0, 0, 0, 0), Color(0, 0, 0, 0))
 	_style_document_view(false)
 	_style_button(approve_btn, COLOR_APPROVE)
@@ -266,6 +232,7 @@ func _connect_signals() -> void:
 	hold_btn.pressed.connect(_on_hold_pressed)
 	reject_btn.pressed.connect(_on_reject_pressed)
 	scanner_btn.pressed.connect(_on_scanner_pressed)
+	_tab_solicitante.pressed.connect(_show_tab_solicitante)
 	tab1.pressed.connect(func(): _show_doc_by_type("transit_pass", tab1))
 	tab2.pressed.connect(func(): _show_doc_by_type("bio_cert", tab2))
 	tab3.pressed.connect(func(): _show_doc_by_type(_tab3_doc_type, tab3))
@@ -311,6 +278,8 @@ func _reset_applicant_panel() -> void:
 	dialogue_text.text = "Cargando turno..."
 	doc_content.text = "[ Sin documento activo ]"
 	alerts_list.text = "--- Sin alertas ---"
+	applicant_vbox.visible = true
+	doc_content.visible = false
 	_set_decision_buttons_enabled(false)
 
 func _on_approve_pressed() -> void:
@@ -347,6 +316,8 @@ func _on_decision_recorded(result: Dictionary) -> void:
 		lines.append("")
 		lines.append("Penalizacion: %d creditos" % result["credit_delta"])
 	doc_content.text = "\n".join(lines)
+	applicant_vbox.visible = false
+	doc_content.visible = true
 	_last_decision_result = result
 	if _debug_panel != null and _debug_panel.visible:
 		_update_debug_panel(_current_applicant)
@@ -401,6 +372,8 @@ func _show_scan_results() -> void:
 	lines.append("")
 	lines.append(_risk_line(risk))
 	doc_content.text = "\n".join(lines)
+	applicant_vbox.visible = false
+	doc_content.visible = true
 
 	var rule_alerts: String = alerts_list.text
 	var scanner_block: String = "\n".join(alert_texts)
@@ -465,26 +438,25 @@ func _load_applicant_documents(applicant: Dictionary) -> void:
 			_tab3_doc_type = dtype
 			break
 	tab3.disabled = _tab3_doc_type == ""
-	# Mostrar primer documento disponible
-	if _applicant_docs.has("transit_pass"):
-		_show_doc_by_type("transit_pass", tab1)
-	elif _applicant_docs.has("bio_cert"):
-		_show_doc_by_type("bio_cert", tab2)
-	elif _tab3_doc_type != "":
-		_show_doc_by_type(_tab3_doc_type, tab3)
-	else:
-		doc_content.text = "[ Sin documentos ]"
+	_show_tab_solicitante()
 
+
+func _show_tab_solicitante() -> void:
+	applicant_vbox.visible = true
+	doc_content.visible = false
+	_set_active_tab(_tab_solicitante)
 
 func _show_doc_by_type(dtype: String, active_btn: Button) -> void:
 	if not _applicant_docs.has(dtype):
 		return
+	applicant_vbox.visible = false
+	doc_content.visible = true
 	_style_document_view(false)
 	_set_active_tab(active_btn)
 	_render_document(_applicant_docs[dtype])
 
 func _set_active_tab(active_btn: Button) -> void:
-	var tabs := [tab1, tab2, tab3]
+	var tabs := [_tab_solicitante, tab1, tab2, tab3]
 	for i in tabs.size():
 		if tabs[i] == active_btn:
 			_active_tab_index = i
@@ -597,8 +569,10 @@ func _style_question_button(btn: Button) -> void:
 
 func _cycle_doc_tab() -> void:
 	var tabs := [tab1, tab2, tab3]
+	# _active_tab_index: 0=solicitante, 1=tab1, 2=tab2, 3=tab3 — restar 1 para indexar docs
+	var doc_idx := _active_tab_index - 1
 	for i in tabs.size():
-		var idx := (_active_tab_index + 1 + i) % tabs.size()
+		var idx := (doc_idx + 1 + i) % tabs.size()
 		if not tabs[idx].disabled:
 			tabs[idx].pressed.emit()
 			return
@@ -819,7 +793,7 @@ func _build_regulations_section() -> void:
 		_regs_container.add_child(lbl)
 
 func _style_tab_buttons() -> void:
-	for tab in [tab1, tab2, tab3]:
+	for tab in [_tab_solicitante, tab1, tab2, tab3]:
 		var s := StyleBoxFlat.new()
 		s.bg_color = Color(0.05, 0.10, 0.05, 1)
 		s.border_color = COLOR_BORDER
