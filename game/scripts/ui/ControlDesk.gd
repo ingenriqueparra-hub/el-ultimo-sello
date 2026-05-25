@@ -3,15 +3,12 @@ extends Control
 
 static var day_to_load: int = 1
 
-var _focused_screen: int = 2  # 1=solicitante 2=documentos 3=herramientas
 var _cockpit_frame: CockpitFrame = null
 
-# Posiciones de panel por vista: [face_left, face_center, face_right]
-# Cada vista: [applicant_rect, docs_rect, tools_rect]  — coincide con las screen areas de CockpitFrame
 const PANEL_RECTS := [
-	[ Rect2(22,50,700,580),  Rect2(762,55,284,575), Rect2(1082,98,176,525) ],  # izquierda
-	[ Rect2(32,75,316,450),  Rect2(410,54,460,515), Rect2(931,75,314,450)  ],  # centro
-	[ Rect2(20,98,176,525),  Rect2(234,55,284,575), Rect2(558,50,696,580)  ],  # derecha
+	Rect2(32,  75, 316, 450),  # solicitante
+	Rect2(410, 54, 460, 515),  # documentos
+	Rect2(931, 75, 314, 450),  # herramientas
 ]
 
 const COLOR_BG := Color(0.03, 0.05, 0.03, 1)
@@ -166,8 +163,6 @@ func _on_day_ended(total: int) -> void:
 	get_tree().change_scene_to_file("res://scenes/main/DayReport.tscn")
 
 func _position_panels_on_cockpit() -> void:
-	# Reparenta los paneles directamente al root Control con posición absoluta.
-	# Debe llamarse DESPUÉS de _apply_theme() para que los $VBox/... paths sean válidos.
 	var main_area := $VBox/MainArea
 	main_area.remove_child(_panel_applicant)
 	main_area.remove_child(_panel_docs)
@@ -182,15 +177,12 @@ func _position_panels_on_cockpit() -> void:
 	add_child(_panel_decisions)
 	_place(_panel_status,    0, 0, 1280, 38)
 	_place(_panel_decisions, 300, 608, 680, 72)
-	# Posición inicial: vista central (índice 1)
-	var center := PANEL_RECTS[1]
-	_place(_panel_applicant, int(center[0].position.x), int(center[0].position.y),
-		int(center[0].size.x), int(center[0].size.y))
-	_place(_panel_docs,      int(center[1].position.x), int(center[1].position.y),
-		int(center[1].size.x), int(center[1].size.y))
-	_place(_panel_tools,     int(center[2].position.x), int(center[2].position.y),
-		int(center[2].size.x), int(center[2].size.y))
-	_focus_screen(2)
+	_place(_panel_applicant, int(PANEL_RECTS[0].position.x), int(PANEL_RECTS[0].position.y),
+		int(PANEL_RECTS[0].size.x), int(PANEL_RECTS[0].size.y))
+	_place(_panel_docs,      int(PANEL_RECTS[1].position.x), int(PANEL_RECTS[1].position.y),
+		int(PANEL_RECTS[1].size.x), int(PANEL_RECTS[1].size.y))
+	_place(_panel_tools,     int(PANEL_RECTS[2].position.x), int(PANEL_RECTS[2].position.y),
+		int(PANEL_RECTS[2].size.x), int(PANEL_RECTS[2].size.y))
 
 func _place(ctrl: Control, x: int, y: int, w: int, h: int) -> void:
 	ctrl.set_anchors_preset(Control.PRESET_TOP_LEFT)
@@ -326,35 +318,10 @@ func _input(event: InputEvent) -> void:
 			_cycle_doc_tab()
 		KEY_Q:
 			_press_next_question()
-		KEY_1:
-			_focus_screen(1)
-		KEY_2:
-			_focus_screen(2)
-		KEY_3:
-			_focus_screen(3)
 		_:
 			handled = false
 	if handled:
 		get_viewport().set_input_as_handled()
-
-func _focus_screen(screen: int) -> void:
-	var prev := _focused_screen
-	_focused_screen = screen
-	const DIM  := Color(0.55, 0.65, 0.55, 0.85)
-	const FULL := Color(1.00, 1.00, 1.00, 1.00)
-	const DURATION := 0.38
-	var panels := [_panel_applicant, _panel_docs, _panel_tools]
-	var rects: Array = PANEL_RECTS[screen - 1]
-	for i in 3:
-		var p: Control = panels[i]
-		var r: Rect2   = rects[i]
-		var t := create_tween().set_parallel(true)
-		t.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		t.tween_property(p, "position", r.position, DURATION)
-		t.tween_property(p, "size",     r.size,     DURATION)
-		t.tween_property(p, "modulate", FULL if i + 1 == screen else DIM, DURATION * 0.6)
-	if prev != screen and _cockpit_frame != null:
-		_cockpit_frame.set_focus(screen - 1)
 
 func _update_status_bar() -> void:
 	var current_date: String = day_data.get("current_date", "")
