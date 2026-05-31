@@ -1,0 +1,18 @@
+{
+  "day": 5,
+  "title": "Umbral 7 — Quinto Turno de Control",
+  "intro": "COMUNICADO MAP-9 DEL MINISTERIO DE ADMISION PLANETARIA: Desde este turno, los Salvoconductos de Faccion tienen efecto vinculante en el control de ingreso. Un Salvoconducto emitido por una faccion reconocida puede acreditar privilegios, excepciones o mandatos especiales. Todo Salvoconducto presentado debe pertenecer a una faccion registrada en el Directorio Oficial y no debe estar vencido. Facciones autorizadas: Liga Mercantil de Rutas, Milicia Orbital, Clero del Sello, Casa Veyr, Oficio de Pureza Civica. Los privilegios o excepciones declarados en el Salvoconducto son de responsabilidad del inspector: admitir un Salvoconducto de faccion no reconocida o vencido constituye infraccion grave.",
+  "current_date": "302.00",
+  "rules_active": [
+    "rule_001", "rule_002", "rule_003", "rule_004",
+    "rule_005", "rule_006", "rule_007",
+    "rule_009", "rule_010", "rule_011",
+    "rule_012", "rule_013"
+  ],
+  "applicant_ids": [
+    "applicant_041", "applicant_042", "applicant_043", "applicant_044", "applicant_045",
+    "applicant_046", "applicant_047", "applicant_048", "applicant_049", "applicant_050"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

@@ -1,0 +1,18 @@
+{
+  "day": 6,
+  "title": "Umbral 7 — Sexto Turno de Control",
+  "intro": "NOTA INTERNA — SUPERVISOR HALVEK: A partir de este turno, el interrogatorio es parte obligatoria del protocolo de evaluacion. La documentacion correcta no excluye la posibilidad de declaraciones falsas o inconsistentes. Todo inspector debe hacer uso de las preguntas disponibles antes de tomar una decision definitiva. Las contradicciones entre declaracion verbal y documentos presentados deben registrarse como anomalia y derivarse a retencion. El Ministerio recuerda que aprobar a un solicitante que mintio durante el control es equivalente a aprobar un documento falso.",
+  "current_date": "303.00",
+  "rules_active": [
+    "rule_001", "rule_002", "rule_003", "rule_004",
+    "rule_005", "rule_006", "rule_007",
+    "rule_009", "rule_010", "rule_011",
+    "rule_012", "rule_013"
+  ],
+  "applicant_ids": [
+    "applicant_051", "applicant_052", "applicant_053", "applicant_054", "applicant_055",
+    "applicant_056", "applicant_057", "applicant_058", "applicant_059", "applicant_060"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

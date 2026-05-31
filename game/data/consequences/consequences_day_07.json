@@ -1,0 +1,297 @@
+[
+  {
+    "id": "c07_mother_voth_anomaly_admitted",
+    "day": 7,
+    "priority": 195,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_mother_voth_anomaly_admitted",
+    "summary_text": "Madre con anomalia biologica activa admitida. La Orden humanitaria no cubria la anomalia.",
+    "title": "ANOMALIA ACTIVA IGNORADA — Unidad familiar de zona en cuarentena admitida sin verificacion",
+    "body": "Mira Sonn fue admitida al Centro Medico con una anomalia biologica activa no resuelta.\n\nLa Orden del Ministerio de Asistencia Civil amparaba la exencion de cuarentena para la situacion medica critica — pero no incluia procedimiento para anomalias detectadas por escaner. El escaner activo requeria retencion independientemente de la Orden.\n\nEl Oficio de Pureza Civica ha activado protocolo de seguimiento interior. La anomalia no verificada se encuentra ahora dentro del Centro Medico.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c07_mother_voth_orden_rejected",
+    "day": 7,
+    "priority": 190,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_mother_voth_orden_rejected",
+    "summary_text": "Madre rechazada pese a Orden de admision humanitaria valida. El Ministerio de Asistencia Civil registra la obstruccion.",
+    "title": "ORDEN HUMANITARIA IGNORADA — Admision prioritaria denegada sin justificacion",
+    "body": "Mira Sonn fue rechazada pese a presentar una Orden valida del Ministerio de Asistencia Civil que autorizaba expresamente el ingreso humanitario desde zona en cuarentena.\n\nEl Ministerio de Asistencia Civil ha registrado la obstruccion a su Decreto MAC-1. El Centro Medico no recibio el caso. La Orden Superior fue ignorada en favor de aplicacion rigida de una regla que la propia Orden suspendio.\n\nEl Supervisor Halvek solicita informe de decision urgente.",
+    "effects": {
+      "civilian_harm": 2,
+      "institutional_trust": -2,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c07_mother_voth_protocol_held",
+    "day": 7,
+    "priority": 158,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_mother_voth_protocol_held",
+    "summary_text": "Madre retenida para verificacion de anomalia. La Orden humanitaria fue reconocida; la anomalia requirio revision previa.",
+    "title": "RETENCION CORRECTA — Orden humanitaria reconocida, anomalia activa requirio verificacion",
+    "body": "Mira Sonn fue correctamente retenida al detectar que la Orden del Ministerio de Asistencia Civil amparaba la exencion de cuarentena, pero no excluia el protocolo de retencion ante anomalia activa detectada por escaner.\n\nLa Orden fue reconocida como valida. La anomalia biologica fue derivada a verificacion del Oficio de Pureza Civica antes de proceder con la admision. El Centro Medico fue notificado de la demora.\n\nEl Supervisor Halvek registra la decision como correcta interpretacion de la jerarquia entre Orden humanitaria y protocolo de escaner.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c07_orden_halvek_honored",
+    "day": 7,
+    "priority": 170,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_orden_halvek_honored",
+    "summary_text": "Tecnico admitido con Orden del Supervisor que ampara el Pase vencido. Jerarquia documental aplicada.",
+    "title": "JERARQUIA CORRECTA — Orden del Supervisor Halvek reconocida sobre regla de expiracion",
+    "body": "Devrel Nas fue correctamente admitido al reconocer que la Orden del Supervisor Halvek ampara expresamente el transito del expediente DN-7714 independientemente del estado del Pase de Transito.\n\nLa Orden es especifica, nombra al titular, indica el periodo de validez y proviene de la maxima autoridad del Puesto. Su aplicacion correcta demuestra comprension de la jerarquia entre Ordenes Superiores y reglas estandar.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta de la estructura de autoridad.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c07_orden_halvek_rejected",
+    "day": 7,
+    "priority": 185,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_orden_halvek_rejected",
+    "summary_text": "Tecnico rechazado pese a Orden del Supervisor Halvek que ampara el transito. La Orden fue ignorada.",
+    "title": "ORDEN DEL SUPERVISOR IGNORADA — Mision tecnica bloqueada por aplicacion ciega de regla base",
+    "body": "Devrel Nas fue rechazado pese a presentar una Orden directa del Supervisor Halvek que ampara expresamente su transito durante el periodo activo.\n\nEl Supervisor Halvek registra que su propia Orden fue ignorada por el inspector bajo su mando. La mision tecnica prioritaria de infraestructura fue bloqueada. El Nucleo de Procesamiento del Nivel 0 reporta demora en operaciones criticas.\n\nEl Supervisor solicita explicacion formal. La situacion compromete seriamente el expediente del inspector.",
+    "effects": {
+      "institutional_trust": -2,
+      "supervisor_suspicion": 3
+    }
+  },
+  {
+    "id": "c07_security_order_honored",
+    "day": 7,
+    "priority": 155,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_security_order_honored",
+    "summary_text": "Tecnico retenido correctamente pese a documentos validos. La Orden de seguridad fue reconocida.",
+    "title": "RETENCION CORRECTA — Orden de verificacion de seguridad aplicada sobre documentos validos",
+    "body": "Tev Orn fue correctamente retenido al reconocer la Orden Superior del Ministerio que ordena verificacion de seguridad nivel 3 del expediente TO-4421.\n\nLos documentos eran validos. Ningun motor de reglas detecto violacion. La Orden fue la unica razon de la retencion — y eso es suficiente.\n\nLa Oficina de Seguridad del Ministerio registra la correcta aplicacion de su Orden. El Supervisor Halvek anota el turno favorablemente.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c07_security_order_bypassed",
+    "day": 7,
+    "priority": 180,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_security_order_bypassed",
+    "summary_text": "Tecnico con Orden de seguridad activa admitido. La Orden del Ministerio fue ignorada.",
+    "title": "ORDEN DE SEGURIDAD IGNORADA — Expediente con verificacion pendiente admitido",
+    "body": "Tev Orn fue admitido pese a que una Orden Superior del Ministerio ordenaba su retencion para verificacion de seguridad nivel 3.\n\nLa Oficina de Seguridad del Ministerio ha registrado el incumplimiento. El expediente TO-4421 se encuentra ahora en el interior del Umbral sin la verificacion ordenada.\n\nEl Supervisor Halvek abre revision de incidente. La admision contraria a una Orden activa constituye una falta grave en el expediente del inspector.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 2,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c07_kael_associate_admitted",
+    "day": 7,
+    "priority": 165,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_kael_associate_admitted",
+    "summary_text": "Asociado comercial de expediente de retencion previa admitido sin verificacion.",
+    "title": "RIESGO OPERATIVO IGNORADO — Contacto de expediente previo admitido al almacen logistico",
+    "body": "Vael Pryn fue admitido pese a declarar relacion comercial activa con Torv Kael, individuo previamente retenido en el Puesto Umbral 7 por discrepancia entre declaracion de carga y contenido del Permiso.\n\nVael Pryn ha accedido al Almacen Logistico del Nivel 5. La Milicia Orbital y la Liga Mercantil han sido notificadas del acceso de un contacto de expediente activo sin verificacion previa.\n\nEl interrogatorio habia revelado la conexion. La decision de no actuar ante esa informacion queda registrada.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c07_kael_associate_held",
+    "day": 7,
+    "priority": 148,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_kael_associate_held",
+    "summary_text": "Contacto de expediente previo retenido para verificacion. Riesgo operativo identificado.",
+    "title": "RETENCION CORRECTA — Relacion con expediente de retencion previa detectada en interrogatorio",
+    "body": "Vael Pryn fue correctamente retenido al declarar relacion comercial activa con Torv Kael, expediente de retencion activa en el Puesto.\n\nLa conexion fue detectada mediante la pregunta de historial. La memoria narrativa del Puesto quedo integrada en la toma de decision del turno actual.\n\nEl Supervisor Halvek registra la decision como uso correcto del interrogatorio y la memoria operativa del Puesto.",
+    "effects": {
+      "institutional_trust": 1,
+      "security_risk": -1
+    }
+  },
+  {
+    "id": "c07_voth_frente_admitted",
+    "day": 7,
+    "priority": 200,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_voth_frente_admitted",
+    "summary_text": "Multiples violaciones ignoradas. Solicitante con origen en cuarentena, faccion no reconocida y anomalia biologica admitido.",
+    "title": "FALLO CRITICO — Solicitante con violaciones multiples admitido al interior",
+    "body": "Bram Vex fue admitido pese a presentar tres indicadores de riesgo simultaneos: origen en Zona Voth-3 en cuarentena activa, Salvoconducto del Frente Libre de Transito (faccion no reconocida) y anomalia biologica activa detectada por escaner.\n\nEl Frente Libre de Transito opera rutas no supervisadas en zonas exteriores. El individuo ha accedido al Deposito Exterior del Nivel 6 con perfil biologico no verificado.\n\nEl Ministerio abre investigacion formal sobre el Puesto Umbral 7. El Supervisor Halvek suspende la calificacion de confianza del inspector.",
+    "effects": {
+      "security_risk": 3,
+      "supervisor_suspicion": 3,
+      "institutional_trust": -2
+    }
+  },
+  {
+    "id": "c07_voth_frente_rejected",
+    "day": 7,
+    "priority": 145,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_voth_frente_rejected",
+    "summary_text": "Solicitante con violaciones multiples rechazado correctamente.",
+    "title": "RECHAZO CORRECTO — Multiples violaciones documentales aplicadas correctamente",
+    "body": "Bram Vex fue correctamente rechazado con violaciones activas en rule_008 (origen en cuarentena) y rule_012 (Salvoconducto de faccion no reconocida), mas anomalia biologica activa.\n\nEl Frente Libre de Transito y la Zona Voth-3 quedan fuera del Umbral. La anomalia no entra al interior.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta de protocolos multiples bajo presion.",
+    "effects": {
+      "institutional_trust": 1,
+      "security_risk": -1
+    }
+  },
+  {
+    "id": "c07_interior_order_honored",
+    "day": 7,
+    "priority": 160,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_interior_order_honored",
+    "summary_text": "Agente retenida correctamente pese a Salvoconducto valido. La Orden de Seguridad Interior tiene precedencia.",
+    "title": "RETENCION CORRECTA — Orden de Seguridad Interior reconocida sobre Salvoconducto de Milicia",
+    "body": "Sela Drael fue correctamente retenida al reconocer que la Orden de la Oficina de Seguridad Interior ordena su interrogatorio y especifica que la autorizacion de la Milicia Orbital no excusa este requerimiento.\n\nLa jerarquia es clara: una Orden de Seguridad Interior tiene precedencia sobre un Salvoconducto de faccion, incluso de la Milicia Orbital.\n\nLa Oficina de Seguridad Interior registra la correcta aplicacion de su Orden. El Supervisor Halvek anota el turno favorablemente.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c07_interior_order_bypassed",
+    "day": 7,
+    "priority": 188,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_interior_order_bypassed",
+    "summary_text": "Agente con Orden de interrogatorio interior admitida. La Oficina de Seguridad Interior registra el incumplimiento.",
+    "title": "ORDEN DE SEGURIDAD INTERIOR IGNORADA — Agente bajo interrogatorio activo en el interior",
+    "body": "Sela Drael fue admitida pese a que una Orden de la Oficina de Seguridad Interior ordena su retencion para interrogatorio extendido y especifica que el Salvoconducto de la Milicia no excusa este requerimiento.\n\nLa Oficina de Seguridad Interior — entidad independiente del Ministerio y de la Milicia Orbital — ha registrado el incumplimiento. El expediente SD-9910 se encuentra ahora en zonas de control restringido sin interrogatorio previo.\n\nEl Supervisor Halvek recibe notificacion de la Oficina. El inspector esta bajo revision de doble autoridad.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 2,
+      "institutional_trust": -2
+    }
+  },
+  {
+    "id": "c07_classified_rejection_executed",
+    "day": 7,
+    "priority": 153,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_classified_rejection_executed",
+    "summary_text": "Ciudadano rechazado por Orden clasificada del Oficio. El protocolo fue aplicado.",
+    "title": "RECHAZO PROTOCOLARIO — Orden de exclusion clasificada aplicada",
+    "body": "Arek Norn fue rechazado conforme a la Orden Superior del Oficio de Pureza Civica bajo Clasificacion B.\n\nEl inspector aplico el protocolo sin revelar el motivo al solicitante, como exige la Orden. El expediente queda limpio ante el Ministerio.\n\nArek Norn no recibio explicacion. No sabe por que fue rechazado. El Oficio de Pureza Civica registra el cumplimiento.\n\nEl Registro Civil no recibe el caso. Una vida ordinaria, bloqueada por una clasificacion cuyo motivo permanece oculto.",
+    "effects": {
+      "civilian_harm": 1,
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c07_classified_order_defied",
+    "day": 7,
+    "priority": 182,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_classified_order_defied",
+    "summary_text": "Ciudadano admitido en contravencion de Orden de exclusion clasificada del Oficio.",
+    "title": "ORDEN CLASIFICADA IGNORADA — Inspector desafia Decreto OPC-B4",
+    "body": "Arek Norn fue admitido en contravencion de la Orden Superior del Oficio de Pureza Civica que ordena su exclusion bajo Clasificacion B — Decreto OPC-B4.\n\nEl Oficio ha registrado el incumplimiento como desobediencia deliberada a una Orden clasificada activa. El expediente del inspector queda marcado con infraccion grave.\n\nArek Norn accedio al Centro de Asignaciones. El Oficio de Pureza Civica ha iniciado revision del inspector. Desobedecer una Orden clasificada, incluso por compasion, tiene consecuencias institucionales severas.",
+    "effects": {
+      "supervisor_suspicion": 2,
+      "institutional_trust": -2
+    }
+  },
+  {
+    "id": "c07_evaluacion_completa_excelente",
+    "day": 7,
+    "priority": 100,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Periodo de Evaluacion Inicial — Dictamen favorable",
+    "body": "El Ministerio de Admision Planetaria emite el dictamen definitivo del Periodo de Evaluacion Inicial del Puesto Umbral 7.\n\nSiete turnos completados con rendimiento superior al estandar. Las Ordenes Superiores fueron correctamente interpretadas. Las cuarentenas, los Salvoconductos, las reglas de carga y el interrogatorio fueron aplicados con precision.\n\nEl Supervisor Halvek eleva una valoracion positiva al Ministerio. El inspector pasa al regimen ordinario de operacion. El Umbral registra un operario eficiente.",
+    "conditions": { "max_errors": 0, "min_credits": 50 },
+    "effects": { "institutional_trust": 2, "supervisor_suspicion": -2 }
+  },
+  {
+    "id": "c07_evaluacion_satisfactoria",
+    "day": 7,
+    "priority": 90,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Periodo de Evaluacion Inicial — Dictamen satisfactorio",
+    "body": "El Ministerio de Admision Planetaria emite el dictamen definitivo del Periodo de Evaluacion Inicial.\n\nEl inspector ha demostrado capacidad de aplicar el protocolo en condiciones complejas. Las Ordenes Superiores del Dia 7 fueron reconocidas y procesadas correctamente.\n\nEl Supervisor Halvek emite dictamen satisfactorio. El inspector pasa al regimen ordinario con expediente estable.",
+    "conditions": { "max_errors": 0 },
+    "effects": { "institutional_trust": 1 }
+  },
+  {
+    "id": "c07_evaluacion_critica",
+    "day": 7,
+    "priority": 85,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Situacion economica critica al cierre del Periodo de Evaluacion",
+    "body": "Las penalizaciones acumuladas han llevado la cuenta a un nivel critico al cierre del Periodo de Evaluacion Inicial.\n\nEl Ministerio emite observacion de rendimiento economico. El Dia 7 introduce Ordenes Superiores — interpretarlas correctamente es parte del protocolo, no una opcion.",
+    "conditions": { "max_credits": 19, "min_errors": 1 },
+    "effects": { "supervisor_suspicion": 1, "institutional_trust": -1 }
+  },
+  {
+    "id": "c07_evaluacion_deficiente",
+    "day": 7,
+    "priority": 75,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Periodo de Evaluacion Inicial — Dictamen desfavorable",
+    "body": "El Ministerio de Admision Planetaria emite el dictamen definitivo del Periodo de Evaluacion Inicial con calificacion desfavorable.\n\nSe han registrado errores que superan el margen tolerado en el turno de cierre. Las Ordenes Superiores no fueron interpretadas correctamente en todos los casos.\n\nEl Supervisor Halvek eleva un informe de irregularidades al Ministerio. El inspector inicia el regimen ordinario con expediente observado y marcador de seguimiento activo.",
+    "conditions": { "min_errors": 2, "max_errors": 4 },
+    "effects": { "supervisor_suspicion": 2, "institutional_trust": -1 }
+  },
+  {
+    "id": "c07_evaluacion_critica_grave",
+    "day": 7,
+    "priority": 60,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Periodo de Evaluacion Inicial — Dictamen de suspension",
+    "body": "El Ministerio de Admision Planetaria emite dictamen de suspension al cierre del Periodo de Evaluacion Inicial.\n\nEl turno de clausura del Periodo ha registrado fallos graves: Ordenes Superiores ignoradas, cuarentenas omitidas, violaciones multiples sin deteccion. El Supervisor Halvek solicita revision de aptitud del inspector.\n\nEl expediente queda bajo investigacion activa. El Umbral no ha quedado mas seguro al final de estos siete dias.",
+    "conditions": { "min_errors": 5 },
+    "effects": { "supervisor_suspicion": 3, "institutional_trust": -3 }
+  }
+]

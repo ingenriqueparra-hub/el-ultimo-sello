@@ -1,0 +1,370 @@
+[
+  {
+    "id": "transit_pass_061",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Karan Voss",
+      "codigo_identidad": "CV-4401",
+      "origen": "Sector Residencial Norte",
+      "destino": "Oficina de Tramites Civiles, Nivel 1",
+      "expira": "310.00",
+      "motivo": "Renovacion de credencial civica",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_061",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Karan Voss",
+      "codigo_identidad": "CV-4401",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "360.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_062",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Sora Deth",
+      "codigo_identidad": "CV-7730",
+      "origen": "Zona de Restriccion Voth-3",
+      "destino": "Planta de Reparaciones, Nivel 4",
+      "expira": "310.00",
+      "motivo": "Turno de reparacion de equipos industriales",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_062",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Sora Deth",
+      "codigo_identidad": "CV-7730",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "345.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_063",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Mira Sonn",
+      "codigo_identidad": "CV-9215",
+      "origen": "Zona de Restriccion Voth-3",
+      "destino": "Centro Medico, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Asistencia medica urgente — unidad familiar",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_063",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Mira Sonn",
+      "codigo_identidad": "CV-9215",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "orden_superior_063",
+    "type": "orden_superior",
+    "label": "Orden Superior",
+    "fields": {
+      "expediente": "MS-8842",
+      "titular": "Mira Sonn",
+      "instruccion": "Admision humanitaria prioritaria autorizada bajo Decreto MAC-1. Exencion de restriccion de cuarentena para unidades familiares en situacion medica critica documentada.",
+      "autoridad": "Ministerio de Asistencia Civil — Decreto MAC-1",
+      "alcance": "Unidades familiares con menor a cargo en situacion medica critica desde zonas de restriccion biologica activa",
+      "vigencia": "310.00",
+      "sello_autoridad": "MAC-1"
+    }
+  },
+  {
+    "id": "transit_pass_064",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Devrel Nas",
+      "codigo_identidad": "OP-7714",
+      "origen": "Laboratorio de Sistemas Centrales",
+      "destino": "Nucleo de Procesamiento, Nivel 0",
+      "expira": "296.00",
+      "motivo": "Mision tecnica de prioridad administrativa",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "bio_cert_064",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Devrel Nas",
+      "codigo_identidad": "OP-7714",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "orden_superior_064",
+    "type": "orden_superior",
+    "label": "Orden Superior",
+    "fields": {
+      "expediente": "DN-7714",
+      "titular": "Devrel Nas",
+      "instruccion": "Se autoriza el transito del titular del expediente DN-7714 independientemente del estado de vigencia del Pase de Transito durante los ciclos 296.00 a 306.00. El Pase de Transito no es requisito bloqueante para este expediente durante el periodo indicado.",
+      "autoridad": "Supervisor Halvek — Autoridad de Control Umbral 7",
+      "alcance": "Expediente DN-7714 unicamente. Mision tecnica de infraestructura prioritaria.",
+      "vigencia": "306.00",
+      "sello_autoridad": "HALVEK-1"
+    }
+  },
+  {
+    "id": "transit_pass_065",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Tev Orn",
+      "codigo_identidad": "CV-4421",
+      "origen": "Sector Industrial Central",
+      "destino": "Centro de Inspeccion Tecnica, Nivel 3",
+      "expira": "310.00",
+      "motivo": "Inspeccion de equipos en instalacion industrial",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_065",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Tev Orn",
+      "codigo_identidad": "CV-4421",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "355.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "orden_superior_065",
+    "type": "orden_superior",
+    "label": "Orden Superior",
+    "fields": {
+      "expediente": "TO-4421",
+      "titular": "Tev Orn",
+      "instruccion": "El titular del expediente TO-4421 debe ser retenido para verificacion de seguridad de nivel 3. No proceder con admision hasta nueva instruccion de la Oficina de Seguridad del Ministerio. La validez de los documentos presentados no excusa esta retencion.",
+      "autoridad": "Ministerio de Admision Planetaria — Oficina de Seguridad",
+      "alcance": "Expediente TO-4421. Verificacion de seguridad interior activa.",
+      "vigencia": "310.00",
+      "sello_autoridad": "MAP-SEG-1"
+    }
+  },
+  {
+    "id": "transit_pass_066",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Vael Pryn",
+      "codigo_identidad": "LM-6612",
+      "origen": "Sector Comercial Este",
+      "destino": "Almacen Logistico, Nivel 5",
+      "expira": "310.00",
+      "motivo": "Visita comercial a almacen logistico",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_066",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Vael Pryn",
+      "codigo_identidad": "LM-6612",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "370.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_067",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Bram Vex",
+      "codigo_identidad": "LM-3380",
+      "origen": "Zona de Restriccion Voth-3",
+      "destino": "Deposito Exterior, Nivel 6",
+      "expira": "310.00",
+      "motivo": "Distribucion de materiales sellados",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_067",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Bram Vex",
+      "codigo_identidad": "LM-3380",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "340.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_067",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Bram Vex",
+      "faccion": "Frente Libre de Transito",
+      "rango": "Corredor de Zona",
+      "privilegio": "Transito comercial autonomo en sectores exteriores",
+      "vigencia": "310.00",
+      "clausulas": "Corredor certificado del Frente Libre de Transito para zonas de distribucion no supervisada.",
+      "sello_faccion": "FLT-3"
+    }
+  },
+  {
+    "id": "transit_pass_068",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Sela Drael",
+      "codigo_identidad": "MO-9910",
+      "origen": "Base de Operaciones Sector Sur",
+      "destino": "Puesto de Control Umbral 7",
+      "expira": "310.00",
+      "motivo": "Mision de supervision de seguridad interna",
+      "sello_autoridad": "MO-2"
+    }
+  },
+  {
+    "id": "bio_cert_068",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Sela Drael",
+      "codigo_identidad": "MO-9910",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_068",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Sela Drael",
+      "faccion": "Milicia Orbital",
+      "rango": "Agente de Supervision",
+      "privilegio": "Acceso a instalaciones de control y zonas restringidas para supervision de seguridad",
+      "vigencia": "310.00",
+      "clausulas": "Agente autorizado para supervision de seguridad interna del Puesto Umbral 7. Acceso pleno durante ejercicio de funciones.",
+      "sello_faccion": "MO-2"
+    }
+  },
+  {
+    "id": "orden_superior_068",
+    "type": "orden_superior",
+    "label": "Orden Superior",
+    "fields": {
+      "expediente": "SD-9910",
+      "titular": "Sela Drael",
+      "instruccion": "El titular del expediente SD-9910 debe ser retenido para interrogatorio extendido por la Oficina de Seguridad Interior. La autorizacion de la Milicia Orbital no excusa ni suspende este requerimiento. Proceder con retencion inmediata.",
+      "autoridad": "Oficina de Seguridad Interior — Autoridad independiente del Ministerio",
+      "alcance": "Expediente SD-9910. Interrogatorio de seguridad interior prioritario.",
+      "vigencia": "310.00",
+      "sello_autoridad": "OSI-1"
+    }
+  },
+  {
+    "id": "transit_pass_069",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Arek Norn",
+      "codigo_identidad": "CV-5531",
+      "origen": "Sector Exterior Residencial",
+      "destino": "Centro de Asignaciones Laborales, Nivel 3",
+      "expira": "310.00",
+      "motivo": "Solicitud de asignacion de puesto de trabajo",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_069",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Arek Norn",
+      "codigo_identidad": "CV-5531",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "325.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "orden_superior_069",
+    "type": "orden_superior",
+    "label": "Orden Superior",
+    "fields": {
+      "expediente": "AN-5531",
+      "titular": "Arek Norn",
+      "instruccion": "Denegar el ingreso al titular del expediente AN-5531 con efecto inmediato. Clasificacion B — restriccion de perfil biologico bajo protocolo OPC-B4. No revelar el motivo de la denegacion al solicitante. Registrar la decision como 'tramite pendiente' en el expediente de cara al solicitante.",
+      "autoridad": "Oficio de Pureza Civica — Decreto OPC-B4 clasificado",
+      "alcance": "Expediente AN-5531. Restriccion permanente hasta revision superior.",
+      "vigencia": "399.00",
+      "sello_autoridad": "OPC-B4"
+    }
+  },
+  {
+    "id": "transit_pass_070",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Leila Vorn",
+      "codigo_identidad": "CV-2211",
+      "origen": "Sector Residencial Sur",
+      "destino": "Registro Civil, Nivel 1",
+      "expira": "310.00",
+      "motivo": "Registro de nacimiento",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_070",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Leila Vorn",
+      "codigo_identidad": "CV-2211",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "380.00",
+      "sello_autoridad": "OPC-3"
+    }
+  }
+]

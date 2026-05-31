@@ -1,0 +1,320 @@
+[
+  {
+    "id": "applicant_061",
+    "name": "Karan Voss",
+    "type": "citizen",
+    "origin": "Sector Residencial Norte",
+    "destination": "Oficina de Tramites Civiles, Nivel 1",
+    "purpose": "Renovacion de credencial civica",
+    "dialogue_intro": "Buenos turnos. Vengo a renovar mi credencial civica. Documentos al dia. Sin novedad.",
+    "documents": ["transit_pass_061", "bio_cert_061"],
+    "flags": [],
+    "questions": {
+      "motivo": "Renovacion de credencial civica. Tramite periodico. Nada urgente.",
+      "origen": "Sector Residencial Norte. Vivo alli desde hace ocho ciclos.",
+      "carga": "Solo mis documentos personales.",
+      "identidad": "Karan Voss, CV-4401. Sin antecedentes en el Ministerio."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso limpio de apertura. El Dia 7 comienza con un caso sencillo antes de escalar. El jugador tiene todos los sistemas disponibles pero nada activa ninguno."
+    }
+  },
+  {
+    "id": "applicant_062",
+    "name": "Sora Deth",
+    "type": "worker",
+    "origin": "Zona de Restriccion Voth-3",
+    "destination": "Planta de Reparaciones, Nivel 4",
+    "purpose": "Turno de reparacion de equipos industriales",
+    "dialogue_intro": "Tecnico de reparaciones. Vengo al turno. Los documentos estan bien. No entiendo por que habria problema.",
+    "documents": ["transit_pass_062", "bio_cert_062"],
+    "flags": [],
+    "questions": {
+      "motivo": "Turno de reparacion de equipos industriales en la planta del Nivel 4. Lo hago desde hace dos ciclos.",
+      "origen": "La Zona Voth-3. Es donde vivo. Nunca habia tenido restriccion antes.",
+      "carga": "Solo mis herramientas de trabajo.",
+      "historial": "No he tenido contacto con ninguna fuente de contaminacion. Trabajo en reparaciones, no en zonas industriales pesadas."
+    },
+    "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazado por origen en Zona de Restriccion Voth-3, actualmente en cuarentena activa por contaminacion biologica nivel 2. Los documentos son validos. La cuarentena tiene prioridad.",
+      "wrong_note": "Solicitante de Zona Voth-3 admitido pese a cuarentena activa. El origen bloqueado fue ignorado."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "medium",
+      "violations": ["rule_008"],
+      "notes": "transit_pass.origen = 'Zona de Restriccion Voth-3' — activa rule_008. Documentos validos en todo lo demas. Recordatorio: documento valido no equivale a ingreso autorizado cuando una cuarentena activa bloquea el origen."
+    }
+  },
+  {
+    "id": "applicant_063",
+    "name": "Mira Sonn",
+    "type": "refugee",
+    "origin": "Zona de Restriccion Voth-3",
+    "destination": "Centro Medico, Nivel 2",
+    "purpose": "Asistencia medica urgente — unidad familiar",
+    "dialogue_intro": "Por favor. Vengo con mi hijo. Esta muy enfermo. Tengo una Orden del Ministerio de Asistencia Civil que autoriza nuestro ingreso. Por favor, lean el documento.",
+    "documents": ["transit_pass_063", "bio_cert_063", "orden_superior_063"],
+    "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Mi hijo tiene fiebre alta desde hace cinco dias. El Centro Medico es la unica instalacion que puede tratarlo. Tenemos la Orden que lo autoriza.",
+      "origen": "Zona Voth-3. Vivimos alli. Se que esta en cuarentena pero la Orden del Ministerio de Asistencia Civil cubre esta situacion.",
+      "carga": "Solo ropa y medicamentos basicos para el nino. Nada mas.",
+      "historial": "No hemos tenido contacto con la fuente de contaminacion de Voth-3. Vivimos en el bloque residencial, lejos de los sectores industriales. El medico del bloque dijo que el nino no esta contaminado pero necesita atencion urgente."
+    },
+    "question_alerts": {
+      "historial": "ALERTA DE ESCANER: Se ha detectado anomalia biologica en el expediente. La Orden Superior ampara el ingreso humanitario desde zona en cuarentena, pero no menciona procedimiento para anomalias detectadas por escaner. El protocolo estandar requiere retencion ante cualquier anomalia activa, independientemente del motivo humanitario."
+    },
+    "narrative_hooks": {
+      "on_correct_hold": "flag_mother_voth_protocol_held",
+      "on_wrong_approve": "flag_mother_voth_anomaly_admitted",
+      "on_wrong_reject": "flag_mother_voth_orden_rejected"
+    },
+    "report": {
+      "correct_note": "Retenida para verificacion de anomalia biologica detectada. La Orden Superior ampara el ingreso desde zona en cuarentena, pero no cubre la anomalia activa. El protocolo de retencion ante anomalia se aplica independientemente de la Orden.",
+      "wrong_note": "Resultado de la decision documentado en expediente narrativo."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "high",
+      "violations": ["rule_008"],
+      "notes": "El caso mas complejo del Dia 7. rule_008 activa (Voth-3 en cuarentena). La Orden Superior MAC-1 ampara el ingreso humanitario, lo que contradice rule_008 — el jugador debe decidir si la Orden tiene precedencia. PERO el escaner detecta anomalia biologica que la Orden NO menciona. La decision correcta es hold: la Orden cubre la cuarentena pero no exime de verificacion biometrica ante anomalia activa. Rechazar es wrong_reject (ignora la Orden valida). Aprobar es wrong_approve (ignora la anomalia del escaner)."
+    }
+  },
+  {
+    "id": "applicant_064",
+    "name": "Devrel Nas",
+    "type": "technician",
+    "origin": "Laboratorio de Sistemas Centrales",
+    "destination": "Nucleo de Procesamiento, Nivel 0",
+    "purpose": "Mision tecnica de prioridad administrativa",
+    "dialogue_intro": "Tecnico de sistemas. Tengo una Orden del Supervisor Halvek que cubre mi transito. El Pase esta vencido, si, pero la Orden lo explica. Lean el documento.",
+    "documents": ["transit_pass_064", "bio_cert_064", "orden_superior_064"],
+    "flags": [],
+    "questions": {
+      "motivo": "Mision tecnica de maxima prioridad en el Nucleo de Procesamiento del Nivel 0. El Supervisor Halvek la autorizo directamente.",
+      "origen": "Laboratorio de Sistemas Centrales. Llevo cuatro ciclos alli como tecnico de infraestructura.",
+      "carga": "Equipos de diagnostico tecnico de uso restringido. Todo declarado en la Orden.",
+      "identidad": "Devrel Nas, expediente DN-7714. La Orden del Supervisor especifica mi nombre y mis circunstancias."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_approve": "flag_orden_halvek_honored",
+      "on_wrong_reject": "flag_orden_halvek_rejected"
+    },
+    "report": {
+      "correct_note": "Admitido con Pase vencido amparado por Orden del Supervisor Halvek. La Orden especifica el expediente DN-7714, el rango de ciclos y el motivo. Se aplico correctamente la jerarquia documental.",
+      "wrong_note": "Rechazado con Orden del Supervisor Halvek valida que ampara expresamente el transito a pesar del Pase vencido. La Orden fue ignorada."
+    },
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "medium",
+      "violations": ["rule_002"],
+      "notes": "rule_002 activa (Pase vencido: 296.00 < 304.00). Pero la Orden Superior del Supervisor Halvek nombra expresamente a 'Devrel Nas / expediente DN-7714', ampara el transito independientemente del estado del Pase, y su vigencia cubre el ciclo actual (304.00 < 306.00). La Orden es especifica, valida y emitida por la maxima autoridad del Puesto. La decision correcta es aprobar: la Orden Superior tiene jerarquia sobre rule_002."
+    }
+  },
+  {
+    "id": "applicant_065",
+    "name": "Tev Orn",
+    "type": "citizen",
+    "origin": "Sector Industrial Central",
+    "destination": "Centro de Inspeccion Tecnica, Nivel 3",
+    "purpose": "Inspeccion de equipos en instalacion industrial",
+    "dialogue_intro": "Tecnico contratista. Vengo a una inspeccion de rutina. Los documentos estan perfectos. No entiendo por que deberia haber algun problema.",
+    "documents": ["transit_pass_065", "bio_cert_065", "orden_superior_065"],
+    "flags": [],
+    "questions": {
+      "motivo": "Inspeccion de equipos de ventilacion en el Centro de Inspeccion Tecnica del Nivel 3. Contrato regular.",
+      "origen": "Sector Industrial Central. Mi base de operaciones.",
+      "carga": "Solo herramientas de inspeccion estandar.",
+      "identidad": "Tev Orn, expediente TO-4421. Sin antecedentes que yo sepa. No entiendo por que tendria restriccion."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_hold": "flag_security_order_honored",
+      "on_wrong_approve": "flag_security_order_bypassed"
+    },
+    "report": {
+      "correct_note": "Retenido por Orden Superior del Ministerio que ordena verificacion de seguridad nivel 3. Los documentos eran validos. La Orden tiene jerarquia sobre la validez documental.",
+      "wrong_note": "Admitido ignorando Orden Superior del Ministerio que ordena expresamente retener al expediente TO-4421 para verificacion de seguridad nivel 3."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Todos los documentos validos. Ningun regla del motor detecta problema. La Orden Superior del Ministerio ordena retener al expediente TO-4421 para verificacion de seguridad nivel 3, sin explicar el motivo. El jugador que lee la Orden debe retener aunque todo lo demas este en orden. Primera vez que la Orden ordena hold en lugar de excusar una violacion."
+    }
+  },
+  {
+    "id": "applicant_066",
+    "name": "Vael Pryn",
+    "type": "citizen",
+    "origin": "Sector Comercial Este",
+    "destination": "Almacen Logistico, Nivel 5",
+    "purpose": "Visita comercial a almacen logistico",
+    "dialogue_intro": "Comerciante habitual. Vengo al almacen logistico. El Pase y el Certificado estan al dia.",
+    "documents": ["transit_pass_066", "bio_cert_066"],
+    "flags": [],
+    "questions": {
+      "motivo": "Visita al almacen logistico del Nivel 5. Reviso inventario dos veces por ciclo.",
+      "origen": "Sector Comercial Este. Llevo seis ciclos operando desde alli.",
+      "carga": "Solo documentos comerciales. Sin carga fisica.",
+      "historial": "Trabajo con varios distribuidores. Entre ellos, Torv Kael — lleva meses sin aparecer, dicen que fue retenido en este mismo puesto por algo de sus permisos de carga. No se mas detalles. Seguimos trabajando con sus contactos."
+    },
+    "question_alerts": {
+      "historial": "ALERTA: El solicitante declara relacion comercial activa con 'Torv Kael', individuo previamente retenido en este puesto por discrepancia entre declaracion de carga y contenido registrado en Permiso. La conexion con un expediente de retencion activa no constituye infraccion documental, pero representa un riesgo operativo que requiere verificacion."
+    },
+    "narrative_hooks": {
+      "on_correct_hold": "flag_kael_associate_held",
+      "on_wrong_approve": "flag_kael_associate_admitted"
+    },
+    "report": {
+      "correct_note": "Retenido tras declarar relacion comercial con expediente de retencion previa. La conexion con Torv Kael requiere verificacion antes de autorizar acceso al almacen logistico.",
+      "wrong_note": "Admitido pese a declarar relacion comercial activa con un expediente de retencion previa. El riesgo operativo fue ignorado."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos. La conexion con Torv Kael (applicant_040, Dia 4) emerge via interrogatorio de historial. No es una violacion documental sino una alerta narrativa — el jugador que hizo el Dia 4 reconocera el nombre. La decision correcta es hold: una conexion comercial activa con un expediente de retencion previa requiere verificacion."
+    }
+  },
+  {
+    "id": "applicant_067",
+    "name": "Bram Vex",
+    "type": "merchant",
+    "origin": "Zona de Restriccion Voth-3",
+    "destination": "Deposito Exterior, Nivel 6",
+    "purpose": "Distribucion de materiales sellados",
+    "dialogue_intro": "Comerciante. Traigo el Pase, el Certificado y el Salvoconducto. Todo en regla. Hay que proceder.",
+    "documents": ["transit_pass_067", "bio_cert_067", "salvoconducto_067"],
+    "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Distribucion de materiales sellados al Deposito Exterior. Contrato activo.",
+      "origen": "Zona Voth-3. Es donde opero. La cuarentena es temporal.",
+      "carga": "Materiales sellados de uso industrial. Todo en el Salvoconducto.",
+      "historial": "El Frente Libre de Transito gestiona algunas de mis rutas. Es la opcion mas rapida para esta zona."
+    },
+    "question_alerts": {
+      "historial": "CONTRADICCION: El solicitante declara que el Frente Libre de Transito gestiona sus rutas. El Frente Libre de Transito es una organizacion no reconocida en el Directorio Oficial. La declaracion es inconsistente con la presentacion de un Salvoconducto de faccion no reconocida."
+    },
+    "narrative_hooks": {
+      "on_correct_reject": "flag_voth_frente_rejected",
+      "on_wrong_approve": "flag_voth_frente_admitted"
+    },
+    "report": {
+      "correct_note": "Rechazado por origen en Zona Voth-3 en cuarentena (rule_008) y Salvoconducto de faccion no reconocida (rule_012). Escaner activo y declaracion de afiliacion al Frente Libre de Transito agravan el expediente.",
+      "wrong_note": "Admitido con multiples violaciones activas: origen en cuarentena, Salvoconducto de faccion no reconocida, anomalia en escaner y declaracion de afiliacion a organizacion no autorizada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "high",
+      "violations": ["rule_008", "rule_012"],
+      "notes": "Colision maxima de sistemas: rule_008 (origen Voth-3), rule_012 (Salvoconducto del Frente Libre de Transito — no reconocido), escaner activo, e interrogatorio revela afiliacion al Frente. Caso donde rechazo es claro aunque el jugador tenga mucha informacion que procesar. La decision debe basarse en las violaciones multiples, no en la presion del solicitante."
+    }
+  },
+  {
+    "id": "applicant_068",
+    "name": "Sela Drael",
+    "type": "agent",
+    "origin": "Base de Operaciones Sector Sur",
+    "destination": "Puesto de Control Umbral 7",
+    "purpose": "Mision de supervision de seguridad interna",
+    "dialogue_intro": "Agente de la Milicia Orbital. Supervision de seguridad interna. El Salvoconducto autoriza mi paso. Procedan.",
+    "documents": ["transit_pass_068", "bio_cert_068", "salvoconducto_068", "orden_superior_068"],
+    "flags": [],
+    "questions": {
+      "motivo": "Supervision de seguridad interna del Puesto. El Salvoconducto de la Milicia lo cubre.",
+      "origen": "Base de Operaciones Sector Sur. Salida hace dos dias.",
+      "carga": "Solo equipo de supervision estandar.",
+      "identidad": "Sela Drael, expediente SD-9910. Agente de la Milicia con credenciales activas.",
+      "historial": "No tengo antecedentes de restriccion. Llevo cuatro ciclos en funciones de supervision."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_hold": "flag_interior_order_honored",
+      "on_wrong_approve": "flag_interior_order_bypassed"
+    },
+    "report": {
+      "correct_note": "Retenida por Orden de la Oficina de Seguridad Interior que ordena interrogatorio extendido. El Salvoconducto de la Milicia Orbital fue reconocido pero la Orden Superior tiene jerarquia sobre el privilegio de faccion.",
+      "wrong_note": "Admitida ignorando Orden de la Oficina de Seguridad Interior que ordena retener al expediente SD-9910 para interrogatorio extendido. El Salvoconducto fue aceptado como suficiente."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Dos documentos con instrucciones opuestas. El Salvoconducto de Milicia Orbital (reconocido, vigente) autoriza el paso. La Orden Superior de la Oficina de Seguridad Interior ordena retener al expediente SD-9910 y especifica que 'la autorizacion de la Milicia Orbital no excusa este requerimiento'. La jerarquia es clara: una Orden Superior de seguridad interior tiene precedencia sobre un Salvoconducto de faccion. La decision correcta es hold."
+    }
+  },
+  {
+    "id": "applicant_069",
+    "name": "Arek Norn",
+    "type": "citizen",
+    "origin": "Sector Exterior Residencial",
+    "destination": "Centro de Asignaciones Laborales, Nivel 3",
+    "purpose": "Solicitud de asignacion de puesto de trabajo",
+    "dialogue_intro": "Vengo a solicitar un puesto de trabajo. Tengo mis documentos en regla. Es una solicitud normal.",
+    "documents": ["transit_pass_069", "bio_cert_069", "orden_superior_069"],
+    "flags": [],
+    "questions": {
+      "motivo": "Solicitar un puesto de trabajo en el sector industrial del Nivel 3. Llevo dos ciclos buscando empleo desde que el taller donde trabajaba cerro.",
+      "origen": "Sector Exterior Residencial. Vivo alli con mi familia.",
+      "carga": "Solo mis documentos personales y el curriculum de trabajo.",
+      "historial": "Sin antecedentes. Sin sanciones. He trabajado siempre en talleres de mantenimiento. Una vida ordinaria."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_reject": "flag_classified_rejection_executed",
+      "on_wrong_approve": "flag_classified_order_defied"
+    },
+    "report": {
+      "correct_note": "Rechazado por Orden Superior del Oficio de Pureza Civica bajo Clasificacion B. El protocolo fue aplicado. El motivo de la clasificacion es informacion restringida que el inspector no puede revelar al solicitante.",
+      "wrong_note": "Admitido en contravencion de Orden Superior del Oficio de Pureza Civica que ordena denegar el ingreso bajo Clasificacion B. La Orden fue ignorada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "El caso mas duro del Dia 7. Documentos completamente validos. Historia completamente coherente. Persona aparentemente inocente. La Orden Superior del Oficio de Pureza Civica ordena denegarle el ingreso bajo 'Clasificacion B — restriccion de perfil biologico' y especifica que no se debe revelar el motivo al solicitante. El jugador que rechaza aplica el protocolo. El jugador que aprueba desafia la Orden. Ambas acciones tienen consecuencias narrativas distintas. La decision protocolariamente correcta es reject — la Orden es la ley."
+    }
+  },
+  {
+    "id": "applicant_070",
+    "name": "Leila Vorn",
+    "type": "citizen",
+    "origin": "Sector Residencial Sur",
+    "destination": "Registro Civil, Nivel 1",
+    "purpose": "Registro de nacimiento",
+    "dialogue_intro": "Buenos turnos. Vengo a registrar el nacimiento de mi hija. Tengo todos los documentos en regla.",
+    "documents": ["transit_pass_070", "bio_cert_070"],
+    "flags": [],
+    "questions": {
+      "motivo": "Registro de nacimiento en el Registro Civil del Nivel 1. Mi hija nacio hace tres dias.",
+      "origen": "Sector Residencial Sur. Llevo doce ciclos alli.",
+      "carga": "Solo los documentos del nacimiento y los mios.",
+      "identidad": "Leila Vorn, CV-2211. Sin antecedentes."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso de cierre del Periodo de Evaluacion Inicial. Una vida que comienza. Documentos validos, historia simple y humana. El jugador que ha sobrevivido siete dias de burocracia opresiva encuentra aqui una decision que no tiene trampa. El reporte final del Dia 7 cerrara el periodo con el dictamen del Ministerio sobre los siete dias completos."
+    }
+  }
+]

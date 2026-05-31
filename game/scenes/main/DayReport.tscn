@@ -22,15 +22,15 @@ color = Color(0.03, 0.05, 0.03, 1)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 740.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 4
 
 [node name="Header" type="PanelContainer" parent="VBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(0, 44)
 
 [node name="HeaderLabel" type="Label" parent="VBox/Header"]
 layout_mode = 2
@@ -41,8 +41,8 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
-text = "REPORTE DEL TURNO — DIA 1"
-theme_override_font_sizes/font_size = 20
+text = "REPORTE DEL TURNO - DIA 1"
+theme_override_font_sizes/font_size = 14
 
 [node name="ScrollArea" type="ScrollContainer" parent="VBox"]
 layout_mode = 2
@@ -70,22 +70,22 @@ layout_mode = 2
 [node name="ProcessedLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
 layout_mode = 2
 text = "Procesados:           --- / 10"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 
 [node name="CorrectLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
 layout_mode = 2
 text = "Decisiones correctas: ---"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 
 [node name="ErrorsLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
 layout_mode = 2
 text = "Errores:              ---"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 
 [node name="CreditsLabel" type="Label" parent="VBox/ScrollArea/ContentVBox/SummaryPanel/SummaryVBox"]
 layout_mode = 2
 text = "Creditos finales:     ---"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 
 [node name="DividerA" type="HSeparator" parent="VBox/ScrollArea/ContentVBox"]
 layout_mode = 2
@@ -128,23 +128,24 @@ layout_mode = 2
 layout_mode = 2
 autowrap_mode = 3
 text = "---"
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 
 [node name="Footer" type="PanelContainer" parent="VBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 108)
 
-[node name="FooterHBox" type="HBoxContainer" parent="VBox/Footer"]
+[node name="FooterHBox" type="VBoxContainer" parent="VBox/Footer"]
 layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+theme_override_constants/separation = 6
 
 [node name="RestartBtn" type="Button" parent="VBox/Footer/FooterHBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(280, 50)
+custom_minimum_size = Vector2(260, 44)
+size_flags_horizontal = 4
 text = "REINICIAR DIA"
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14

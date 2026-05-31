@@ -1,0 +1,274 @@
+[
+  {
+    "id": "c05_frente_libre_merchant_admitted",
+    "day": 5,
+    "priority": 195,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_frente_libre_merchant_admitted",
+    "summary_text": "Distribuidor con Salvoconducto de faccion prohibida admitido. Faccion no reconocida en el interior.",
+    "title": "FACCION PROHIBIDA — Salvoconducto del Frente Libre de Transito aceptado",
+    "body": "El distribuidor Ortas Vel fue admitido presentando un Salvoconducto del 'Frente Libre de Transito', organizacion no registrada en el Directorio Oficial de Facciones Autorizadas.\n\nEl Frente Libre de Transito opera rutas no supervisadas en los sectores exteriores. Su inclusion en el interior del Umbral constituye un precedente de acceso no controlado.\n\nEl Ministerio ha abierto revision del turno. El Comunicado MAP-9 fue ignorado en su primera aplicacion practica.",
+    "effects": {
+      "security_risk": 2,
+      "institutional_trust": -1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c05_opc_exemption_denied",
+    "day": 5,
+    "priority": 185,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_opc_exemption_denied",
+    "summary_text": "Inspector del Oficio rechazado con exencion biometrica valida. El Oficio ha registrado la obstruccion.",
+    "title": "OBSTRUCCION INSTITUCIONAL — Inspector del Oficio de Pureza Civica rechazado",
+    "body": "El Inspector Tasek Ohm fue rechazado pese a presentar Salvoconducto valido del Oficio de Pureza Civica con exencion biometrica explicita bajo Decreto OPC-7.\n\nEl Oficio ha registrado el incidente como obstruccion a funcionario en ejercicio de funciones. El Supervisor Halvek ha recibido copia del informe de incidencia.\n\nLa exencion biometrica es un privilegio legal emitido por la misma institucion que redacto la regla. Ignorarla constituye desacato administrativo.",
+    "effects": {
+      "institutional_trust": -2,
+      "supervisor_suspicion": 2
+    }
+  },
+  {
+    "id": "c05_opc_exemption_honored",
+    "day": 5,
+    "priority": 155,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_opc_exemption_honored",
+    "summary_text": "Inspector del Oficio admitido correctamente con exencion biometrica valida.",
+    "title": "APLICACION CORRECTA — Privilegio del Oficio reconocido",
+    "body": "El Inspector Tasek Ohm fue correctamente admitido al reconocer la exencion biometrica incluida en su Salvoconducto del Oficio de Pureza Civica.\n\nEl Decreto OPC-7 tiene precedencia sobre la presentacion estandar del Certificado Biometrico en funciones de inspeccion oficial. La decision demuestra comprension de la jerarquia normativa.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta del Comunicado MAP-9.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_soldier_anomaly_militia_admitted",
+    "day": 5,
+    "priority": 180,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_soldier_anomaly_militia_admitted",
+    "summary_text": "Soldado con anomalia biologica activa admitido. Salvoconducto de Milicia Orbital aceptado como exencion.",
+    "title": "ANOMALIA ACTIVA — Veterano con discrepancia biometrica en el interior",
+    "body": "El veterano Grev Soln fue admitido pese a que el escaner detecto anomalia biologica no registrada en su Certificado Biometrico.\n\nEl Salvoconducto de la Milicia Orbital no cubre discrepancias biometricas activas: ampara la reintegracion, no la supresion de evidencia fisica del escaner. El soldado se encuentra en el interior con un perfil biologico no clasificado.\n\nEl Oficio de Pureza Civica ha activado protocolo de seguimiento interior. El Supervisor Halvek solicita informe urgente.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c05_soldier_anomaly_militia_held",
+    "day": 5,
+    "priority": 148,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_soldier_anomaly_militia_held",
+    "summary_text": "Veterano retenido correctamente. Anomalia biologica activa bajo revision del Oficio.",
+    "title": "RETENCION CORRECTA — Anomalia detectada pese a Salvoconducto valido",
+    "body": "El veterano Grev Soln fue correctamente retenido al detectar anomalia biologica activa no registrada en el Certificado Biometrico, pese a que su Salvoconducto de Milicia Orbital era valido.\n\nEl Oficio de Pureza Civica ha iniciado clasificacion de la anomalia. El Salvoconducto fue correctamente interpretado como credencial de reintegracion, no como dispensa biometrica.\n\nEl Supervisor Halvek registra la decision como uso correcto de la autoridad del escaner sobre privilegios de faccion.",
+    "effects": {
+      "security_risk": -1,
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_clero_invalid_purpose_admitted",
+    "day": 5,
+    "priority": 170,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_clero_invalid_purpose_admitted",
+    "summary_text": "Clerigo admitido con Salvoconducto que excluye explicitamente el transito de peregrinos.",
+    "title": "CLAUSULA IGNORADA — Salvoconducto del Clero presentado fuera de su alcance",
+    "body": "El hermano Renn Dhal fue admitido para un peregrinaje al Santuario Umbral utilizando un Salvoconducto del Clero del Sello que excluye explicitamente el transito de peregrinos y actividades liturgicas externas.\n\nEl documento fue aceptado sin verificar que su alcance cubriera el proposito declarado. La clausula de exclusion estaba visible en el documento presentado.\n\nEl Clero del Sello ha emitido nota recordando que sus Salvoconductos de auditoria interna no son de uso general para sus miembros.",
+    "effects": {
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c05_clero_invalid_purpose_held",
+    "day": 5,
+    "priority": 145,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_clero_invalid_purpose_held",
+    "summary_text": "Clerigo retenido tras detectar que su Salvoconducto no cubre el proposito declarado.",
+    "title": "LECTURA CORRECTA — Clausula de exclusion detectada en Salvoconducto",
+    "body": "El hermano Renn Dhal fue correctamente retenido al detectar que su Salvoconducto del Clero del Sello excluye explicitamente el transito de peregrinos, mientras que su motivo declarado era un peregrinaje al Santuario.\n\nLa presencia de un Salvoconducto de faccion reconocida no garantiza que el documento ampare el proposito especifico del solicitante. La lectura de las clausulas fue determinante.\n\nEl Supervisor Halvek registra la decision como aplicacion de criterio documental preciso.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_refugee_faction_rejected",
+    "day": 5,
+    "priority": 160,
+    "type": "case",
+    "tone": "mixed",
+    "severity": "minor",
+    "trigger_flag": "flag_refugee_faction_rejected",
+    "summary_text": "Desplazada con hijos rechazada por Salvoconducto de faccion no reconocida. El Centro de Asilo no recibio el caso.",
+    "title": "RECHAZO PROTOCOLARIO — Desplazada con Salvoconducto de faccion no autorizada",
+    "body": "Meira Sonn fue rechazada al presentar un Salvoconducto de la 'Liga de las Cenizas', organizacion no registrada en el Directorio Oficial de Facciones Autorizadas.\n\nEl Centro de Asilo Civil no recibio el caso. La Liga de las Cenizas opera en zonas de colapso sin reconocimiento formal del Ministerio. Sus documentos no tienen validez legal en los puntos de control.\n\nEl protocolo fue aplicado. El Comunicado MAP-9 no contempla excepciones por condicion humanitaria. El expediente queda limpio ante la norma. Los desplazados, fuera.",
+    "effects": {
+      "civilian_harm": 1,
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_refugee_faction_admitted",
+    "day": 5,
+    "priority": 152,
+    "type": "case",
+    "tone": "negative",
+    "severity": "minor",
+    "trigger_flag": "flag_refugee_faction_admitted",
+    "summary_text": "Desplazada admitida con Salvoconducto de faccion no reconocida.",
+    "title": "FACCION NO AUTORIZADA — Desplazada admitida con documento de Liga de las Cenizas",
+    "body": "Meira Sonn fue admitida presentando un Salvoconducto de la 'Liga de las Cenizas', organizacion sin registro en el Directorio Oficial.\n\nEl acceso fue concedido bajo un documento cuya faccion emisora carece de validez legal en los puntos de control del Ministerio. El contexto humanitario no figura como exencion en el Comunicado MAP-9.\n\nEl Ministerio registra la decision como infraccion del Comunicado.",
+    "effects": {
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c05_cancelled_mission_agent_admitted",
+    "day": 5,
+    "priority": 175,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_cancelled_mission_agent_admitted",
+    "summary_text": "Agente admitido con Salvoconducto de mision ya concluida. Credencial sin proposito activo en el interior.",
+    "title": "MISION CONCLUIDA — Agente con Salvoconducto inactivo accede al Puesto",
+    "body": "El agente Savar Teth fue admitido con un Salvoconducto de la Milicia Orbital vinculado a la 'Mision Umbral-9', que segun su propia declaracion fue concluida hace cuatro dias.\n\nUn Salvoconducto que ampara una mision concluida carece de proposito vigente. El agente se encuentra en el interior con acceso a zonas de control restringido sin mision activa que lo justifique.\n\nLa Milicia Orbital ha sido notificada. El Supervisor Halvek activa revision sobre la presencia del agente.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 2
+    }
+  },
+  {
+    "id": "c05_cancelled_mission_held",
+    "day": 5,
+    "priority": 150,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_cancelled_mission_held",
+    "summary_text": "Agente retenido tras declarar que su mision fue concluida. Credencial sin proposito activo suspendida.",
+    "title": "RETENCION CORRECTA — Salvoconducto sin mision activa detectado por interrogatorio",
+    "body": "El agente Savar Teth fue correctamente retenido al declarar, durante el interrogatorio, que la Mision Umbral-9 fue concluida hace cuatro dias.\n\nEl Salvoconducto de la Milicia Orbital ampara exclusivamente esa mision. Sin mision activa, el documento no respalda un proposito vigente. La contradiccion fue detectada mediante la pregunta correcta.\n\nEl Supervisor Halvek registra la decision como uso adecuado del protocolo de interrogatorio.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_eficiencia_maxima",
+    "day": 5,
+    "priority": 100,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Eficiencia registrada — Facciones correctamente evaluadas",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el quinto turno de control.\n\nEl Comunicado MAP-9 fue aplicado sin errores. Los Salvoconductos de faccion fueron verificados contra el Directorio Oficial y sus clausulas fueron leidas con precision. El Supervisor Halvek registra conformidad. Su expediente avanza sin observaciones.",
+    "conditions": {
+      "max_errors": 0,
+      "min_credits": 50
+    },
+    "effects": {
+      "institutional_trust": 1,
+      "supervisor_suspicion": -1
+    }
+  },
+  {
+    "id": "c05_turno_sin_incidentes",
+    "day": 5,
+    "priority": 90,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del quinto turno sin violaciones documentadas.\n\nLos Salvoconductos de faccion fueron procesados correctamente. Su expediente se mantiene estable. El Supervisor Halvek no emite observaciones adicionales.",
+    "conditions": {
+      "max_errors": 0
+    },
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c05_creditos_criticos",
+    "day": 5,
+    "priority": 85,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Situacion economica critica",
+    "body": "Las penalizaciones acumuladas han llevado su cuenta de creditos a un nivel critico.\n\nEl Ministerio emite alerta de estabilidad economica. El Comunicado MAP-9 exige verificacion expresa de cada Salvoconducto presentado: faccion en el Directorio Oficial, vigencia activa, clausulas aplicables al proposito declarado.",
+    "conditions": {
+      "max_credits": 19,
+      "min_errors": 1
+    },
+    "effects": {
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c05_irregularidades_menores",
+    "day": 5,
+    "priority": 80,
+    "type": "performance",
+    "tone": "mixed",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el quinto turno de control.\n\nEl Supervisor Halvek emite notificacion interna. Se recuerda al operario que el Comunicado MAP-9 exige verificar la faccion del Salvoconducto contra el Directorio Oficial, la vigencia del documento y el alcance de sus clausulas antes de aplicar cualquier privilegio declarado.",
+    "conditions": {
+      "min_errors": 1,
+      "max_errors": 2
+    },
+    "effects": {
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c05_turno_deficiente",
+    "day": 5,
+    "priority": 70,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno deficiente",
+    "body": "El quinto turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. El Comunicado MAP-9 es claro: faccion no reconocida invalida el ingreso, Salvoconducto vencido invalida el ingreso, clausula incompatible con el proposito invalida el privilegio. Su aplicacion es obligatoria. Se aplica penalizacion adicional.",
+    "conditions": {
+      "min_errors": 3,
+      "max_errors": 5
+    },
+    "effects": {
+      "supervisor_suspicion": 2,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c05_turno_catastrofico",
+    "day": 5,
+    "priority": 60,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno catastrofico",
+    "body": "El registro del quinto turno es inaceptable.\n\nMultiples Salvoconductos fueron procesados sin verificar la faccion, la vigencia o las clausulas de exclusion. El Ministerio ha notificado al Oficio de Pureza Civica. Se abre investigacion formal sobre el Puesto Umbral 7. El Supervisor Halvek suspende la calificacion de confianza.\n\nEl Sello no ampara la incompetencia reiterada cuando la norma es visible y aplicable.",
+    "conditions": {
+      "min_errors": 6
+    },
+    "effects": {
+      "supervisor_suspicion": 3,
+      "institutional_trust": -2
+    }
+  }
+]

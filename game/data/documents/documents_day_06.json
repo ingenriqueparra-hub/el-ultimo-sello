@@ -1,0 +1,329 @@
+[
+  {
+    "id": "transit_pass_051",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Voss Kern",
+      "codigo_identidad": "CV-5519",
+      "origen": "Sector Industrial Sur",
+      "destino": "Centro de Asignaciones Laborales, Nivel 3",
+      "expira": "310.00",
+      "motivo": "Asignacion de puesto tecnico en sector industrial",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_051",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Voss Kern",
+      "codigo_identidad": "CV-5519",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "360.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_052",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Hara Lenn",
+      "codigo_identidad": "CV-1183",
+      "origen": "Taller Mecanico, Sector Oeste",
+      "destino": "Planta de Ensamble, Sector Este",
+      "expira": "301.05",
+      "motivo": "Turno de trabajo en planta de ensamble",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_052",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Hara Lenn",
+      "codigo_identidad": "CV-1183",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "340.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_053",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Oryn Vest",
+      "codigo_identidad": "CV-3340",
+      "origen": "Sector Residencial Central",
+      "destino": "Cuartel Milicia Orbital, Nivel 7",
+      "expira": "308.00",
+      "motivo": "Visita de descanso y actividades recreativas",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_053",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Oryn Vest",
+      "codigo_identidad": "CV-3340",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_054",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Mael Tors",
+      "codigo_identidad": "CV-7724",
+      "origen": "Almacen de Transito Exterior",
+      "destino": "Bloque Residencial, Nivel 3",
+      "expira": "310.00",
+      "motivo": "Visita personal a familiar en Nivel 3",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_054",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Mael Tors",
+      "codigo_identidad": "CV-7724",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "345.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_055",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Sele Korn",
+      "codigo_identidad": "MO-4413",
+      "origen": "Estacion Operativa Kron-7",
+      "destino": "Bloque Residencial, Nivel 4",
+      "expira": "308.00",
+      "motivo": "Visita familiar autorizada",
+      "sello_autoridad": "MO-2"
+    }
+  },
+  {
+    "id": "bio_cert_055",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Sele Korn",
+      "codigo_identidad": "MO-4413",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "355.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_056",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Tan Vel",
+      "codigo_identidad": "CV-8890",
+      "origen": "Sector Exterior Este",
+      "destino": "Centro Comercial, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Compras y tramites personales",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_056",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Tan Vel",
+      "codigo_identidad": "CV-8890",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "330.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_057",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Kael Orm",
+      "codigo_identidad": "MO-5577",
+      "origen": "Sector de Transito Operativo Norte",
+      "destino": "Puesto de Control Umbral 7",
+      "expira": "310.00",
+      "motivo": "Supervision de instalaciones de control",
+      "sello_autoridad": "MO-2"
+    }
+  },
+  {
+    "id": "bio_cert_057",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Kael Orm",
+      "codigo_identidad": "MO-5577",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_057",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Kael Orm",
+      "faccion": "Milicia Orbital",
+      "rango": "Agente de Supervision",
+      "privilegio": "Acceso a instalaciones de control perimetral para supervision operativa",
+      "vigencia": "310.00",
+      "clausulas": "Agente autorizado para supervision de instalaciones de control perimetral del Umbral. Acceso a zonas de inspeccion restringidas durante ejercicio de funciones.",
+      "sello_faccion": "MO-2"
+    }
+  },
+  {
+    "id": "transit_pass_058",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Dorn Rael",
+      "codigo_identidad": "LM-3310",
+      "origen": "Puerto Comercial Sur",
+      "destino": "Mercado Central, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Tramite comercial registrado",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_058",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Dorn Rael",
+      "codigo_identidad": "LM-3310",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "365.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_058",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Rann Dohl",
+      "faccion": "Liga Mercantil de Rutas",
+      "rango": "Distribuidor Certificado",
+      "privilegio": "Transito comercial prioritario en zonas de mercado y deposito",
+      "vigencia": "310.00",
+      "clausulas": "Distribuidor certificado de la Liga Mercantil de Rutas. Aval de transito para operaciones comerciales registradas.",
+      "sello_faccion": "LMR-5"
+    }
+  },
+  {
+    "id": "transit_pass_059",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Asel Vor",
+      "codigo_identidad": "CV-6647",
+      "origen": "Sector Residencial Externo",
+      "destino": "Registro de Residencias, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Tramite de transferencia de residencia",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_059",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Asel Vor",
+      "codigo_identidad": "CV-6647",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_060",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Drael Sonn",
+      "codigo_identidad": "LM-9921",
+      "origen": "Puerto de Distribucion Este",
+      "destino": "Deposito Industrial, Nivel 5",
+      "expira": "308.00",
+      "motivo": "Entrega de materiales de construccion certificados",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_060",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Drael Sonn",
+      "codigo_identidad": "LM-9921",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "380.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "ingress_permit_060",
+    "type": "ingress_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Drael Sonn",
+      "numero_permiso": "LMR-CP-06001",
+      "tipo_carga": "Materiales de construccion — grado industrial",
+      "peso_max": "4.1 Tm",
+      "destino": "Deposito Industrial, Nivel 5",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "310.00",
+      "sello_emisor": "LMR-ACTIVO"
+    }
+  },
+  {
+    "id": "salvoconducto_060",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Drael Sonn",
+      "faccion": "Liga Mercantil de Rutas",
+      "rango": "Distribuidor Certificado",
+      "privilegio": "Transito comercial de grado industrial en zonas de deposito y distribucion",
+      "vigencia": "310.00",
+      "clausulas": "Distribuidor certificado de la Liga Mercantil de Rutas. Aval de transito para operaciones de entrega de carga industrial.",
+      "sello_faccion": "LMR-5"
+    }
+  }
+]

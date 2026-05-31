@@ -1,8 +1,28 @@
 [gd_scene format=3 uid="uid://cjbcf1tw2uvb4"]
 
 [ext_resource type="Script" uid="uid://cecc5af6gaddf" path="res://scripts/ui/ControlDesk.gd" id="1_desk"]
+[ext_resource type="Texture2D" uid="uid://bt8wihagjntlq" path="res://assets/ui/panels/frame_top_status_bar.png" id="2_status_frame"]
+[ext_resource type="Texture2D" uid="uid://bflxpgwbn2qrl" path="res://assets/ui/panels/frame_dossier_panel.png" id="3_dossier_frame"]
+[ext_resource type="Texture2D" uid="uid://c5yxv6u1o56ai" path="res://assets/ui/cockpit/bg_applicant_checkpoint_view.png" id="4_applicant_bg"]
+[ext_resource type="Texture2D" uid="uid://b51aun8ygqc1x" path="res://assets/ui/cockpit/bg_desk_console.png" id="5_console_bg"]
+[ext_resource type="Texture2D" uid="uid://dgispdyak7qqk" path="res://assets/ui/panels/frame_portrait_scan.png" id="6_portrait_frame"]
+[ext_resource type="Texture2D" uid="uid://dbpory4hmln6m" path="res://assets/ui/portraits/applicant_worker_sprite.png" id="7_applicant_sprite"]
+[ext_resource type="VideoStream" uid="uid://b76swoh62tjek" path="res://assets/ui/cockpit/bg_applicant_checkpoint_view.ogv" id="8_applicant_video"]
+[ext_resource type="Texture2D" path="res://assets/ui/overlays/frame_overlay_basic.png" id="9_overlay_frame"]
 
-[node name="ControlDesk" type="Control"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_overlay_basic"]
+texture = ExtResource("9_overlay_frame")
+texture_margin_left = 12.0
+texture_margin_top = 34.0
+texture_margin_right = 12.0
+texture_margin_bottom = 34.0
+content_margin_left = 24.0
+content_margin_top = 30.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+draw_center = true
+
+[node name="ControlDesk" type="Control" unique_id=1930406009]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_desk")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=1971158818]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,92 +40,252 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.03, 0.05, 0.03, 1)
 
-[node name="StatusBar" type="PanelContainer" parent="."]
+[node name="StatusBar" type="Control" parent="." unique_id=812622312]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 0
-offset_right = 320
-offset_bottom = 47
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 47.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatusHBox" type="HBoxContainer" parent="StatusBar"]
+[node name="StatusFrame" type="TextureRect" parent="StatusBar" unique_id=513259916]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_status_frame")
+
+[node name="StatusDayPanel" type="PanelContainer" parent="StatusBar" unique_id=174563296]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 43.0
+
+[node name="DayValue" type="Label" parent="StatusBar/StatusDayPanel" unique_id=1636109514]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 8
+text = "DIA 1
+298.12
+1 / 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusCreditsPanel" type="PanelContainer" parent="StatusBar" unique_id=1247990663]
+layout_mode = 1
+offset_left = 85.0
+offset_top = 5.0
+offset_right = 172.0
+offset_bottom = 43.0
+mouse_filter = 0
+
+[node name="CreditsHBox" type="HBoxContainer" parent="StatusBar/StatusCreditsPanel" unique_id=1805016107]
 layout_mode = 2
 
-[node name="DayLabel" type="Label" parent="StatusBar/StatusHBox"]
+[node name="CreditsIcon" type="Label" parent="StatusBar/StatusCreditsPanel/CreditsHBox" unique_id=419907041]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "CR"
+vertical_alignment = 1
+
+[node name="CreditsValue" type="Label" parent="StatusBar/StatusCreditsPanel/CreditsHBox" unique_id=1147891280]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 11
-text = "DIA 1\n1 / 10"
+theme_override_font_sizes/font_size = 10
+text = "CREDITOS
+50"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="CreditsLabel" type="Label" parent="StatusBar/StatusHBox"]
+[node name="StatusSuspicionPanel" type="PanelContainer" parent="StatusBar" unique_id=880630026]
+layout_mode = 1
+offset_left = 176.0
+offset_top = 5.0
+offset_right = 314.0
+offset_bottom = 43.0
+
+[node name="SuspicionHBox" type="HBoxContainer" parent="StatusBar/StatusSuspicionPanel" unique_id=562281732]
+layout_mode = 2
+
+[node name="SuspicionValueBox" type="VBoxContainer" parent="StatusBar/StatusSuspicionPanel/SuspicionHBox" unique_id=1319737008]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 11
-text = "CREDITOS: 50"
-horizontal_alignment = 2
 
-[node name="SuspicionBox" type="VBoxContainer" parent="StatusBar/StatusHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SuspicionLabel" type="Label" parent="StatusBar/StatusHBox/SuspicionBox"]
+[node name="SuspicionValueLabel" type="Label" parent="StatusBar/StatusSuspicionPanel/SuspicionHBox/SuspicionValueBox" unique_id=689093532]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "SOSPECHA"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="SuspicionBar" type="ProgressBar" parent="StatusBar/StatusHBox/SuspicionBox"]
+[node name="SuspicionValueBar" type="ProgressBar" parent="StatusBar/StatusSuspicionPanel/SuspicionHBox/SuspicionValueBox" unique_id=962281455]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 8)
-max_value = 100
-value = 0
 show_percentage = false
 
-[node name="AlertIcon" type="Label" parent="StatusBar/StatusHBox"]
+[node name="AlertSlot" type="PanelContainer" parent="StatusBar/StatusSuspicionPanel/SuspicionHBox" unique_id=941178936]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+
+[node name="AlertValue" type="Label" parent="StatusBar/StatusSuspicionPanel/SuspicionHBox/AlertSlot" unique_id=1533321475]
+modulate = Color(0.2, 0.6, 0.2, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
-text = "●"
-horizontal_alignment = 2
-modulate = Color(0.2, 0.6, 0.2, 1)
+text = "ALR"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="DossierPanel" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 52
-offset_right = 320
-offset_bottom = 277
-grow_horizontal = 2
-grow_vertical = 2
+[node name="DossierPanel" type="Control" parent="." unique_id=1125917678]
 clip_contents = true
-mouse_filter = 2
-
-[node name="PortraitArea" type="ColorRect" parent="DossierPanel"]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 30
-offset_top = 53
-offset_right = 124
-offset_bottom = 180
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 52.0
+offset_right = 315.0
+offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.04, 0.08, 0.04, 1)
 mouse_filter = 2
 
-[node name="PortraitLabel" type="Label" parent="DossierPanel/PortraitArea"]
+[node name="DossierFrame" type="TextureRect" parent="DossierPanel" unique_id=1333729229]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("3_dossier_frame")
+
+[node name="DossierTitle" type="Label" parent="DossierPanel" unique_id=1766898834]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 13.0
+offset_right = 168.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 10
+text = "EXPEDIENTE"
+
+[node name="DocTabs" type="HBoxContainer" parent="DossierPanel" unique_id=2143707101]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 305.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+
+[node name="TabSolicitante" type="Button" parent="DossierPanel/DocTabs" unique_id=1723605396]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "IDENTIDAD"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Tab1" type="Button" parent="DossierPanel/DocTabs" unique_id=1922551484]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "PASE"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Tab2" type="Button" parent="DossierPanel/DocTabs" unique_id=524390583]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "BIOMETRIA"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Tab3" type="Button" parent="DossierPanel/DocTabs" unique_id=98121302]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "CARGA"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Tab4" type="Button" parent="DossierPanel/DocTabs" unique_id=312456789]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "FACCION"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Tab5" type="Button" parent="DossierPanel/DocTabs" unique_id=567890123]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "ORDEN"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="TabAlertas" type="Button" parent="DossierPanel/DocTabs" unique_id=1997991939]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 7
+text = "ALERTAS"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="DocumentView" type="PanelContainer" parent="DossierPanel" unique_id=1261102209]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 53.0
+offset_right = 286.0
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DossierPanel/DocumentView" unique_id=1285655398]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ContentVBox" type="VBoxContainer" parent="DossierPanel/DocumentView/ScrollContainer" unique_id=1640500826]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IdentityContent" type="HBoxContainer" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox" unique_id=827354100]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PortraitArea" type="ColorRect" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent" unique_id=279784347]
+custom_minimum_size = Vector2(94, 127)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.04, 0.08, 0.04, 1)
+
+[node name="PortraitFrame" type="TextureRect" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/PortraitArea" unique_id=473994588]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("6_portrait_frame")
+
+[node name="PortraitLabel" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/PortraitArea" unique_id=2070476069]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_font_sizes/font_size = 8
@@ -113,382 +293,357 @@ text = "RETRATO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="DocTabs" type="HBoxContainer" parent="DossierPanel"]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 24
-offset_top = 30
-offset_right = 298
-offset_bottom = 52
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TabSolicitante" type="Button" parent="DossierPanel/DocTabs"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 24)
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 7
-text = "IDENTIDAD"
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="Tab1" type="Button" parent="DossierPanel/DocTabs"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 24)
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 7
-text = "PASE"
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="Tab2" type="Button" parent="DossierPanel/DocTabs"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 24)
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 7
-text = "BIOMETRIA"
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="Tab3" type="Button" parent="DossierPanel/DocTabs"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 24)
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 7
-text = "CARGA"
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="TabAlertas" type="Button" parent="DossierPanel/DocTabs"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 24)
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 7
-text = "ALERTAS"
-clip_text = true
-text_overrun_behavior = 3
-
-
-[node name="DocumentView" type="PanelContainer" parent="DossierPanel"]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 24
-offset_top = 53
-offset_right = 291
-offset_bottom = 214
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="DossierPanel/DocumentView"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="ContentVBox" type="VBoxContainer" parent="DossierPanel/DocumentView/ScrollContainer"]
+[node name="ApplicantVBox" type="VBoxContainer" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent" unique_id=979565312]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ApplicantVBox" type="VBoxContainer" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelTitle" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox"]
+[node name="PanelTitle" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/ApplicantVBox" unique_id=431858934]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "SOLICITANTE"
 horizontal_alignment = 1
 
-[node name="ApplicantOrigin" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox"]
+[node name="ApplicantOrigin" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/ApplicantVBox" unique_id=55427783]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "Origen: ---"
 autowrap_mode = 3
 
-[node name="ApplicantDestination" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox"]
+[node name="ApplicantDestination" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/ApplicantVBox" unique_id=430601320]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "Destino: ---"
 autowrap_mode = 3
 
-[node name="ApplicantPurpose" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/ApplicantVBox"]
+[node name="ApplicantPurpose" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox/IdentityContent/ApplicantVBox" unique_id=890549173]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "Motivo: ---"
 autowrap_mode = 3
 
-[node name="DocContent" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox"]
+[node name="DocContent" type="Label" parent="DossierPanel/DocumentView/ScrollContainer/ContentVBox" unique_id=43119919]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "[ Sin documento activo ]"
 autowrap_mode = 3
-visible = false
 
-[node name="AlertsContainer" type="VBoxContainer" parent="DossierPanel"]
+[node name="AlertsStore" type="VBoxContainer" parent="DossierPanel" unique_id=551616278]
+visible = false
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 24
-offset_top = 53
-offset_right = 291
-offset_bottom = 214
+offset_left = 19.0
+offset_top = 53.0
+offset_right = 286.0
+offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
-visible = false
 
-[node name="ScrollAlertas" type="ScrollContainer" parent="DossierPanel/AlertsContainer"]
+[node name="ScrollAlertas" type="ScrollContainer" parent="DossierPanel/AlertsStore" unique_id=1113687443]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="AlertsList" type="Label" parent="DossierPanel/AlertsContainer/ScrollAlertas"]
+[node name="AlertsList" type="Label" parent="DossierPanel/AlertsStore/ScrollAlertas" unique_id=1351578604]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "--- Sin alertas ---"
 autowrap_mode = 3
 
-[node name="RegsContainer" type="VBoxContainer" parent="DossierPanel"]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 24
-offset_top = 53
-offset_right = 291
-offset_bottom = 214
-grow_horizontal = 2
-grow_vertical = 2
+[node name="RegsStore" type="VBoxContainer" parent="DossierPanel" unique_id=1120198892]
 visible = false
-
-[node name="DialogueArea" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 282
-offset_right = 320
-offset_bottom = 514
+offset_left = 19.0
+offset_top = 53.0
+offset_right = 286.0
+offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DialogueArea" type="Control" parent="." unique_id=1693560288]
 clip_contents = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 282.0
+offset_right = 315.0
+offset_bottom = 514.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="ViewportBG" type="ColorRect" parent="DialogueArea"]
+[node name="ViewportBG" type="TextureRect" parent="DialogueArea" unique_id=1186246588]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.02, 0.04, 0.02, 1)
+mouse_filter = 2
+texture = ExtResource("4_applicant_bg")
 
-[node name="DialogueBox" type="PanelContainer" parent="DialogueArea"]
+[node name="ViewportVideo" type="VideoStreamPlayer" parent="DialogueArea" unique_id=1267267095]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 17
-offset_top = 22
-offset_right = 132
-offset_bottom = 80
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stream = ExtResource("8_applicant_video")
+autoplay = true
+expand = true
+
+[node name="ApplicantPreview" type="TextureRect" parent="DialogueArea" unique_id=1634984772]
+layout_mode = 1
+offset_left = 103.0
+offset_top = 37.0
+offset_right = 281.0
+offset_bottom = 242.0
+mouse_filter = 2
+texture = ExtResource("7_applicant_sprite")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DialogueBox" type="PanelContainer" parent="DialogueArea" unique_id=1040284560]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 18.0
+offset_right = 150.0
+offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DialogueVBox" type="VBoxContainer" parent="DialogueArea/DialogueBox"]
+[node name="DialogueVBox" type="VBoxContainer" parent="DialogueArea/DialogueBox" unique_id=37480173]
 layout_mode = 2
 
-
-[node name="DialogueText" type="Label" parent="DialogueArea/DialogueBox/DialogueVBox"]
+[node name="DialogueText" type="Label" parent="DialogueArea/DialogueBox/DialogueVBox" unique_id=605236990]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 text = "Esperando al proximo solicitante."
 autowrap_mode = 3
-max_lines_visible = 3
+max_lines_visible = 5
 
-[node name="QuestionButtonsArea" type="VBoxContainer" parent="DialogueArea"]
+[node name="QuestionButtonsArea" type="VBoxContainer" parent="DialogueArea" unique_id=184187550]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 18
-offset_top = 144
-offset_right = 84
-offset_bottom = 228
+offset_left = 20.0
+offset_top = 150.0
+offset_right = 86.0
+offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ConsoleArea" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 514
-offset_right = 320
-offset_bottom = 620
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ConsoleArea" type="Control" parent="." unique_id=50258083]
 clip_contents = true
+layout_mode = 1
+anchors_preset = 0
+offset_top = 514.0
+offset_right = 320.0
+offset_bottom = 620.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScannerButton" type="Button" parent="ConsoleArea"]
+[node name="ConsoleBG" type="TextureRect" parent="ConsoleArea" unique_id=2068491898]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 13
-offset_top = 9
-offset_right = 69
-offset_bottom = 76
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("5_console_bg")
+
+[node name="ScannerButton" type="Button" parent="ConsoleArea" unique_id=2046457016]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 96.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 11
-text = "[ ESCANER ]"
+text = "ESCANER"
 
-[node name="RegsButton" type="Button" parent="ConsoleArea"]
+[node name="DocumentScannerButton" type="Button" parent="ConsoleArea" unique_id=238921971]
+visible = false
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 232
-offset_top = 6
-offset_right = 306
-offset_bottom = 85
+offset_left = 107.0
+offset_top = 9.0
+offset_right = 213.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 9
+text = ""
+
+[node name="StampButton" type="Button" parent="ConsoleArea" unique_id=1328690221]
+layout_mode = 1
+offset_left = 118.0
+offset_top = 5.0
+offset_right = 202.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 11
-text = "[ R ]"
+text = "SELLO"
 
-[node name="DecisionBar" type="PanelContainer" parent="."]
+[node name="RegsButton" type="Button" parent="ConsoleArea" unique_id=1798367746]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 620
-offset_right = 320
-offset_bottom = 692
+offset_left = 224.0
+offset_top = 5.0
+offset_right = 308.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "REGLAS"
+
+[node name="DecisionBar" type="PanelContainer" parent="." unique_id=1008132683]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 620.0
+offset_right = 315.0
+offset_bottom = 692.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DecisionHBox" type="HBoxContainer" parent="DecisionBar"]
+[node name="DecisionHBox" type="HBoxContainer" parent="DecisionBar" unique_id=1632577378]
 layout_mode = 2
 alignment = 1
 
-[node name="ApproveButton" type="Button" parent="DecisionBar/DecisionHBox"]
+[node name="ApproveButton" type="Button" parent="DecisionBar/DecisionHBox" unique_id=457643181]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "APROBAR"
 
-[node name="Spacer1" type="Control" parent="DecisionBar/DecisionHBox"]
+[node name="Spacer1" type="Control" parent="DecisionBar/DecisionHBox" unique_id=686696376]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="HoldButton" type="Button" parent="DecisionBar/DecisionHBox"]
+[node name="HoldButton" type="Button" parent="DecisionBar/DecisionHBox" unique_id=7445094]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "INSPECC."
 
-[node name="Spacer2" type="Control" parent="DecisionBar/DecisionHBox"]
+[node name="Spacer2" type="Control" parent="DecisionBar/DecisionHBox" unique_id=1751035534]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="RejectButton" type="Button" parent="DecisionBar/DecisionHBox"]
+[node name="RejectButton" type="Button" parent="DecisionBar/DecisionHBox" unique_id=230060182]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "RECHAZAR"
 
-[node name="ToolsBar" type="Control" parent="."]
+[node name="ToolsBar" type="Control" parent="." unique_id=795498265]
+clip_contents = true
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 0
-offset_top = 693
-offset_right = 320
-offset_bottom = 740
+anchors_preset = 0
+offset_top = 693.0
+offset_right = 320.0
+offset_bottom = 740.0
 grow_horizontal = 2
 grow_vertical = 2
-clip_contents = true
 
-[node name="ToolsBarHBox" type="HBoxContainer" parent="ToolsBar"]
+[node name="ToolsBarHBox" type="HBoxContainer" parent="ToolsBar" unique_id=404096520]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="ToolsBarSpacer" type="Control" parent="ToolsBar/ToolsBarHBox"]
+[node name="ToolScanner" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=1706785647]
+custom_minimum_size = Vector2(48, 34)
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "ESC
+3"
 
-[node name="OverlayLayer" type="CanvasLayer" parent="."]
+[node name="ToolUV" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=1645255067]
+custom_minimum_size = Vector2(48, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "UV
+2"
+
+[node name="ToolVerifier" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=402105520]
+custom_minimum_size = Vector2(48, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "VER
+2"
+
+[node name="ToolStamp" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=1745190827]
+custom_minimum_size = Vector2(48, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "SEL
+3"
+
+[node name="ToolAlert" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=39654239]
+custom_minimum_size = Vector2(48, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "ALR
+1"
+
+[node name="ToolRegistry" type="Button" parent="ToolsBar/ToolsBarHBox" unique_id=1718699588]
+custom_minimum_size = Vector2(58, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "REG
+1"
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=2099056403]
 layer = 8
 
-[node name="OverlayPanel" type="PanelContainer" parent="OverlayLayer"]
-layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0
-anchor_bottom = 0
-offset_left = 16
-offset_top = 100
-offset_right = 304
-offset_bottom = 660
+[node name="OverlayBlocker" type="ColorRect" parent="OverlayLayer" unique_id=1199365802]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0, 0, 0, 0.68)
 
-[node name="OverlayVBox" type="VBoxContainer" parent="OverlayLayer/OverlayPanel"]
+[node name="OverlayPanel" type="PanelContainer" parent="OverlayLayer" unique_id=1264763182]
+visible = false
+offset_left = 16.0
+offset_top = 100.0
+offset_right = 304.0
+offset_bottom = 660.0
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_overlay_basic")
+
+[node name="OverlayVBox" type="VBoxContainer" parent="OverlayLayer/OverlayPanel" unique_id=1196552645]
 layout_mode = 2
 
-[node name="OverlayTitleBar" type="HBoxContainer" parent="OverlayLayer/OverlayPanel/OverlayVBox"]
+[node name="OverlayTitleBar" type="HBoxContainer" parent="OverlayLayer/OverlayPanel/OverlayVBox" unique_id=1594552997]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="OverlayTitle" type="Label" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar"]
+[node name="OverlayTitle" type="Label" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar" unique_id=1449049710]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 10
 text = "INFORME"
 
-[node name="OverlayCloseBtn" type="Button" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar"]
+[node name="OverlayCloseBtn" type="Button" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayTitleBar" unique_id=20809266]
+custom_minimum_size = Vector2(26, 22)
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "[ X ]"
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 9
+text = "X"
 
-[node name="OverlayScroll" type="ScrollContainer" parent="OverlayLayer/OverlayPanel/OverlayVBox"]
+[node name="OverlayScroll" type="ScrollContainer" parent="OverlayLayer/OverlayPanel/OverlayVBox" unique_id=1743581112]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="OverlayContent" type="Label" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayScroll"]
+[node name="OverlayContent" type="Label" parent="OverlayLayer/OverlayPanel/OverlayVBox/OverlayScroll" unique_id=1191084399]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
-text = ""
 autowrap_mode = 3

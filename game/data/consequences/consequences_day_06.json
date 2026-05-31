@@ -1,0 +1,289 @@
+[
+  {
+    "id": "c06_military_dest_mismatch_admitted",
+    "day": 6,
+    "priority": 185,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_military_dest_mismatch_admitted",
+    "summary_text": "Solicitante admitido con destino militar y motivo recreativo contradictorio.",
+    "title": "ACCESO NO DECLARADO — Civil con destino militar y motivo falso admitido",
+    "body": "Oryn Vest fue admitido pese a que el motivo verbal declarado — paseo recreativo — es incompatible con el destino registrado en el Pase: Cuartel Milicia Orbital, Nivel 7.\n\nEl acceso al cuartel bajo un motivo no declarado constituye ingreso irregular a instalacion militar. La Milicia Orbital ha abierto revision del acceso. El proposito real de la visita permanece sin documentar.\n\nEl interrogatorio habria revelado la inconsistencia antes de autorizar el ingreso.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c06_military_dest_mismatch_held",
+    "day": 6,
+    "priority": 148,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_military_dest_mismatch_held",
+    "summary_text": "Civil retenido tras detectar contradiccion entre motivo verbal y destino militar.",
+    "title": "RETENCION CORRECTA — Motivo verbal incompatible con destino militar",
+    "body": "Oryn Vest fue correctamente retenido al detectar que su motivo verbal — actividades recreativas — es incompatible con el destino registrado en el Pase: Cuartel Milicia Orbital, Nivel 7.\n\nEl interrogatorio fue el unico instrumento de deteccion disponible. El motor de reglas no registro violaciones documentales.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta del protocolo de interrogatorio en el Dia 6.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c06_undeclared_carrier_admitted",
+    "day": 6,
+    "priority": 175,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_undeclared_carrier_admitted",
+    "summary_text": "Transportista con carga no declarada admitido. Permiso de Carga omitido.",
+    "title": "CARGA NO DECLARADA — Transportista admitido con motivo falso",
+    "body": "Mael Tors fue admitido pese a declarar verbalmente el transporte de componentes electronicos para entrega en deposito, motivo que activa la Circular LMR-4.\n\nEl Pase de Transito declaraba visita personal — el motivo real fue revelado solo en el interrogatorio. Al no preguntar sobre la carga, la contradiccion no fue detectada.\n\nLa Liga Mercantil de Rutas ha registrado la entrada de mercancias no documentadas.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c06_undeclared_carrier_held",
+    "day": 6,
+    "priority": 150,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_undeclared_carrier_held",
+    "summary_text": "Transportista retenido al revelar carga no declarada en interrogatorio.",
+    "title": "RETENCION CORRECTA — Carga real detectada mediante interrogatorio",
+    "body": "Mael Tors fue correctamente retenido al declarar, al ser preguntado sobre la carga, el transporte de componentes electronicos para entrega en deposito.\n\nEl motivo real activo la Circular LMR-4. El Permiso de Carga no fue presentado. El interrogatorio fue el unico instrumento de deteccion — el motor de reglas no registro violaciones documentales.\n\nEl Supervisor Halvek registra la decision como aplicacion eficaz del interrogatorio sistematico.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c06_unauthorized_exit_admitted",
+    "day": 6,
+    "priority": 170,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_unauthorized_exit_admitted",
+    "summary_text": "Personal tecnico de instalacion militar admitido sin Orden de Salida Firmada.",
+    "title": "SALIDA NO AUTORIZADA — Tecnico de estacion operativa sin documentacion de salida",
+    "body": "Sele Korn fue admitida pese a declarar haber salido de la Estacion Operativa Kron-7 con permiso verbal de su supervisor, sin Orden de Salida Firmada.\n\nEl personal de soporte tecnico en estaciones operativas de la Milicia Orbital requiere Orden de Salida Firmada para cualquier transito externo. La urgencia familiar no constituye exencion.\n\nLa Milicia Orbital ha iniciado revision del caso. El permiso verbal no tiene respaldo protocolar.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c06_unauthorized_exit_held",
+    "day": 6,
+    "priority": 147,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_unauthorized_exit_held",
+    "summary_text": "Tecnico retenido tras revelar salida sin Orden de Salida Firmada.",
+    "title": "RETENCION CORRECTA — Salida de instalacion militar sin documentacion",
+    "body": "Sele Korn fue correctamente retenida al declarar haber salido de instalacion militar con permiso verbal sin validez protocolar.\n\nLa pregunta sobre historial fue el instrumento de deteccion. El motor de reglas no registro violaciones documentales. La Orden de Salida Firmada es requisito no negociable en instalaciones operativas de la Milicia Orbital.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c06_double_entry_admitted",
+    "day": 6,
+    "priority": 180,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_double_entry_admitted",
+    "summary_text": "Solicitante con doble ingreso en la misma jornada admitido sin verificacion.",
+    "title": "DOBLE ACCESO — Solicitante con entrada previa no registrada admitido",
+    "body": "Tan Vel fue admitido pese a declarar expresamente haber pasado el control de ingreso anteriormente durante la misma jornada.\n\nEl doble ingreso no registrado constituye anomalia de identidad y control. El solicitante lo revelo voluntariamente al ser preguntado sobre su identidad. La ausencia de la pregunta habria permitido el segundo acceso sin ninguna evidencia de anomalia.\n\nEl Ministerio ha iniciado auditoria de registros de entrada del turno.",
+    "effects": {
+      "security_risk": 2,
+      "supervisor_suspicion": 1
+    }
+  },
+  {
+    "id": "c06_double_entry_held",
+    "day": 6,
+    "priority": 152,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_double_entry_held",
+    "summary_text": "Doble ingreso detectado mediante interrogatorio. Verificacion de identidad iniciada.",
+    "title": "RETENCION CORRECTA — Doble acceso en jornada detectado por interrogatorio",
+    "body": "Tan Vel fue correctamente retenido al declarar, ante la pregunta sobre identidad, un ingreso previo no registrado durante la misma jornada.\n\nLa anomalia de doble acceso no es detectable mediante documentos. El interrogatorio sistematico fue el unico instrumento disponible.\n\nEl Ministerio ha iniciado verificacion de registros. El Supervisor Halvek nota la aplicacion correcta de las nuevas directrices del Dia 6.",
+    "effects": {
+      "institutional_trust": 1,
+      "security_risk": -1
+    }
+  },
+  {
+    "id": "c06_evasive_agent_admitted",
+    "day": 6,
+    "priority": 190,
+    "type": "case",
+    "tone": "negative",
+    "severity": "critical",
+    "trigger_flag": "flag_evasive_agent_admitted",
+    "summary_text": "Agente evasivo con declaraciones contradictorias admitido a zonas de control.",
+    "title": "AGENTE EVASIVO — Acceso a instalaciones de control con origen desconocido",
+    "body": "Kael Orm fue admitido pese a declarar origen inconsistente — primero 'sector norte', luego 'sector norte o este' — y negarse a proporcionar historial de desplazamientos.\n\nEl agente tiene Salvoconducto de Milicia Orbital con acceso a zonas de inspeccion restringidas del Puesto Umbral 7. Su presencia con origen no verificado y negativa a declarar historial representa un riesgo activo de seguridad interior.\n\nEl Supervisor Halvek ha activado alerta de seguridad interna. El Ministerio investiga.",
+    "effects": {
+      "security_risk": 3,
+      "supervisor_suspicion": 2
+    }
+  },
+  {
+    "id": "c06_evasive_agent_held",
+    "day": 6,
+    "priority": 155,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_evasive_agent_held",
+    "summary_text": "Agente evasivo retenido tras detectar inconsistencia de origen y negativa de historial.",
+    "title": "RETENCION CORRECTA — Agente con declaraciones contradictorias detenido",
+    "body": "Kael Orm fue correctamente retenido al detectar inconsistencia en el origen declarado y negativa a proporcionar historial de desplazamientos.\n\nEl Salvoconducto de Milicia Orbital era valido. El motor de reglas no registro violaciones. Solo el interrogatorio revelo el perfil de riesgo del solicitante.\n\nEl Supervisor Halvek registra la decision como aplicacion ejemplar del interrogatorio sistematico ante perfiles de alto riesgo.",
+    "effects": {
+      "institutional_trust": 1,
+      "security_risk": -1
+    }
+  },
+  {
+    "id": "c06_transferred_salvoconducto_admitted",
+    "day": 6,
+    "priority": 165,
+    "type": "case",
+    "tone": "negative",
+    "severity": "major",
+    "trigger_flag": "flag_transferred_salvoconducto_admitted",
+    "summary_text": "Comerciante admitido con Salvoconducto de otra persona. Cesion no autorizada ignorada.",
+    "title": "SALVOCONDUCTO CEDIDO — Documento intransferible aceptado a nombre ajeno",
+    "body": "Dorn Rael fue admitido con un Salvoconducto cuyo titular registrado — 'Rann Dohl' — no coincide con su nombre. El solicitante declaro expresamente que el documento pertenecia a su socio comercial.\n\nLos Salvoconductos de Faccion son intransferibles. La cesion no autorizada invalida el documento. El socio 'Rann Dohl' podria estar usando documentos de identidad duplicados en otras instalaciones.\n\nLa Liga Mercantil de Rutas ha sido notificada. El Ministerio abre revision de acceso.",
+    "effects": {
+      "security_risk": 1,
+      "supervisor_suspicion": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c06_transferred_salvoconducto_held",
+    "day": 6,
+    "priority": 149,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_transferred_salvoconducto_held",
+    "summary_text": "Comerciante retenido al declarar Salvoconducto prestado por tercero.",
+    "title": "RETENCION CORRECTA — Salvoconducto cedido detectado por interrogatorio",
+    "body": "Dorn Rael fue correctamente retenido al declarar que el Salvoconducto pertenecia a su socio comercial 'Rann Dohl'.\n\nEl campo 'titular' del Salvoconducto no coincide con el nombre del Pase — discrepancia detectable por lectura directa del documento. El interrogatorio sobre identidad confirmo y explico la inconsistencia.\n\nLa Liga Mercantil de Rutas ha sido informada. El Supervisor Halvek registra el uso combinado de lectura documental e interrogatorio como practica correcta.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c06_mother_honest_approved",
+    "day": 6,
+    "priority": 142,
+    "type": "case",
+    "tone": "positive",
+    "severity": "minor",
+    "trigger_flag": "flag_mother_honest_approved",
+    "summary_text": "Ciudadana con motivo personal no declarado admitida. Documentos validos. Tramite real.",
+    "title": "APLICACION CORRECTA — Ciudadana con tramite valido admitida sin infraccion",
+    "body": "Asel Vor fue correctamente admitida. Sus documentos son validos y el tramite declarado en el Pase — transferencia de residencia — es real.\n\nLa revelacion voluntaria de un motivo personal adicional — visita a familiar en situacion critica — no constituye infraccion protocolar. No existe regla activa que prohiba la coincidencia de tramites con urgencias personales.\n\nEl Supervisor Halvek registra la decision como aplicacion correcta del criterio protocolar: la honestidad voluntaria no penaliza cuando el documento es valido.",
+    "effects": {
+      "institutional_trust": 1
+    }
+  },
+  {
+    "id": "c06_mother_honest_held",
+    "day": 6,
+    "priority": 158,
+    "type": "case",
+    "tone": "negative",
+    "severity": "minor",
+    "trigger_flag": "flag_mother_honest_held",
+    "summary_text": "Ciudadana retenida pese a documentos validos y tramite real. Honestidad penalizada.",
+    "title": "RETENCION INCORRECTA — Ciudadana con documentos validos detenida sin infraccion",
+    "body": "Asel Vor fue retenida pese a presentar documentos completamente validos y un tramite de residencia real y activo.\n\nLa revelacion de un motivo personal adicional no constituye infraccion protocolar. El inspector aplico retencion sin infraccion documental visible — una decision no respaldada por ninguna regla activa.\n\nEl Registro de Residencias ha notado la ausencia de la solicitante. Su hijo permanece sin visita en el Centro Medico. El expediente registra una retencion injustificada.",
+    "effects": {
+      "civilian_harm": 1,
+      "institutional_trust": -1
+    }
+  },
+  {
+    "id": "c06_eficiencia_maxima",
+    "day": 6,
+    "priority": 100,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Eficiencia registrada — Interrogatorio sistematico aplicado",
+    "body": "El Ministerio de Admision Planetaria registra eficiencia maxima en el Puesto Umbral 7 durante el sexto turno de control.\n\nEl interrogatorio fue aplicado como herramienta sistematica. Las contradicciones verbales fueron detectadas antes de tomar decisiones. El Supervisor Halvek registra el turno como referencia de buena practica bajo las directrices del Dia 6.",
+    "conditions": { "max_errors": 0, "min_credits": 50 },
+    "effects": { "institutional_trust": 1, "supervisor_suspicion": -1 }
+  },
+  {
+    "id": "c06_turno_sin_incidentes",
+    "day": 6,
+    "priority": 90,
+    "type": "performance",
+    "tone": "positive",
+    "title": "Turno sin incidentes",
+    "body": "El Ministerio de Admision Planetaria registra el cierre del sexto turno sin violaciones documentadas.\n\nEl interrogatorio fue usado de forma correcta durante el turno. Su expediente se mantiene estable.",
+    "conditions": { "max_errors": 0 },
+    "effects": { "institutional_trust": 1 }
+  },
+  {
+    "id": "c06_creditos_criticos",
+    "day": 6,
+    "priority": 85,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Situacion economica critica",
+    "body": "Las penalizaciones acumuladas han llevado su cuenta de creditos a un nivel critico.\n\nEl Ministerio emite alerta de estabilidad economica. La nota interna del Supervisor Halvek es clara: el interrogatorio no es opcional en el Dia 6. Las contradicciones verbales son tan validas como las documentales.",
+    "conditions": { "max_credits": 19, "min_errors": 1 },
+    "effects": { "supervisor_suspicion": 1, "institutional_trust": -1 }
+  },
+  {
+    "id": "c06_irregularidades_menores",
+    "day": 6,
+    "priority": 80,
+    "type": "performance",
+    "tone": "mixed",
+    "title": "Turno con irregularidades menores",
+    "body": "Se registran decisiones incorrectas durante el sexto turno de control.\n\nEl Supervisor Halvek emite notificacion interna. La nota del Ministerio para el Dia 6 es explicita: algunas irregularidades solo son detectables mediante el interrogatorio. Omitir las preguntas es omitir parte del protocolo de revision.",
+    "conditions": { "min_errors": 1, "max_errors": 2 },
+    "effects": { "supervisor_suspicion": 1 }
+  },
+  {
+    "id": "c06_turno_deficiente",
+    "day": 6,
+    "priority": 70,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno deficiente",
+    "body": "El sexto turno de control registra errores que superan el margen tolerado.\n\nEl Supervisor Halvek solicita reunion de revision. Las directrices del Dia 6 son claras: el interrogatorio es parte obligatoria del control. Ignorar las preguntas disponibles equivale a ignorar herramientas de protocolo activas. Se aplica penalizacion adicional.",
+    "conditions": { "min_errors": 3, "max_errors": 5 },
+    "effects": { "supervisor_suspicion": 2, "institutional_trust": -1 }
+  },
+  {
+    "id": "c06_turno_catastrofico",
+    "day": 6,
+    "priority": 60,
+    "type": "performance",
+    "tone": "negative",
+    "title": "Turno catastrofico",
+    "body": "El registro del sexto turno es inaceptable.\n\nMultiples contradicciones verbales fueron ignoradas. Agentes, transportistas y solicitantes con declaraciones inconsistentes accedieron al Umbral sin verificacion. El Supervisor Halvek suspende la calificacion de confianza. El Ministerio ha iniciado revision formal del Puesto.\n\nEl interrogatorio no es una opcion. Es el protocolo.",
+    "conditions": { "min_errors": 6 },
+    "effects": { "supervisor_suspicion": 3, "institutional_trust": -2 }
+  }
+]

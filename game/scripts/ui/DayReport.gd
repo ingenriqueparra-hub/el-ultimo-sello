@@ -35,7 +35,7 @@ func _ready() -> void:
 	_build_debug_panel()
 	_populate(pending_summary)
 	var current_day: int = pending_summary.get("day", 1)
-	header_label.text = "REPORTE DEL TURNO — DIA %d" % current_day
+	header_label.text = "REPORTE DEL TURNO - DIA %d" % current_day
 	restart_btn.pressed.connect(_on_restart_pressed)
 	if not _is_terminal:
 		_maybe_add_continue_button(current_day)
@@ -118,23 +118,23 @@ func _add_audit_block(decision: Dictionary) -> void:
 
 	var header_color: Color = COLOR_OK if was_correct else COLOR_ERROR
 	var header_prefix: String = "EXPEDIENTE VALIDADO" if was_correct else "EXPEDIENTE OBSERVADO"
-	_add_block_line("%s — %s" % [header_prefix, name], header_color, 13)
-	_add_block_line("  Accion registrada:  %s" % dec_label, COLOR_DIM, 12)
+	_add_block_line("%s - %s" % [header_prefix, name], header_color, 11)
+	_add_block_line("  Accion registrada:  %s" % dec_label, COLOR_DIM, 10)
 
 	if was_correct:
 		var note: String = str(report.get("correct_note", ""))
 		if note != "":
-			_add_block_line("  Resultado: %s" % note, COLOR_DIM, 12)
+			_add_block_line("  Resultado: %s" % note, COLOR_DIM, 10)
 		if delta == 0:
-			_add_block_line("  Sin sancion.", COLOR_DIM, 12)
+			_add_block_line("  Sin sancion.", COLOR_DIM, 10)
 	else:
 		var note: String = str(report.get("wrong_note", ""))
 		if note != "":
-			_add_block_line("  Observacion: %s" % note, COLOR_ERROR.lightened(0.15), 12)
+			_add_block_line("  Observacion: %s" % note, COLOR_ERROR.lightened(0.15), 10)
 		if correct_dec != "":
-			_add_block_line("  Accion protocolaria omitida: %s" % correct_label_str, COLOR_DIM, 12)
+			_add_block_line("  Accion protocolaria omitida: %s" % correct_label_str, COLOR_DIM, 10)
 		if delta < 0:
-			_add_block_line("  Sancion aplicada: %d creditos" % delta, COLOR_ERROR, 12)
+			_add_block_line("  Sancion aplicada: %d creditos" % delta, COLOR_ERROR, 10)
 
 	var spacer := Label.new()
 	spacer.text = " "
@@ -168,7 +168,7 @@ func _style_panel(panel: PanelContainer, bg: Color, border: Color) -> void:
 	style.bg_color = bg
 	style.border_color = border
 	style.set_border_width_all(1)
-	style.set_content_margin_all(10)
+	style.set_content_margin_all(6)
 	panel.add_theme_stylebox_override("panel", style)
 
 func _install_visual_layers() -> void:
@@ -228,9 +228,10 @@ func _maybe_add_continue_button(current_day: int) -> void:
 	if not FileAccess.file_exists("res://data/days/day_%02d.json" % next_day):
 		return
 	var btn := Button.new()
-	btn.text = "CONTINUAR — DIA %d" % next_day
-	btn.custom_minimum_size = Vector2(280, 50)
-	btn.add_theme_font_size_override("font_size", 18)
+	btn.text = "CONTINUAR - DIA %d" % next_day
+	btn.custom_minimum_size = Vector2(260, 44)
+	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	btn.add_theme_font_size_override("font_size", 14)
 	var s: StyleBox = _make_button_style("", Color(0.04, 0.16, 0.36, 1))
 	var s_hover: StyleBox = _make_button_style("", Color(0.06, 0.24, 0.52, 1))
 	btn.add_theme_stylebox_override("normal", s)
@@ -250,8 +251,8 @@ func _build_debug_panel() -> void:
 	_debug_panel.z_index = 100
 	_debug_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_debug_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
-	_debug_panel.custom_minimum_size = Vector2(420, 0)
-	_debug_panel.offset_left = -420
+	_debug_panel.custom_minimum_size = Vector2(312, 0)
+	_debug_panel.offset_left = -312
 
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(0.03, 0.03, 0.06, 0.93)
@@ -264,9 +265,9 @@ func _build_debug_panel() -> void:
 	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var title := Label.new()
-	title.text = "[ DEBUG — REPORTE ]"
+	title.text = "[ DEBUG - REPORTE ]"
 	title.add_theme_color_override("font_color", Color(0.55, 0.90, 1.0, 1))
-	title.add_theme_font_size_override("font_size", 11)
+	title.add_theme_font_size_override("font_size", 10)
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var sep := HSeparator.new()
@@ -279,7 +280,7 @@ func _build_debug_panel() -> void:
 	_debug_label = Label.new()
 	_debug_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_debug_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_debug_label.add_theme_font_size_override("font_size", 11)
+	_debug_label.add_theme_font_size_override("font_size", 10)
 	_debug_label.add_theme_color_override("font_color", Color(0.55, 0.90, 1.0, 1))
 	_debug_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_debug_label.text = "Sin datos."
@@ -405,7 +406,7 @@ func _show_terminal_ending(terminal: Dictionary) -> void:
 	style.bg_color = Color(0.12, 0.04, 0.04, 1)
 	style.border_color = color_terminal
 	style.set_border_width_all(2)
-	style.set_content_margin_all(10)
+	style.set_content_margin_all(6)
 	panel.add_theme_stylebox_override("panel", style)
 	restart_btn.text = "NUEVA PARTIDA"
 

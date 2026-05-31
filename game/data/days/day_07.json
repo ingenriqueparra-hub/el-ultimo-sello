@@ -1,0 +1,19 @@
+{
+  "day": 7,
+  "title": "Umbral 7 — Septimo Turno de Control",
+  "intro": "COMUNICADO CONJUNTO — MINISTERIO DE ADMISION PLANETARIA Y SUPERVISOR HALVEK: Este es el ultimo turno del Periodo de Evaluacion Inicial. Todos los expedientes del dia seran revisados con prioridad maxima. Se notifica la reactivacion de cuarentena en la Zona de Restriccion Voth-3 por contaminacion biologica de nivel 2. Todo ingreso desde dicha zona queda bloqueado hasta nuevo aviso. Asimismo, durante este turno pueden presentarse Ordenes Superiores emitidas por autoridades ministeriales o por el propio Supervisor. Dichas Ordenes tienen caracter vinculante y pueden modificar, suspender o contradecir protocolos regulares. El inspector es responsable de leer e interpretar correctamente cada Orden. Al cierre del turno, el Ministerio emitira el dictamen definitivo del Periodo de Evaluacion.",
+  "current_date": "304.00",
+  "rules_active": [
+    "rule_001", "rule_002", "rule_003", "rule_004",
+    "rule_005", "rule_006", "rule_007",
+    "rule_008",
+    "rule_009", "rule_010", "rule_011",
+    "rule_012", "rule_013"
+  ],
+  "applicant_ids": [
+    "applicant_061", "applicant_062", "applicant_063", "applicant_064", "applicant_065",
+    "applicant_066", "applicant_067", "applicant_068", "applicant_069", "applicant_070"
+  ],
+  "credits_start": 50,
+  "quota": 10
+}

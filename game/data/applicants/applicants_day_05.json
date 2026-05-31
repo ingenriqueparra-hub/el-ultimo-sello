@@ -1,0 +1,295 @@
+[
+  {
+    "id": "applicant_041",
+    "name": "Vael Kross",
+    "type": "citizen",
+    "origin": "Sector Residencial Este",
+    "destination": "Registro Civil Central, Nivel 2",
+    "purpose": "Transferencia de licencia residencial",
+    "dialogue_intro": "Buenos turnos. Soy miembro de la Liga Mercantil. Vengo a tramitar una transferencia de licencia residencial. Tengo el Pase, el Certificado y el Salvoconducto de la Liga.",
+    "documents": ["transit_pass_041", "bio_cert_041", "salvoconducto_041"],
+    "flags": [],
+    "questions": {
+      "motivo": "Transferencia de licencia residencial al Registro Civil del Nivel 2. Tramite administrativo estandar.",
+      "origen": "Sector Residencial Este. Llevo cuatro ciclos viviendo alli.",
+      "carga": "Solo mis documentos personales. Nada mas."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso tutorial del nuevo documento. Todos los documentos validos, Salvoconducto de Liga Mercantil reconocida y vigente. Sin motivo de carga: rule_009 no aplica. El jugador aprende como se ve un Salvoconducto correcto."
+    }
+  },
+  {
+    "id": "applicant_042",
+    "name": "Denn Yara",
+    "type": "worker",
+    "origin": "Taller de Componentes, Sector Oeste",
+    "destination": "Planta de Manufactura Norte",
+    "purpose": "Turno de trabajo en planta de manufactura",
+    "dialogue_intro": "Operario de manufactura. Vengo a trabajar. El Pase esta un poco vencido pero el turno es urgente. El capataz me necesita alla.",
+    "documents": ["transit_pass_042", "bio_cert_042"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Turno de manufactura en la planta norte. Lo hago dos veces por ciclo.",
+      "origen": "Taller de Componentes, Sector Oeste. Trabajo alli como contratista.",
+      "carga": "Solo herramientas personales. Nada de carga."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase de Transito vencido (300.08 < 302.00). Sin Salvoconducto que altere la situacion. Regla base heredada del Dia 1. Establece que la presencia o ausencia de un Salvoconducto no corrige documentos base vencidos."
+    }
+  },
+  {
+    "id": "applicant_043",
+    "name": "Ortas Vel",
+    "type": "merchant",
+    "origin": "Puerto de Carga Externo",
+    "destination": "Mercado Interior, Nivel 3",
+    "purpose": "Distribucion de materiales de construccion",
+    "dialogue_intro": "Distribuidor habitual. Traigo el Pase, el Certificado y mi Salvoconducto del Frente. No deberia haber problema.",
+    "documents": ["transit_pass_043", "bio_cert_043", "salvoconducto_043"],
+    "flags": [],
+    "questions": {
+      "motivo": "Distribucion de materiales de construccion al Mercado Interior. Ruta habitual.",
+      "origen": "Puerto de Carga Externo. Mi base de operaciones desde hace tres ciclos.",
+      "carga": "Materiales de construccion estandar. Ninguna carga especial."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_frente_libre_merchant_admitted"
+    },
+    "report": {
+      "correct_note": "Rechazado por Salvoconducto de faccion no reconocida. El 'Frente Libre de Transito' no figura en el Directorio Oficial de Facciones Autorizadas. Comunicado MAP-9 aplicado.",
+      "wrong_note": "Solicitante admitido con Salvoconducto de faccion no reconocida. El 'Frente Libre de Transito' no esta en el Directorio Oficial. Comunicado MAP-9 ignorado."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "medium",
+      "violations": ["rule_012"],
+      "notes": "Salvoconducto con faccion 'Frente Libre de Transito' que NO esta en la lista de facciones autorizadas. Pase y Certificado validos. El jugador aprende a verificar la faccion del Salvoconducto contra el Directorio Oficial."
+    }
+  },
+  {
+    "id": "applicant_044",
+    "name": "Illana Veyr",
+    "type": "noble",
+    "origin": "Residencia Casa Veyr, Sector Alto",
+    "destination": "Camara de Asignaciones, Nivel 1",
+    "purpose": "Visita de representacion nobiliaria",
+    "dialogue_intro": "Representante de la Casa Veyr. Mi Salvoconducto acredita mi rango. La Camara de Asignaciones me espera. No deberia necesitar mas explicaciones.",
+    "documents": ["transit_pass_044", "bio_cert_044", "salvoconducto_044"],
+    "flags": [],
+    "questions": {
+      "motivo": "Visita de representacion ante la Camara de Asignaciones. Asunto de estado de la Casa Veyr.",
+      "origen": "Residencia oficial de la Casa Veyr. Sector Alto, fuera de jurisdiccion directa del Ministerio.",
+      "carga": "Solo documentos y comunicaciones internas de la Casa."
+    },
+    "question_alerts": {},
+    "report": {
+      "correct_note": "Rechazada por Salvoconducto de Casa Veyr vencido desde el ciclo 299.00. Vigencia insuficiente independientemente del rango declarado. Comunicado MAP-9 aplicado.",
+      "wrong_note": "Representante de Casa Veyr admitida con Salvoconducto vencido desde ciclo 299.00. El rango fue aceptado como razon suficiente. Comunicado MAP-9 ignorado."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_013"],
+      "notes": "La faccion 'Casa Veyr' es reconocida (rule_012 pasa). Pero el Salvoconducto esta vencido: vigencia 299.00 < 302.00. La presion politica de la noble no altera el protocolo. El jugador aprende que faccion reconocida + Salvoconducto vencido = rechazo."
+    }
+  },
+  {
+    "id": "applicant_045",
+    "name": "Tasek Ohm",
+    "type": "inspector",
+    "origin": "Sede del Oficio de Pureza Civica",
+    "destination": "Puesto de Control Umbral 7",
+    "purpose": "Inspeccion de rutina del Oficio de Pureza Civica",
+    "dialogue_intro": "Inspector acreditado del Oficio. Vengo a realizar la revision de rutina del Puesto Umbral 7. El Decreto OPC-7 me exime del Certificado Biometrico durante ejercicio de funciones. Revise las clausulas del Salvoconducto.",
+    "documents": ["transit_pass_045", "salvoconducto_045"],
+    "flags": [],
+    "questions": {
+      "motivo": "Inspeccion de rutina del Oficio de Pureza Civica al Puesto Umbral 7. Revisiones programadas cada dos ciclos.",
+      "origen": "Sede central del Oficio. Edificio administrativo del Ministerio, Nivel 0.",
+      "carga": "Solo equipos de inspeccion del Oficio. Todo declarado en el Salvoconducto."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_approve": "flag_opc_exemption_honored",
+      "on_wrong_reject": "flag_opc_exemption_denied"
+    },
+    "report": {
+      "correct_note": "Inspector del Oficio admitido con exencion biometrica valida. El Decreto OPC-7 registrado en el Salvoconducto exime la presentacion del Certificado durante funciones oficiales.",
+      "wrong_note": "Inspector del Oficio rechazado pese a exencion biometrica valida en el Salvoconducto. El Decreto OPC-7 fue ignorado. El Oficio ha registrado la obstruccion."
+    },
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "No presenta bio_cert: rule_005 marcara violacion. Pero el Salvoconducto del Oficio de Pureza Civica — la misma institucion que emite rule_005 — incluye clausula de exencion biometrica explicita. El jugador que aprueba correctamente entiende que un privilegio oficial reconocido puede anular una regla de la misma fuente. Rechazar es la decision incorrecta y tiene consecuencias graves: el Oficio registra la obstruccion."
+    }
+  },
+  {
+    "id": "applicant_046",
+    "name": "Grev Soln",
+    "type": "soldier",
+    "origin": "Estacion Orbital Sector 4",
+    "destination": "Cuartel Milicia Orbital, Nivel 5",
+    "purpose": "Reintegracion operativa post-mision",
+    "dialogue_intro": "Veterano en retorno. Tengo el Pase, el Certificado y el Salvoconducto de la Milicia. La orden de reintegracion esta activa. Sin novedades que declarar.",
+    "documents": ["transit_pass_046", "bio_cert_046", "salvoconducto_046"],
+    "flags": ["biological_anomaly"],
+    "questions": {
+      "motivo": "Reintegracion operativa. Las ordenes del cuartel me situan aqui hoy.",
+      "origen": "Estacion Orbital Sector 4. Concluida la mision hace tres dias.",
+      "carga": "Equipo reglamentario de combate. Todo declarado en el Pase."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_soldier_anomaly_militia_admitted",
+      "on_correct_hold": "flag_soldier_anomaly_militia_held"
+    },
+    "report": {
+      "correct_note": "Soldado retenido por anomalia biologica detectada por escaner no registrada en el Certificado Biometrico. El Salvoconducto de la Milicia no cubre discrepancias biometricas activas.",
+      "wrong_note": "Soldado con anomalia biologica activa admitido. El Salvoconducto de la Milicia fue aceptado como razon suficiente para ignorar la deteccion del escaner."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Todos los documentos validos. Salvoconducto de Milicia Orbital reconocido y vigente (rules 012 y 013 pasan). bio_cert indica 'Ninguna' anomalia. Pero el escaner detecta anomalia biologica no documentada. El Salvoconducto ampara la reintegracion pero no puede desactivar evidencia fisica del escaner. La decision correcta es retener para verificacion."
+    }
+  },
+  {
+    "id": "applicant_047",
+    "name": "Renn Dhal",
+    "type": "cleric",
+    "origin": "Parroquia del Umbral Externo",
+    "destination": "Santuario Umbral Interior",
+    "purpose": "Peregrinaje anual al Santuario Umbral",
+    "dialogue_intro": "Hermano del Clero del Sello. Realizo el peregrinaje anual al Santuario. El Salvoconducto del Clero avala mi transito. Es el documento oficial del Clero.",
+    "documents": ["transit_pass_047", "bio_cert_047", "salvoconducto_047"],
+    "flags": [],
+    "questions": {
+      "motivo": "Peregrinaje anual al Santuario Umbral. Lo realizo cada ciclo desde hace doce anos.",
+      "origen": "Parroquia del Umbral Externo. Llevo alli siete ciclos como hermano de paso.",
+      "carga": "Solo objetos liturgicos personales. Nada de uso comercial."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_clero_invalid_purpose_admitted",
+      "on_correct_hold": "flag_clero_invalid_purpose_held"
+    },
+    "report": {
+      "correct_note": "Clerigo retenido tras detectar que el Salvoconducto del Clero del Sello excluye explicitamente el transito de peregrinos. El motivo declarado no esta amparado por el documento presentado.",
+      "wrong_note": "Clerigo admitido con Salvoconducto que excluye explicitamente el transito de peregrinos. El documento fue aceptado sin leer las clausulas de exclusion."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "La faccion 'Clero del Sello' es reconocida (rule_012 pasa). El Salvoconducto no esta vencido (rule_013 pasa). Ningun otro documento falla. El trampa: las clausulas del Salvoconducto indican explicitamente que NO ampara transito de peregrinos ni actividades liturgicas externas. El motivo del Pase es 'Peregrinaje'. El jugador debe LEER las clausulas para detectar la incompatibilidad. La presencia del documento no garantiza que el documento cubra este proposito."
+    }
+  },
+  {
+    "id": "applicant_048",
+    "name": "Meira Sonn",
+    "type": "refugee",
+    "origin": "Bloque de Desplazados, Sector Exterior",
+    "destination": "Centro de Asilo Civil, Nivel 2",
+    "purpose": "Busqueda de asilo civil temporal",
+    "dialogue_intro": "Por favor. Vengo del bloque de desplazados con mis hijos. La Liga de las Cenizas nos registro y nos dio el Salvoconducto. Solo buscamos asilo temporal en el Centro Civil.",
+    "documents": ["transit_pass_048", "bio_cert_048", "salvoconducto_048"],
+    "flags": [],
+    "questions": {
+      "motivo": "Asilo civil temporal. El bloque de desplazados ya no es seguro. Tenemos todos los documentos que nos dieron.",
+      "origen": "Bloque de Desplazados, Sector Exterior. Llevamos tres ciclos alli tras el colapso del Sector 12.",
+      "carga": "Solo pertenencias personales y documentos de mis hijos. Nada mas."
+    },
+    "question_alerts": {},
+    "narrative_hooks": {
+      "on_correct_reject": "flag_refugee_faction_rejected",
+      "on_wrong_approve": "flag_refugee_faction_admitted"
+    },
+    "report": {
+      "correct_note": "Rechazada por Salvoconducto de faccion no reconocida. La 'Liga de las Cenizas' no figura en el Directorio Oficial de Facciones Autorizadas. El protocolo fue aplicado.",
+      "wrong_note": "Desplazada admitida con Salvoconducto de faccion no reconocida. La 'Liga de las Cenizas' no esta en el Directorio Oficial. El contexto humanitario fue aceptado como exencion no prevista en el protocolo."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_012"],
+      "notes": "Caso moral del Dia 5. La 'Liga de las Cenizas' es una organizacion no reconocida formada en zonas de colapso, fuera del Directorio Oficial. Sus documentos no tienen validez legal. Pase y bio_cert validos. La decision correcta es rechazar porque la faccion del Salvoconducto no esta autorizada. El costo humano — desplazada con hijos buscando asilo — se registra como consecuencia narrativa via civilian_harm."
+    }
+  },
+  {
+    "id": "applicant_049",
+    "name": "Savar Teth",
+    "type": "agent",
+    "origin": "Base Operacional Este",
+    "destination": "Puesto de Control Umbral 7",
+    "purpose": "Mision de vigilancia Umbral-9",
+    "dialogue_intro": "Agente de la Milicia Orbital. Mision activa. El Salvoconducto es valido. Sin mas preguntas.",
+    "documents": ["transit_pass_049", "bio_cert_049", "salvoconducto_049"],
+    "flags": [],
+    "questions": {
+      "motivo": "Mision Umbral-9. Vigilancia de sector de control. Aunque... la mision fue concluida hace cuatro dias. Pero el Salvoconducto sigue siendo mi credencial de acceso habitual.",
+      "origen": "Base Operacional Este. Salida hace seis dias.",
+      "carga": "Equipo de vigilancia estandar. Todo declarado."
+    },
+    "question_alerts": {
+      "motivo": "CONTRADICCION: El agente declara que la Mision Umbral-9 fue concluida hace cuatro dias. El Salvoconducto ampara exclusivamente la 'Mision de vigilancia Umbral-9'. Si la mision esta concluida, el Salvoconducto ya no respalda un proposito activo."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_cancelled_mission_agent_admitted",
+      "on_correct_hold": "flag_cancelled_mission_held"
+    },
+    "report": {
+      "correct_note": "Agente retenido tras declarar que la Mision Umbral-9 fue concluida. El Salvoconducto ampara exclusivamente dicha mision. Credencial activa sin proposito vigente requiere verificacion superior.",
+      "wrong_note": "Agente admitido pese a declarar que la Mision Umbral-9 fue concluida. El Salvoconducto fue aceptado sin verificar que el proposito que ampara sigue activo."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Todos los documentos validos. Salvoconducto de Milicia Orbital reconocido y vigente. Rules 012 y 013 pasan. La contradiccion solo es detectable por interrogatorio: el agente revela que la mision ya esta concluida, pero el Salvoconducto solo ampara esa mision. Sin mision activa, el Salvoconducto carece de proposito vigente. El jugador que hace la pregunta correcta detecta la inconsistencia."
+    }
+  },
+  {
+    "id": "applicant_050",
+    "name": "Levan Mors",
+    "type": "merchant",
+    "origin": "Puerto de Distribucion Central",
+    "destination": "Deposito Norte, Nivel 4",
+    "purpose": "Entrega de componentes certificados para linea de ensamble",
+    "dialogue_intro": "Distribuidor certificado de la Liga. Traigo el Pase, el Certificado, el Permiso de Carga y el Salvoconducto. Todo en regla. Ruta habitual.",
+    "documents": ["transit_pass_050", "bio_cert_050", "ingress_permit_050", "salvoconducto_050"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de componentes de ensamble industrial al Deposito Norte. Contrato de la Liga en vigor.",
+      "origen": "Puerto de Distribucion Central. Mi base de operaciones.",
+      "carga": "Componentes de ensamble industrial de clase 2. Todo sellado y registrado en el Permiso de Carga."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso tutorial final del Dia 5. Todo en orden: Pase vigente, bio_cert vigente, Permiso de Carga vigente con destino coincidente, Salvoconducto de Liga Mercantil reconocido y vigente. El jugador ve como se integran correctamente todos los documentos de los cuatro dias anteriores mas el nuevo Salvoconducto."
+    }
+  }
+]

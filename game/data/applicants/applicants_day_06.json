@@ -1,0 +1,322 @@
+[
+  {
+    "id": "applicant_051",
+    "name": "Voss Kern",
+    "type": "citizen",
+    "origin": "Sector Industrial Sur",
+    "destination": "Centro de Asignaciones Laborales, Nivel 3",
+    "purpose": "Asignacion de puesto tecnico en sector industrial",
+    "dialogue_intro": "Buenos turnos. Vengo a tramitar una asignacion de puesto tecnico. Los documentos estan en regla. Sin novedades.",
+    "documents": ["transit_pass_051", "bio_cert_051"],
+    "flags": [],
+    "questions": {
+      "motivo": "Asignacion de puesto en el sector industrial del Nivel 3. Me convocaron hace dos dias. Es un contrato de cuatro ciclos.",
+      "origen": "Sector Industrial Sur. Trabajo alli desde hace tres anos como tecnico de mantenimiento.",
+      "carga": "Solo mis documentos y herramientas personales. Nada mas.",
+      "identidad": "Voss Kern. Codigo de identidad CV-5519. Sin antecedentes en el Ministerio."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso limpio. Interrogatorio confirma historia consistente con documentos. Introduce al jugador al uso sistematico de preguntas en el Dia 6."
+    }
+  },
+  {
+    "id": "applicant_052",
+    "name": "Hara Lenn",
+    "type": "worker",
+    "origin": "Taller Mecanico, Sector Oeste",
+    "destination": "Planta de Ensamble, Sector Este",
+    "purpose": "Turno de trabajo en planta de ensamble",
+    "dialogue_intro": "Operaria de la planta. Vengo al turno. El Pase esta un poco pasado pero llevo este recorrido hace dos anos. No deberia haber problema.",
+    "documents": ["transit_pass_052", "bio_cert_052"],
+    "flags": ["expired_document"],
+    "questions": {
+      "motivo": "Turno ordinario en la planta de ensamble del Sector Este. Lo hago cada tres dias.",
+      "origen": "Taller Mecanico del Sector Oeste. Mi base de trabajo habitual.",
+      "carga": "Solo herramientas propias. Nada especial."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "reject",
+      "risk_level": "low",
+      "violations": ["rule_002"],
+      "notes": "Pase de Transito vencido (301.05 < 303.00). Recordatorio de regla base. La historia consistente en el interrogatorio no excusa el documento vencido."
+    }
+  },
+  {
+    "id": "applicant_053",
+    "name": "Oryn Vest",
+    "type": "citizen",
+    "origin": "Sector Residencial Central",
+    "destination": "Cuartel Milicia Orbital, Nivel 7",
+    "purpose": "Visita de descanso y actividades recreativas",
+    "dialogue_intro": "Hola. Solo vengo a dar un paseo por los niveles centrales. Nada importante. El Pase esta en regla.",
+    "documents": ["transit_pass_053", "bio_cert_053"],
+    "flags": [],
+    "questions": {
+      "motivo": "Vengo a dar un paseo por las galerias del nivel central. Necesito un poco de aire. Nada especial.",
+      "origen": "Sector Residencial Central. Vivo alli desde hace seis ciclos.",
+      "carga": "Solo ropa de calle. Nada mas.",
+      "identidad": "Oryn Vest. Ciudadano comun. No tengo vinculo con la Milicia ni con ningun organismo de control."
+    },
+    "question_alerts": {
+      "motivo": "CONTRADICCION: El solicitante declara motivo de paseo recreativo en galerias del nivel central. El Pase de Transito registra como destino 'Cuartel Milicia Orbital, Nivel 7'. Las instalaciones militares no son accesibles para actividades recreativas civiles. Hay una inconsistencia entre el destino declarado y el motivo verbal."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_military_dest_mismatch_admitted",
+      "on_correct_hold": "flag_military_dest_mismatch_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras detectar contradiccion entre motivo verbal recreativo y destino militar registrado en el Pase. El motivo real de la visita al Cuartel no fue declarado.",
+      "wrong_note": "Admitido pese a contradiccion entre motivo verbal de paseo recreativo y destino registrado en el Pase: Cuartel Milicia Orbital, Nivel 7."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos. Ningun regla falla. La contradiccion es entre el motivo verbal (paseo recreativo) y el destino en el Pase (Cuartel Milicia Orbital, Nivel 7). Solo detectable preguntando sobre el motivo. Primer caso donde el interrogatorio es la unica herramienta de deteccion."
+    }
+  },
+  {
+    "id": "applicant_054",
+    "name": "Mael Tors",
+    "type": "carrier",
+    "origin": "Almacen de Transito Exterior",
+    "destination": "Bloque Residencial, Nivel 3",
+    "purpose": "Visita personal a familiar en Nivel 3",
+    "dialogue_intro": "Vengo a visitar a un familiar. Tengo el Pase y el Certificado al dia. Tramite rapido.",
+    "documents": ["transit_pass_054", "bio_cert_054"],
+    "flags": [],
+    "questions": {
+      "motivo": "Visita a un familiar en el Nivel 3. Aprovecho el viaje para llevar unas cosas.",
+      "origen": "Almacen de Transito del Exterior. Trabajo alli como operador.",
+      "carga": "Traigo unas cajas de componentes electronicos para entregar en el Deposito del Nivel 3. Es una entrega para un conocido. No crei que necesitara permiso para eso.",
+      "identidad": "Mael Tors. Operador de almacen. Sin antecedentes de control."
+    },
+    "question_alerts": {
+      "carga": "CONTRADICCION: El Pase de Transito declara motivo 'visita personal a familiar'. El solicitante declara transporte de componentes electronicos para entrega en deposito. La declaracion verbal activa la Circular LMR-4: el motivo real implica entrega de mercancias y requiere Permiso de Carga vigente. No ha sido presentado."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_undeclared_carrier_admitted",
+      "on_correct_hold": "flag_undeclared_carrier_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras declarar en interrogatorio transporte de componentes electronicos para entrega en deposito. El motivo real activa la Circular LMR-4. Permiso de Carga no presentado.",
+      "wrong_note": "Admitido pese a declarar verbalmente transporte de mercancias para entrega. El motivo real activo la Circular LMR-4 que no fue aplicada. Permiso de Carga omitido."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "El Pase.motivo es 'visita personal' — rule_009 no se activa automaticamente. La pregunta sobre carga revela el motivo real: transporte de mercancias para entrega. Ese motivo activa la Circular LMR-4 pero no hay Permiso de Carga. Solo detectable por interrogatorio."
+    }
+  },
+  {
+    "id": "applicant_055",
+    "name": "Sele Korn",
+    "type": "technician",
+    "origin": "Estacion Operativa Kron-7",
+    "destination": "Bloque Residencial, Nivel 4",
+    "purpose": "Visita familiar autorizada",
+    "dialogue_intro": "Tecnico de soporte operativo. Vengo a visitar a mi hermana. Tengo el Pase y el Certificado en regla.",
+    "documents": ["transit_pass_055", "bio_cert_055"],
+    "flags": [],
+    "questions": {
+      "motivo": "Visita a mi hermana. Vive en el bloque residencial del Nivel 4. Una visita familiar normal.",
+      "origen": "La Estacion Operativa Kron-7. Llevo tres anos alli como soporte tecnico de sistemas.",
+      "carga": "Solo equipaje personal. Ropa y algunos libros.",
+      "historial": "Mi supervisor me dio permiso verbal para salir este dia. Era urgente y no habia tiempo de tramitar la orden escrita. Siempre he cumplido el protocolo pero esta vez fue de urgencia."
+    },
+    "question_alerts": {
+      "historial": "CONTRADICCION: El solicitante declara haber salido de la Estacion Operativa Kron-7 con permiso verbal de su supervisor. Las estaciones operativas de la Milicia Orbital son instalaciones de acceso restringido. El personal de soporte tecnico requiere Orden de Salida Firmada para cualquier transito externo, incluyendo urgencias familiares. El permiso verbal no tiene validez protocolar. No presenta Orden de Salida."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_unauthorized_exit_admitted",
+      "on_correct_hold": "flag_unauthorized_exit_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras declarar salida de estacion operativa militar con permiso verbal. El protocolo exige Orden de Salida Firmada. La urgencia familiar no constituye exencion.",
+      "wrong_note": "Admitido pese a declarar salida de instalacion militar restringida sin Orden de Salida Firmada. El permiso verbal fue aceptado como suficiente."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos. El Pase.origen registra la Estacion Kron-7 pero no hay regla que lo prohíba directamente. La pregunta sobre historial revela la salida sin Orden escrita de una instalacion militar. Solo detectable por interrogatorio."
+    }
+  },
+  {
+    "id": "applicant_056",
+    "name": "Tan Vel",
+    "type": "citizen",
+    "origin": "Sector Exterior Este",
+    "destination": "Centro Comercial, Nivel 2",
+    "purpose": "Compras y tramites personales",
+    "dialogue_intro": "Buenos dias. Solo vengo a hacer unas compras. El Pase y el Certificado estan al dia.",
+    "documents": ["transit_pass_056", "bio_cert_056"],
+    "flags": [],
+    "questions": {
+      "motivo": "Compras en el Centro Comercial del Nivel 2. Nada urgente.",
+      "origen": "Sector Exterior Este. Vivo alli.",
+      "carga": "Solo lo que compre aqui, nada de entrada.",
+      "identidad": "Mi nombre es Tan Vel. Ya pase por este mismo control esta manana, hace unas cuatro horas. El inspector de turno anterior no tuvo ningun problema. Vengo a por mas cosas."
+    },
+    "question_alerts": {
+      "identidad": "ALERTA: El solicitante declara haber pasado este control de ingreso anteriormente durante la misma jornada. El doble ingreso en la misma jornada sin notificacion registrada en el control constituye anomalia de identidad. Se requiere verificacion del registro de entradas."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_double_entry_admitted",
+      "on_correct_hold": "flag_double_entry_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras declarar un ingreso previo no registrado durante la misma jornada. El doble acceso sin notificacion requiere verificacion de identidad.",
+      "wrong_note": "Admitido pese a declarar un ingreso previo no registrado durante la misma jornada. La anomalia de doble acceso fue ignorada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Documentos validos. La anomalia solo aparece al preguntar sobre identidad: el solicitante revela que ya entro hoy. El doble ingreso no registrado es una anomalia de control que requiere verificacion."
+    }
+  },
+  {
+    "id": "applicant_057",
+    "name": "Kael Orm",
+    "type": "agent",
+    "origin": "Sector de Transito Operativo Norte",
+    "destination": "Puesto de Control Umbral 7",
+    "purpose": "Supervision de instalaciones de control",
+    "dialogue_intro": "Agente en funciones. Supervision de rutina. El Salvoconducto lo cubre todo. Procedan.",
+    "documents": ["transit_pass_057", "bio_cert_057", "salvoconducto_057"],
+    "flags": [],
+    "questions": {
+      "motivo": "Supervision de instalaciones de control perimetral. Trabajo de rutina.",
+      "origen": "Del sector norte. O del este. Llevo varios dias en transito entre puestos. El Salvoconducto cubre todo el recorrido.",
+      "carga": "Solo equipo de supervision estandar. No es relevante.",
+      "historial": "No es relevante donde estuve antes. El Salvoconducto autoriza mi presencia aqui. No tengo obligacion de justificar mi historial de desplazamientos a un inspector de nivel basico."
+    },
+    "question_alerts": {
+      "historial": "CONTRADICCION: El solicitante declara origen 'sector norte', luego corrige a 'sector este o norte'. Describe desplazamiento multiple entre puestos durante varios dias sin ruta fija. El Salvoconducto de Milicia Orbital ampara supervision de instalaciones especificas, no transito indefinido entre puestos. La negativa a declarar historial combinada con la inconsistencia de origen requiere verificacion."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_evasive_agent_admitted",
+      "on_correct_hold": "flag_evasive_agent_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras detectar inconsistencia de origen declarado y negativa a proporcionar historial de desplazamientos. El Salvoconducto no excusa la inconsistencia verbal.",
+      "wrong_note": "Admitido pese a inconsistencia de origen declarado y negativa explicita a dar historial de desplazamientos. El Salvoconducto fue aceptado sin verificar la coherencia de la declaracion."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Salvoconducto de Milicia Orbital valido — rules 012 y 013 pasan. El motor de reglas no detecta nada. La evasion y contradiccion verbal solo son detectables por interrogatorio. El agente con acceso a zonas de control que miente sobre su origen es un riesgo que los documentos no revelan."
+    }
+  },
+  {
+    "id": "applicant_058",
+    "name": "Dorn Rael",
+    "type": "merchant",
+    "origin": "Puerto Comercial Sur",
+    "destination": "Mercado Central, Nivel 2",
+    "purpose": "Tramite comercial registrado",
+    "dialogue_intro": "Comerciante habitual. Pase, Certificado y Salvoconducto al dia. Tramite rapido.",
+    "documents": ["transit_pass_058", "bio_cert_058", "salvoconducto_058"],
+    "flags": [],
+    "questions": {
+      "motivo": "Tramite comercial en el Mercado Central. Contrato de suministro activo.",
+      "origen": "Puerto Comercial Sur. Base de operaciones desde hace cuatro ciclos.",
+      "carga": "Solo muestras comerciales. Nada de carga pesada.",
+      "identidad": "El Salvoconducto me lo presto mi socio comercial. El no necesita viajar hoy y yo si. Tenemos los mismos derechos de acceso comercial dentro de la Liga. Pensé que con eso bastaba."
+    },
+    "question_alerts": {
+      "identidad": "CONTRADICCION: El solicitante declara que el Salvoconducto pertenece a su socio comercial. El campo 'titular' del Salvoconducto registra 'Rann Dohl', diferente al nombre del Pase de Transito 'Dorn Rael'. Los Salvoconductos de Faccion son intransferibles — su validez es exclusiva para el titular registrado."
+    },
+    "narrative_hooks": {
+      "on_wrong_approve": "flag_transferred_salvoconducto_admitted",
+      "on_correct_hold": "flag_transferred_salvoconducto_held"
+    },
+    "report": {
+      "correct_note": "Retenido tras declarar que el Salvoconducto pertenece a otra persona. El campo 'titular' no coincide con el nombre del Pase. Los Salvoconductos son intransferibles.",
+      "wrong_note": "Admitido con Salvoconducto cuyo 'titular' no coincide con el nombre del Pase de Transito. El solicitante declaro que el documento pertenecia a otra persona. La cesion fue ignorada."
+    },
+    "truth": {
+      "should_allow": false,
+      "correct_decision": "hold",
+      "risk_level": "medium",
+      "violations": [],
+      "notes": "Salvoconducto de Liga Mercantil reconocido y vigente — rules 012 y 013 pasan. rule_003 no detecta el mismatch porque salvoconducto usa 'titular', no 'nombre'. El jugador que LEE el salvoconducto puede notar que titular != nombre del pase. El interrogatorio sobre identidad confirma y lo hace explicito."
+    }
+  },
+  {
+    "id": "applicant_059",
+    "name": "Asel Vor",
+    "type": "citizen",
+    "origin": "Sector Residencial Externo",
+    "destination": "Registro de Residencias, Nivel 2",
+    "purpose": "Tramite de transferencia de residencia",
+    "dialogue_intro": "Buenos turnos. Vengo a hacer un tramite de residencia. El Pase y el Certificado estan en regla.",
+    "documents": ["transit_pass_059", "bio_cert_059"],
+    "flags": [],
+    "questions": {
+      "motivo": "El motivo oficial es una transferencia de residencia. Es lo que podia tramitar hoy.",
+      "origen": "Sector Residencial Externo. Vivo alli con mi familia.",
+      "carga": "Solo mis documentos personales.",
+      "historial": "La verdad es que mi hijo esta internado en el Centro Medico del Nivel 2. Esta grave. No habia forma de obtener un permiso de visita medica a tiempo. La transferencia de residencia era el unico documento que podia conseguir hoy. No he falsificado nada — el tramite es real. Solo necesito estar cerca de el."
+    },
+    "question_alerts": {
+      "historial": "DECLARACION SENSIBLE: El solicitante revela que el motivo real de la visita difiere del motivo oficial declarado en el Pase. El motivo declarado — transferencia de residencia — es valido y no constituye falsedad documental. El motivo real — presencia junto a familiar en situacion critica — tampoco constituye infraccion protocolar. No existe regla activa que prohiba esta situacion. El tramite declarado es real. La decision recae en el criterio del inspector."
+    },
+    "narrative_hooks": {
+      "on_correct_approve": "flag_mother_honest_approved",
+      "on_wrong_hold": "flag_mother_honest_held"
+    },
+    "report": {
+      "correct_note": "Admitida. Los documentos son validos y el tramite declarado es real. La revelacion voluntaria del motivo personal no constituye infraccion — el protocolo no prohibe la coincidencia de tramites con urgencias familiares.",
+      "wrong_note": "Retenida sin infraccion documental activa. Los documentos son validos y el tramite declarado es real. La revelacion de motivo personal no constituye irregularidad protocolar."
+    },
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso moral del Dia 6. Documentos completamente validos. La revelacion honesta en el historial no crea una infraccion — el tramite declarado es real y el motivo personal no viola ninguna regla activa. La decision correcta es aprobar. Retener es incorrecto: sanciona la honestidad sin infraccion visible. El costo emocional para el jugador es asumir que el protocolo no requiere compasion, solo cumplimiento."
+    }
+  },
+  {
+    "id": "applicant_060",
+    "name": "Drael Sonn",
+    "type": "merchant",
+    "origin": "Puerto de Distribucion Este",
+    "destination": "Deposito Industrial, Nivel 5",
+    "purpose": "Entrega de materiales de construccion certificados",
+    "dialogue_intro": "Distribuidor certificado de la Liga. Traigo el Pase, el Certificado, el Permiso de Carga y el Salvoconducto. Todo en orden. Ruta habitual.",
+    "documents": ["transit_pass_060", "bio_cert_060", "ingress_permit_060", "salvoconducto_060"],
+    "flags": [],
+    "questions": {
+      "motivo": "Entrega de materiales de construccion al Deposito Industrial del Nivel 5. Contrato de la Liga vigente.",
+      "origen": "Puerto de Distribucion Este. Mi base de operaciones desde hace cinco ciclos.",
+      "carga": "Materiales de construccion de grado industrial. Todo sellado, declarado en el Permiso de Carga.",
+      "identidad": "Drael Sonn. Distribuidor certificado de la Liga Mercantil de Rutas. El Salvoconducto es mio. Llevo este recorrido tres veces por ciclo.",
+      "historial": "Ninguna incidencia anterior en el control. Siempre los mismos documentos, siempre la misma ruta. Sin novedades."
+    },
+    "question_alerts": {},
+    "truth": {
+      "should_allow": true,
+      "correct_decision": "approve",
+      "risk_level": "low",
+      "violations": [],
+      "notes": "Caso tutorial de cierre del Dia 6. Todos los documentos validos. Interrogatorio completo confirma historia coherente. El jugador que ha aprendido a usar sistematicamente el interrogatorio comprueba que tambien puede confirmar inocencia mediante preguntas."
+    }
+  }
+]

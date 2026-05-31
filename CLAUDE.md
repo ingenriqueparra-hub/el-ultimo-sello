@@ -1146,6 +1146,111 @@ Pendientes:
 
 ---
 
+### Módulo 18 — Expansión Día 5: Facciones
+Estado: Completado
+
+Implementado:
+- Nueva validación `field_in_list` en `RuleEngine.gd`: verifica que un campo de documento esté en una lista de valores válidos. Devuelve null si el documento no existe (Salvoconducto es opcional). Flagea si la facción no está en la lista autorizada.
+- `day_05.json` — Día 5, fecha 302.00, 12 reglas activas (001-007 + 009-011 + 012-013 nuevas), 10 solicitantes (041-050), créditos inicio 50.
+- `rules_day_05.json` — 7 reglas heredadas de Día 4 + rule_012 (`field_in_list` sobre `salvoconducto.faccion`) + rule_013 (`field_not_expired` sobre `salvoconducto.vigencia`). Facciones autorizadas: Liga Mercantil de Rutas, Milicia Orbital, Clero del Sello, Casa Veyr, Oficio de Pureza Civica.
+- `applicants_day_05.json` — 10 casos: 2 aprobaciones limpias (041, 050), 1 pase vencido sin salvoconducto (042), 1 salvoconducto de facción no reconocida/Frente Libre (043), 1 salvoconducto vencido/noble Casa Veyr (044), 1 aprobación por exención biométrica OPC válida (045), 1 retención por anomalía pese a salvoconducto Milicia Orbital (046), 1 retención por clausula de exclusión en salvoconducto Clero del Sello (047), 1 rechazo moral/refugiada con salvoconducto de Liga de las Cenizas (048), 1 retención por misión cancelada revelada en interrogatorio (049).
+- `documents_day_05.json` — 29 documentos: 10 transit_pass + 9 bio_cert (sin bio_cert_045) + 9 salvoconducto + 1 ingress_permit.
+- `consequences_day_05.json` — 10 consecuencias de caso (prioridades 145-195) + 5 de rendimiento.
+
+Nueva capa jugable:
+- Un Salvoconducto de facción reconocida y vigente puede otorgar privilegios que anulan reglas estándar (caso 045: exención biométrica OPC).
+- Tener un Salvoconducto válido no basta si las clausulas excluyen el propósito declarado (caso 047: Clero del Sello no cubre peregrinos).
+- Evidencia física del escáner tiene prioridad sobre el Salvoconducto (caso 046).
+- El interrogatorio puede revelar que un Salvoconducto ya no tiene misión activa (caso 049).
+- Caso moral del día (048): persona inocente rechazada porque su afiliación es una organización no reconocida.
+
+Archivos principales:
+- `game/scripts/systems/RuleEngine.gd` (actualizado — `field_in_list`)
+- `game/data/days/day_05.json` (nuevo)
+- `game/data/rules/rules_day_05.json` (nuevo)
+- `game/data/applicants/applicants_day_05.json` (nuevo)
+- `game/data/documents/documents_day_05.json` (nuevo)
+- `game/data/consequences/consequences_day_05.json` (nuevo)
+
+Pendientes:
+- Ninguno para Módulo 18.
+
+---
+
+### Módulo 19 — Expansión Día 6: Interrogatorio
+Estado: Completado
+
+Implementado:
+- Nuevas preguntas `identidad` e `historial` en el sistema de preguntas de `ControlDesk.gd`. El diccionario de claves pasa de 3 a 5 tipos. Los botones aparecen solo si el solicitante tiene esa clave definida en su JSON — sin impacto en días anteriores.
+- `day_06.json` — Día 6, fecha 303.00, 12 reglas activas heredadas (001-007 + 009-011 + 012-013), 10 solicitantes (051-060), créditos inicio 50.
+- `rules_day_06.json` — Reglas heredadas de Día 5 con current_date 303.00. Sin nuevas reglas de motor: las mentiras verbales no son detectables automáticamente.
+- `applicants_day_06.json` — 10 casos: 2 aprobaciones limpias (051, 060), 1 pase vencido (052), 1 contradicción motivo verbal vs. destino militar (053), 1 carga revelada en interrogatorio que activa LMR-4 (054), 1 salida militar sin orden escrita (055), 1 doble ingreso en jornada (056), 1 agente evasivo con origen contradictorio (057), 1 salvoconducto cedido (titular ≠ nombre, 058), 1 caso moral madre honesta (059).
+- `documents_day_06.json` — 24 documentos: 10 transit_pass + 10 bio_cert + 3 salvoconducto (057, 058, 060) + 1 ingress_permit (060). salvoconducto_058 tiene titular "Rann Dohl" diferente al nombre del Pase "Dorn Rael".
+- `consequences_day_06.json` — 12 consecuencias de caso (prioridades 142-190) + 5 de rendimiento. Incluye flag_mother_honest_held con civilian_harm para el caso de retención injustificada de caso moral.
+
+Nueva capa jugable:
+- El interrogatorio pasa de herramienta suplementaria a herramienta principal: la mayoría de las inconsistencias del turno solo son detectables mediante preguntas.
+- Casos 053-058: el motor de reglas no registra ninguna violación — solo el interrogatorio revela el problema.
+- Caso 054: respuesta verbal activa retroactivamente la Circular LMR-4 (el motivo real implica entrega de mercancías).
+- Caso 058: el titular del salvoconducto no coincide con el nombre del Pase — detectable por lectura manual + pregunta identidad.
+- Caso 059: primera vez que el caso moral tiene correct_decision = "approve" — retener es incorrecto y produce civilian_harm.
+
+Narrative hooks activados:
+- applicant_053: on_wrong_approve → flag_military_dest_mismatch_admitted, on_correct_hold → flag_military_dest_mismatch_held
+- applicant_054: on_wrong_approve → flag_undeclared_carrier_admitted, on_correct_hold → flag_undeclared_carrier_held
+- applicant_055: on_wrong_approve → flag_unauthorized_exit_admitted, on_correct_hold → flag_unauthorized_exit_held
+- applicant_056: on_wrong_approve → flag_double_entry_admitted, on_correct_hold → flag_double_entry_held
+- applicant_057: on_wrong_approve → flag_evasive_agent_admitted, on_correct_hold → flag_evasive_agent_held
+- applicant_058: on_wrong_approve → flag_transferred_salvoconducto_admitted, on_correct_hold → flag_transferred_salvoconducto_held
+- applicant_059: on_correct_approve → flag_mother_honest_approved, on_wrong_hold → flag_mother_honest_held
+
+Archivos principales:
+- `game/scripts/ui/ControlDesk.gd` (actualizado — preguntas identidad e historial)
+- `game/data/days/day_06.json` (nuevo)
+- `game/data/rules/rules_day_06.json` (nuevo)
+- `game/data/applicants/applicants_day_06.json` (nuevo)
+- `game/data/documents/documents_day_06.json` (nuevo)
+- `game/data/consequences/consequences_day_06.json` (nuevo)
+
+Pendientes:
+- Ninguno para Módulo 19.
+
+---
+
+### Módulo 20 — Expansión Día 7: Caso narrativo mayor / Orden Superior
+Estado: Completado
+
+Implementado:
+- Tab5 "ORDEN" agregado a `ControlDesk.tscn` (entre Tab4 y TabAlertas). Índice de ALERTAS actualizado de 5 → 6 en todo el código (4 ocurrencias de `_active_tab_index == 6`).
+- `ControlDesk.gd` — `@onready var tab5`, `tab5.disabled = true` en `_ready()`, conexión a `orden_superior`, `tab5.disabled = not _applicant_docs.has("orden_superior")`, incluido en todas las listas de tabs.
+- `day_07.json` — Día 7, fecha 304.00, 13 reglas activas (001-007 + rule_008 reactivada con Zona Voth-3 + 009-013), 10 solicitantes (061-070).
+- `rules_day_07.json` — rule_008 reactivada con `field_not_in_list` sobre `transit_pass.origen`, sector bloqueado: "Zona de Restriccion Voth-3". Sin nuevo tipo de regla — Orden Superior es interpretación manual.
+- `applicants_day_07.json` — 10 casos: aprobación limpia (061), cuarentena Voth-3 (062), madre+niño+Orden humanitaria+anomalía (063), pase vencido+Orden del Supervisor válida → approve (064), docs perfectos+Orden de retención → hold (065), conexión con expediente previo Torv Kael (066), colisión máxima cuarentena+facción no reconocida+escáner (067), Salvoconducto MO + Orden OSI contradictorios → hold (068), Orden clasificada de exclusión OPC-B4 → reject (069), caso de cierre (070).
+- `documents_day_07.json` — 28 documentos: 10 transit_pass + 10 bio_cert + 5 orden_superior + 2 salvoconducto + 1 ingress_permit (no, sin ingress_permit en este día).
+- `consequences_day_07.json` — 13 consecuencias de caso (prioridades 145-200) + 5 de rendimiento. El reporte de rendimiento del Día 7 funciona como dictamen definitivo del Periodo de Evaluacion Inicial.
+
+Nueva capa jugable:
+- Orden Superior como nuevo documento en Tab5: puede excusar violaciones (064), ordenar retención sin violación (065), contradecir un Salvoconducto (068), o ejecutar una exclusión opaca (069).
+- Cuarentena Voth-3 reactivada — rule_008 con nuevo sector.
+- Caso 063 (madre con hijo): sin decisión limpia — la Orden cubre la cuarentena pero no la anomalía → hold correcto.
+- Caso 064: primera vez que approve es correcto aunque rule_002 falle — la Orden del Supervisor Halvek tiene jerarquia.
+- Caso 069 (Arek Norn): caso moral de cierre — persona inocente rechazada por Orden clasificada. Correct = reject. on_correct_reject → civilian_harm.
+- El reporte del Día 7 cierra el Periodo de Evaluación Inicial con dictamen definitivo.
+
+Archivos principales:
+- `game/scenes/main/ControlDesk.tscn` (actualizado — Tab5 ORDEN)
+- `game/scripts/ui/ControlDesk.gd` (actualizado — tab5 + alertas index 6)
+- `game/data/days/day_07.json` (nuevo)
+- `game/data/rules/rules_day_07.json` (nuevo)
+- `game/data/applicants/applicants_day_07.json` (nuevo)
+- `game/data/documents/documents_day_07.json` (nuevo)
+- `game/data/consequences/consequences_day_07.json` (nuevo)
+
+Pendientes:
+- Ninguno para Módulo 20.
+
+---
+
 ### Módulo 12 — Pulido del Día 1
 Estado: Pendiente / En validación
 

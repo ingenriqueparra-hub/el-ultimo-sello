@@ -23,6 +23,8 @@ static func _check_rule(rule: Dictionary, docs: Dictionary, current_date: String
 			return _check_field_match(rule, validation, docs)
 		"field_not_in_list":
 			return _check_field_not_in_list(rule, validation, docs)
+		"field_in_list":
+			return _check_field_in_list(rule, validation, docs)
 		"document_required_if_field":
 			return _check_document_required_if_field(rule, validation, docs)
 	return null
@@ -92,6 +94,17 @@ static func _check_field_not_in_list(rule: Dictionary, validation: Dictionary, d
 	var value: String = docs[dtype].get("fields", {}).get(field, "")
 	if value != "" and value in invalid:
 		return _violation(rule, "Sector bloqueado: \"%s\"" % value)
+	return null
+
+static func _check_field_in_list(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:
+	var dtype: String = validation.get("document_type", "")
+	var field: String = validation.get("field", "")
+	var valid: Array  = validation.get("valid_values", [])
+	if not docs.has(dtype):
+		return null
+	var value: String = docs[dtype].get("fields", {}).get(field, "")
+	if value not in valid:
+		return _violation(rule, "Faccion no autorizada: \"%s\"" % value)
 	return null
 
 static func _check_document_required_if_field(rule: Dictionary, validation: Dictionary, docs: Dictionary) -> Variant:

@@ -1,0 +1,400 @@
+[
+  {
+    "id": "transit_pass_041",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Vael Kross",
+      "codigo_identidad": "CV-7742",
+      "origen": "Sector Residencial Este",
+      "destino": "Registro Civil Central, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Transferencia de licencia residencial",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_041",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Vael Kross",
+      "codigo_identidad": "CV-7742",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_041",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Vael Kross",
+      "faccion": "Liga Mercantil de Rutas",
+      "rango": "Asociado Comercial",
+      "privilegio": "Transito prioritario en zonas de registro y tramitacion",
+      "vigencia": "310.00",
+      "clausulas": "Miembro activo de la Liga Mercantil de Rutas. Expedicion de tramites comerciales y residenciales prioritarios.",
+      "sello_faccion": "LMR-7"
+    }
+  },
+  {
+    "id": "transit_pass_042",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Denn Yara",
+      "codigo_identidad": "CV-2284",
+      "origen": "Taller de Componentes, Sector Oeste",
+      "destino": "Planta de Manufactura Norte",
+      "expira": "300.08",
+      "motivo": "Turno de trabajo en planta de manufactura",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_042",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Denn Yara",
+      "codigo_identidad": "CV-2284",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "340.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "transit_pass_043",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Ortas Vel",
+      "codigo_identidad": "LM-5563",
+      "origen": "Puerto de Carga Externo",
+      "destino": "Mercado Interior, Nivel 3",
+      "expira": "308.00",
+      "motivo": "Distribucion de materiales de construccion",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_043",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Ortas Vel",
+      "codigo_identidad": "LM-5563",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "360.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_043",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Ortas Vel",
+      "faccion": "Frente Libre de Transito",
+      "rango": "Corredor Certificado",
+      "privilegio": "Transito comercial autonomo sin supervision directa",
+      "vigencia": "308.00",
+      "clausulas": "Miembro activo del Frente Libre de Transito. Autonomia de ruta comercial declarada.",
+      "sello_faccion": "FLT-2"
+    }
+  },
+  {
+    "id": "transit_pass_044",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Illana Veyr",
+      "codigo_identidad": "VY-1110",
+      "origen": "Residencia Casa Veyr, Sector Alto",
+      "destino": "Camara de Asignaciones, Nivel 1",
+      "expira": "310.00",
+      "motivo": "Visita de representacion nobiliaria",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_044",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Illana Veyr",
+      "codigo_identidad": "VY-1110",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "380.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_044",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Illana Veyr",
+      "faccion": "Casa Veyr",
+      "rango": "Representante de Casa",
+      "privilegio": "Acceso prioritario a camaras de gobierno y organos ministeriales",
+      "vigencia": "299.00",
+      "clausulas": "Representante oficial de la Casa Veyr ante el Ministerio de Admision Planetaria y organismos afiliados.",
+      "sello_faccion": "CV-3"
+    }
+  },
+  {
+    "id": "transit_pass_045",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Tasek Ohm",
+      "codigo_identidad": "OP-0091",
+      "origen": "Sede del Oficio de Pureza Civica",
+      "destino": "Puesto de Control Umbral 7",
+      "expira": "310.00",
+      "motivo": "Inspeccion de rutina del Oficio de Pureza Civica",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_045",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Tasek Ohm",
+      "faccion": "Oficio de Pureza Civica",
+      "rango": "Inspector Acreditado — Nivel 2",
+      "privilegio": "Acceso a zonas de control, revision de operaciones y auditoria de puestos",
+      "vigencia": "310.00",
+      "clausulas": "Inspector acreditado bajo Decreto OPC-7. Exento de presentacion de Certificado Biometrico estandar durante ejercicio de funciones oficiales del Oficio.",
+      "sello_faccion": "OPC-7"
+    }
+  },
+  {
+    "id": "transit_pass_046",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Grev Soln",
+      "codigo_identidad": "MO-3347",
+      "origen": "Estacion Orbital Sector 4",
+      "destino": "Cuartel Milicia Orbital, Nivel 5",
+      "expira": "310.00",
+      "motivo": "Reintegracion operativa post-mision",
+      "sello_autoridad": "MO-2"
+    }
+  },
+  {
+    "id": "bio_cert_046",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Grev Soln",
+      "codigo_identidad": "MO-3347",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_046",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Grev Soln",
+      "faccion": "Milicia Orbital",
+      "rango": "Veterano de Campana",
+      "privilegio": "Reintegracion operativa prioritaria en zonas de control",
+      "vigencia": "310.00",
+      "clausulas": "Autorizacion de ingreso — Orden operativa MO-9. Expediente de reintegracion en tramite ante el cuartel.",
+      "sello_faccion": "MO-2"
+    }
+  },
+  {
+    "id": "transit_pass_047",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Renn Dhal",
+      "codigo_identidad": "CS-6620",
+      "origen": "Parroquia del Umbral Externo",
+      "destino": "Santuario Umbral Interior",
+      "expira": "308.00",
+      "motivo": "Peregrinaje anual al Santuario Umbral",
+      "sello_autoridad": "CS-1"
+    }
+  },
+  {
+    "id": "bio_cert_047",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Renn Dhal",
+      "codigo_identidad": "CS-6620",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "340.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_047",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Renn Dhal",
+      "faccion": "Clero del Sello",
+      "rango": "Hermano de Paso",
+      "privilegio": "Acceso a instalaciones del Clero del Sello en zonas de control administrativo",
+      "vigencia": "308.00",
+      "clausulas": "Valido exclusivamente para misiones de auditoria interna del Clero del Sello. No ampara transito de peregrinos, actividades liturgicas externas ni visitas a terceros.",
+      "sello_faccion": "CS-1"
+    }
+  },
+  {
+    "id": "transit_pass_048",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Meira Sonn",
+      "codigo_identidad": "CV-9982",
+      "origen": "Bloque de Desplazados, Sector Exterior",
+      "destino": "Centro de Asilo Civil, Nivel 2",
+      "expira": "310.00",
+      "motivo": "Busqueda de asilo civil temporal",
+      "sello_autoridad": "MAP-7"
+    }
+  },
+  {
+    "id": "bio_cert_048",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Meira Sonn",
+      "codigo_identidad": "CV-9982",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "320.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_048",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Meira Sonn",
+      "faccion": "Liga de las Cenizas",
+      "rango": "Desplazada Registrada",
+      "privilegio": "Transito humanitario a centros de asilo y atencion civil",
+      "vigencia": "310.00",
+      "clausulas": "Persona desplazada registrada por la Liga de las Cenizas. Solicitud de admision temporal por razon humanitaria declarada.",
+      "sello_faccion": "LCA-1"
+    }
+  },
+  {
+    "id": "transit_pass_049",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Savar Teth",
+      "codigo_identidad": "MO-8821",
+      "origen": "Base Operacional Este",
+      "destino": "Puesto de Control Umbral 7",
+      "expira": "310.00",
+      "motivo": "Mision de vigilancia Umbral-9",
+      "sello_autoridad": "MO-2"
+    }
+  },
+  {
+    "id": "bio_cert_049",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Savar Teth",
+      "codigo_identidad": "MO-8821",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "350.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "salvoconducto_049",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Savar Teth",
+      "faccion": "Milicia Orbital",
+      "rango": "Agente de Vigilancia",
+      "privilegio": "Acceso a zonas de inspeccion y control restringido",
+      "vigencia": "310.00",
+      "clausulas": "Agente autorizado para Mision Umbral-9. Acceso pleno a zonas de inspeccion y control del Puesto Umbral 7 durante la duracion de la mision.",
+      "sello_faccion": "MO-2"
+    }
+  },
+  {
+    "id": "transit_pass_050",
+    "type": "transit_pass",
+    "label": "Pase de Transito Planetario",
+    "fields": {
+      "nombre": "Levan Mors",
+      "codigo_identidad": "LM-4470",
+      "origen": "Puerto de Distribucion Central",
+      "destino": "Deposito Norte, Nivel 4",
+      "expira": "308.00",
+      "motivo": "Entrega de componentes certificados para linea de ensamble",
+      "sello_autoridad": "LMR-5"
+    }
+  },
+  {
+    "id": "bio_cert_050",
+    "type": "bio_cert",
+    "label": "Certificado de Identidad Biometrica",
+    "fields": {
+      "nombre": "Levan Mors",
+      "codigo_identidad": "LM-4470",
+      "tipo_biologico": "Estandar",
+      "anomalias": "Ninguna",
+      "expira": "380.00",
+      "sello_autoridad": "OPC-3"
+    }
+  },
+  {
+    "id": "ingress_permit_050",
+    "type": "ingress_permit",
+    "label": "Permiso de Carga",
+    "fields": {
+      "titular": "Levan Mors",
+      "numero_permiso": "LMR-CP-05001",
+      "tipo_carga": "Componentes de ensamble industrial — clase 2",
+      "peso_max": "3.2 Tm",
+      "destino": "Deposito Norte, Nivel 4",
+      "emisor": "Liga Mercantil de Rutas",
+      "expira": "310.00",
+      "sello_emisor": "LMR-ACTIVO"
+    }
+  },
+  {
+    "id": "salvoconducto_050",
+    "type": "salvoconducto",
+    "label": "Salvoconducto de Faccion",
+    "fields": {
+      "titular": "Levan Mors",
+      "faccion": "Liga Mercantil de Rutas",
+      "rango": "Distribuidor Certificado",
+      "privilegio": "Transito comercial de grado industrial en zonas de deposito y distribucion",
+      "vigencia": "310.00",
+      "clausulas": "Distribuidor certificado de la Liga Mercantil de Rutas. Aval de transito para operaciones de entrega de carga industrial.",
+      "sello_faccion": "LMR-5"
+    }
+  }
+]

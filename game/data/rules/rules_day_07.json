@@ -1,0 +1,135 @@
+[
+  {
+    "id": "rule_001",
+    "day": 7,
+    "order": 1,
+    "description": "Todo solicitante debe presentar Pase de Transito Planetario vigente.",
+    "display_text": "DECRETO MAP-7: Pase de Transito obligatorio para todo ingreso.",
+    "validation": { "type": "document_required", "document_type": "transit_pass" },
+    "penalty_on_fail": { "credits": -10, "reputation": -1, "faction": "MAP" }
+  },
+  {
+    "id": "rule_002",
+    "day": 7,
+    "order": 2,
+    "description": "El Pase de Transito no debe estar vencido.",
+    "display_text": "DECRETO MAP-7: Documentos vencidos no tienen validez de ingreso.",
+    "validation": { "type": "field_not_expired", "document_type": "transit_pass", "field": "expira", "current_date": "304.00" },
+    "penalty_on_fail": { "credits": -10, "reputation": -1, "faction": "MAP" }
+  },
+  {
+    "id": "rule_003",
+    "day": 7,
+    "order": 3,
+    "description": "El nombre en todos los documentos presentados debe coincidir exactamente.",
+    "display_text": "DECRETO OPC-3: Identidad consistente en todos los documentos.",
+    "validation": { "type": "name_consistency", "field": "nombre" },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "OPC" }
+  },
+  {
+    "id": "rule_004",
+    "day": 7,
+    "order": 4,
+    "description": "El Pase de Transito debe tener sello de autoridad valido.",
+    "display_text": "DECRETO MAP-7: Solo se acepta sello MAP, LMR, MO, OPC o CS. PENDIENTE no es valido.",
+    "validation": { "type": "field_not_empty", "document_type": "transit_pass", "field": "sello_autoridad", "invalid_values": ["PENDIENTE", "", "NINGUNO"] },
+    "penalty_on_fail": { "credits": -10, "reputation": -1, "faction": "MAP" }
+  },
+  {
+    "id": "rule_005",
+    "day": 7,
+    "order": 5,
+    "description": "Todo solicitante debe presentar Certificado de Identidad Biometrica vigente.",
+    "display_text": "DECRETO OPC-3: Certificado Biometrico obligatorio desde el Ciclo 299.",
+    "validation": { "type": "document_required", "document_type": "bio_cert" },
+    "penalty_on_fail": { "credits": -10, "reputation": -1, "faction": "OPC" }
+  },
+  {
+    "id": "rule_006",
+    "day": 7,
+    "order": 6,
+    "description": "El Certificado Biometrico no debe estar vencido.",
+    "display_text": "DECRETO OPC-3: Certificado Biometrico vencido invalida el ingreso.",
+    "validation": { "type": "field_not_expired", "document_type": "bio_cert", "field": "expira", "current_date": "304.00" },
+    "penalty_on_fail": { "credits": -10, "reputation": -1, "faction": "OPC" }
+  },
+  {
+    "id": "rule_007",
+    "day": 7,
+    "order": 7,
+    "description": "El codigo de identidad debe coincidir entre el Pase de Transito y el Certificado Biometrico.",
+    "display_text": "DECRETO OPC-3: Codigos de identidad deben ser identicos en todos los documentos.",
+    "validation": { "type": "field_match", "document_type_a": "transit_pass", "document_type_b": "bio_cert", "field": "codigo_identidad" },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "OPC" }
+  },
+  {
+    "id": "rule_008",
+    "day": 7,
+    "order": 8,
+    "description": "El origen del solicitante no debe pertenecer a la Zona de Restriccion Voth-3, actualmente en cuarentena activa.",
+    "display_text": "NUEVO — ALERTA DE CUARENTENA: Zona de Restriccion Voth-3 bloqueada. Contaminacion biologica nivel 2. Ingreso denegado desde dicho origen.",
+    "validation": {
+      "type": "field_not_in_list",
+      "document_type": "transit_pass",
+      "field": "origen",
+      "invalid_values": ["Zona de Restriccion Voth-3"]
+    },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "OPC" }
+  },
+  {
+    "id": "rule_009",
+    "day": 7,
+    "order": 9,
+    "description": "Todo solicitante con motivo de ingreso que incluya entrega, distribucion, suministro o transporte de carga debe presentar Permiso de Carga vigente.",
+    "display_text": "CIRCULAR LMR-4: Motivo de carga, entrega o suministro obliga a presentar Permiso de Carga.",
+    "validation": {
+      "type": "document_required_if_field",
+      "condition_document_type": "transit_pass",
+      "condition_field": "motivo",
+      "condition_values": ["carga", "mercancia", "suministro", "entrega"],
+      "required_document_type": "ingress_permit"
+    },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "LMR" }
+  },
+  {
+    "id": "rule_010",
+    "day": 7,
+    "order": 10,
+    "description": "El Permiso de Carga no debe estar vencido.",
+    "display_text": "CIRCULAR LMR-4: Permiso de Carga vencido invalida el ingreso.",
+    "validation": { "type": "field_not_expired", "document_type": "ingress_permit", "field": "expira", "current_date": "304.00" },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "LMR" }
+  },
+  {
+    "id": "rule_011",
+    "day": 7,
+    "order": 11,
+    "description": "El destino declarado en el Permiso de Carga debe coincidir con el destino del Pase de Transito.",
+    "display_text": "CIRCULAR LMR-4: Destino en Permiso de Carga debe ser identico al destino del Pase de Transito.",
+    "validation": { "type": "field_match", "document_type_a": "transit_pass", "document_type_b": "ingress_permit", "field": "destino" },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "LMR" }
+  },
+  {
+    "id": "rule_012",
+    "day": 7,
+    "order": 12,
+    "description": "Si se presenta un Salvoconducto de Faccion, la faccion emisora debe estar en el Directorio Oficial.",
+    "display_text": "COMUNICADO MAP-9: Salvoconducto de faccion no reconocida invalida el ingreso.",
+    "validation": {
+      "type": "field_in_list",
+      "document_type": "salvoconducto",
+      "field": "faccion",
+      "valid_values": ["Liga Mercantil de Rutas", "Milicia Orbital", "Clero del Sello", "Casa Veyr", "Oficio de Pureza Civica"]
+    },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "MAP" }
+  },
+  {
+    "id": "rule_013",
+    "day": 7,
+    "order": 13,
+    "description": "El Salvoconducto de Faccion, si es presentado, no debe estar vencido.",
+    "display_text": "COMUNICADO MAP-9: Salvoconducto vencido no tiene efecto legal.",
+    "validation": { "type": "field_not_expired", "document_type": "salvoconducto", "field": "vigencia", "current_date": "304.00" },
+    "penalty_on_fail": { "credits": -15, "reputation": -2, "faction": "MAP" }
+  }
+]
